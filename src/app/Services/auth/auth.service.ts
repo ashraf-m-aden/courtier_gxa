@@ -51,7 +51,7 @@ return this.da.getUserProfile(username,domain)
   }))
 }
 
-  getProfile(): Observable<any> {
+  getProfileile(): Observable<any> {
     return this.http.get(`${this.baseUrl}/auth/me`);
   }
 

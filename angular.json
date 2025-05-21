@@ -48,7 +48,10 @@
       }
     }
   },
-  "newProjectRoot": "courtiers"
+  "newProjectRoot": "courtiers",
+  "cli": {
+    "analytics": false
+  }
 
 }
 

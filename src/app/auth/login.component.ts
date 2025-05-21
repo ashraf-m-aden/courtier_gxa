@@ -30,7 +30,7 @@ import { Observable } from 'rxjs';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatCardModule,
-   
+
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -48,8 +48,8 @@ import { Observable } from 'rxjs';
   ]
 })
 export class LoginComponent {
-    private store =  inject<Store<AuthState>>(Store);
-    //inject<Store<AppState>>(Store);
+  private store = inject<Store<AuthState>>(Store);
+  //inject<Store<AppState>>(Store);
   private fb = inject(FormBuilder);
   private router = inject(Router);
   public loading$!: Observable<Boolean>;
@@ -58,28 +58,33 @@ export class LoginComponent {
     password: ['maintech', Validators.required],
     domain: ['Maintech', Validators.required]
   });
+
+  public loading = toSignal(this.store.select(AuthSelectors.selectAuthLoading), { initialValue: false });
+  public rawError = toSignal(this.store.select(AuthSelectors.selectAuthError), { initialValue: null });
+  public isAuthenticated = toSignal(this.store.select(AuthSelectors.selectIsAuthenticated), { initialValue: false });
   constructor() {
-    
-    //effect(() => {if (this.isAuthenticated()) {
-     //  this.router.navigate(['courtiers']);}});
-    this.loading$=this.store.select(AuthSelectors.selectAuthLoading)
-       
+
+    effect(() => {
+      if (this.isAuthenticated()) {
+        this.router.navigate(['courtiers']);
+      }
+    });
+    this.loading$ = this.store.select(AuthSelectors.selectAuthLoading)
+
   }
 
-  
-  public loading= toSignal(this.store.select(AuthSelectors.selectAuthLoading), { initialValue: false });
-  public rawError = toSignal(this.store.select(AuthSelectors.selectAuthError), { initialValue: null });
- public isAuthenticated = toSignal(this.store.select(AuthSelectors.selectIsAuthenticated), { initialValue: false });
+
+
   submit(): void {
-    console.log("In SUBMIT befor If !!!!this.loginForm.invalid==="+this.loginForm.invalid)
-   
+    console.log("In SUBMIT befor If !!!!this.loginForm.invalid===" + this.loginForm.invalid)
+
     if (this.loginForm.invalid) return;
     const { username, password, domain } = this.loginForm.value;
     //console.log("User !!!!==="+username)
-   // console.log("passs !!!!==="+password)
-   //this.store.dispatch(AuthActions.loginStart());
+    // console.log("passs !!!!==="+password)
+    //this.store.dispatch(AuthActions.loginStart());
 
-    this.store.dispatch(AuthActions.login({ username: username!, password: password! , domain:domain!}));
+    this.store.dispatch(AuthActions.login({ username: username!, password: password!, domain: domain! }));
   }
 
 

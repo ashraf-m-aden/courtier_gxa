@@ -9,8 +9,10 @@ import { authRoutes } from './auth/auth.routes';
 import { animation, AnimationFactory, useAnimation } from '@angular/animations';
 import { AnimationDriver } from '@angular/animations/animation_driver.d-DAiEDqQt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { authReducer } from './store/features/auth/auth.reducer';
+import { AuthEffects } from './store/features/auth/auth.effects';
 
 
 export const appConfig: ApplicationConfig = {
@@ -24,9 +26,13 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideEffects(),
 
-   // provideAnimations(),
- provideRouter(appRoutes,
-    withRouterConfig({paramsInheritanceStrategy: 'emptyOnly'})),
+    provideState('auth', authReducer),
+    provideEffects(AuthEffects),
+
+
+    // provideAnimations(),
+    provideRouter(appRoutes,
+      withRouterConfig({ paramsInheritanceStrategy: 'emptyOnly' })),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
 
 
