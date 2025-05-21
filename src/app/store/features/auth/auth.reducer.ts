@@ -66,6 +66,16 @@ export const authReducer = createReducer(
     isAuthenticated: false
   })),
 
+// When user logs out:
+// - Set loading to false (in case logout was triggered during a loading state)
+// - Reset isAuthenticated to false to reflect the logout state
+on(AuthActions.logout, (state) => ({
+  ...state,
+  loading: false,
+  isAuthenticated: false
+})),
+
+
   // When fetching profile fails:
   // - Set loading to false
   // - Store error message (either string or fallback default)

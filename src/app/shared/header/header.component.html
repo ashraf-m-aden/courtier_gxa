@@ -1,42 +1,50 @@
-    <mat-toolbar color="primary" class="header">
-      <div class="logo">
-        <mat-icon (click)="toggleDrawer()" >business</mat-icon>
-        <span>GXA Courtiers</span>
-      </div>
+<mat-toolbar color="primary" class="header">
+  <div class="logo" (click)="toggleDrawer()">
+    <mat-icon>business</mat-icon>
 
-      <span class="spacer"></span>
+    @if(isAuthenticated()){
+    <span>GXA Courtiers</span>
+    }
+  </div>
 
-      <ng-container *ngIf="user(); else loginButtons">
-        <button mat-button (click)="logout()">Déconnexion</button>
-      </ng-container>
+  <span class="spacer"></span>
 
-      <ng-template #loginButtons>
-        <button mat-button routerLink="/auth/login">Connexion</button>
-        <button mat-raised-button color="accent" routerLink="/auth/register">Créer un compte</button>
-      </ng-template>
+  <ng-container *ngIf="user(); else loginButtons">
+    <button mat-button (click)="logout()">Déconnexion</button>
+  </ng-container>
 
-      <mat-icon
-        class="profile-icon"
-        matTooltip="Profil utilisateur"
-        (click)="openProfileDialog()"
-      >account_circle</mat-icon>
-    </mat-toolbar>
+  <ng-template #loginButtons>
+    <button mat-button routerLink="/auth/login">Connexion</button>
+    <button mat-raised-button color="accent" routerLink="/auth/register">
+      Créer un compte
+    </button>
+  </ng-template>
 
-    <ng-template #profileDialog>
-      <div class="modal-content" [@fadeIn]>
-        <h2>Profil Utilisateur</h2>
-        <p *ngIf="isauthenticated$ | async">
-          <strong>Login:</strong> {{ user()?.login }}<br />
-          <strong>Email:</strong> {{ user()?.email || '-' }}<br />
-          <strong>Raison Sociale:</strong> {{ user()?.rsociale || '-' }}<br />
-          <strong>Dossier:</strong> {{ user()?.dossier || '-' }}<br />
-          <strong>Portefeuille:</strong> {{ user()?.portef || '-' }}<br />
-          <strong>Rôle:</strong> {{ user()?.role || '-' }}<br />
-          <strong>Ordre Ext.:</strong> {{ user()?.ordreext || '-' }}<br />
-        </p>
-        <div class="modal-actions">
-          <button mat-button (click)="editProfile()">Modifier</button>
-          <button mat-button (click)="this.closeProfileDialog()">Fermer</button>
-        </div>
-      </div>
-    </ng-template>
+  <mat-icon
+    class="profile-icon"
+    matTooltip="Profil utilisateur"
+    (click)="openProfileDialog()"
+    >account_circle</mat-icon
+  >
+</mat-toolbar>
+
+<ng-template #profileDialog>
+  <!-- @if(isAuthenticated() ){ -->
+  <div class="modal-content" [@fadeIn]>
+    <h2>Profil Utilisateur</h2>
+    <p>
+      <strong>Login:</strong> {{ user()?.login }}<br />
+      <strong>Email:</strong> {{ user()?.email || "-" }}<br />
+      <strong>Raison Sociale:</strong> {{ user()?.rsociale || "-" }}<br />
+      <strong>Dossier:</strong> {{ user()?.dossier || "-" }}<br />
+      <strong>Portefeuille:</strong> {{ user()?.portef || "-" }}<br />
+      <strong>Rôle:</strong> {{ user()?.role || "-" }}<br />
+      <strong>Ordre Ext.:</strong> {{ user()?.ordreext || "-" }}<br />
+    </p>
+    <div class="modal-actions">
+      <button mat-button (click)="editProfile()">Modifier</button>
+      <button mat-button (click)="this.closeProfileDialog()">Fermer</button>
+    </div>
+  </div>
+  <!-- } -->
+</ng-template>

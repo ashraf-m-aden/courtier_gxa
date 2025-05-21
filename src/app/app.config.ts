@@ -13,6 +13,8 @@ import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { authReducer } from './store/features/auth/auth.reducer';
 import { AuthEffects } from './store/features/auth/auth.effects';
+import { TierEffects } from './courtiers/tier/store/tier.effects';
+import { TierReducer } from './courtiers/tier/store/tier.reducer';
 
 
 export const appConfig: ApplicationConfig = {
@@ -25,7 +27,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideStore(),
     provideEffects(),
-
+    provideState('tier', TierReducer),
+    provideEffects(TierEffects),
     provideState('auth', authReducer),
     provideEffects(AuthEffects),
 

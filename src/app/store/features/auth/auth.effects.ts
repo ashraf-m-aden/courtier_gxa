@@ -30,8 +30,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login), // Listen for login action
       tap(() => {
-                    console.log("FROM EFFECT After .... this.authService.login");
-        }),
+        console.log("FROM EFFECT After .... this.authService.login");
+      }),
       switchMap(({ username, password, domain }) =>
         this.authService.login(username, password, domain).pipe(
           map((user: BasSecurityContext) => {
@@ -142,18 +142,12 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.logout),
         tap(() => {
-                    console.log("FROM EFFECT After .... this.authService.logout");
-        }),
-        map(() => {
+          this.authService.logout()
+        }
+        )
 
-          this.router.navigate(['/login']);
-          this.snackBar.open('Déconnexion réussie.', 'Fermer', {
-            duration: 3000,
-            panelClass: ['mat-toolbar', 'mat-accent'],
-          });
-        })
-      ),
-    { dispatch: false }
+      ), { dispatch: false }
+
   );
 
   /**
