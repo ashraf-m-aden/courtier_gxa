@@ -1,0 +1,30 @@
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .spacer {
+      flex: 1 1 auto;
+    }
+    .profile-icon {
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .modal-content {
+      padding: 1rem;
+      min-width: 250px;
+      animation: fadeIn 0.3s ease-in;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
