@@ -1,0 +1,258 @@
+
+  $red: #f44336;
+  $pink: #e91e63;
+  $purple: #9c27b0;
+  $indigooo: #3f51b5;
+  $blue: #2196f3;
+  $cyan: #00bcd4;
+  $teal: #009688;
+  $green: #4caf50;
+  $yellow: #ffe821;
+  $orange: #ff9800;
+  $deep-orange: #ff5722;
+  $brown: #795548;
+  $grey: #9e9e9e;
+  $black: #000000;
+  $white: #ffffff;
+
+$indigooo: #3f51b5;
+
+
+  $linear-green: linear-gradient(45deg, #9ce89d, #cdfa7e);
+  $linear-orange: linear-gradient(135deg, #ffc480, #ff763b);
+  $linear-cyan: linear-gradient(45deg, #72c2ff, #86f0ff);
+  $linear-red: linear-gradient(316deg, #fc5286, #fbaaa2);
+  $linear-purple: linear-gradient(230deg, #759bff, #843cf6);
+  $linear-purple-dark: linear-gradient(45deg, #a52dd8, #e29bf1);
+  $linear-card2: linear-gradient(to right, #c33764, #1d2671);
+  $linear-card3: linear-gradient(to left, #134e5e, #71b280);
+  $linear-card4: linear-gradient(to left, #d38312, #a83279);
+  $red-to-pink-to-purple-horizontal-gradient: linear-gradient(
+    0deg,
+    --orange-red 0%,
+    --vivid-pink 50%,
+    --electric-violet 100%
+  );
+
+//Fonts Family
+$navbar-font-family: "Roboto", sans-serif;
+$sidebar-font-family: "Roboto", sans-serif;
+// colors
+$color-primary: #1e0e7ac2;
+$color-secondary: #4e9eb6cc;
+$color-white: #fff;
+$color-blue-white: rgb(237, 240, 243);
+$color-grey: #777;
+$color-black: #000;
+$color-dark-green: rgb(35, 61, 35);
+
+//Font
+
+$default-font-size: 1.6rem; // colors
+$color-primary: #1e0e7ac2;
+$color-secondary: #4e9eb6cc;
+$color-white: #fff;
+$color-blue-white: rgb(237, 240, 243);
+$color-grey: #777;
+$color-light-grey: rgba(236, 230, 230, 0.945);
+$color-black: #000;
+$color-dark-green: rgb(35, 61, 35);
+$color-light-green: rgb(126, 167, 126);
+$color-light-pink: rgb(211, 117, 195);
+$color-gold: rgb(219, 196, 120);
+// Font Family
+$muli: 'Muli';
+$body-font: $muli;
+$heading-font: $muli;
+$link-font: 'Rubik', sans-serif;
+
+// Icon Font
+$fontAwesome5Brands: "Font Awesome 5 Brands";
+$fontAwesome5Pro: "Font Awesome 5 Pro";
+
+
+// Colors ---------------
+$body-bg: #000;
+$body-color: #748494;
+$body-bg: white;
+$heading-color: #030f27;
+$primary: #1292ee;
+$primary-two: #3a7e69;
+$primary-three: #ef6f31;
+$secondary: #748494;
+$secondary-light: #8C89A2;
+$secondary-three: #6ac5f1;
+$success: #67d68a;
+$danger: #F44336;
+$warning: #FFC107;
+$info: #17A2B8;
+$light: #F8F9FA;
+$off-white: #f6f2ed;
+$white-gray: #f2f2f2;
+$white-light: #cacaca;
+$white-opacity-50: rgba(255,255,255,0.5);
+$white: #fff;
+$black: #000;
+$gray-100: #748494;
+$gray-200: #3f5054;
+
+$overlay-black: #030f27;
+$light-orange: rgba(239,111,49,.1);
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  black,
+  "success":    green,
+  "info":       yellow,
+  "warning":    yellow,
+  "danger":     red,
+  "light":      $white,
+  "dark":       #000,
+  "white-gray": $white-gray,
+  "white-opacity-50": $white-opacity-50,
+  "white":      $white,
+  "overlay-black": $overlay-black,
+);
+
+
+// Border Color
+$border-color: #F3F3F3;
+
+
+// Default Transition
+$transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+// Social Color
+$android: #7AC157;
+$apple: #B8B8B8;
+$behance: #1869FF;
+$dribbble: #EA4C8A;
+$dropbox: #007EE5;
+$evernote: #78D525;
+$facebook: #4867AA;
+$github: #313131;
+$google-drive: #1DA462;
+$google-earth: #4285F4;
+$google-glass: #EA4335;
+$google-maps: #5083C3;
+$google-play: #01B9FD;
+$google-plus: #DD5144;
+$google: #4285F4;
+$instagram: #B23A94;
+$css3: #0277BD;
+$html5: #E44D26;
+$javascript: #F9DC3D;
+$python: #0C9DBF;
+$lastfm: #E31B23;
+$linkedin: #007BB6;
+$paypal: #002F86;
+$pinterest: #BD081B;
+$pocket: #EF3E56;
+$polymer: #F87292;
+$rss: #F99C3A;
+$share: #2C9CFF;
+$stackoverflow: #F38024;
+$steam: #15497B;
+$twitter: #1DA1F2;
+$vk: #5181B8;
+$wikipedia: #E9E9E9;
+$windows: #0078D6;
+$s8tracks: #122D4B;
+$amazon: #F79B34;
+$blogger: #F06A35;
+$delicious: #0000FE;
+$disqus: #2E9EFE;
+$flattr: #7AB831;
+$flickr: #FE0084;
+$odnoklassniki: #F58220;
+$outlook: #0072C6;
+$playstation: #07418E;
+$reddit: #FF4500;
+$skype: #00A9F0;
+$slideshare: #0077B5;
+$soundcloud: #FE4900;
+$tumblr: #36465D;
+$twitch: #6441A4;
+$vimeo: #1AB7EA;
+$whatsapp: #189D0E;
+$xbox: #107C0F;
+$yahoo: #4101AF;
+$youtube: #FE0000;
+
+// Responsive Variables
+$extraBig-device: "only screen and (min-width: 1600px)";
+$laptop-device: "only screen and (min-width: 1200px) and (max-width: 1599px)";
+$desktop-device: "only screen and (min-width: 992px) and (max-width: 1199px)";
+$tablet-device: "only screen and (min-width: 768px) and (max-width: 991px)";
+$large-mobile: "only screen and (max-width: 767px)";
+$small-mobile: "only screen and (max-width: 575px)";
+$extra-small-mobile: "only screen and (max-width: 479px)";
+$red: #f44336;
+$pink: #861a5d;
+$pinkinsh: #fff8fa;
+$purple: #6f42c1;
+  $indigo: #3f51b5;
+  $blue: #2196f3;
+  $cyan: #00bcd4;
+  $teal: #009688;
+  $green: #4caf50;
+  $yellow: #ffe821;
+  $orange: #fd7e14;
+  $deep-orange: #ff5722;
+  $brown: #795548;
+  $grey: #9e9e9e;
+  $black: #000000;
+  $white: #ffffff;
+  $bright-blue: oklch(51.01% 0.274 263.83);
+  $electric-violet: oklch(53.18% 0.28 296.97);
+  $french-violet: oklch(47.66% 0.246 305.88);
+  $vivid-pink: oklch(69.02% 0.277 332.77);
+  $hot-red: oklch(61.42% 0.238 15.34);
+  $orange-red: oklch(63.32% 0.24 31.68);
+
+  $gray-900: oklch(19.37% 0.006 300.98);
+  $gray-700: oklch(36.98% 0.014 302.71);
+  $gray-400: oklch(70.9% 0.015 304.04);
+
+  $linear-green: linear-gradient(45deg, #9ce89d, #cdfa7e);
+  $linear-orange: linear-gradient(135deg, #ffc480, #ff763b);
+  $linear-cyan: linear-gradient(45deg, #72c2ff, #86f0ff);
+  $linear-red: linear-gradient(316deg, #fc5286, #fbaaa2);
+  $linear-purple: linear-gradient(230deg, #759bff, #843cf6);
+  $linear-purple-dark: linear-gradient(45deg, #a52dd8, #e29bf1);
+  $linear-card1: linear-gradient(to left, #3a7bd5, #3a6073);
+  $linear-card2: linear-gradient(to right, #c33764, #1d2671);
+  $linear-card3: linear-gradient(to left, #134e5e, #71b280);
+  $linear-card4: linear-gradient(to left, #d38312, #a83279);
+  $red-to-pink-to-purple-vertical-gradient: linear-gradient(
+    to right,
+    $orange-red 0%,
+    $vivid-pink 50%,
+    $electric-violet 100%
+  );
+
+  $white-to-purple-horizontal-gradient: linear-gradient(
+    to right,
+    $pinkinsh 0%,
+    $pinkinsh 60%,
+    $electric-violet 70%,
+    $instagram 80%,
+    $flickr 90%,
+    $vivid-pink 100%,
+  );
+
+  $customGradient: linear-gradient(
+    90deg,
+    $instagram 0%,
+    $flickr 25%,
+    $vivid-pink 50%,
+    $electric-violet 100%
+  );
+
+//Fonts Family
+$navbar-font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+"Segoe UI Symbol";
+$sidebar-font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+"Segoe UI Symbol";

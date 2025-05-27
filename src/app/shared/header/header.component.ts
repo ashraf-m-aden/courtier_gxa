@@ -1,8 +1,8 @@
-import { Component, ViewChild, TemplateRef, inject, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, TemplateRef, inject, Output, EventEmitter, effect } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,7 @@ import {
   style,
   animate
 } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-header',
   imports: [
@@ -43,17 +44,35 @@ import {
 export class HeaderComponent {
   @ViewChild('profileDialog') profileDialog!: TemplateRef<any>;
   @Output() drawerOpen = new EventEmitter<any>();
-isDrawerOpen = false;
+  isDrawerOpen = false;
   private dialog = inject(MatDialog);
   private store = inject(Store<AuthState>);
-  isauthenticated$ = this.store.pipe(select(AuthSelectors.selectIsAuthenticated))
+  private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+
+  public isAuthenticated = toSignal(this.store.select(AuthSelectors.selectIsAuthenticated), { initialValue: true });
   user = toSignal(this.store.pipe(select(AuthSelectors.selectUserProfile)));
 
+
+
+
+  constructor() {
+    // effect(() => {
+
+    //   if (!this.isAuthenticated()) {
+    //     this.router.navigate(['/login']);
+    //     this.snackBar.open('Déconnexion réussie.', 'Fermer', {
+    //       duration: 3000,
+    //       panelClass: ['mat-toolbar', 'mat-accent'],
+    //     });
+    //   }
+    // });
+  }
+
+
   openProfileDialog() {
-    if (this.dialog.openDialogs.length === 0) {
       const dialogRef = this.dialog.open(this.profileDialog);
-      setTimeout(() => dialogRef.close(), 10000);
-    }
+
   }
   closeProfileDialog() {
     if (this.dialog.openDialogs.length !== 0) {
@@ -74,4 +93,10 @@ isDrawerOpen = false;
   toggleDrawer() {
     this.drawerOpen.emit()
   }
+
+  ngOnInit() {
+
+
+  }
+
 }

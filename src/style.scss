@@ -1,0 +1,51 @@
+/*
+ *  Document   : style.css
+ *  Author     : RedStar Template
+ *  Description: This is a main style scss file for import all scss files.
+ *
+ *  Structure (with shortcodes):
+                 [1. Common ]
+                 [2. Fonts ]
+                 [3. Components ]
+                 [4. Apps]
+                 [5. Pages ]
+                 [6. Pugins ]
+                 [7. UI ]
+                 [8. Browser ]
+
+
+/*                 [1. Common ]
+              			*/
+/* Importing Bootstrap SCSS file. */
+
+@use '@angular/material' as mat;
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+@import "./scss/common/_variables";
+@import "./scss/common/_mixins";
+@import "./scss/common/_customanimate.scss";
+@import "./scss/common/_general.scss";
+@import "./scss/common/_demo.scss";
+@import "./scss/common/_animation.scss";
+@import "./scss/common/_rtl.scss";
+
+/*                 [2. Fonts]                   				*/
+
+
+
+
+
+
+/*                 [5. Pages ]                   				*/
+@import "./scss/pages/_dashboard.scss";
+@import "./scss/pages/_inbox.scss";
+@import "./scss/pages/_pricing.scss";
+@import "./scss/pages/_profile.scss";
+@import "./scss/pages/_timeline.scss";
+@import "./scss/pages/_auth.scss";
+
+
+/*                 [8. Browser ]                   			*/
+@import "./scss/browser/_ie10.scss";
+@import "./scss/browser/_ie11.scss";
+
+

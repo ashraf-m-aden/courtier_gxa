@@ -6,6 +6,12 @@ import { authReducer } from './store/features/auth/auth.reducer';
 
 // app.routes.ts
 export const appRoutes: Routes = [
+
+    {
+    path: '',
+    redirectTo: 'courtiers',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
 

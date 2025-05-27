@@ -1,0 +1,147 @@
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-shadow($shadowinfo) {
+  -webkit-box-shadow: $shadowinfo;
+  -moz-box-shadow: $shadowinfo;
+  -ms-box-shadow: $shadowinfo;
+  box-shadow: $shadowinfo;
+}
+@mixin transform($transform) {
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  -webkit-transform: $transform;
+  transform: $transform;
+}
+
+@mixin transition($transition) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+@mixin slidefromRight{
+  @keyframes slide {
+    from {margin-right: 0px;}
+    to {margin-right: 20px;}
+  }
+  animation-duration: 1s;
+
+}
+@mixin three-dots-overflow() {
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin navbar-link-color($textcolor, $navbarcolor, $opacity) {
+  .navbar-brand,
+  .navbar-brand:hover,
+  .navbar-brand:active,
+  .navbar-brand:focus {
+    color: $textcolor;
+  }
+
+  .nav > li > a:hover,
+  .nav > li > a:focus,
+  .nav .open > a,
+  .nav .open > a:hover,
+  .nav .open > a:focus {
+    background-color: transparentize($navbarcolor, $opacity);
+  }
+
+  .nav > li > a {
+    color: $textcolor;
+  }
+
+  .bars {
+    float: left;
+    padding: 10px 20px;
+    font-size: 22px;
+    color: $textcolor;
+    margin-right: 10px;
+    margin-left: -10px;
+    margin-top: 4px;
+  }
+
+  .bars:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin centerElement {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERY MANAGER
+/*
+0-600 px; phones
+600-900px; tablet
+900-1200px;tablet-landscape
+1200-1800px; desktop
+1800px+++;desktop
+*/
+/*
+breakpoints arguments choices
+-phone
+-tablet
+-tablet-land
+-big-desk
+
+1em = 16px
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint==phone {
+    @media (max-width: 500px) {
+      //600px
+      @content;
+    }
+  }
+  @if $breakpoint==tablet {
+    @media (min-width: 501px) {
+      //900px
+      @content;
+    }
+  }
+  @if $breakpoint==tablet-land {
+    @media (min-width: 800px) {
+      //1100px
+      @content;
+    }
+  }
+  @if $breakpoint==desk {
+    @media (min-width: 1024px) {
+      //1800px
+      @content;
+    }
+  }
+  @if $breakpoint==big-desk {
+    @media (min-width: 1200px) {
+      //1800px
+      @content;
+    }
+  }
+}
+
+@mixin respond-phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
