@@ -1,3 +1,4 @@
+import { TierNouveauComponent } from './tier/tier-nouveau/tier-nouveau.component';
 import { Routes } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAppStore } from '../store/app-store.module';
@@ -30,7 +31,8 @@ export const courtiersRoutes: Routes = [
       { path: 'commissions', loadComponent: () => import('./commissions/commissions.component').then(m => m.CommissionsComponent) },
       { path: 'profile', loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
       { path: 'tiers', loadComponent: () => import('./tier/list/tier-list.component').then(m => m.TierListComponent) },
-      { path: 'tiers/:id', loadComponent: () => import('./tier/detail/tier-detail.component').then(m => m.TierDetailComponent) },
+      { path: 'tiers/profile/:id', loadComponent: () => import('./tier/detail/tier-detail.component').then(m => m.TierDetailComponent) },
+      { path: 'tiers/nouveau', loadComponent: () => import('./tier/tier-nouveau/tier-nouveau.component').then(m => m.TierNouveauComponent) },
 
     ]
   },

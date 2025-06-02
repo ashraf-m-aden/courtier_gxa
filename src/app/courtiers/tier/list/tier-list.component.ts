@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { TierFacade } from '../store/tier.Facade';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,7 +24,7 @@ import { selectTiers } from '../../../store/features/courtiers/courtier.selector
   standalone: true,
   imports: [
     CommonModule,
-    MatTableModule, MatInputModule, MatSelectModule,
+    MatTableModule, MatInputModule, MatSelectModule,RouterModule,RouterLink,RouterLinkActive,
     MatFormFieldModule, FormsModule, ReactiveFormsModule,
     MatIconModule, MatCardModule
   ],
