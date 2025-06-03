@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as CourtierActions from './courtier.actions';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
 
 @Injectable()
@@ -18,5 +18,17 @@ export class CourtierEffects {
         )
       )
     )
-  );
+  )
+loadTiersData$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CourtierActions.loadTiersData),
+    switchMap(() =>
+      this.courtierService.getTiers().pipe(
+        map(tiers => CourtierActions.loadTiersDataSuccess({ tiers })),
+        catchError(error => of(CourtierActions.loadTiersDataFailure({ error })))
+      )
+    )
+  )
+);
+
 }

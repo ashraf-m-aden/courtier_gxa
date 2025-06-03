@@ -1,27 +1,113 @@
-<mat-card>
-    <mat-form-field appearance="fill">
-      <mat-label>Search</mat-label>
-<input matInput placeholder="Rechercher..." [value]="searchTerm()" (input)="onSearch($event)">
-    </mat-form-field>
-    <table mat-table [dataSource]="filtered()" class="mat-elevation-z8">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
+<div class="container-fluid">
+  <div class="row card p-3 m-0">
+    <div class="col-12 form">
+      <form [formGroup]="filtersForm" class="form-search">
+        <!-- Recherche -->
+        <mat-form-field appearance="outline">
+          <mat-label>Recherche</mat-label>
+          <input
+            matInput
+            placeholder="Nom, téléphone, adresse..."
+            formControlName="search"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
 
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nom </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
+        <!-- Type de tiers -->
+        <mat-form-field appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="typtiers">
+            <mat-option value="">Tous</mat-option>
+            <mat-option value="physique">Personne Physique</mat-option>
+            <mat-option value="morale">Personne Morale</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-button (click)="onRowClick(element)">Détails</button>
-        </td>
-      </ng-container>
+        <!-- Ville -->
+        <mat-form-field appearance="outline">
+          <mat-label>Ville</mat-label>
+          <mat-select formControlName="ville">
+            <mat-option value="">Toutes</mat-option>
+            @for(city of allCities();track city){
+            <mat-option [value]="city">{{ city }}</mat-option
+            >}
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <div class="">
+        <button
+          class="btn btn-group btn-primary"
+          [routerLink]="['/courtiers/tiers/nouveau']"
+          routerLinkActive
+        >
+              <mat-icon>add</mat-icon> Nouveau tier
+        </button>
+      </div>
+    </div>
 
-      <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-    </table>
-  </mat-card>
+    <div class="col-12 mt-5">
+      <table
+        mat-table
+        [dataSource]="filteredTiers()"
+        class="mat-elevation-z8 w-full"
+      >
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon
+              [color]="element.type === 'physique' ? 'primary' : 'accent'"
+            >
+              {{ element.type === "physique" ? "person" : "apartment" }}
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <!-- Nom Column -->
+        <ng-container matColumnDef="nom">
+          <th mat-header-cell *matHeaderCellDef>Nom</th>
+          <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
+        </ng-container>
+
+        <!-- Téléphone Column -->
+        <ng-container matColumnDef="tel">
+          <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.portable || element.ntel }}
+          </td>
+        </ng-container>
+
+        <!-- Adresse Column -->
+        <ng-container matColumnDef="adresse">
+          <th mat-header-cell *matHeaderCellDef>Adresse</th>
+          <td mat-cell *matCellDef="let element">{{ element.adresse }}</td>
+        </ng-container>
+
+        <!-- Ville Column -->
+        <ng-container matColumnDef="ville">
+          <th mat-header-cell *matHeaderCellDef>Ville</th>
+          <td mat-cell *matCellDef="let element">{{ element.ville }}</td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              class="btn btn-group btn-primary"
+              color="primary"
+              (click)="editTier(element)"
+            >
+              <mat-icon>edit</mat-icon> Consulter
+            </button>
+
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -14,5 +14,22 @@ export const courtierReducer = createReducer(
     ...state,
     error,
     loading: false
+  })),
+  on(CourtierActions.loadTiersData, state => ({
+    ...state,
+    loading: true,
+    error: null
+  })),
+
+  on(CourtierActions.loadTiersDataSuccess, (state, { tiers }) => ({
+    ...state,
+    tiers,
+    loading: false
+  })),
+
+  on(CourtierActions.loadTiersDataFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false
   }))
 );

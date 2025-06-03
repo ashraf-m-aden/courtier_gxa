@@ -1,7 +1,40 @@
-<mat-card *ngIf="selected()">
-    <h2>Détails de {{selected()?.rsociale}}</h2>
-    <p>ID: {{selected()?.numtiers}}</p>
-    <!-- Add more fields here -->
-    <button mat-raised-button routerLink="../">Retour</button>
-  </mat-card>
-  
+<div class="container-fluid p-0">
+  <div class="row p-0 m-0">
+    <div class="col-12 card">
+      <h2>Profil du Tier</h2>
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <!-- Tab 1: Profil -->
+        <mat-tab label="Tier">
+          <app-tier-profil></app-tier-profil>
+        </mat-tab>
+        <mat-tab label="Profil Dpm">
+          <app-dpm-profil></app-dpm-profil>
+        </mat-tab>
+
+        <mat-tab label="Profil Dpp">
+          <app-dpp-profil></app-dpp-profil>
+        </mat-tab>
+
+        <!-- Tab 2: Historique -->
+        <mat-tab label="Historique">
+          <div class="container-fluid mt-4">
+            <!-- Empty for now -->
+            <p>Contenu à venir...</p>
+          </div>
+        </mat-tab>
+        <!-- Tab 2: Projet -->
+        <mat-tab label="Projet">
+          <div class="container-fluid mt-4">
+            <div class="row">
+              <div class="col-12">
+                <button class="btn btn-outline-secondary">
+                  Créer un nouveau projet
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

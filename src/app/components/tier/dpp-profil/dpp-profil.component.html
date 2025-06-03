@@ -1,0 +1,751 @@
+<div class="container-fluid mt-4 p-2">
+  <div class="row">
+    @if(editMode){
+    <div class="col-12">
+      <form [formGroup]="dppForm" (ngSubmit)="onSubmit()">
+        <div class="row d-flex flex-wrap gap-3 justify-content-start">
+          <!-- Titre -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Titre</mat-label>
+              <mat-select formControlName="titre">
+                <mat-option *ngFor="let t of titres" [value]="t">{{
+                  t
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Nom et prénom -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="nom" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Prénom</mat-label>
+              <input matInput formControlName="prenom" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nom de jeune fille</mat-label>
+              <input matInput formControlName="nomfille" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Alias</mat-label>
+              <input matInput formControlName="alias" />
+            </mat-form-field>
+          </div>
+
+          <!-- Sexe et date de naissance -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Sexe</mat-label>
+              <mat-select formControlName="sexe">
+                <mat-option *ngFor="let s of sexes" [value]="s">{{
+                  s
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Date de naissance</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerNaiss"
+                formControlName="datenais"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerNaiss"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerNaiss></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Âge</mat-label>
+              <input matInput type="number" formControlName="age" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Âge millésime</mat-label>
+              <input matInput type="number" formControlName="agemsme" />
+            </mat-form-field>
+          </div>
+
+          <!-- Nationalité et numéro de sécurité sociale -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nationalité</mat-label>
+              <mat-select formControlName="national">
+                <mat-option *ngFor="let n of nationals" [value]="n">{{
+                  n
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>N° de sécurité sociale</mat-label>
+              <input matInput formControlName="numss" />
+            </mat-form-field>
+          </div>
+
+          <!-- Situation familiale et activité -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Situation familiale</mat-label>
+              <mat-select formControlName="sitfam">
+                <mat-option *ngFor="let sf of sitfams" [value]="sf">{{
+                  sf
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Activité</mat-label>
+              <mat-select formControlName="activite">
+                <mat-option *ngFor="let a of activites" [value]="a">{{
+                  a
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Catégorie professionnelle et profession -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Catégorie professionnelle</mat-label>
+              <input matInput formControlName="catprof" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Profession</mat-label>
+              <input matInput formControlName="profess" />
+            </mat-form-field>
+          </div>
+
+          <!-- Employeur et filiale -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Employeur</mat-label>
+              <input matInput formControlName="employe" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Filiale</mat-label>
+              <input matInput formControlName="filiale" />
+            </mat-form-field>
+          </div>
+
+          <!-- Date d'entrée dans l'entreprise -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Date d'entrée dans l'entreprise</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerEnt"
+                formControlName="dateent"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerEnt"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerEnt></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Salaire annuel -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Salaire annuel</mat-label>
+              <input matInput type="number" formControlName="salaire" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Devise</mat-label>
+              <input matInput formControlName="salaire1" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Année salaire</mat-label>
+              <input matInput type="number" formControlName="datesal" />
+            </mat-form-field>
+          </div>
+
+          <!-- Téléphone professionnel et email personnel -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Téléphone professionnel</mat-label>
+              <input matInput formControlName="telprof" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email personnel</mat-label>
+              <input matInput formControlName="numemail" />
+            </mat-form-field>
+          </div>
+
+          <!-- Numéro permis de conduire -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Numéro permis de conduire</mat-label>
+              <input matInput formControlName="npermis" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Lieu de délivrance du permis</mat-label>
+              <input matInput formControlName="lieuperm" />
+            </mat-form-field>
+          </div>
+
+          <!-- Dates des permis -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Date conduite accompagnée</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerCA"
+                formControlName="dateca"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerCA"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerCA></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Date permis moto A</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerMoto"
+                formControlName="datemoto"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerMoto"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerMoto></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <mat-checkbox formControlName="condacc"
+            >Conduite accompagnée</mat-checkbox
+          >
+          <mat-checkbox formControlName="enfass">Enfant d'assuré</mat-checkbox>
+
+          <!-- Organisme d'affiliation -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Organisme d'affiliation</mat-label>
+              <input matInput formControlName="orgaffil" />
+            </mat-form-field>
+          </div>
+
+          <!-- Permis bateau -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Type permis bateau</mat-label>
+              <input matInput formControlName="typepermisbateau" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Date permis bateau</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerBateau"
+                formControlName="datepermisbateau"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerBateau"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerBateau></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Date obtention BSR -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Date obtention BSR</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerBSR"
+                formControlName="datebsr"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerBSR"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerBSR></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <button
+            class="btn btn-group btn-primary"
+            color="primary"
+            type="submit"
+            [disabled]="!dppForm.valid"
+          >
+            <mat-icon>save</mat-icon>
+            Mettre à jour
+          </button>
+          <button
+            class="btn btn-group btn-warning"
+            color="primary"
+            type="button"
+            (click)="editMode = false"
+          >
+            <mat-icon>cancel</mat-icon>
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+    } @else {
+    <div class="col-12">
+      <div class="col-12">
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end mb-3">
+          <div class="btn-group">
+            <button class="btn btn-primary" (click)="toggleEditMode()">
+              {{ editMode ? "Annuler" : "Modifier" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Identité</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td><strong>N° de personne physique:</strong></td>
+              <td>
+                <span>{{ dppForm.get("numdpp")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>N° de tiers:</strong></td>
+              <td>
+                <span>{{ dppForm.get("numtiers")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Titre:</strong></td>
+              <td>
+                <span>{{ dppForm.get("titre")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Nom:</strong></td>
+              <td>
+                <span>{{ dppForm.get("nom")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Prénom:</strong></td>
+              <td>
+                <span>{{ dppForm.get("prenom")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Nom complet:</strong></td>
+              <td>
+                <span>{{ dppForm.get("nompre")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Nom de jeune fille:</strong></td>
+              <td>
+                <span>{{ dppForm.get("nomfille")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Alias:</strong></td>
+              <td>
+                <span>{{ dppForm.get("alias")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Sexe:</strong></td>
+              <td>
+                <span>{{ dppForm.get("sexe")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Date de naissance:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datenais")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Âge:</strong></td>
+              <td>
+                <span>{{ dppForm.get("age")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Âge millésime:</strong></td>
+              <td>
+                <span>{{ dppForm.get("agemsme")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Nationalité:</strong></td>
+              <td>
+                <span>{{ dppForm.get("national")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>N° de sécurité sociale:</strong></td>
+              <td>
+                <span>{{ dppForm.get("numss")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Situation familiale:</strong></td>
+              <td>
+                <span>{{ dppForm.get("sitfam")?.value }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Profession & Activité</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td><strong>Activité:</strong></td>
+              <td>
+                <span>{{ dppForm.get("activite")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Catégorie professionnelle:</strong></td>
+              <td>
+                <span>{{ dppForm.get("catprof")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Code socio-professionnel:</strong></td>
+              <td>
+                <span>{{ dppForm.get("csp")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Profession:</strong></td>
+              <td>
+                <span>{{ dppForm.get("profess")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Employeur:</strong></td>
+              <td>
+                <span>{{ dppForm.get("employe")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Filiale:</strong></td>
+              <td>
+                <span>{{ dppForm.get("filiale")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Date d'entrée:</strong></td>
+              <td>
+                <span>{{ dppForm.get("dateent")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Salaire annuel:</strong></td>
+              <td>
+                <span
+                  >{{ dppForm.get("salaire")?.value }}
+                  {{ dppForm.get("salaire1")?.value }}</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Année du salaire:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datesal")?.value }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Coordonnées</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td><strong>Téléphone pro:</strong></td>
+              <td>
+                <span>{{ dppForm.get("telprof")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Poste:</strong></td>
+              <td>
+                <span>{{ dppForm.get("postetel")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Fax pro:</strong></td>
+              <td>
+                <span>{{ dppForm.get("faxpro")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Portable:</strong></td>
+              <td>
+                <span>{{ dppForm.get("portable")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Email personnel:</strong></td>
+              <td>
+                <span>{{ dppForm.get("numemail")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Email professionnel:</strong></td>
+              <td>
+                <span>{{ dppForm.get("emailprof")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Lieu de naissance:</strong></td>
+              <td>
+                <span>{{ dppForm.get("lieunaissance")?.value }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Permis & Conduite</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td><strong>N° permis:</strong></td>
+              <td>
+                <span>{{ dppForm.get("npermis")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Délivré par:</strong></td>
+              <td>
+                <span>{{ dppForm.get("lieuperm")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Conduite accompagnée:</strong></td>
+              <td>
+                <span>{{ dppForm.get("condacc")?.value ? "Oui" : "Non" }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Date conduite accompagnée:</strong></td>
+              <td>
+                <span>{{ dppForm.get("dateca")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Permis moto A:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datemoto")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Permis auto B:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datevl")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Permis poids-lourds C:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datepl")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Permis transport D:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datetc")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Permis A1:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datea1")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Permis A2:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datea2")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Permis B1 (Quad):</strong></td>
+              <td>
+                <span>{{ dppForm.get("dateb1")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Permis bateau:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datepermisbateau")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Type permis bateau:</strong></td>
+              <td>
+                <span>{{ dppForm.get("typepermisbateau")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Date validité permis moto:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datevalvl")?.value | date }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Date BSR:</strong></td>
+              <td>
+                <span>{{ dppForm.get("datebsr")?.value | date }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Sécurité Sociale</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td><strong>Code région:</strong></td>
+              <td>
+                <span>{{ dppForm.get("ssregion")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Code caisse:</strong></td>
+              <td>
+                <span>{{ dppForm.get("sscaisse")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Centre de paiement:</strong></td>
+              <td>
+                <span>{{ dppForm.get("sscentre")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Organisme d'affiliation:</strong></td>
+              <td>
+                <span>{{ dppForm.get("orgaffil")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Régime social:</strong></td>
+              <td>
+                <span>{{ dppForm.get("regimesocial")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Régime local:</strong></td>
+              <td>
+                <span>{{ dppForm.get("regimelocal")?.value }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Enfant d'assuré:</strong></td>
+              <td>
+                <span>{{ dppForm.get("enfass")?.value ? "Oui" : "Non" }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Salaire par Tranches</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td><strong>Tranche A:</strong></td>
+              <td>
+                <span
+                  >{{ dppForm.get("saltra")?.value }}
+                  {{ dppForm.get("saltra1")?.value }}</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Tranche B:</strong></td>
+              <td>
+                <span
+                  >{{ dppForm.get("saltrb")?.value }}
+                  {{ dppForm.get("saltrb1")?.value }}</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Tranche C:</strong></td>
+              <td>
+                <span
+                  >{{ dppForm.get("saltrc")?.value }}
+                  {{ dppForm.get("saltrc1")?.value }}</span
+                >
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4" *ngIf="dppForm.get('images')?.value">
+        <mat-card-title>Photo</mat-card-title>
+        <mat-card-content>
+          <table>
+            <img
+              [src]="dppForm.get('images')?.value"
+              alt="Photo"
+              style="max-width: 200px; border-radius: 8px"
+            />
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    }
+  </div>
+</div>
