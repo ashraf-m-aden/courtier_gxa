@@ -59,7 +59,7 @@ export class TierListComponent {
   displayedColumns: string[] = ['type', 'nom', 'tel', 'adresse', 'ville', 'actions'];
 
 
-  constructor(private facade: TierFacade, private courtierStore: Store) {
+  constructor(private facade: TierFacade, private courtierStore: Store, private router:Router) {
     this.courtierStore.select(selectTiers).subscribe(this.allTiers.set);
 
   }
@@ -161,7 +161,7 @@ export class TierListComponent {
   });
 
   editTier(tier: TierDisplay): void {
-    console.log('Edit:', tier);
+    this.router.navigate(['/courtiers/tiers/details/'+tier.numtiers])
   }
 
   viewTier(tier: TierDisplay): void {

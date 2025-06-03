@@ -28,9 +28,9 @@
           <mat-label>Ville</mat-label>
           <mat-select formControlName="ville">
             <mat-option value="">Toutes</mat-option>
-            <mat-option *ngFor="let city of allCities()" [value]="city">{{
-              city
-            }}</mat-option>
+            @for(city of allCities();track city){
+            <mat-option [value]="city">{{ city }}</mat-option
+            >}
           </mat-select>
         </mat-form-field>
       </form>
@@ -40,7 +40,7 @@
           [routerLink]="['/courtiers/tiers/nouveau']"
           routerLinkActive
         >
-          Ajouter
+              <mat-icon>add</mat-icon> Nouveau tier
         </button>
       </div>
     </div>
@@ -98,22 +98,10 @@
               color="primary"
               (click)="editTier(element)"
             >
-              <mat-icon>edit</mat-icon>
+              <mat-icon>edit</mat-icon> Consulter
             </button>
-            <button
-              class="btn btn-group btn-warning"
-              color="accent"
-              (click)="viewTier(element)"
-            >
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button
-              class="btn btn-group btn-danger"
-              color="warn"
-              (click)="deleteTier(element)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
+
+
           </td>
         </ng-container>
 

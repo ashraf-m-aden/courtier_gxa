@@ -1,39 +1,33 @@
-import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { ActivatedRoute } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { TierFacade } from '../store/tier.Facade';
-import { Tier } from '../../../Model/tier.model';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSelectModule } from '@angular/material/select';
-import { Dpp } from '../../../Model/dpp.model';
-import { ConvColl, DpmModel, Statutju } from '../../../Model/dpm.model';
-//import { constructor } from 'assert';
-//import { classify } from '../store/__name@dasherize__.state';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { TierProfilComponent } from '../../../components/tier/tier-profil/tier-profil.component';
-import { DpmProfilComponent } from '../../../components/tier/dpm-profil/dpm-profil.component';
-import { DppProfilComponent } from '../../../components/tier/dpp-profil/dpp-profil.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ActivatedRoute } from '@angular/router';
+import { TierFacade } from '../../../courtiers/tier/store/tier.Facade';
+import { DpmModel, Statutju, ConvColl } from '../../../Model/dpm.model';
+import { Dpp } from '../../../Model/dpp.model';
+import { Tier } from '../../../Model/tier.model';
+
 @Component({
-  selector: 'app-tier-detail',
-  standalone: true,
-  imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
+  selector: 'app-tier-profil',
+  imports: [    CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
     MatCardModule, MatTabsModule,MatDatepickerModule,    MatNativeDateModule,
     MatInputModule, MatCheckboxModule,
-    MatButtonModule, MatIconModule,TierProfilComponent,DpmProfilComponent,DppProfilComponent
-  ],
-  styleUrls: ['./tier-detail.component.scss'],
-  templateUrl: './tier-detail.component.html'
+    MatButtonModule, MatIconModule],
+  templateUrl: './tier-profil.component.html',
+  styleUrl: './tier-profil.component.css'
 })
-export class TierDetailComponent {
-  public id: string
+export class TierProfilComponent {
+
+ public id: string
   selected = signal<Tier | null>(null);
   selectedDPP = signal<Dpp | null>(null);
   selectedDPM = signal<DpmModel | null>(null);
@@ -325,3 +319,4 @@ export class TierDetailComponent {
     }
   }
 }
+

@@ -7,11 +7,12 @@ import { Store } from '@ngrx/store';
 import { tierActions } from '../store/tier.actions';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'tier-nouveau',
   imports: [FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule, MatCardModule, MatInputModule,
-    MatSelectModule,
+    MatSelectModule,MatIcon,
     MatCheckboxModule,
     MatButtonModule,],
   templateUrl: './tier-nouveau.component.html',
@@ -62,20 +63,10 @@ export class TierNouveauComponent {
       territory: [''],
       latitude: [null],
       longitude: [null],
-      // ... les autres champs ...
-      nom: [''],              // pour DDP
-      prenom: [''],           // pour DDP
-      nomentreprise: [''],    // pour DPM
-      regcom: [''],           // pour DPM
+
     });
   }
-  get isDDP(): boolean {
-    return this.tierForm.get('typtiers')?.value === 'ddp';
-  }
 
-  get isDPM(): boolean {
-    return this.tierForm.get('typtiers')?.value === 'dpm';
-  }
 
   onSubmit() {
     console.log(this.tierForm.value);

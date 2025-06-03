@@ -1,0 +1,443 @@
+
+          <div class="container-fluid mt-4 p-2">
+            <div class="row">
+              <div class="col-12">
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-end mb-3">
+                  <div class="btn-group">
+                    <button class="btn btn-primary" (click)="toggleEditMode()">
+                      {{ editMode ? "Annuler" : "Modifier" }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <!-- Form -->
+                <form [formGroup]="tierForm" (ngSubmit)="save()">
+                  <div class="row d-flex flex-wrap gap-3 justify-content-start">
+                    <!-- typtiers -->
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Type de Tiers</mat-label>
+                        <mat-select
+                          [disabled]="!editMode"
+                          formControlName="typtiers"
+                          [value]="selected()?.typtiers"
+                        >
+                          <mat-option value="ddp">Personne Physique</mat-option>
+                          <mat-option value="dpm">Personne Morale</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <!-- nattiers -->
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nature du Tiers</mat-label>
+                        <input
+                          matInput
+                          formControlName="nattiers"
+                          [value]="selected()?.nattiers"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- numdpp, titre, rsociale -->
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Num DPP</mat-label>
+                        <input
+                          matInput
+                          type="number"
+                          formControlName="numdpp"
+                          [value]="selected()?.numdpp"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Titre</mat-label>
+                        <input
+                          matInput
+                          formControlName="titre"
+                          [value]="selected()?.titre"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Raison Sociale</mat-label>
+                        <input
+                          matInput
+                          formControlName="rsociale"
+                          [value]="selected()?.rsociale"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- referenc, connexe, refext -->
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Référence</mat-label>
+                        <input
+                          matInput
+                          formControlName="referenc"
+                          [value]="selected()?.referenc"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Connexe</mat-label>
+                        <input
+                          matInput
+                          formControlName="connexe"
+                          [value]="selected()?.connexe"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Référence Externe</mat-label>
+                        <input
+                          matInput
+                          formControlName="refext"
+                          [value]="selected()?.refext"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- adresse -->
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Adresse 1</mat-label>
+                        <input
+                          matInput
+                          formControlName="adr1"
+                          [value]="selected()?.adr1"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Adresse 2</mat-label>
+                        <input
+                          matInput
+                          formControlName="adr2"
+                          [value]="selected()?.adr2"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Adresse 3</mat-label>
+                        <input
+                          matInput
+                          formControlName="adr3"
+                          [value]="selected()?.adr3"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- ville, code postal, pays -->
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Ville</mat-label>
+                        <input
+                          matInput
+                          formControlName="ville"
+                          [value]="selected()?.ville"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Code Postal</mat-label>
+                        <input
+                          matInput
+                          formControlName="codp"
+                          [value]="selected()?.codp"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Pays</mat-label>
+                        <input
+                          matInput
+                          formControlName="pays"
+                          [value]="selected()?.pays"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- téléphone, fax, email -->
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Téléphone</mat-label>
+                        <input
+                          matInput
+                          formControlName="ntel"
+                          [value]="selected()?.ntel"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Fax</mat-label>
+                        <input
+                          matInput
+                          formControlName="nfax"
+                          [value]="selected()?.nfax"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Email</mat-label>
+                        <input
+                          matInput
+                          type="email"
+                          formControlName="numemail"
+                          [value]="selected()?.numemail"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- infos supplémentaires -->
+                    <div class="col-md-6 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Mémo</mat-label>
+                        <textarea
+                          matInput
+                          formControlName="memo"
+                          [value]="selected()?.memo"
+                          rows="3"
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+
+                    <!-- checkboxes -->
+                    <div class="col-md-12 d-flex flex-wrap gap-4 px-3">
+                      <mat-checkbox
+                        formControlName="adrinsee"
+                        [checked]="selected()?.adrinsee"
+                        >Adresse INSEE</mat-checkbox
+                      >
+                      <mat-checkbox
+                        formControlName="grcok"
+                        [checked]="selected()?.grcok"
+                        >GRC OK</mat-checkbox
+                      >
+                      <mat-checkbox
+                        formControlName="nonepur"
+                        [checked]="selected()?.nonepur"
+                        >Non épuré</mat-checkbox
+                      >
+                    </div>
+
+                    <!-- Autres champs en ligne avec labels compréhensibles -->
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Extension</mat-label>
+                        <input
+                          matInput
+                          formControlName="ext"
+                          [value]="selected()?.ext"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Image</mat-label>
+                        <input
+                          matInput
+                          formControlName="images"
+                          [value]="selected()?.images"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nom sur Titre</mat-label>
+                        <input
+                          matInput
+                          formControlName="titnom"
+                          [value]="selected()?.titnom"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Gommette</mat-label>
+                        <input
+                          matInput
+                          formControlName="gommette"
+                          [value]="selected()?.gommette"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>OLE</mat-label>
+                        <input
+                          matInput
+                          formControlName="ole"
+                          [value]="selected()?.ole"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Titre de Courtoisie</mat-label>
+                        <input
+                          matInput
+                          formControlName="titrecou"
+                          [value]="selected()?.titrecou"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Modifié par</mat-label>
+                        <input
+                          matInput
+                          formControlName="modifpar"
+                          [value]="selected()?.modifpar"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Constitution</mat-label>
+                        <input
+                          matInput
+                          formControlName="const"
+                          [value]="selected()?.const"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Historique</mat-label>
+                        <input
+                          matInput
+                          formControlName="histo"
+                          [value]="selected()?.histo"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Adresse complémentaire 1</mat-label>
+                        <input
+                          matInput
+                          formControlName="adresse1"
+                          [value]="selected()?.adresse1"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Adresse complémentaire 2</mat-label>
+                        <input
+                          matInput
+                          formControlName="adresse2"
+                          [value]="selected()?.adresse2"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Adresse complémentaire 3</mat-label>
+                        <input
+                          matInput
+                          formControlName="adresse3"
+                          [value]="selected()?.adresse3"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Territoire</mat-label>
+                        <input
+                          matInput
+                          formControlName="territory"
+                          [value]="selected()?.territory"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- latitude / longitude -->
+                    <div class="col-md-6 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Latitude</mat-label>
+                        <input
+                          matInput
+                          type="number"
+                          formControlName="latitude"
+                          [value]="selected()?.latitude"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Longitude</mat-label>
+                        <input
+                          matInput
+                          type="number"
+                          formControlName="longitude"
+                          [value]="selected()?.longitude"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- nbpercha -->
+                    <div class="col-md-12 mb-3">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nombre de personnes à charge</mat-label>
+                        <input
+                          matInput
+                          type="number"
+                          formControlName="nbpercha"
+                          [value]="selected()?.nbpercha"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <!-- Submit -->
+                    @if(editMode){
+                    <div class="col-12 text-end mt-4">
+                      <button class="btn btn-group btn-primary" type="submit">
+                        <mat-icon>save</mat-icon> Mettre à jour
+                      </button>
+                    </div>
+                    }
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>

@@ -1,0 +1,709 @@
+<div class="container-fluid mt-4 p-2">
+  <div class="row">
+    @if(editMode){
+    <div class="col-12">
+      <form [formGroup]="dpmForm" (ngSubmit)="save()">
+        <div class="row d-flex flex-wrap gap-3 justify-content-start">
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Numéro de tiers</mat-label>
+              <input matInput type="number" formControlName="numtiers" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Statut juridique</mat-label>
+              <mat-select formControlName="statutju">
+                <mat-option *ngFor="let s of statutjuOptions" [value]="s">{{
+                  s
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Capital</mat-label>
+              <input matInput type="number" formControlName="capital" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Devise du capital</mat-label>
+              <mat-select formControlName="capital1">
+                <mat-option *ngFor="let c of currencyCodes" [value]="c">{{
+                  c
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Numéro SIRET</mat-label>
+              <input matInput formControlName="nsiret" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Numéro RC</mat-label>
+              <input matInput formControlName="nrc" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Numéro RM</mat-label>
+              <input matInput formControlName="nrm" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Code NAF (APE)</mat-label>
+              <input matInput formControlName="codeape" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Lieu d'immatriculation</mat-label>
+              <input matInput formControlName="lieuimm" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>TVA intracommunautaire</mat-label>
+              <input matInput formControlName="tvaintra" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Date de création</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerDateCre"
+                formControlName="datecre"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerDateCre"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerDateCre></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nombre d'établissements</mat-label>
+              <input matInput type="number" formControlName="nbetabli" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nombre de salariés</mat-label>
+              <input matInput type="number" formControlName="nbsalar" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nombre de cadres</mat-label>
+              <input matInput type="number" formControlName="nbcadre" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nombre de non cadres</mat-label>
+              <input matInput type="number" formControlName="noncadre" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Filiale de (N°)</mat-label>
+              <input matInput type="number" formControlName="groupe" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Participation de la mère (%)</mat-label>
+              <input matInput type="number" formControlName="partic" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Année 1</mat-label>
+              <input matInput formControlName="annee1" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Année 2</mat-label>
+              <input matInput formControlName="annee2" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Année 3</mat-label>
+              <input matInput formControlName="annee3" />
+            </mat-form-field>
+          </div>
+
+          <!-- Salaries masse salariale + currency -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Masse salariale 1</mat-label>
+              <input matInput type="number" formControlName="salair1" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Devise masse salariale 1</mat-label>
+              <mat-select formControlName="salair11">
+                <mat-option *ngFor="let c of currencyCodes" [value]="c">{{
+                  c
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Add the same pattern for salair2, salair21, salair3, salair31 -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Masse salariale 2</mat-label>
+              <input matInput type="number" formControlName="salair2" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Devise masse salariale 2</mat-label>
+              <mat-select formControlName="salair21">
+                <mat-option *ngFor="let c of currencyCodes" [value]="c">{{
+                  c
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Masse salariale 3</mat-label>
+              <input matInput type="number" formControlName="salair3" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Devise masse salariale 3</mat-label>
+              <mat-select formControlName="salair31">
+                <mat-option *ngFor="let c of currencyCodes" [value]="c">{{
+                  c
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Similarly for CA HT 1, 2, 3 and their currencies -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>CA HT année 1</mat-label>
+              <input matInput type="number" formControlName="caht1" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Devise CA HT année 1</mat-label>
+              <mat-select formControlName="caht11">
+                <mat-option *ngFor="let c of currencyCodes" [value]="c">{{
+                  c
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Repeat for caht2, caht21, caht3, caht31 -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Marge brute 1</mat-label>
+              <input matInput type="number" formControlName="marge1" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Devise marge brute 1</mat-label>
+              <mat-select formControlName="marge11">
+                <mat-option *ngFor="let c of currencyCodes" [value]="c">{{
+                  c
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Repeat for marge2, marge21, marge3, marge31 -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Entité juridique</mat-label>
+              <input matInput formControlName="entite" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Emetteur</mat-label>
+              <input matInput formControlName="emetteur" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Compte bancaire</mat-label>
+              <input matInput formControlName="compteba" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Interlocuteur</mat-label>
+              <input matInput type="number" formControlName="interl" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Activité</mat-label>
+              <input matInput formControlName="activite" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Convention collective</mat-label>
+              <mat-select formControlName="convcol">
+                <mat-option *ngFor="let c of convCollOptions" [value]="c">{{
+                  c
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>URL</mat-label>
+              <input matInput formControlName="url" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Expert</mat-label>
+              <input matInput type="number" formControlName="expert" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Début exercice</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerDebExe"
+                formControlName="debexe"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerDebExe"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerDebExe></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Fin exercice</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerFinExe"
+                formControlName="finexe"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerFinExe"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerFinExe></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Numéro convention collective</mat-label>
+              <input matInput formControlName="numeroconvcol" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Numéro brochure</mat-label>
+              <input matInput formControlName="numerobrochure" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>ID enregistrement ORIAS</mat-label>
+              <input matInput formControlName="oriasregistrationid" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Dernière mise à jour RBE</mat-label>
+              <input matInput formControlName="rbelastupdate" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <button
+            class="btn btn-group btn-primary"
+            color="primary"
+            type="submit"
+            [disabled]="!dpmForm.valid"
+          >
+            <mat-icon>save</mat-icon>
+            Mettre à jour
+          </button>
+          <button
+            class="btn btn-group btn-warning"
+            color="primary"
+            type="button"
+            (click)="editMode = false"
+          >
+            <mat-icon>cancel</mat-icon>
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+    } @else{
+    <div class="col-12">
+      <!-- Action Buttons -->
+      <div class="d-flex justify-content-end mb-3">
+        <div class="btn-group">
+          <button class="btn btn-primary" (click)="toggleEditMode()">
+            {{ editMode ? "Annuler" : "Modifier" }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Informations juridiques</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td>
+                <strong>Numéro de tiers:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("numtiers")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Statut juridique:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("statutju")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Capital:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("capital")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Devise du capital:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("capital1")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Numéro SIRET:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("nsiret")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Numéro RC:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("nrc")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Numéro RM:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("nrm")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Code NAF (APE):</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("codeape")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Lieu d'immatriculation:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("lieuimm")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>TVA intracommunautaire:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("tvaintra")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Date de création:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("datecre")?.value | date }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Structure de l'entreprise</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td>
+                <strong>Nombre d'établissements:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("nbetabli")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Nombre de salariés:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("nbsalar")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Nombre de cadres:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("nbcadre")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Nombre de non-cadres:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("noncadre")?.value }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Groupe / Filiale</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td>
+                <strong>Filiale de (N°):</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("groupe")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Participation de la mère (%):</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("partic")?.value }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Historique des années</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td>
+                <strong>Année 1:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("annee1")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Année 2:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("annee2")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Année 3:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("annee3")?.value }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Masse salariale</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td>
+                <strong>Masse salariale 1:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("salair1")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Devise masse salariale 1:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("salair11")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Masse salariale 2:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("salair2")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Devise masse salariale 2:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("salair21")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Masse salariale 3:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("salair3")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Devise masse salariale 3:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("salair31")?.value }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mb-4 p-4">
+        <mat-card-title>Chiffre d'affaires (HT)</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td>
+                <strong>CA HT année 1:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("caht1")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Devise CA HT année 1:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("caht11")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>CA HT année 2:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("caht2")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Devise CA HT année 2:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("caht21")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>CA HT année 3:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("caht3")?.value }}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Devise CA HT année 3:</strong>
+              </td>
+              <td>
+                <span>{{ dpmForm.get("caht31")?.value }}</span>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    }
+  </div>
+</div>

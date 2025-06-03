@@ -1,318 +1,280 @@
 <div class="container-fluid">
-<div class="row card">
-  <div class="col-12 ">
-    <h2>Création d'un tier</h2>
-  </div>
-  <div class="col-12 mt-5">
-      <form [formGroup]="tierForm" (ngSubmit)="onSubmit()">
-    <div class="row d-flex flex-wrap gap-3 justify-content-start">
-
-
-      <!-- typtiers -->
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Type de Tiers</mat-label>
-          <mat-select formControlName="typtiers">
-            <mat-option value="ddp">Personne Physique</mat-option>
-            <mat-option value="dpm">Personne Morale</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <!-- nattiers -->
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Nature du Tiers</mat-label>
-          <input matInput formControlName="nattiers" />
-        </mat-form-field>
-      </div>
-
-      <!-- numdpp, titre, rsociale -->
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Num DPP</mat-label>
-          <input matInput type="number" formControlName="numdpp" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Titre</mat-label>
-          <input matInput formControlName="titre" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Raison Sociale</mat-label>
-          <input matInput formControlName="rsociale" />
-        </mat-form-field>
-      </div>
-
-      <!-- referenc, connexe, refext -->
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Référence</mat-label>
-          <input matInput formControlName="referenc" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Connexe</mat-label>
-          <input matInput formControlName="connexe" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Référence Externe</mat-label>
-          <input matInput formControlName="refext" />
-        </mat-form-field>
-      </div>
-
-      <!-- adresse -->
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Adresse 1</mat-label>
-          <input matInput formControlName="adr1" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Adresse 2</mat-label>
-          <input matInput formControlName="adr2" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Adresse 3</mat-label>
-          <input matInput formControlName="adr3" />
-        </mat-form-field>
-      </div>
-
-      <!-- ville, code postal, pays -->
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Ville</mat-label>
-          <input matInput formControlName="ville" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Code Postal</mat-label>
-          <input matInput formControlName="codp" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Pays</mat-label>
-          <input matInput formControlName="pays" />
-        </mat-form-field>
-      </div>
-
-      <!-- téléphone, fax, email -->
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Téléphone</mat-label>
-          <input matInput formControlName="ntel" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Fax</mat-label>
-          <input matInput formControlName="nfax" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3 col-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="numemail" />
-        </mat-form-field>
-      </div>
-
-      <!-- infos supplémentaires -->
-      <div class="col-md-6 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Mémo</mat-label>
-          <textarea matInput formControlName="memo" rows="3"></textarea>
-        </mat-form-field>
-      </div>
-
-
-      <!-- checkboxes -->
-      <div class="col-md-12 d-flex flex-wrap gap-4 px-3">
-        <mat-checkbox formControlName="adrinsee">Adresse INSEE</mat-checkbox>
-        <mat-checkbox formControlName="grcok">GRC OK</mat-checkbox>
-        <mat-checkbox formControlName="nonepur">Non épuré</mat-checkbox>
-      </div>
-
-  <!-- Autres champs en ligne avec labels compréhensibles -->
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Extension</mat-label>
-      <input matInput formControlName="ext" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Image</mat-label>
-      <input matInput formControlName="images" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Nom sur Titre</mat-label>
-      <input matInput formControlName="titnom" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Gommette</mat-label>
-      <input matInput formControlName="gommette" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>OLE</mat-label>
-      <input matInput formControlName="ole" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Titre de Courtoisie</mat-label>
-      <input matInput formControlName="titrecou" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Modifié par</mat-label>
-      <input matInput formControlName="modifpar" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Constitution</mat-label>
-      <input matInput formControlName="const" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Historique</mat-label>
-      <input matInput formControlName="histo" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Adresse complémentaire 1</mat-label>
-      <input matInput formControlName="adresse1" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Adresse complémentaire 2</mat-label>
-      <input matInput formControlName="adresse2" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Adresse complémentaire 3</mat-label>
-      <input matInput formControlName="adresse3" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-3 col-12 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Territoire</mat-label>
-      <input matInput formControlName="territory" />
-    </mat-form-field>
-  </div>
-
-      <!-- latitude / longitude -->
-      <div class="col-md-6 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Latitude</mat-label>
-          <input matInput type="number" formControlName="latitude" />
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Longitude</mat-label>
-          <input matInput type="number" formControlName="longitude" />
-        </mat-form-field>
-      </div>
-
-      <!-- nbpercha -->
-      <div class="col-md-12 mb-3">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Nombre de personnes à charge</mat-label>
-          <input matInput type="number" formControlName="nbpercha" />
-        </mat-form-field>
-      </div>
-<!-- Champs spécifiques DDP -->
-  @if(isDDP){
-
-  <div class="col-md-6 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Nom</mat-label>
-      <input matInput formControlName="nom" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-6 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Prénom</mat-label>
-      <input matInput formControlName="prenom" />
-    </mat-form-field>
-  </div>
-
-  <!-- Ajoute d'autres champs spécifiques DDP ici -->
-  }
-<!-- Champs spécifiques DPM -->
- @if(isDPM){
-  <div class="col-md-6 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Nom entreprise</mat-label>
-      <input matInput formControlName="nomentreprise" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-md-6 mb-3">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Registre de commerce</mat-label>
-      <input matInput formControlName="regcom" />
-    </mat-form-field>
-
-
-  <!-- Ajoute d'autres champs spécifiques DPM ici -->
-</div>
-}
-      <!-- Submit -->
-      <div class="col-12 text-end mt-4">
-        <button class="btn btn-group btn-primary" type="submit">
-          Enregistrer
-        </button>
-      </div>
+  <div class="row card">
+    <div class="col-12">
+      <h2>Création d'un tier</h2>
     </div>
-  </form>
+    <div class="col-12 mt-5">
+      <form [formGroup]="tierForm" (ngSubmit)="onSubmit()">
+        <div class="row d-flex flex-wrap gap-3 justify-content-start">
+          <!-- typtiers -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Type de Tiers</mat-label>
+              <mat-select formControlName="typtiers">
+                <mat-option value="ddp">Personne Physique</mat-option>
+                <mat-option value="dpm">Personne Morale</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- nattiers -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nature du Tiers</mat-label>
+              <input matInput formControlName="nattiers" />
+            </mat-form-field>
+          </div>
+
+          <!-- numdpp, titre, rsociale -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Num DPP</mat-label>
+              <input matInput type="number" formControlName="numdpp" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Titre</mat-label>
+              <input matInput formControlName="titre" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Raison Sociale</mat-label>
+              <input matInput formControlName="rsociale" />
+            </mat-form-field>
+          </div>
+
+          <!-- referenc, connexe, refext -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Référence</mat-label>
+              <input matInput formControlName="referenc" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Connexe</mat-label>
+              <input matInput formControlName="connexe" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Référence Externe</mat-label>
+              <input matInput formControlName="refext" />
+            </mat-form-field>
+          </div>
+
+          <!-- adresse -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse 1</mat-label>
+              <input matInput formControlName="adr1" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse 2</mat-label>
+              <input matInput formControlName="adr2" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse 3</mat-label>
+              <input matInput formControlName="adr3" />
+            </mat-form-field>
+          </div>
+
+          <!-- ville, code postal, pays -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Ville</mat-label>
+              <input matInput formControlName="ville" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Code Postal</mat-label>
+              <input matInput formControlName="codp" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Pays</mat-label>
+              <input matInput formControlName="pays" />
+            </mat-form-field>
+          </div>
+
+          <!-- téléphone, fax, email -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Téléphone</mat-label>
+              <input matInput formControlName="ntel" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Fax</mat-label>
+              <input matInput formControlName="nfax" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="numemail" />
+            </mat-form-field>
+          </div>
+
+          <!-- infos supplémentaires -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Mémo</mat-label>
+              <textarea matInput formControlName="memo" rows="3"></textarea>
+            </mat-form-field>
+          </div>
+
+          <!-- checkboxes -->
+          <div class="col-md-12 d-flex flex-wrap gap-4 px-3">
+            <mat-checkbox formControlName="adrinsee"
+              >Adresse INSEE</mat-checkbox
+            >
+            <mat-checkbox formControlName="grcok">GRC OK</mat-checkbox>
+            <mat-checkbox formControlName="nonepur">Non épuré</mat-checkbox>
+          </div>
+
+          <!-- Autres champs en ligne avec labels compréhensibles -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Extension</mat-label>
+              <input matInput formControlName="ext" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Image</mat-label>
+              <input matInput formControlName="images" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nom sur Titre</mat-label>
+              <input matInput formControlName="titnom" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Gommette</mat-label>
+              <input matInput formControlName="gommette" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>OLE</mat-label>
+              <input matInput formControlName="ole" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Titre de Courtoisie</mat-label>
+              <input matInput formControlName="titrecou" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Modifié par</mat-label>
+              <input matInput formControlName="modifpar" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Constitution</mat-label>
+              <input matInput formControlName="const" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Historique</mat-label>
+              <input matInput formControlName="histo" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse complémentaire 1</mat-label>
+              <input matInput formControlName="adresse1" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse complémentaire 2</mat-label>
+              <input matInput formControlName="adresse2" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse complémentaire 3</mat-label>
+              <input matInput formControlName="adresse3" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Territoire</mat-label>
+              <input matInput formControlName="territory" />
+            </mat-form-field>
+          </div>
+
+          <!-- latitude / longitude -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Latitude</mat-label>
+              <input matInput type="number" formControlName="latitude" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Longitude</mat-label>
+              <input matInput type="number" formControlName="longitude" />
+            </mat-form-field>
+          </div>
+
+          <!-- nbpercha -->
+          <div class="col-md-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nombre de personnes à charge</mat-label>
+              <input matInput type="number" formControlName="nbpercha" />
+            </mat-form-field>
+          </div>
+
+          <!-- Submit -->
+          <div class="col-12 text-end mt-4">
+            <button class="btn btn-group btn-primary" type="submit">
+              <mat-icon>save</mat-icon> Enregistrer
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 </div>
