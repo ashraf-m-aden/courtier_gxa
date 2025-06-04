@@ -15,19 +15,20 @@ import { Dpp } from '../../../Model/dpp.model';
 import { ConvColl, DpmModel, Statutju } from '../../../Model/dpm.model';
 //import { constructor } from 'assert';
 //import { classify } from '../store/__name@dasherize__.state';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TierProfilComponent } from '../../../components/tier/tier-profil/tier-profil.component';
 import { DpmProfilComponent } from '../../../components/tier/dpm-profil/dpm-profil.component';
 import { DppProfilComponent } from '../../../components/tier/dpp-profil/dpp-profil.component';
+import { ProjetBaseComponent } from '../../../components/projets/base/base.component';
 @Component({
   selector: 'app-tier-detail',
   standalone: true,
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
-    MatCardModule, MatTabsModule,MatDatepickerModule,    MatNativeDateModule,
-    MatInputModule, MatCheckboxModule,
-    MatButtonModule, MatIconModule,TierProfilComponent,DpmProfilComponent,DppProfilComponent
+    MatCardModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule,
+    MatInputModule, MatCheckboxModule,ProjetBaseComponent,
+    MatButtonModule, MatIconModule, TierProfilComponent, DpmProfilComponent, DppProfilComponent
   ],
   styleUrls: ['./tier-detail.component.scss'],
   templateUrl: './tier-detail.component.html'
@@ -54,53 +55,48 @@ export class TierDetailComponent {
   statutjuOptions = Object.values(Statutju);
   convCollOptions = Object.values(ConvColl);
   currencyCodes = ['EUR', 'USD', 'GBP', 'XAF']; // Add your currency codes
-  ddpTierData = {
-    id: 'TIER001',
-    typtiers: 'ddp',
-    nom: 'Ali',
-    prenom: 'Mohamed',
-    nomentreprise: null,
-    regcom: null,
-    adresse: 'Quartier 7, Djibouti',
-    ville: 'Djibouti',
-    pays: 'Djibouti',
-    telephone: '77889900',
-    email: 'ali.mohamed@example.com',
-    siteweb: null,
-    lat: 11.5721,
-    long: 43.1456,
-    modifpar: 'admin',
-    datdermo: '2025-05-30T14:00:00Z',
+
+  exempleTier: Tier = {
+    numtiers: 12345,
+    typtiers: "Client",
+    nattiers: "Particulier",
+    numdpp: 67890,
+    titre: "M.",
+    rsociale: "Société Exemple SARL",
+    referenc: "REF-2025-001",
+    connexe: "C123",
+    refext: "EXT-456",
+    adr1: "10 rue de la Paix",
+    adr2: "Bâtiment B",
+    adr3: "2ème étage",
+    codp: "75002",
+    ville: "Paris",
+    codepays: "FR",
+    pays: "France",
+    ntel: "+33 1 23 45 67 89",
+    nfax: "+33 1 23 45 67 80",
+    numemail: "contact@example.com",
+    memo: "Client important, préférer contact par email.",
+    ext: "EXT01",
+    images: "logo_exemple.png",
+    titnom: "Exemple",
+    gommette: "rouge",
+    ole: "OLE123",
+    titrecou: "M.",
+    datdermo: "2025-06-01T10:30:00Z",
+    modifpar: "admin",
     nbpercha: 3,
-    nbcont: 2,
-    typeclient: 'normal',
-    clientbloque: false,
-    clientparticulier: true,
-    clientprofessionnel: false
-  };
-  dpmTierData = {
-    id: 'TIER002',
-    typtiers: 'dpm',
-    nom: null,
-    prenom: null,
-    nomentreprise: 'Entreprise Horizon SARL',
-    regcom: 'RC123456',
-    adresse: 'Zone industrielle Sud',
-    ville: 'Djibouti',
-    pays: 'Djibouti',
-    telephone: '77223344',
-    email: 'contact@horizon.dj',
-    siteweb: 'https://www.horizon.dj',
-    lat: 11.5854,
-    long: 43.1599,
-    modifpar: 'user42',
-    datdermo: '2025-06-01T10:30:00Z',
-    nbpercha: 10,
-    nbcont: 5,
-    typeclient: 'premium',
-    clientbloque: false,
-    clientparticulier: false,
-    clientprofessionnel: true
+    const: "CONST456",
+    histo: "Historique des commandes disponibles.",
+    adrinsee: true,
+    adresse1: "10 rue de la Paix",
+    adresse2: "Bâtiment B",
+    adresse3: "2ème étage",
+    grcok: false,
+    nonepur: false,
+    territory: "Île-de-France",
+    latitude: 48.8686,
+    longitude: 2.3444
   };
 
 
@@ -113,7 +109,7 @@ export class TierDetailComponent {
     // if (id) this.facade.getById(id);
     // this.selected.set(this.facade.selected());
     this.initForm();
-    this.tierForm.patchValue(this.ddpTierData); // ou dpmTierData
+    this.tierForm.patchValue(this.exempleTier); // ou dpmTierData
   }
 
   initForm() {
@@ -163,123 +159,7 @@ export class TierDetailComponent {
       nomentreprise: [''],    // pour DPM
       regcom: [''],           // pour DPM
     });
-    this.dppForm = this.fb.group({
-      numdpp: [null, [Validators.required]],
-      numtiers: [null],
-      titre: [''],
-      nom: [''],
-      prenom: [''],
-      nompre: [''],
-      nomfille: [''],
-      alias: [''],
-      sexe: [''],
-      datenais: [''],
-      age: [null],
-      agemsme: [null],
-      national: [''],
-      numss: [''],
-      sitfam: [''],
-      activite: [''],
-      catprof: [''],
-      csp: [''],
-      profess: [''],
-      employe: [''],
-      filiale: [''],
-      dateent: [''],
-      salaire: [null],
-      salaire1: [''],
-      datesal: [null],
-      telprof: [''],
-      postetel: [''],
-      faxpro: [''],
-      portable: [''],
-      npermis: [''],
-      lieuperm: [''],
-      condacc: [false],
-      dateca: [''],
-      datemoto: [''],
-      datevl: [''],
-      datepl: [''],
-      datetc: [''],
-      images: [''],
-      ssregion: [''],
-      sscaisse: [''],
-      sscentre: [''],
-      enfass: [false],
-      saltra: [null],
-      saltra1: [''],
-      saltrb: [null],
-      saltrb1: [''],
-      saltrc: [null],
-      saltrc1: [''],
-      numemail: [''],
-      datea1: [''],
-      datebsr: [''],
-      orgaffil: [''],
-      datea2: [''],
-      dateb1: [''],
-      regimesocial: [''],
-      regimelocal: [''],
-      emailprof: [''],
-      lieunaissance: [''],
-      datepermisbateau: [''],
-      typepermisbateau: [''],
-      datevalvl: [''],
-    });
-    this.dpmForm = this.fb.group({
-      numtiers: [null],
-      statutju: [''],
-      capital: [null],
-      capital1: [''],
-      nsiret: [''],
-      nrc: [''],
-      nrm: [''],
-      codeape: [''],
-      lieuimm: [''],
-      tvaintra: [''],
-      datecre: [''],
-      nbetabli: [null],
-      nbsalar: [null],
-      nbcadre: [null],
-      noncadre: [null],
-      groupe: [null],
-      partic: [null],
-      annee1: [''],
-      annee2: [''],
-      annee3: [''],
-      salair1: [null],
-      salair11: [''],
-      salair2: [null],
-      salair21: [''],
-      salair3: [null],
-      salair31: [''],
-      caht1: [null],
-      caht11: [''],
-      caht2: [null],
-      caht21: [''],
-      caht3: [null],
-      caht31: [''],
-      marge1: [null],
-      marge11: [''],
-      marge2: [null],
-      marge21: [''],
-      marge3: [null],
-      marge31: [''],
-      entite: [''],
-      emetteur: [''],
-      compteba: [''],
-      interl: [null],
-      activite: [''],
-      convcol: [''],
-      url: [''],
-      expert: [null],
-      debexe: [''],
-      finexe: [''],
-      numeroconvcol: [''],
-      numerobrochure: [''],
-      oriasregistrationid: [''],
-      rbelastupdate: [''],
-    });
+
     this.updateFormState()
   }
 
@@ -296,13 +176,7 @@ export class TierDetailComponent {
     this.updateFormState()
   }
 
-  isDPP(): boolean {
-    return this.tierForm.get('typtiers')?.value === 'ddp';
-  }
 
-  isDPM(): boolean {
-    return this.tierForm.get('typtiers')?.value === 'dpm';
-  }
 
   save() {
     if (this.tierForm.valid) {
@@ -310,14 +184,14 @@ export class TierDetailComponent {
       this.editMode = false;
     }
   }
-    onSubmitDPM() {
+  onSubmitDPM() {
     if (this.dpmForm.valid) {
       console.log('Form Value:', this.dpmForm.value);
     } else {
       console.log('Form invalid');
     }
   }
-    onSubmitDPP() {
+  onSubmitDPP() {
     if (this.dpmForm.valid) {
       console.log('Form Value:', this.dpmForm.value);
     } else {
