@@ -1,115 +1,201 @@
 <div class="container-fluid mt-4">
   <div class="row">
-    <!-- Colonne gauche : Liste des projets -->
-    <div class="col-md-4 border-end">
-      <h5>Liste des projets en-cours</h5>
-      <mat-nav-list>
-        @for(projet of projets;track projet){
-        <mat-list-item
-          (click)="selectProjet(projet)"
-          [class.active]="projet === projetSelectionne"
-          style="cursor: pointer"
-        >
-          {{ projet.nom }}
-        </mat-list-item>
-        }
-      </mat-nav-list>
+    <!-- LEFT: Projects + Propositions + Contrats -->
+    <div
+      class="col-md-3 border-end pe-3"
+      style="max-height: 80vh; overflow-y: auto"
+    >
+      <h5 class="mb-3 d-flex align-items-center gap-2">
+        <mat-icon>folder</mat-icon> Projets en cours
+      </h5>
 
-      <div class="mt-3 d-flex flex-column gap-2">
-        <button mat-raised-button color="primary" (click)="creerProjet()">
+      <div class="list-group">
+        @for (projet of projets;track projet){
+        <div
+          class="list-group-item p-2"
+          [class.bg-light]="projet === projetSelectionne"
+          style="cursor: pointer"
+          (click)="selectProjet(projet)"
+        >
+          <div class="d-flex align-items-center gap-2">
+            <mat-icon color="primary">work_outline</mat-icon>
+            <strong>{{ projet.nom }}</strong>
+          </div>
+
+          <div class="mt-2 ps-4">
+            <!-- Propositions non validées -->
+            @for (prop of projet.propositions;track prop){ @if (!prop.valide){
+            <div
+              class="d-flex align-items-center gap-2 list-group-item list-group-item-action rounded-3 mb-1"
+              [class.active]="prop === propositionSelectionnee"
+              style="cursor: pointer"
+              (click)="selectProposition(prop); $event.stopPropagation()"
+            >
+              <mat-icon color="accent">description</mat-icon>
+              <span>{{ prop.intitule }}</span>
+            </div>
+            } }
+
+            <!-- Propositions validées (contrats) -->
+            @for (prop of projet.propositions;track prop){ @if (prop.valide){
+            <div
+              class="d-flex align-items-center gap-2 list-group-item list-group-item-success rounded-3 mb-1"
+              [class.active]="prop === propositionSelectionnee"
+              style="cursor: pointer; font-weight: 600"
+              (click)="selectProposition(prop); $event.stopPropagation()"
+            >
+              <mat-icon color="success">check_circle</mat-icon>
+              <span>{{ prop.intitule }}</span>
+              <span class="badge bg-success ms-auto">Contrat</span>
+            </div>
+            } }
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Buttons -->
+      <div class="mt-4 d-grid gap-2">
+        <button type="button" class="btn btn-primary" (click)="creerProjet()">
           Nouveau projet
         </button>
         <button
-          mat-raised-button
-          color="warn"
+          type="button"
+          class="btn btn-danger"
           (click)="effacerProjet()"
           [disabled]="!projetSelectionne"
         >
           Effacer projet
         </button>
         <button
-          mat-raised-button
-          color="accent"
+          type="button"
+          class="btn btn-secondary"
           (click)="renommerProjet()"
           [disabled]="!projetSelectionne"
         >
           Renommer projet
         </button>
-      </div>
-    </div>
-
-    <!-- Colonne droite : Propositions + Détails -->
-    <div class="col-md-8">
-      @if(projetSelectionne){
-      <h5>Propositions du projet : {{ projetSelectionne?.nom }}</h5>
-      }
-      @if(projetSelectionne && projetSelectionne.propositions.length > 0){
-      <mat-nav-list
-
-      >
-        @for(prop of projetSelectionne!.propositions;track prop){
-        <mat-list-item
-          (click)="selectProposition(prop)"
-          [class.active]="prop === propositionSelectionnee"
-          style="cursor: pointer"
-        >
-          {{ prop.intitule }}
-        </mat-list-item>
-        }
-      </mat-nav-list>
-    }
-      @if(projetSelectionne){
-      <div class="mt-3 d-flex flex-column gap-2">
         <button
-          mat-raised-button
-          color="primary"
+          type="button"
+          class="btn btn-primary"
           (click)="ajouterProposition()"
+          [disabled]="!projetSelectionne"
         >
           Nouvelle proposition
         </button>
-        <button
-          mat-raised-button
-          color="warn"
-          (click)="effacerProposition()"
-          [disabled]="!propositionSelectionnee"
-        >
-          Effacer proposition
-        </button>
       </div>
-      } @if(propositionSelectionnee){
-      <div class="mt-4">
-        <h6>Détails proposition</h6>
+    </div>
 
-        <mat-form-field class="w-100">
-          <mat-label>Intitulé</mat-label>
-          <input matInput [(ngModel)]="propositionSelectionnee!.intitule" />
-        </mat-form-field>
+    <!-- RIGHT: Proposition or Contrat Details -->
+    <div class="col-md-9 p-2">
+      @if (propositionSelectionnee){
+        @if (propositionSelectionnee.valide){
+      <!-- Contrat Details -->
+      <h5 class="mb-3 d-flex align-items-center gap-2">
+        <mat-icon>verified_user</mat-icon> Détails du contrat
+      </h5>
 
-        <mat-form-field class="w-100">
-          <mat-label>Données administratives et techniques</mat-label>
-          <textarea
-            matInput
-            rows="4"
-            [(ngModel)]="propositionSelectionnee!.details"
-          ></textarea>
-        </mat-form-field>
+      <div class="mb-3">
+        <label for="intitule" class="form-label">Intitulé</label>
+        <input
+          id="intitule"
+          class="form-control"
+          [(ngModel)]="propositionSelectionnee.contrat!.intitule"
+        />
+      </div>
 
-        <mat-form-field class="w-100">
-          <mat-label>Garanties, clauses</mat-label>
-          <textarea
-            matInput
-            rows="3"
-            [(ngModel)]="propositionSelectionnee!.garanties"
-          ></textarea>
-        </mat-form-field>
+      <div class="mb-3">
+        <label for="numtiers" class="form-label">Numéro Tiers</label>
+        <input
+          id="numtiers"
+          type="number"
+          class="form-control"
+          [(ngModel)]="propositionSelectionnee.contrat!.numtiers"
+        />
+      </div>
 
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="validerProposition()"
+      <div class="mb-3">
+        <label for="debCours" class="form-label">Début de cours</label>
+        <input
+          id="debCours"
+          type="date"
+          class="form-control"
+          [(ngModel)]="propositionSelectionnee.contrat!.debcours"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="finCours" class="form-label">Fin de cours</label>
+        <input
+          id="finCours"
+          type="date"
+          class="form-control"
+          [(ngModel)]="propositionSelectionnee.contrat!.fincours"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="prime" class="form-label">Prime annuelle</label>
+        <input
+          id="prime"
+          type="number"
+          class="form-control"
+          [(ngModel)]="propositionSelectionnee.contrat!.primann"
+        />
+      </div>
+
+      <button type="button" class="btn btn-success">
+        Mettre à jour le contrat
+      </button>
+      } @else{
+      <!-- Proposition Details -->
+      <h5 class="mb-3 d-flex align-items-center gap-2">
+        <mat-icon>info</mat-icon> Détails de la proposition
+      </h5>
+
+      <div class="mb-3">
+        <label for="intitule" class="form-label">Intitulé</label>
+        <input
+          id="intitule"
+          class="form-control"
+          [(ngModel)]="propositionSelectionnee.intitule"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="details" class="form-label"
+          >Données administratives et techniques</label
         >
-          Valider proposition
-        </button>
+        <textarea
+          id="details"
+          rows="4"
+          class="form-control"
+          [(ngModel)]="propositionSelectionnee.details"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="garanties" class="form-label">Garanties / Clauses</label>
+        <textarea
+          id="garanties"
+          rows="3"
+          class="form-control"
+          [(ngModel)]="propositionSelectionnee.garanties"
+        ></textarea>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="validerProposition()"
+      >
+        Valider proposition
+      </button>
+      }
+     } @else{
+      <div class="text-center text-muted mt-5">
+        <mat-icon style="font-size: 48px">info</mat-icon>
+        <p>Sélectionnez une proposition pour afficher les détails</p>
       </div>
       }
     </div>

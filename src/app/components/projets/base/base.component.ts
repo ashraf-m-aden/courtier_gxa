@@ -1,46 +1,92 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+interface Contrat {
+  intitule: string;
+  numtiers: number;
+  debcours: string;
+  fincours: string;
+  primann: number;
+  propproj: number; // identifiant de la proposition
+  numproj: number;  // identifiant du projet
+}
 
 interface Proposition {
+  id: number;
   intitule: string;
-  details: string;
-  garanties: string;
+  valide: boolean;
+  details?: string;
+  garanties?: string;
+  contrat?: Contrat;
 }
 
 interface Projet {
+  id: number;
   nom: string;
   propositions: Proposition[];
 }
 
+
 @Component({
   selector: 'app-projet-base',
-  imports: [FormsModule,MatButtonModule,MatListModule,MatInputModule,MatSelectModule],
+  imports: [FormsModule,MatButtonModule,MatListModule,MatInputModule,MatSelectModule,MatCardModule,MatIconModule],
   templateUrl: './base.component.html',
   styleUrl: './base.component.scss'
 })
 export class ProjetBaseComponent {
+
 projets: Projet[] = [
-    {
-      nom: 'Projet Affaire Nouvelle',
-      propositions: [
-        { intitule: 'Proposition 1', details: 'Détails techniques', garanties: 'Garanties A' },
-        { intitule: 'Proposition 2', details: 'Détails techniques', garanties: 'Garanties B' }
-      ]
-    },
-    {
-      nom: 'Projet Avenant',
-      propositions: [
-        { intitule: 'Proposition Avenant 1', details: 'Détails avenant', garanties: 'Garanties X' }
-      ]
-    }
-  ];
+  {
+    id: 1,
+    nom: 'Projet Santé 2025',
+    propositions: [
+      {
+        id: 1,
+        intitule: 'Offre basique',
+        valide: false,
+        details: 'Données techniques...',
+        garanties: 'Garantie A, Clause B',
+      },
+      {
+        id: 2,
+        intitule: 'Offre premium',
+        valide: true,
+        contrat: {
+          intitule: 'Contrat premium santé',
+          numtiers: 1001,
+          debcours: '2025-01-01',
+          fincours: '2026-01-01',
+          primann: 1200,
+          propproj: 2,
+          numproj: 1,
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    nom: 'Projet Auto 2025',
+    propositions: [
+      {
+        id: 3,
+        intitule: 'Formule classique',
+        valide: false,
+        details: 'Couverture standard',
+        garanties: 'Responsabilité civile',
+      },
+    ],
+  },
+];
 
   projetSelectionne: Projet | null = null;
   propositionSelectionnee: Proposition | null = null;
+
+
 
   selectProjet(projet: Projet) {
     this.projetSelectionne = projet;
@@ -51,12 +97,7 @@ projets: Projet[] = [
     this.propositionSelectionnee = prop;
   }
 
-  creerProjet() {
-    const nom = prompt('Nom du nouveau projet ?');
-    if (nom) {
-      this.projets.push({ nom, propositions: [] });
-    }
-  }
+
 
   effacerProjet() {
     if (this.projetSelectionne) {
@@ -78,15 +119,29 @@ projets: Projet[] = [
     }
   }
 
-  ajouterProposition() {
-    if (this.projetSelectionne) {
-      const intitule = prompt('Intitulé de la nouvelle proposition ?');
-      if (intitule) {
-        this.projetSelectionne.propositions.push({ intitule, details: '', garanties: '' });
-      }
+nextProjetId = 3;
+nextPropositionId = 4;
+
+creerProjet() {
+  const nom = prompt('Nom du projet ?');
+  if (nom) {
+    this.projets.push({ id: this.nextProjetId++, nom, propositions: [] });
+  }
+}
+
+ajouterProposition() {
+  if (this.projetSelectionne) {
+    const intitule = prompt('Intitulé de la proposition ?');
+    if (intitule) {
+      const nouvelleProp: Proposition = {
+        id: this.nextPropositionId++,
+        intitule,
+        valide: false,
+      };
+      this.projetSelectionne.propositions.push(nouvelleProp);
     }
   }
-
+}
   effacerProposition() {
     if (this.projetSelectionne && this.propositionSelectionnee) {
       const index = this.projetSelectionne.propositions.indexOf(this.propositionSelectionnee);
@@ -96,12 +151,19 @@ projets: Projet[] = [
       }
     }
   }
-
-  validerProposition() {
-    if (this.propositionSelectionnee) {
-      alert(`Proposition "${this.propositionSelectionnee.intitule}" validée !`);
-      // Ici tu peux ajouter la logique de transformation en contrat ou avenant
-    }
+validerProposition() {
+  if (this.projetSelectionne && this.propositionSelectionnee && !this.propositionSelectionnee.valide) {
+    this.propositionSelectionnee.valide = true;
+    this.propositionSelectionnee.contrat = {
+      intitule: this.propositionSelectionnee.intitule,
+      numtiers: 0,
+      debcours: new Date().toISOString().split('T')[0],
+      fincours: '',
+      primann: 0,
+      propproj: this.propositionSelectionnee.id,
+      numproj: this.projetSelectionne.id,
+    };
   }
+}
 }
 
