@@ -1,0 +1,45 @@
+<!-- contrat-stepper.component.html -->
+<form [formGroup]="contratForm">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step >
+      <ng-template matStepLabel>Informations générales</ng-template>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>Contrat</label>
+          <input class="form-control" formControlName="contrat" type="number" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Intitulé</label>
+          <input class="form-control" formControlName="intitule" />
+        </div>
+        <!-- Ajoute les autres champs de cette étape ici -->
+      </div>
+      <button mat-button matStepperNext>SUIVANT</button>
+    </mat-step>
+
+    <!-- Étape 2 -->
+    <mat-step >
+      <ng-template matStepLabel>Données administratives</ng-template>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>Aff. nouvelle</label>
+          <input class="form-control" formControlName="affnouv" type="date" />
+        </div>
+        <!-- Autres champs -->
+      </div>
+      <button mat-button matStepperPrevious>PRÉCÉDENT</button>
+      <button mat-button matStepperNext>SUIVANT</button>
+    </mat-step>
+
+    <!-- Ajoute les autres étapes ici -->
+
+    <mat-step>
+      <ng-template matStepLabel>Résumé & Enregistrement</ng-template>
+      <p>Vérifie les informations saisies.</p>
+      <button mat-button matStepperPrevious>PRÉCÉDENT</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Enregistrer
+      </button>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>

@@ -5,7 +5,7 @@ import { BasParams } from '../Model/BasSoapObject/BasParams';
 import { BasAction } from '../Model/Model-BasAction/BasAction';
 //import { AuthenticationHelper } from '../Model/Model-BasAuth/BasAuthHelper';
 import { BasSoapClient } from '../Model/Model-BasSoapClient/BasSoapClient';
-import { Tier, TierTagdMap } from '../Model/tier.model';
+import { Tier, TierTagMap } from '../Model/tier.model';
 import { AppConfigService } from './AppConfigService/app-config.service';
 //import { isEntityName } from 'typescript';
 import { produitTagMap } from '../Model/produit.model';
@@ -25,35 +25,35 @@ export class DataAccessService {
      // this._authenticationHelper = new AuthenticationHelper(this.sessionStorage, this.http, this.basSoapClient, this.appConfigService);
     }
 
-public getall(entity:string){ 
+public getall(entity:string){
   let actionName: string =this.getActionNameID(entity+'_getall')?.name?? "getall" ;
  const field =this.getActionNameID(entity+'_getall')?.id?? "id"
   let basParams = new BasParams();
   return this._basAction.New_RunAction(actionName, basParams, this.sessionStorage.GetContext()).pipe(map(res=>{
-    
+
     return this.parseSoapResponse(res, entity)
 
 }))
 
 }
-public getbyID(entity:string, id:number){ 
+public getbyID(entity:string, id:number){
   let actionName: string =this.getActionNameID(entity+'_getall')?.name?? "getall" ;
  const field =this.getActionNameID(entity+'_getall')?.id?? "id"
   let basParams = new BasParams();
   basParams.AddInt(field,id)
   return this._basAction.New_RunAction(actionName, basParams, this.sessionStorage.GetContext()).pipe(map(res=>{
-    
+
     return this._basAction.parseSoapXmlToJson(res)
 
 }))
 
 }
-public create(entity:string, id:number, data:any){ 
-  
+public create(entity:string, id:number, data:any){
+
   return this.getbyID(entity,id)
 }
 
-public update(entity:string, id:number, data:any){ 
+public update(entity:string, id:number, data:any){
   return this.getbyID(entity,id)
 
 }
@@ -65,9 +65,9 @@ public update(entity:string, id:number, data:any){
     basParams.AddStr('login', username);
     basParams.AddStr('domain', domain);
     return this._basAction.New_RunAction(actionName, basParams, this.sessionStorage.GetContext()).pipe(map(async res=>{
-     
+
         return this.parseSoapXmlToJson<Xtlog>(res)
-    
+
     }))
   }
 
@@ -93,14 +93,14 @@ public update(entity:string, id:number, data:any){
        case "quitget": return {name:"tiergetall", id:"numtier" };
        case "quitcreate": return {name:"tiergetall", id:"numtier" };
        case "quitupdate": return {name:"tiergetall", id:"numtier" };
-      
+
      }
      }
 
-     
+
      private parseSoapResponse<T>(xmlString: string, entity:string) {
       const data: any[] = [];
-    
+
       const cleaned = xmlString
         .replace(/\\</g, '<')
         .replace(/\\>/g, '>')
@@ -109,56 +109,56 @@ public update(entity:string, id:number, data:any){
         .replace(/\\\\/g, '\\')
         .replace(/&gt;/g, '>')
         .replace(/&lt;/g, '<');
-    
+
       const match = cleaned.match(`/<`+entity+`s[^>]*>[\s\S]*?<\/`+entity+`s>/`);
       if (!match) return data;
-    
+
       const wrappedXml = match[0];
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(wrappedXml, 'text/xml');
       const prodElements = xmlDoc.getElementsByTagName(entity);
-    
+
       for (let i = 0; i < prodElements.length; i++) {
           const defaults: Partial<any> = {
               taxatt: 0,
               tauxano: 0,
             };
-            
+
             const obj = this.autoMapXmlToObject<any>(prodElements[i], this.getTagMap(entity), defaults);
-            
+
         //const produit = this.mapXmlToObject<Produit>(prodElements[i], produitFieldMap);
         data.push(obj);
       }
-    
+
       return data;
     }
 
-   
-   
+
+
      private parseSoapXmlToJson<T = Record<string, any>>(soapXml: string): T {
         const parser = new DOMParser();
         const doc = parser.parseFromString(soapXml, 'application/xml');
-    
+
         const dataNode = doc.querySelector('Data');
         console.log('<Data>  dans la réponse SOAP......='+dataNode)
         if (!dataNode) throw new Error('<Data> introuvable dans la réponse SOAP');
-    
+
         const innerXml = new DOMParser().parseFromString(dataNode.textContent || '', 'application/xml');
         const params = innerXml.querySelectorAll('param');
         console.log('<innerXml>  dans la réponse SOAP......='+innerXml)
         console.log('<params>  dans la réponse SOAP......='+params)
         const result: Record<string, any> = {};
-    
+
         params.forEach(param => {
           const name = param.getAttribute('name');
           console.log('<param name>  dans la réponse SOAP......='+name)
-   
+
           if (!name) return;
-    
+
           const type = param.getAttribute('type');
           const intVal = param.getAttribute('int_val');
           const isNull = param.getAttribute('is_null');
-    
+
           if (isNull === 'true') {
             result[name] = null;
           } else if (type === 'ptInt' && intVal !== null) {
@@ -167,12 +167,12 @@ public update(entity:string, id:number, data:any){
             result[name] = param.textContent ?? '';
           }
         });
-    
+
         return result as T;
       }
-    
-    
-  
+
+
+
 
 
    /*
@@ -180,7 +180,7 @@ public update(entity:string, id:number, data:any){
     private async  parseSoapXmlToJson(xml: string): Promise<Record<string, any>> {
       try {
         const result = await parseStringPromise(xml, { explicitArray: false });
-    
+
         // 1. Naviguer jusqu'à SOAP > Body > RunActionResponse > BasActionResult > Data
         const dataEncoded = result['SOAP-ENV:Envelope']?.['SOAP-ENV:Body']?.['NS1:BasActionResult']?.['Data'];
         if (!dataEncoded) throw new Error('Data field not found in SOAP response.');
@@ -190,11 +190,11 @@ public update(entity:string, id:number, data:any){
         console.log("DECODED DATA  XML string en texte lisible .......!="+dataXml)
         // 3. Parser le XML contenu dans <Data>
         const parsedData = await parseStringPromise(dataXml, { explicitArray: false });
-    
+
         // 4. Mapper <param> en objet clé-valeur
         const params = parsedData.xtlog?.object?.param;
         const objectResult: Record<string, any> = {};
-    
+
         if (Array.isArray(params)) {
           for (const param of params) {
             const key = param.$.name;
@@ -205,14 +205,14 @@ public update(entity:string, id:number, data:any){
           objectResult[key] = params._ || params.$?.int_val || null;
         }
         console.log("OBJET EN JSON CONSTITUER .......!="+JSON.stringify(objectResult))
-   
+
         return objectResult;
       } catch (err) {
         console.error('Failed to parse SOAP response:', err);
         throw err;
       }
     }
-    
+
 
    private decodeHtmlEntities(encoded: string): string {
       const textarea = document.createElement('textarea');
@@ -220,44 +220,43 @@ public update(entity:string, id:number, data:any){
       return textarea.value;
     }
     */
-     
-    private getTagMap(entity:string){ 
+
+    private getTagMap(entity:string){
       let tagmap:any
       switch(entity) {
         case "prod": return produitTagMap ;
-        case "tier": return TierTagdMap;
+        case "tier": return TierTagMap;
         case "xtlog": return xtlogTagMap;
         default:
           return{};
       }
-      return tagmap
 
     }
-  
+
 
      private autoMapXmlToObject<T>(
       element: Element,
       tagMap?: Record<keyof T, string>,
       defaults?: Partial<T>
     ): T {
-     
+
      // const def:Partial<typeoftagmap>
      defaults={}
       const obj = { ...(defaults ?? {}) } as T;
-    
+
       for (const key in tagMap) {
         const tagName = tagMap[key];
         const el = element.getElementsByTagName(tagName)?.[0];
         const text = el?.textContent?.trim();
-    
+
         if (text == null) {
           (obj as any)[key] = undefined;
           continue;
         }
-    
+
         // 🔍 auto-detection du type cible selon la valeur par défaut ou sa présence
         const exampleValue = (defaults?.[key] ?? obj[key]) as any;
-    
+
         if (typeof exampleValue === 'number') {
           (obj as any)[key] = parseFloat(text);
         } else if (typeof exampleValue === 'boolean') {
@@ -268,7 +267,7 @@ public update(entity:string, id:number, data:any){
           (obj as any)[key] = text;
         }
       }
-    
+
       return obj;
     }
 }

@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row card p-3 m-0">
+    <div class="col-12">
+      <button class="btn btn-group btn-primary" (click)="nouveauContrat()">
+        <mat-icon>add</mat-icon>
+
+        Nouveau contrat
+      </button>
+    </div>
+    <div class="col-12 mt-5">
+      <table class="table table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Numéro Contrat</th>
+            <th>Intitulé</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(contrat of contrats;track contrat){
+          <tr>
+            <td>{{ contrat.contrat }}</td>
+            <td>{{ contrat.intitule || "-" }}</td>
+
+            <td>{{ contrat.debcours | date : "dd/MM/yyyy" }}</td>
+            <td>{{ contrat.fincours | date : "dd/MM/yyyy" }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
