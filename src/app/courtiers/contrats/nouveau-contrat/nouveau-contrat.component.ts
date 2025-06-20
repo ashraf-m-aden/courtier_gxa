@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
+import { InfoGeneralContratComponent } from '../../../components/contrat/nouveau/info-general-contrat/info-general-contrat.component';
+import { AdminContratComponent } from '../../../components/contrat/nouveau/admin-contrat/admin-contrat.component';
+import { AdminPieceContratComponent } from '../../../components/contrat/nouveau/admin-piece-contrat/admin-piece-contrat.component';
+import { RisqueContratComponent } from '../../../components/contrat/nouveau/risque-contrat/risque-contrat.component';
+import { ProduitsContratComponent } from '../../../components/contrat/nouveau/produits-contrat/produits-contrat.component';
 
 @Component({
   selector: 'nouveau-contrat',
-  imports: [FormsModule,MatStepperModule,ReactiveFormsModule],
+  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, InfoGeneralContratComponent, AdminContratComponent, AdminPieceContratComponent, RisqueContratComponent, ProduitsContratComponent],
   templateUrl: './nouveau-contrat.component.html',
   styleUrl: './nouveau-contrat.component.css'
 })
 export class NouveauContratComponent {
-contratForm!: FormGroup;
+  contratForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.contratForm = this.fb.group({
