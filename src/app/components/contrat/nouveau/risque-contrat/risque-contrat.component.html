@@ -1,0 +1,213 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="riskForm" class="d-flex flex-column gap-4 p-4">
+      <div class="d-flex gap-4">
+        <!-- Vehicle Details -->
+        <fieldset class="card p-4 w-100">
+          <legend class="font-semibold text-lg">Véhicule</legend>
+
+          <div class="d-flex flex-column gap-1">
+            <label>Véhicule </label>
+            <input formControlName="vehicule" type="text" class="input" />
+
+            <label>Usage </label>
+            <select formControlName="usage" class="input">
+              <option value="Promenade / Trajet">Promenade / Trajet</option>
+              <option value="Affaires">Affaires</option>
+            </select>
+            <label>Valeur à neuf </label>
+            <input formControlName="valeurNeuve" type="text" class="input" />
+
+            <label>Expertise </label>
+            <input formControlName="expertise" type="text" class="input" />
+
+            <label>Date acquisition </label>
+            <input
+              formControlName="dateAcquisition"
+              type="date"
+              class="input"
+            />
+            <label>Type </label>
+            <input formControlName="type" type="text" class="input" />
+
+            <label>Dérogation FVA </label>
+            <input formControlName="derogationFVA" type="text" class="input" />
+          </div>
+        </fieldset>
+
+        <!-- Carte Grise -->
+        <fieldset class="card p-4 w-100">
+          <legend class="font-semibold text-lg">Carte Grise</legend>
+          <label>Titulaire </label>
+          <input formControlName="titulaire" type="text" class="input" />
+          <label>Nom </label>
+          <input formControlName="titulaireNom" type="text" class="input" />
+
+          <div class="d-flex flex-column gap-1">
+            <label>Marque </label>
+            <input formControlName="marque" type="text" class="input" />
+
+            <label>Pays d'immat. </label>
+            <input formControlName="paysImmat" type="text" class="input" />
+
+            <label>Modèle </label>
+            <input formControlName="modele" type="text" class="input" />
+
+            <label>Type </label>
+            <input formControlName="typeMine" type="text" class="input" />
+
+            <label>Immatriculation </label>
+            <input
+              formControlName="immatriculation"
+              type="text"
+              class="input"
+            />
+            <label>Date carte grise </label>
+            <input formControlName="dateCarteGrise" type="date" class="input" />
+            <label>1ère circulation </label>
+            <input
+              formControlName="datePremiereCirculation"
+              type="date"
+              class="input"
+            />
+            <label>Genre </label>
+            <input formControlName="genre" type="text" class="input" />
+
+            <label>Carrosserie </label>
+            <input formControlName="carrosserie" type="text" class="input" />
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="d-flex gap-4 w-100">
+        <!-- Infos Techniques -->
+        <fieldset class="card p-4 w-100">
+          <legend class="font-semibold text-lg">Carte grise</legend>
+
+          <div class="d-flex flex-column gap-1">
+            <div class="d-flex gap-3 m-2">
+              <label>Energie </label>
+              <input formControlName="energie" type="text" class="input" />
+
+              <label>Transmission </label>
+              <input formControlName="transmission" type="text" class="input" />
+
+              <label>Précédente immat. </label>
+              <input
+                formControlName="precedenteImmat"
+                type="text"
+                class="input"
+              />
+              <label>Type mine </label>
+              <input formControlName="typeMine" type="text" class="input" />
+            </div>
+
+            <div class="d-flex gap-3 m-2">
+              <label>VIN / N° identification </label>
+              <input
+                formControlName="numeroIdentification"
+                type="text"
+                class="input"
+              />
+              <label>Puissance fiscale </label>
+              <input
+                formControlName="puissanceFiscale"
+                type="number"
+                class="input"
+              />
+              <label>Cat. </label>
+              <input formControlName="categorie" type="text" class="input" />
+
+              <label>Places assises </label>
+              <input
+                formControlName="placesAssises"
+                type="number"
+                class="input"
+              />
+            </div>
+            <div class="d-flex gap-3 m-2">
+              <label>Poids à vide </label>
+              <input formControlName="poidsVide" type="text" class="input" />
+
+              <label>Poids T.R. </label>
+              <input formControlName="poidsTR" type="text" class="input" />
+
+              <label>Tx CO2 </label>
+              <input formControlName="txCO2" type="text" class="input" />
+
+              <label>Cat. CO2 </label>
+              <input formControlName="catCO2" type="text" class="input" />
+            </div>
+
+            <div class="d-flex gap-3 m-2">
+              <label>Cv </label>
+              <input formControlName="cv" type="text" class="input" />
+
+              <label>Kilométrage </label>
+              <input formControlName="kilometrage" type="text" class="input" />
+
+              <label>Couleur </label>
+              <input formControlName="couleur" type="text" class="input" />
+
+              <label>Clé Rép. </label>
+              <input formControlName="cleRep" type="text" class="input" />
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="d-flex">
+        <!-- Conducteurs autorisés -->
+        <fieldset class="card p-4 w-100">
+          <legend class="font-semibold text-lg">Conducteurs autorisés</legend>
+
+          <div class="d-flex flex-column gap-1">
+            <div class="d-flex items-center gap-4">
+              <div class="d-flex gap-1">
+                <input
+                  type="checkbox"
+                  class="form-check"
+                  formControlName="assurePrincipal"
+                />
+                <label>Assuré principal</label>
+              </div>
+
+              <div class="d-flex gap-1">
+                <input
+                  type="checkbox"
+                  class="form-check"
+                  formControlName="enfantAssure"
+                />
+                <label>Enfant d’assuré</label>
+              </div>
+            </div>
+
+            <table class="table-auto w-full border">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th>Titre</th>
+                  <th>Nom et prénom</th>
+                  <th>Age</th>
+                  <th>Date B</th>
+                  <th>Numéro / Permis</th>
+                  <th>Permis délivré par</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (driver of conducteurs; track driver.id) {
+                <tr>
+                  <td>{{ driver.titre }}</td>
+                  <td>{{ driver.nomPrenom }}</td>
+                  <td>{{ driver.age }}</td>
+                  <td>{{ driver.dateB }}</td>
+                  <td>{{ driver.numeroPermis }}</td>
+                  <td>{{ driver.permisDelivrePar }}</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </fieldset>
+      </div>
+    </form>
+  </div>
+</div>

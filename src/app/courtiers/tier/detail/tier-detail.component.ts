@@ -21,13 +21,14 @@ import { TierProfilComponent } from '../../../components/tier/tier-profil/tier-p
 import { DpmProfilComponent } from '../../../components/tier/dpm-profil/dpm-profil.component';
 import { DppProfilComponent } from '../../../components/tier/dpp-profil/dpp-profil.component';
 import { ProjetBaseComponent } from '../../../components/projets/base/base.component';
+import { ListContratComponent } from '../../contrats/list/list.component';
 @Component({
   selector: 'app-tier-detail',
   standalone: true,
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
     MatCardModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule,
-    MatInputModule, MatCheckboxModule,ProjetBaseComponent,
+    MatInputModule, MatCheckboxModule,ProjetBaseComponent,ListContratComponent,
     MatButtonModule, MatIconModule, TierProfilComponent, DpmProfilComponent, DppProfilComponent
   ],
   styleUrls: ['./tier-detail.component.scss'],

@@ -15,6 +15,7 @@ import { authReducer } from './store/features/auth/auth.reducer';
 import { AuthEffects } from './store/features/auth/auth.effects';
 import { TierEffects } from './courtiers/tier/store/tier.effects';
 import { TierReducer } from './courtiers/tier/store/tier.reducer';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 
 export const appConfig: ApplicationConfig = {
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
     provideEffects(TierEffects),
     provideState('auth', authReducer),
     provideEffects(AuthEffects),
+    provideNativeDateAdapter(),
 
 
     // provideAnimations(),
