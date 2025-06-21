@@ -6,17 +6,6 @@
     <div class="col-12 mt-5">
       <form [formGroup]="tierForm" (ngSubmit)="onSubmit()">
         <div class="row d-flex flex-wrap gap-3 justify-content-start">
-          <!-- typtiers -->
-          <div class="col-md-3 col-12 mb-3">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Type de Tiers</mat-label>
-              <mat-select formControlName="typtiers">
-                <mat-option value="ddp">Personne Physique</mat-option>
-                <mat-option value="dpm">Personne Morale</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-
           <!-- nattiers -->
           <div class="col-md-3 col-12 mb-3">
             <mat-form-field appearance="outline" class="w-100">
@@ -259,7 +248,675 @@
             </mat-form-field>
           </div>
 
+          <!-- typtiers -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Type de Tiers</mat-label>
+              <mat-select formControlName="typtiers">
+                <mat-option [value]="undefined"></mat-option>
+                <mat-option value="ddp">Personne Physique</mat-option>
+                <mat-option value="dpm">Personne Morale</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
+          <h5>Information du type de tiers</h5>
+          @if(tierForm.get('typtiers')?.value === 'dpm') {
+          <div>
+            <div class="row d-flex flex-wrap gap-3 justify-content-start">
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Statut juridique</mat-label>
+                  <mat-select formControlName="statutju">
+                    @for(s of statutjuOptions;track s){
+                    <mat-option [value]="s">{{ s }}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Capital</mat-label>
+                  <input matInput type="number" formControlName="capital" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Devise du capital</mat-label>
+                  <mat-select formControlName="capital1">
+                    @for (c of currencyCodes; track c) {
+                    <mat-option [value]="c">
+                      {{ c }}
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Numéro SIRET</mat-label>
+                  <input matInput formControlName="nsiret" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Numéro RC</mat-label>
+                  <input matInput formControlName="nrc" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Numéro RM</mat-label>
+                  <input matInput formControlName="nrm" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Code NAF (APE)</mat-label>
+                  <input matInput formControlName="codeape" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Lieu d'immatriculation</mat-label>
+                  <input matInput formControlName="lieuimm" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>TVA intracommunautaire</mat-label>
+                  <input matInput formControlName="tvaintra" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Date de création</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="pickerDateCre"
+                    formControlName="datecre"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="pickerDateCre"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickerDateCre></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Nombre d'établissements</mat-label>
+                  <input matInput type="number" formControlName="nbetabli" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Nombre de salariés</mat-label>
+                  <input matInput type="number" formControlName="nbsalar" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Nombre de cadres</mat-label>
+                  <input matInput type="number" formControlName="nbcadre" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Nombre de non cadres</mat-label>
+                  <input matInput type="number" formControlName="noncadre" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Filiale de (N°)</mat-label>
+                  <input matInput type="number" formControlName="groupe" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Participation de la mère (%)</mat-label>
+                  <input matInput type="number" formControlName="partic" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Année 1</mat-label>
+                  <input matInput formControlName="annee1" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Année 2</mat-label>
+                  <input matInput formControlName="annee2" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Année 3</mat-label>
+                  <input matInput formControlName="annee3" />
+                </mat-form-field>
+              </div>
+
+              <!-- Salaries masse salariale + currency -->
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Masse salariale 1</mat-label>
+                  <input matInput type="number" formControlName="salair1" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Devise masse salariale 1</mat-label>
+                  <mat-select formControlName="salair11">
+                    @for (c of currencyCodes; track c) {
+                    <mat-option [value]="c">
+                      {{ c }}
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Add the same pattern for salair2, salair21, salair3, salair31 -->
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Masse salariale 2</mat-label>
+                  <input matInput type="number" formControlName="salair2" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Devise masse salariale 2</mat-label>
+                  <mat-select formControlName="salair21">
+                    @for (c of currencyCodes; track c) {
+                    <mat-option [value]="c">
+                      {{ c }}
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Masse salariale 3</mat-label>
+                  <input matInput type="number" formControlName="salair3" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Devise masse salariale 3</mat-label>
+                  <mat-select formControlName="salair31">
+                    @for (c of currencyCodes; track c) {
+                    <mat-option [value]="c">
+                      {{ c }}
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Similarly for CA HT 1, 2, 3 and their currencies -->
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>CA HT année 1</mat-label>
+                  <input matInput type="number" formControlName="caht1" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Devise CA HT année 1</mat-label>
+                  <mat-select formControlName="caht11">
+                    @for (c of currencyCodes; track c) {
+                    <mat-option [value]="c">
+                      {{ c }}
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Repeat for caht2, caht21, caht3, caht31 -->
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Marge brute 1</mat-label>
+                  <input matInput type="number" formControlName="marge1" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Devise marge brute 1</mat-label>
+                  <mat-select formControlName="marge11">
+                    @for (c of currencyCodes; track c) {
+                    <mat-option [value]="c">
+                      {{ c }}
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Repeat for marge2, marge21, marge3, marge31 -->
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Entité juridique</mat-label>
+                  <input matInput formControlName="entite" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Emetteur</mat-label>
+                  <input matInput formControlName="emetteur" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Compte bancaire</mat-label>
+                  <input matInput formControlName="compteba" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Interlocuteur</mat-label>
+                  <input matInput type="number" formControlName="interl" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Activité</mat-label>
+                  <input matInput formControlName="activite" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Convention collective</mat-label>
+                  <mat-select formControlName="convcol">
+                    @for (c of convCollOptions; track c) {
+                    <mat-option [value]="c">
+                      {{ c }}
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>URL</mat-label>
+                  <input matInput formControlName="url" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Expert</mat-label>
+                  <input matInput type="number" formControlName="expert" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Début exercice</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="pickerDebExe"
+                    formControlName="debexe"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="pickerDebExe"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickerDebExe></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Fin exercice</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="pickerFinExe"
+                    formControlName="finexe"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="pickerFinExe"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickerFinExe></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Numéro convention collective</mat-label>
+                  <input matInput formControlName="numeroconvcol" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Numéro brochure</mat-label>
+                  <input matInput formControlName="numerobrochure" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>ID enregistrement ORIAS</mat-label>
+                  <input matInput formControlName="oriasregistrationid" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 col-12 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Dernière mise à jour RBE</mat-label>
+                  <input matInput formControlName="rbelastupdate" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          } @if(tierForm.get('typtiers')?.value === 'ddp') {
+          <div class="row d-flex flex-wrap gap-3 justify-content-start">
+            <!-- Titre -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Titre</mat-label>
+                <mat-select formControlName="titre">
+                  @for (t of titres; track t) {
+                  <mat-option [value]="t">
+                    {{ t }}
+                  </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!-- Nom et prénom -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="nom" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="prenom" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nom de jeune fille</mat-label>
+                <input matInput formControlName="nomfille" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Alias</mat-label>
+                <input matInput formControlName="alias" />
+              </mat-form-field>
+            </div>
+
+            <!-- Sexe et date de naissance -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Sexe</mat-label>
+                <mat-select formControlName="sexe">
+                  @for (s of sexes; track s) {
+                  <mat-option [value]="s">
+                    {{ s }}
+                  </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Date de naissance</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="pickerNaiss"
+                  formControlName="datenais"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="pickerNaiss"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #pickerNaiss></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Âge</mat-label>
+                <input matInput type="number" formControlName="age" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Âge millésime</mat-label>
+                <input matInput type="number" formControlName="agemsme" />
+              </mat-form-field>
+            </div>
+
+            <!-- Nationalité et numéro de sécurité sociale -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nationalité</mat-label>
+                <mat-select formControlName="national">
+                  @for (n of nationals; track n) {
+                  <mat-option [value]="n">
+                    {{ n }}
+                  </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>N° de sécurité sociale</mat-label>
+                <input matInput formControlName="numss" />
+              </mat-form-field>
+            </div>
+
+            <!-- Situation familiale et activité -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Situation familiale</mat-label>
+                <mat-select formControlName="sitfam">
+                  @for (sf of sitfams; track sf) {
+                  <mat-option [value]="sf">
+                    {{ sf }}
+                  </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Activité</mat-label>
+                <mat-select formControlName="activite">
+                  @for (a of activites; track a) {
+                  <mat-option [value]="a">
+                    {{ a }}
+                  </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!-- Catégorie professionnelle et profession -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Catégorie professionnelle</mat-label>
+                <input matInput formControlName="catprof" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Profession</mat-label>
+                <input matInput formControlName="profess" />
+              </mat-form-field>
+            </div>
+
+            <!-- Employeur et filiale -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Employeur</mat-label>
+                <input matInput formControlName="employe" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Filiale</mat-label>
+                <input matInput formControlName="filiale" />
+              </mat-form-field>
+            </div>
+
+            <!-- Date d'entrée dans l'entreprise -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Date d'entrée dans l'entreprise</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="pickerEnt"
+                  formControlName="dateent"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="pickerEnt"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #pickerEnt></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <!-- Salaire annuel -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Salaire annuel</mat-label>
+                <input matInput type="number" formControlName="salaire" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Devise</mat-label>
+                <input matInput formControlName="salaire1" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Année salaire</mat-label>
+                <input matInput type="number" formControlName="datesal" />
+              </mat-form-field>
+            </div>
+
+            <!-- Téléphone professionnel et email personnel -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Téléphone professionnel</mat-label>
+                <input matInput formControlName="telprof" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Email personnel</mat-label>
+                <input matInput formControlName="numemail" />
+              </mat-form-field>
+            </div>
+
+            <!-- Numéro permis de conduire -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Numéro permis de conduire</mat-label>
+                <input matInput formControlName="npermis" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Lieu de délivrance du permis</mat-label>
+                <input matInput formControlName="lieuperm" />
+              </mat-form-field>
+            </div>
+
+            <!-- Dates des permis -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Date conduite accompagnée</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="pickerCA"
+                  formControlName="dateca"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="pickerCA"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #pickerCA></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Date permis moto A</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="pickerMoto"
+                  formControlName="datemoto"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="pickerMoto"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #pickerMoto></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <mat-checkbox formControlName="condacc"
+              >Conduite accompagnée</mat-checkbox
+            >
+            <mat-checkbox formControlName="enfass"
+              >Enfant d'assuré</mat-checkbox
+            >
+
+            <!-- Organisme d'affiliation -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Organisme d'affiliation</mat-label>
+                <input matInput formControlName="orgaffil" />
+              </mat-form-field>
+            </div>
+
+            <!-- Permis bateau -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Type permis bateau</mat-label>
+                <input matInput formControlName="typepermisbateau" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Date permis bateau</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="pickerBateau"
+                  formControlName="datepermisbateau"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="pickerBateau"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #pickerBateau></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <!-- Date obtention BSR -->
+            <div class="col-md-3 col-12 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Date obtention BSR</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="pickerBSR"
+                  formControlName="datebsr"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="pickerBSR"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #pickerBSR></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          }
 
           <!-- Submit -->
           <div class="col-12 text-end mt-4">
