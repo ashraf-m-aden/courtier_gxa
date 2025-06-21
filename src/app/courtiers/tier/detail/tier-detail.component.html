@@ -22,9 +22,13 @@
             <p>Contenu à venir...</p>
           </div>
         </mat-tab>
-        <!-- Tab 2: Projet -->
+        <!-- Tab 2: Contrat -->
         <mat-tab label="Liste des contrats">
-          <app-list-contrat></app-list-contrat>
+          <app-list-contrat [isContrat]="true"></app-list-contrat>
+        </mat-tab>
+
+        <mat-tab label="Liste des projets">
+          <app-list-contrat [isContrat]="false"></app-list-contrat>
         </mat-tab>
       </mat-tab-group>
     </div>

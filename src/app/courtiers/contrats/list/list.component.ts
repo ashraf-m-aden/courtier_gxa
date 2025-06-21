@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Contrat } from '../../../Model/contrat.model';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -304,12 +304,21 @@ export class ListContratComponent {
       typesignature: "Electronique"
     }
   ];
+  @Input() isContrat = false;
 
   constructor(private router: Router) { }
 
   nouveauContrat(): void {
     const url = this.router.serializeUrl(
       this.router.createUrlTree(['/courtiers/contrats/nouveau'])
+    );
+    window.open(url, '_blank');
+  }
+
+
+  nouveauProjet(): void {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/courtiers/projets/nouveau'])
     );
     window.open(url, '_blank');
   }

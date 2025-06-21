@@ -1,7 +1,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
+      @if(isContrat()){
       <h5>Création d'un nouveau contrat</h5>
+      } @else {
+      <h5>Création d'un nouveau projet</h5>
+      }
     </div>
     <div class="col-12">
       <!-- contrat-stepper.component.html -->
@@ -11,22 +15,26 @@
             <ng-template matStepLabel
               >Informations générales et choix du produits</ng-template
             >
-            <info-general-contrat
+            <info-general-contrat [isContrat]="isContrat"
               [formGroup]="contratForm"
             ></info-general-contrat>
             <produits-contrat></produits-contrat>
 
-            <button mat-button matStepperNext>SUIVANT</button>
+            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
           </mat-step>
-
-
 
           <!-- Étape 2 -->
           <mat-step>
             <ng-template matStepLabel>Données administratives</ng-template>
             <admin-contrat></admin-contrat>
-            <button mat-button matStepperPrevious>PRÉCÉDENT</button>
-            <button mat-button matStepperNext>SUIVANT</button>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary mt-5" matStepperPrevious>
+                PRÉCÉDENT
+              </button>
+              <button class="btn btn-primary mt-5" matStepperNext>
+                SUIVANT
+              </button>
+            </div>
           </mat-step>
 
           <!-- Étape 2 -->
@@ -35,27 +43,47 @@
               >Données administratives - Pieces</ng-template
             >
             <admin-piece-contrat></admin-piece-contrat>
-            <button mat-button matStepperPrevious>PRÉCÉDENT</button>
-            <button mat-button matStepperNext>SUIVANT</button>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary mt-5" matStepperPrevious>
+                PRÉCÉDENT
+              </button>
+              <button class="btn btn-primary mt-5" matStepperNext>
+                SUIVANT
+              </button>
+            </div>
           </mat-step>
 
           <!-- Étape 2 -->
           <mat-step>
             <ng-template matStepLabel>Risques</ng-template>
             <risque-contrat></risque-contrat>
-            <button mat-button matStepperPrevious>PRÉCÉDENT</button>
-            <button mat-button matStepperNext>SUIVANT</button>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary mt-5" matStepperPrevious>
+                PRÉCÉDENT
+              </button>
+              <button class="btn btn-primary mt-5" matStepperNext>
+                SUIVANT
+              </button>
+            </div>
           </mat-step>
 
           <!-- Ajoute les autres étapes ici -->
 
           <mat-step>
-            <ng-template matStepLabel>Résumé & Enregistrement</ng-template>
-            <p>Vérifie les informations saisies.</p>
-            <button mat-button matStepperPrevious>PRÉCÉDENT</button>
-            <button mat-raised-button color="primary" (click)="onSubmit()">
-              Enregistrer
-            </button>
+            <ng-template matStepLabel>Enregistrement</ng-template>
+            <p>Vérifiez les informations saisies.</p>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary mt-5" matStepperPrevious>
+                PRÉCÉDENT
+              </button>
+              <button
+                class="btn btn-warning"
+                color="primary"
+                (click)="onSubmit()"
+              >
+                Enregistrer
+              </button>
+            </div>
           </mat-step>
         </mat-horizontal-stepper>
       </form>

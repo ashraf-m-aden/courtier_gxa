@@ -1,1 +1,81 @@
-<p>admin-piece-contrat works!</p>
+<div class="row card">
+  <div class="col-12">
+    <!-- Table: Pièces successives -->
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Motif de la pièce</th>
+          <th>Date Effet</th>
+          <th>Situation Pièce</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (piece of pieces; track piece.id) {
+        <tr class="border-t">
+          <td>{{ piece.id }}</td>
+          <td>{{ piece.motif }}</td>
+          <td>{{ piece.dateEffet | date : "MM/dd/yyyy" }}</td>
+          <td>{{ piece.situation }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12 col-md-6">
+    <!-- Form: Ajouter / Modifier une pièce -->
+    <form [formGroup]="pieceForm" class=" mt-5 w-100 card">
+      <div class="d-flex flex-column gap-4 mt-5 ">
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> N° Pièce </label>
+          <input formControlName="numero" type="text" class="input" />
+        </div>
+
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> N° Police de groupe </label>
+          <input formControlName="numeroPolice" type="text" class="input" />
+        </div>
+
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> N° Avenant </label>
+          <input formControlName="numeroAvenant" type="text" class="input" />
+        </div>
+
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> Réf. CG </label>
+          <input formControlName="refCg" type="text" class="input" />
+        </div>
+
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> Origine </label>
+          <select formControlName="origine" class="input">
+            <option value="affaire nouvelle">Affaire nouvelle</option>
+            <option value="renouvellement">Renouvellement</option>
+            <option value="résiliation">Résiliation</option>
+          </select>
+        </div>
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> Effet le </label>
+          <input formControlName="dateEffet" type="date" class="input" />
+        </div>
+
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> Heure </label>
+          <input formControlName="heureEffet" type="time" class="input" />
+        </div>
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> Motif </label>
+          <input formControlName="motif" type="text" class="input" />
+        </div>
+
+        <div class="d-flex flex-column gap-1 m-1">
+          <label> Situation </label>
+          <select formControlName="situation" class="input">
+            <option value="Nouvelle pièce">Nouvelle pièce</option>
+            <option value="Résiliée">Résiliée</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

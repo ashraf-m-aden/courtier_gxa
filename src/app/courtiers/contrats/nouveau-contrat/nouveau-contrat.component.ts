@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InfoGeneralContratComponent } from '../../../components/contrat/nouveau/info-general-contrat/info-general-contrat.component';
@@ -6,6 +6,7 @@ import { AdminContratComponent } from '../../../components/contrat/nouveau/admin
 import { AdminPieceContratComponent } from '../../../components/contrat/nouveau/admin-piece-contrat/admin-piece-contrat.component';
 import { RisqueContratComponent } from '../../../components/contrat/nouveau/risque-contrat/risque-contrat.component';
 import { ProduitsContratComponent } from '../../../components/contrat/nouveau/produits-contrat/produits-contrat.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'nouveau-contrat',
@@ -15,10 +16,16 @@ import { ProduitsContratComponent } from '../../../components/contrat/nouveau/pr
 })
 export class NouveauContratComponent {
   contratForm!: FormGroup;
+  isContrat= signal<boolean>(true);
+  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+    console.log(this.route.snapshot.data['isContrat'] );
 
-  constructor(private fb: FormBuilder) { }
+    this.isContrat.set(this.route.snapshot.data['isContrat'])
+
+  }
 
   ngOnInit(): void {
+
     this.contratForm = this.fb.group({
       contrat: [null, Validators.required],
       numtiers: [null],
@@ -121,7 +128,14 @@ export class NouveauContratComponent {
   onSubmit(): void {
     if (this.contratForm.valid) {
       const contratData = this.contratForm.value;
-      console.log('Contrat soumis :', contratData);
+      if (this.isContrat()) {
+        console.log('Contrat soumis :', contratData);
+
+      } else {
+        console.log('Projet soumis :', contratData);
+
+      }
+
       // TODO : Envoyer contratData à l’API
     } else {
       console.warn('Formulaire invalide');

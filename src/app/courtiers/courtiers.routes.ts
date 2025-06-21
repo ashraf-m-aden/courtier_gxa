@@ -28,9 +28,12 @@ export const courtiersRoutes: Routes = [
       },
       { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'produits', loadComponent: () => import('./produits/produits.component').then(m => m.ProduitsComponent) },
+      {
+        path: 'projets/nouveau', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat:false }
+      },
       { path: 'projets', loadComponent: () => import('./projets/projets.component').then(m => m.ProjetsComponent) },
       { path: 'contrats', loadComponent: () => import('./contrats/list/list.component').then(m => m.ListContratComponent) },
-      { path: 'contrats/nouveau', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent) },
+      { path: 'contrats/nouveau', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat:true }},
       { path: 'commissions', loadComponent: () => import('./commissions/commissions.component').then(m => m.CommissionsComponent) },
       { path: 'profile', loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
       { path: 'tiers', loadComponent: () => import('./tier/list/tier-list.component').then(m => m.TierListComponent) },

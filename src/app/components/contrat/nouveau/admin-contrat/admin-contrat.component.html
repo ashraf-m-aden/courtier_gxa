@@ -1,1 +1,226 @@
-<p>admin-contrat works!</p>
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="form" class="card">
+      <!-- Échéances -->
+      <div class="d-flex gap-5 mb-5">
+        <fieldset formGroupName="echeances" class="d-flex gap-4 card flex-column w-100 m-2">
+          <legend class="font-semibold text-lg">Échéances</legend>
+          <div class="d-flex gap-5">
+            <div class="d-flex flex-column gap-4">
+              <div class="d-flex gap-4">
+                <div>
+                  <label>Fractionnement: </label>
+                  <select
+                    formControlName="fractionnement"
+                    class="border p-1 rounded"
+                  >
+                    @for(f of fractionnements;track f){
+                    <option [value]="f">{{ f }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label>Jour: </label>
+                  <input
+                    type="number"
+                    formControlName="jour"
+                    class="border p-1 rounded w-16"
+                  />
+                </div>
+
+                <div>
+                  <label>Mois: </label>
+                  <input
+                    type="number"
+                    formControlName="mois"
+                    class="border p-1 rounded w-16"
+                  />
+                </div>
+              </div>
+              <div class="d-flex gap-4">
+                <label
+                  ><input type="checkbox" formControlName="termeEchu" /> Terme
+                  échu</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    formControlName="sansTaciteReconduction"
+                  />
+                  Sans tacite reconduction</label
+                >
+              </div>
+
+              <label
+                >Prochaine échéance :
+                <input
+                  type="date"
+                  formControlName="prochaineEcheance"
+                  class="border p-1 rounded w-full"
+                />
+              </label>
+              <label
+                >Periode en cours :
+                <input
+                  type="text"
+                  formControlName="periodeEnCours"
+                  class="border p-1 rounded w-full"
+                />
+              </label>
+              <label
+                >Période anniversaire :
+                <input
+                  type="text"
+                  formControlName="periodeAnniversaire"
+                  class="border p-1 rounded w-full"
+                />
+              </label>
+              <label
+                >Date de suspension prévisionnelle :
+                <input
+                  type="date"
+                  formControlName="dateSuspensionPrevisionnelle"
+                  class="border p-1 rounded w-full"
+                />
+              </label>
+              <label
+                >Date de résiliation prévisionnelle :
+                <input
+                  type="date"
+                  formControlName="dateResiliationPrevisionnelle"
+                  class="border p-1 rounded w-full"
+                />
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Situation Comptable -->
+        <fieldset
+          formGroupName="situationComptable"
+          class="d-flex gap-4 flex-column w-100 card m-2"
+        >
+          <legend class="font-semibold text-lg">Situation comptable</legend>
+          <p>Net : {{ form.get("situationComptable.net")?.value }}</p>
+          <p>Impayés : {{ form.get("situationComptable.impayes")?.value }}</p>
+          <p>Actes : {{ form.get("situationComptable.actes")?.value }}</p>
+        </fieldset>
+      </div>
+      <!-- Gestion -->
+      <fieldset formGroupName="gestion" class="d-flex gap-4 flex-column w-100 m-2 card">
+        <legend class="font-semibold text-lg">Informations de gestion</legend>
+
+        <label
+          >Gestionnaire :
+          <input
+            type="text"
+            formControlName="gestionnaire"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+
+        <label
+          >Centre de gestion Cie :
+          <input
+            type="text"
+            formControlName="centreGestionCie"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+
+        <label
+          >Mode de gestion :
+          <input
+            type="text"
+            formControlName="modeGestion"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+
+        <label
+          >Destinataire des taxes :
+          <input
+            type="text"
+            formControlName="destinataireTaxes"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+
+        <div class="flex gap-4">
+          <label
+            >% Commission attendue :
+            <input
+              type="number"
+              formControlName="commissionAttendue"
+              class="border p-1 rounded w-24"
+            />
+          </label>
+          <label
+            >dont commission de gestion :
+            <input
+              type="number"
+              formControlName="commissionGestion"
+              class="border p-1 rounded w-24"
+            />
+          </label>
+        </div>
+
+        <div class="flex gap-4">
+          <label
+            ><input type="checkbox" formControlName="pollicitationInterdite" />
+            Pollicitation interdite</label
+          >
+          <label
+            ><input type="checkbox" formControlName="aConserverSiEpuration" /> À
+            conserver si épuration</label
+          >
+        </div>
+
+        <label
+          >Date de réalisation :
+          <input
+            type="date"
+            formControlName="dateRealisation"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+
+        <label
+          >Signature :
+          <input
+            type="text"
+            formControlName="signature"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+
+        <label
+          >Préavis résiliation (mois) :
+          <input
+            type="text"
+            formControlName="preavisResiliation"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+
+        <label
+          >Modalités de révision :
+          <input
+            type="text"
+            formControlName="modalitesRevision"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+
+        <label
+          >Durée fixe (ans) :
+          <input
+            type="number"
+            formControlName="dureeFixe"
+            class="border p-1 rounded w-full"
+          />
+        </label>
+      </fieldset>
+    </form>
+  </div>
+</div>

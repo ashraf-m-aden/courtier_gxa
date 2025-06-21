@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 
 @Component({
   selector: 'info-general-contrat',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './info-general-contrat.component.css'
 })
 export class InfoGeneralContratComponent {
-
+@Input() isContrat=signal(true); // Indique si c'est un contrat ou une police
 }
