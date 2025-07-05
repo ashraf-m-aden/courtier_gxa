@@ -22,6 +22,7 @@
             <th>Intitulé</th>
             <th>Date début</th>
             <th>Date fin</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +33,23 @@
 
             <td>{{ contrat.debcours | date : "dd/MM/yyyy" }}</td>
             <td>{{ contrat.fincours | date : "dd/MM/yyyy" }}</td>
+            <td>
+              @if(isContrat){
+
+              <button
+                class="btn btn-sm btn-primary"
+                (click)="voirDetailsContrat(contrat)"
+              >
+                Voir</button
+              >} @else{
+
+              <button
+                class="btn btn-sm btn-primary"
+                (click)="voirDetailsProjet(contrat)"
+              >
+                Voir</button
+              >}
+            </td>
           </tr>
           }
         </tbody>

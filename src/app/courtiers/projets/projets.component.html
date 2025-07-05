@@ -1,5 +1,4 @@
 <div class="container-fluid my-4">
-
   <!-- 🔍 Barre de recherche -->
   <div class="row mb-3">
     <div class="col-md-6">
@@ -20,42 +19,43 @@
           <th>#</th>
           <th>Nom du projet</th>
           <th>Propositions</th>
-          <th>Contrats validés</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         @for (projet of projetsFiltres(); track projet) {
-          <tr>
-            <td>{{ projet.id }}</td>
-            <td>
-              <strong>{{ projet.nom }}</strong>
-            </td>
-            <td>
-              <span class="badge bg-secondary">
-                {{ projet.propositions.length }} propositions
-              </span>
-            </td>
-            <td>
-              <span class="badge bg-success">
-                {{ nbrContrat(projet)}} contrats
-              </span>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-primary" (click)="voirDetails(projet)">
-                Voir
-              </button>
-              <button class="btn btn-sm btn-danger" (click)="supprimerProjet(projet)">
-                Supprimer
-              </button>
-            </td>
-          </tr>
+        <tr>
+          <td>{{ projet.id }}</td>
+          <td>
+            <strong>{{ projet.nom }}</strong>
+          </td>
+          <td>
+            <span class="badge bg-secondary">
+              {{ projet.propositions.length }} propositions
+            </span>
+          </td>
+
+          <td>
+            <button
+              class="btn btn-sm btn-primary"
+              (click)="voirDetails(projet)"
+            >
+              Voir
+            </button>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="supprimerProjet(projet)"
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
         } @if (projetsFiltres().length === 0) {
-          <tr>
-            <td colspan="5" class="text-center text-muted">
-              Aucun projet trouvé.
-            </td>
-          </tr>
+        <tr>
+          <td colspan="5" class="text-center text-muted">
+            Aucun projet trouvé.
+          </td>
+        </tr>
         }
       </tbody>
     </table>

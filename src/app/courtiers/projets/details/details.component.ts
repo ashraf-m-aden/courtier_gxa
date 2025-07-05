@@ -15,9 +15,9 @@ import { RisqueContratComponent } from '../../../components/contrat/nouveau/risq
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
-export class DetailsContratComponent {
+export class DetailsProjetsComponent {
   contratForm!: FormGroup;
-  isContrat = signal<boolean>(true);
+  isContrat = signal<boolean>(false);
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     console.log(this.route.snapshot.data['isContrat']);
 
