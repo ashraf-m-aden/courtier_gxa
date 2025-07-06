@@ -16,16 +16,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NouveauContratComponent {
   contratForm!: FormGroup;
-  isContrat= signal<boolean>(true);
+  isContrat = signal<boolean>(true);
+  isEdit = signal<boolean>(true);
+
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
-    console.log(this.route.snapshot.data['isContrat'] );
 
     this.isContrat.set(this.route.snapshot.data['isContrat'])
+    this.isEdit.set(this.route.snapshot.data['isEdit'])
 
   }
 
   ngOnInit(): void {
-
     this.contratForm = this.fb.group({
       contrat: [null, Validators.required],
       numtiers: [null],
@@ -123,6 +124,107 @@ export class NouveauContratComponent {
       daterefindice: [''],
       typesignature: ['']
     });
+
+    if (this.isEdit()) {
+      this.contratForm.setValue({
+        contrat: 'C12345',
+        numtiers: 'T67890',
+        frac: 'Mensuel',
+        echpjj: '15',
+        echpmm: '06',
+        intitule: 'Contrat auto',
+        affnouv: 'Nouvelle affaire',
+        tacite: true,
+        prelev: 'Oui',
+        prelbank: 'BANQUE123',
+        jourp: '5',
+        querab: 'Aucun',
+        realis: '2024-01-15',
+        apport1: 5000,
+        apport2: 2500,
+        tauxrea: 12.5,
+        tauxap1: 6.25,
+        tauxap2: 3.12,
+        gestionn: 'Dupont',
+        portef: 'Portefeuille A',
+        remplace: 'Ancien contrat',
+        remppar: 'Contrat B',
+        derpiece: '2024-06-30',
+        memo: 'Notes internes',
+        ext: 'Extension A',
+        primann: 1200,
+        primann1: '1 200 EUR',
+        commann: 150,
+        commann1: '150 EUR',
+        totann: 1350,
+        totann1: '1 350 EUR',
+        dateresi: '2025-01-01',
+        debcours: '2024-01-01',
+        fincours: '2024-12-31',
+        debsuiv: '2025-01-01',
+        finsuiv: '2025-12-31',
+        debann: '2024-01-01',
+        finann: '2024-12-31',
+        nbsin: 2,
+        impaye: 300,
+        impaye1: '300 EUR',
+        acompte: 500,
+        acompte1: '500 EUR',
+        netimp: 200,
+        netimp1: '200 EUR',
+        lima: 1000,
+        retrorea: 'Retro Réa',
+        retroap1: 'Retro Ap1',
+        retroap2: 'Retro Ap2',
+        kprretro: 50,
+        kprretem: 25,
+        retroemi: true,
+        datdermo: '2024-06-01',
+        modifpar: 'Admin',
+        ole: 'OLE123',
+        txcomm: 7.5,
+        comges: 2.5,
+        polinter: false,
+        polrefus: 'Pas de refus',
+        modrev: 'Révision annuelle',
+        sansquit: false,
+        duree: 3,
+        modegest: 'Gestion directe',
+        echu: true,
+        echeance: '2024-06-15',
+        ddebpiec: '2024-01-01',
+        dfinpiec: '2024-12-31',
+        hono: 500,
+        hono1: '500 EUR',
+        frprel: 100,
+        frprel1: '100 EUR',
+        datereal: '2024-01-01',
+        histo: 'Historique des modifications',
+        typretrr: 'Type R',
+        typretr1: 'Type 1',
+        typretr2: 'Type 2',
+        ptini: 1000,
+        ptini1: '1 000 EUR',
+        pnini: 800,
+        pnini1: '800 EUR',
+        comini: 150,
+        comini1: '150 EUR',
+        agelimit: 65,
+        fiscal: 'Fiscalité A',
+        numproj: 123,
+        propproj: 456,
+        archive: 'Non',
+        indic: 10,
+        nonepur: true,
+        mandat: 'Mandat spécial',
+        prevsusp: '2024-09-01',
+        prevresi: '2024-12-01',
+        fvahom: false,
+        daterefindice: '2024-06-30',
+        typesignature: 'Électronique'
+      });
+    }
+
   }
 
   onSubmit(): void {

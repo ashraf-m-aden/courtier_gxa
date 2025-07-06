@@ -22,6 +22,7 @@
             <th>Intitulé</th>
             <th>Date début</th>
             <th>Date fin</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +33,17 @@
 
             <td>{{ contrat.debcours | date : "dd/MM/yyyy" }}</td>
             <td>{{ contrat.fincours | date : "dd/MM/yyyy" }}</td>
+
+            <td>
+              <button
+                class="btn btn-group btn-primary"
+                (click)="voir(contrat)"
+              >
+                <mat-icon>eye</mat-icon>
+
+                Voir
+              </button>
+            </td>
           </tr>
           }
         </tbody>

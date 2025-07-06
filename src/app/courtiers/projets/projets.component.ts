@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'projets',
@@ -80,7 +81,7 @@ projets = [
   },
 ];
 
-
+constructor(private router: Router){}
   projetsFiltres() {
     const filtreMin = this.filtre.toLowerCase().trim();
     return this.projets.filter(p =>
@@ -89,8 +90,9 @@ projets = [
   }
 
   voirDetails(projet: any) {
-    alert(`Voir détails du projet : ${projet.nom}`);
-    // Tu peux ici rediriger vers une vue détaillée ou ouvrir un modal
+    const url = this.router.serializeUrl(
+        this.router.createUrlTree(['/courtiers/projet/details/'+projet.id])
+      ); window.open(url, '_blank');
   }
 
   supprimerProjet(projet: any) {

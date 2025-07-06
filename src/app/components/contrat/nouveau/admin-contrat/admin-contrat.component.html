@@ -1,9 +1,13 @@
 <div class="row">
   <div class="col-12">
+    @if(isEdit()){
     <form [formGroup]="form" class="card">
       <!-- Échéances -->
       <div class="d-flex gap-5 mb-5">
-        <fieldset formGroupName="echeances" class="d-flex gap-4 card flex-column w-100 m-2">
+        <fieldset
+          formGroupName="echeances"
+          class="d-flex gap-4 card flex-column w-100 m-2"
+        >
           <legend class="font-semibold text-lg">Échéances</legend>
           <div class="d-flex gap-5">
             <div class="d-flex flex-column gap-4">
@@ -107,7 +111,10 @@
         </fieldset>
       </div>
       <!-- Gestion -->
-      <fieldset formGroupName="gestion" class="d-flex gap-4 flex-column w-100 m-2 card">
+      <fieldset
+        formGroupName="gestion"
+        class="d-flex gap-4 flex-column w-100 m-2 card"
+      >
         <legend class="font-semibold text-lg">Informations de gestion</legend>
 
         <label
@@ -222,5 +229,200 @@
         </label>
       </fieldset>
     </form>
+    } @else{
+    <div class="card p-4">
+      <!-- Échéances -->
+      <div class="d-flex gap-5 mb-5">
+        <fieldset class="d-flex gap-4 card flex-column w-100 m-2">
+          <legend class="font-semibold text-lg">Échéances</legend>
+
+          <div class="d-flex gap-4 flex-wrap">
+            <div>
+              <label>Fractionnement:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.fractionnement")?.value}}</span>
+            </div>
+            <div>
+              <label>Jour:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.jour")?.value
+              }}</span>
+            </div>
+            <div>
+              <label>Mois:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.mois")?.value
+              }}</span>
+            </div>
+          </div>
+
+          <div class="d-flex gap-4 mt-3">
+            <div>
+              <label>Terme échu:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.termeEchu")?.value ? "Oui" : "Non"
+              }}</span>
+            </div>
+            <div>
+              <label>Sans tacite reconduction:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.sansTaciteReconduction")?.value
+                  ? "Oui"
+                  : "Non"
+              }}</span>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column gap-2 mt-3">
+            <div>
+              <label>Prochaine échéance:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.prochaineEcheance")?.value
+              }}</span>
+            </div>
+            <div>
+              <label>Période en cours:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.periodeEnCours")?.value
+              }}</span>
+            </div>
+            <div>
+              <label>Période anniversaire:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.periodeAnniversaire")?.value
+              }}</span>
+            </div>
+            <div>
+              <label>Date de suspension prévisionnelle:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.dateSuspensionPrevisionnelle")?.value
+              }}</span>
+            </div>
+            <div>
+              <label>Date de résiliation prévisionnelle:</label>
+              <span class="ml-2 font-medium">{{
+                form.get("echeances.dateResiliationPrevisionnelle")?.value
+              }}</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Situation Comptable -->
+        <fieldset class="d-flex gap-4 flex-column w-100 card m-2">
+          <legend class="font-semibold text-lg">Situation comptable</legend>
+          <div>
+            <label>Net:</label>
+            <span class="ml-2 font-medium">{{
+              form.get("situationComptable.net")?.value
+            }}</span>
+          </div>
+          <div>
+            <label>Impayés:</label>
+            <span class="ml-2 font-medium">{{
+              form.get("situationComptable.impayes")?.value
+            }}</span>
+          </div>
+          <div>
+            <label>Actes:</label>
+            <span class="ml-2 font-medium">{{
+              form.get("situationComptable.actes")?.value
+            }}</span>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Gestion -->
+      <fieldset class="d-flex gap-4 flex-column w-100 m-2 card">
+        <legend class="font-semibold text-lg">Informations de gestion</legend>
+
+        <div>
+          <label>Gestionnaire:</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.gestionnaire")?.value
+          }}</span>
+        </div>
+        <div>
+          <label>Centre de gestion Cie:</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.centreGestionCie")?.value
+          }}</span>
+        </div>
+        <div>
+          <label>Mode de gestion:</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.modeGestion")?.value
+          }}</span>
+        </div>
+        <div>
+          <label>Destinataire des taxes:</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.destinataireTaxes")?.value
+          }}</span>
+        </div>
+
+        <div class="d-flex gap-4">
+          <div>
+            <label>% Commission attendue:</label>
+            <span class="ml-2 font-medium">{{
+              form.get("gestion.commissionAttendue")?.value
+            }}</span>
+          </div>
+          <div>
+            <label>Dont commission de gestion:</label>
+            <span class="ml-2 font-medium">{{
+              form.get("gestion.commissionGestion")?.value
+            }}</span>
+          </div>
+        </div>
+
+        <div class="d-flex gap-4">
+          <div>
+            <label>Pollicitation interdite:</label>
+            <span class="ml-2 font-medium">{{
+              form.get("gestion.pollicitationInterdite")?.value ? "Oui" : "Non"
+            }}</span>
+          </div>
+          <div>
+            <label>À conserver si épuration:</label>
+            <span class="ml-2 font-medium">{{
+              form.get("gestion.aConserverSiEpuration")?.value ? "Oui" : "Non"
+            }}</span>
+          </div>
+        </div>
+
+        <div>
+          <label>Date de réalisation:</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.dateRealisation")?.value
+          }}</span>
+        </div>
+        <div>
+          <label>Signature:</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.signature")?.value
+          }}</span>
+        </div>
+        <div>
+          <label>Préavis résiliation (mois):</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.preavisResiliation")?.value
+          }}</span>
+        </div>
+        <div>
+          <label>Modalités de révision:</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.modalitesRevision")?.value
+          }}</span>
+        </div>
+        <div>
+          <label>Durée fixe (ans):</label>
+          <span class="ml-2 font-medium">{{
+            form.get("gestion.dureeFixe")?.value
+          }}</span>
+        </div>
+      </fieldset>
+    </div>
+
+    }
   </div>
 </div>

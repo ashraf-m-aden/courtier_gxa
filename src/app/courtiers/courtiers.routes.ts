@@ -34,6 +34,8 @@ export const courtiersRoutes: Routes = [
       { path: 'projets', loadComponent: () => import('./projets/projets.component').then(m => m.ProjetsComponent) },
       { path: 'contrats', loadComponent: () => import('./contrats/list/list.component').then(m => m.ListContratComponent) },
       { path: 'contrats/nouveau', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat:true }},
+      { path: 'contrats/details/:id', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat:true,isEdit:true }},
+      { path: 'projets/details/:id', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat:false,isEdit:true }},
       { path: 'commissions', loadComponent: () => import('./commissions/commissions.component').then(m => m.CommissionsComponent) },
       { path: 'profile', loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
       { path: 'tiers', loadComponent: () => import('./tier/list/tier-list.component').then(m => m.TierListComponent) },

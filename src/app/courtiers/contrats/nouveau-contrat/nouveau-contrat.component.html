@@ -15,10 +15,15 @@
             <ng-template matStepLabel
               >Informations générales et choix du produits</ng-template
             >
-            <info-general-contrat [isContrat]="isContrat"
+            <info-general-contrat
+              [isContrat]="isContrat"
               [formGroup]="contratForm"
+              [isEdit]="isEdit"
             ></info-general-contrat>
-            <produits-contrat></produits-contrat>
+            <produits-contrat
+              [vehiculeForm]="contratForm"
+              [isEdit]="isEdit"
+            ></produits-contrat>
 
             <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
           </mat-step>
@@ -26,7 +31,7 @@
           <!-- Étape 2 -->
           <mat-step>
             <ng-template matStepLabel>Données administratives</ng-template>
-            <admin-contrat></admin-contrat>
+            <admin-contrat [isEdit]="isEdit"></admin-contrat>
             <div class="d-flex justify-content-between">
               <button class="btn btn-primary mt-5" matStepperPrevious>
                 PRÉCÉDENT

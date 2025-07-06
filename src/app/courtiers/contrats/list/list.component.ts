@@ -322,5 +322,18 @@ export class ListContratComponent {
     );
     window.open(url, '_blank');
   }
+  voir(contrat:any): void {
 
+    if (this.isContrat) {
+      const url = this.router.serializeUrl(
+        this.router.createUrlTree(['/courtiers/contrats/details/'+contrat.id])
+      ); window.open(url, '_blank');
+
+    } else {
+      const url = this.router.serializeUrl(
+        this.router.createUrlTree(['/courtiers/projets/details/'+contrat.id])
+      ); window.open(url, '_blank');
+
+    }
+  }
 }
