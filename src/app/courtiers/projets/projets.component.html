@@ -1,5 +1,9 @@
 <div class="container-fluid my-4">
-
+  <div class="row">
+    <div class="col-12">
+      <h5>Liste des projets</h5>
+    </div>
+  </div>
   <!-- 🔍 Barre de recherche -->
   <div class="row mb-3">
     <div class="col-md-6">
@@ -25,30 +29,31 @@
       </thead>
       <tbody>
         @for (projet of projetsFiltres(); track projet) {
-          <tr>
-            <td>{{ projet.id }}</td>
-            <td>
-              <strong>{{ projet.nom }}</strong>
-            </td>
-            <td>
-              <span class="badge bg-secondary">
-                {{ projet.propositions.length }} propositions
-              </span>
-            </td>
+        <tr>
+          <td>{{ projet.id }}</td>
+          <td>
+            <strong>{{ projet.nom }}</strong>
+          </td>
+          <td>
+            <span class="badge bg-secondary">
+              {{ projet.propositions.length }} propositions
+            </span>
+          </td>
 
-            <td>
-              <button class="btn btn-sm btn-primary" (click)="voirDetails(projet)">
-                Voir
-              </button>
+          <td>
+            <button class="btn btn-primary" (click)="voirDetails(projet)">
+              <mat-icon>visibility</mat-icon>
 
-            </td>
-          </tr>
+              Voir
+            </button>
+          </td>
+        </tr>
         } @if (projetsFiltres().length === 0) {
-          <tr>
-            <td colspan="5" class="text-center text-muted">
-              Aucun projet trouvé.
-            </td>
-          </tr>
+        <tr>
+          <td colspan="5" class="text-center text-muted">
+            Aucun projet trouvé.
+          </td>
+        </tr>
         }
       </tbody>
     </table>

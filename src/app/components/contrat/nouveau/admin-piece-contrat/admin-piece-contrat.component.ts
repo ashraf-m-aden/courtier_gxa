@@ -34,6 +34,18 @@ export class AdminPieceContratComponent {
     });
   }
   ngOnInit(): void {
+    console.log("piece");
+    console.log(this.isEdit());
+
+    if (!this.isEdit()) {
+      this.pieces = [
+        { id: 1, motif: 'affaire nouvelle', dateEffet: new Date('2023-08-26'), situation: 'Nouvelle pièce' },
+
+      ];
+    }
+  }
+
+  ngOnChanges(): void {
     if (!this.isEdit()) {
       this.pieces = [
         { id: 1, motif: 'affaire nouvelle', dateEffet: new Date('2023-08-26'), situation: 'Nouvelle pièce' },

@@ -1,0 +1,108 @@
+<div class="container-fluid mt-4">
+  <h3>Saisie de Quittance</h3>
+
+  <!-- Recherche police -->
+  <div class="mb-3 d-flex">
+    <input
+      type="text"
+      class="form-control me-2"
+      placeholder="Numéro de police..."
+      [(ngModel)]="recherchePolice"
+    />
+    <button class="btn btn-primary" (click)="rechercherContrat()">
+      Rechercher
+    </button>
+  </div>
+
+  <!-- Sélection contrat -->
+  @if(affichageSelection){
+  <div>
+    <p>Contrats trouvés :</p>
+    <ul class="list-group">
+      @for( c of contratsTrouves;track c){
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        {{ c.police }} - {{ c.nom }}
+        <button class="btn btn-sm btn-success" (click)="selectionnerContrat(c)">
+          Sélectionner
+        </button>
+      </li>
+      }
+    </ul>
+  </div>
+  }
+  <!-- Contrat sélectionné -->
+  @if(contratSelectionne){
+  <div class="alert alert-info mt-3">
+    Contrat sélectionné :
+    <strong
+      >{{ contratSelectionne.police }} - {{ contratSelectionne.nom }}</strong
+    >
+  </div>
+  }
+
+  <!-- Formulaire quittances -->
+  @if(contratSelectionne){
+  <form [formGroup]="form" (ngSubmit)="enregistrer()">
+    <div formArrayName="quittances">
+      @for(q of quittances.controls;track q; let i = $index){
+      <div [formGroupName]="i" class="border rounded p-3 mb-2">
+        <h6>Ligne {{ i + 1 }}</h6>
+        <div class="row">
+          <div class="col-md-3 mb-2">
+            <label>Total quittance</label>
+            <input
+              type="number"
+              formControlName="totquit"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-3 mb-2">
+            <label>Primes nettes</label>
+            <input
+              type="number"
+              formControlName="pnette"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-2 mb-2">
+            <label>Commissions</label>
+            <input type="number" formControlName="comm" class="form-control" />
+          </div>
+          <div class="col-md-2 mb-2">
+            <label>Taxe</label>
+            <input type="number" formControlName="taxe" class="form-control" />
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button
+              class="btn btn-danger btn-sm"
+              type="button"
+              (click)="supprimerQuittance(i)"
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <button
+      class="btn btn-secondary mt-2"
+      type="button"
+      (click)="ajouterQuittance()"
+    >
+      + Nouvelle quittance
+    </button>
+    <!-- <button
+      class="btn btn-info mt-2 ms-2"
+      type="button"
+      (click)="calculerCumuls()"
+    >
+      🧮 Cumuls
+    </button> -->
+    <button class="btn btn-primary mt-2 ms-2" type="submit">Enregistrer</button>
+  </form>
+  }
+</div>

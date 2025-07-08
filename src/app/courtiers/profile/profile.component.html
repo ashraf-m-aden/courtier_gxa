@@ -1,1 +1,64 @@
-<p>profile works!</p>
+<div class="container py-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Profil Utilisateur</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3">
+          <!-- Dossier -->
+          <div class="col-md-4">
+            <label class="form-label">N° Dossier</label>
+            <input type="number" class="form-control" formControlName="dossier" />
+          </div>
+
+          <!-- Login -->
+          <div class="col-md-4">
+            <label class="form-label">Login *</label>
+            <input type="text" class="form-control" formControlName="login" required />
+          </div>
+
+          <!-- Rôle -->
+          <div class="col-md-4">
+            <label class="form-label">Rôle</label>
+            <select class="form-select" formControlName="role">
+              <option [ngValue]="null">-- Sélectionner --</option>
+              <option [ngValue]="1">Administrateur</option>
+              <option [ngValue]="2">Utilisateur</option>
+              <option [ngValue]="3">Gestionnaire</option>
+            </select>
+          </div>
+
+          <!-- Raison Sociale -->
+          <div class="col-md-6">
+            <label class="form-label">Raison sociale</label>
+            <input type="text" class="form-control" formControlName="rsociale" />
+          </div>
+
+          <!-- Portefeuille -->
+          <div class="col-md-6">
+            <label class="form-label">Portefeuille</label>
+            <input type="text" class="form-control" formControlName="portef" />
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email" />
+          </div>
+
+          <!-- Ordre Externe -->
+          <div class="col-md-6">
+            <label class="form-label">Ordre Externe</label>
+            <input type="number" class="form-control" formControlName="ordreext" />
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <button type="button" class="btn btn-secondary" (click)="onReset()">Réinitialiser</button>
+          <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

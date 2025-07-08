@@ -1,11 +1,19 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      @if(isContrat()){
+ @if(isEdit()){
+     @if(isContrat()){
+      <h5>Modifier un contrat</h5>
+      } @else {
+      <h5>Modifier un projet</h5>
+      }
+ }@else {
+     @if(isContrat()){
       <h5>Création d'un nouveau contrat</h5>
       } @else {
       <h5>Création d'un nouveau projet</h5>
       }
+ }
     </div>
     <div class="col-12">
       <!-- contrat-stepper.component.html -->

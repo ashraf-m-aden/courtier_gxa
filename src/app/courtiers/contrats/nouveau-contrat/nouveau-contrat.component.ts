@@ -23,6 +23,7 @@ export class NouveauContratComponent {
 
     this.isContrat.set(this.route.snapshot.data['isContrat'])
     this.isEdit.set(this.route.snapshot.data['isEdit'])
+console.log(this.isEdit());
 
   }
 
@@ -232,9 +233,11 @@ export class NouveauContratComponent {
       const contratData = this.contratForm.value;
       if (this.isContrat()) {
         console.log('Contrat soumis :', contratData);
+        alert("Contrat enregistré avec succés")
 
       } else {
         console.log('Projet soumis :', contratData);
+        alert("Projet enregistré avec succés")
 
       }
 

@@ -1,1 +1,39 @@
-<p>produits works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h5>Liste des produits</h5>
+    </div>
+    <div class="col-12">
+      <div class="table-responsive mt-3">
+  <table class="table table-striped table-bordered align-middle">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Code Produit</th>
+        <th scope="col">Libellé</th>
+        <th scope="col">Branche</th>
+        <th scope="col">Compagnie</th>
+        <th scope="col">Type Tarif</th>
+        <th scope="col">Devise</th>
+        <th scope="col">Taxe (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (prod of produits; track prod.codeprod) {
+        <tr>
+          <td>{{ produits.indexOf(prod) + 1 }}</td>
+          <td>{{ prod.codeprod }}</td>
+          <td>{{ prod.libelle }}</td>
+          <td>{{ prod.branche }}</td>
+          <td>{{ prod.cieprin }}</td>
+          <td>{{ prod.tartype }}</td>
+          <td>{{ prod.tardev }}</td>
+          <td>{{ prod.taxatt }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+    </div>
+  </div>
+</div>

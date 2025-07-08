@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'projets',
-  imports: [FormsModule,MatInputModule,],
+  imports: [FormsModule,MatInputModule,MatIconModule],
   templateUrl: './projets.component.html',
   styleUrl: './projets.component.css'
 })

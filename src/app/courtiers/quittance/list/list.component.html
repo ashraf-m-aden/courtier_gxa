@@ -1,0 +1,48 @@
+
+   <button class="btn btn-group btn-primary"[routerLink]="['/courtiers/quittance/nouveau']" routerLinkActive="router-link-active" >
+        <mat-icon>add</mat-icon>
+
+        Nouvelle quittance</button
+      >
+<div class="table-responsive mt-4">
+  <table class="table table-bordered table-hover table-sm">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Police</th>
+        <th>Libellé</th>
+        <th>Nature</th>
+        <th>Contrat</th>
+        <th>Entité</th>
+        <th>Cie</th>
+        <th>Total quittance</th>
+        <th>Primes nettes</th>
+        <th>Commissions</th>
+        <th>Taxe</th>
+        <th>Actions</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      @for(q of quittances; track q.numero) {
+        <tr>
+          <td>{{ q.numero }}</td>
+          <td>{{ q.police }}</td>
+          <td>{{ q.libelle }}</td>
+          <td>{{ q.nature }}</td>
+          <td>{{ q.contrat }}</td>
+          <td>{{ q.entite }}</td>
+          <td>{{ q.cie }}</td>
+          <td>{{ q.totquit }} {{ q.totquit1 }}</td>
+          <td>{{ q.pnette }} {{ q.pnette1 }}</td>
+          <td>{{ q.comm }} {{ q.comm1 }}</td>
+          <td>{{ q.taxe }} {{ q.taxe1 }}</td>
+          <td>
+         <button class="btn btn-primary" (dblclick)="encaisser()">Encaisser</button>
+          </td>
+
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
