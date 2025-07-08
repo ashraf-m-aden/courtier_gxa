@@ -1,9 +1,57 @@
 <div class="row">
+  @if(isEdit() ){ @if( isContrat()){
+  <div class="card p-3">
+    <h2 class="text-xl font-bold mb-3">Informations Véhicule</h2>
+
+    <!-- CATEGORIE -->
+    <div class="mb-2">
+      <label class="fw-bold">Catégorie :</label>
+      <span>{{
+        vehiculeForm.get("categorie")?.value || "Non sélectionnée"
+      }}</span>
+    </div>
+
+    <!-- MARQUE -->
+    <div class="mb-2">
+      <label class="fw-bold">Marque :</label>
+      <span>{{ vehiculeForm.get("marque")?.value || "Non sélectionnée" }}</span>
+    </div>
+
+    <!-- TABLEAU DES MODELES -->
+    @if(modelesDisponibles.length > 0){
+    <div class="pt-4">
+      <h3 class="text-lg font-semibold mb-2">Modèles disponibles</h3>
+      <table class="w-full border text-sm w-100">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="border p-1">Nom</th>
+            <th class="border p-1">CV</th>
+            <th class="border p-1">Type Mine</th>
+            <th class="border p-1">Carburant</th>
+            <th class="border p-1">Places</th>
+            <th class="border p-1">Carrosserie</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(m of modelesDisponibles;track m){
+          <tr>
+            <td class="border p-1">{{ m.nom }}</td>
+            <td class="border p-1">{{ m.cv }}</td>
+            <td class="border p-1">{{ m.typeMine }}</td>
+            <td class="border p-1">{{ m.carburant }}</td>
+            <td class="border p-1">{{ m.places }}</td>
+            <td class="border p-1">{{ m.carrosserie }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+  </div>
+
+  } @else {
   <div class="col-12">
-    <form
-      [formGroup]="vehiculeForm"
-      class="card"
-    >
+    <form [formGroup]="vehiculeForm" class="card">
       <h2 class="text-xl font-bold">Formulaire Véhicule</h2>
 
       <!-- CATEGORIE -->
@@ -51,7 +99,7 @@
           </thead>
           <tbody>
             @for(m of modelesDisponibles;track m){
-            <tr>
+            <tr class="model">
               <td class="border p-1">{{ m.nom }}</td>
               <td class="border p-1">{{ m.cv }}</td>
               <td class="border p-1">{{ m.typeMine }}</td>
@@ -66,4 +114,70 @@
       }
     </form>
   </div>
+  } } @else{
+  <div class="col-12">
+    <form [formGroup]="vehiculeForm" class="card">
+      <h2 class="text-xl font-bold">Formulaire Véhicule</h2>
+
+      <!-- CATEGORIE -->
+      <div class="d-flex m-3 flex-column">
+        <label class="block mb-1">Catégorie</label>
+        <select formControlName="categorie" class="border p-2 rounded w-full">
+          <option value="">-- Choisir une catégorie --</option>
+          @for(cat of categoriesVehicules;track cat){
+          <option [value]="cat.code">
+            {{ cat.libelle }}
+          </option>
+          }
+        </select>
+      </div>
+
+      <!-- MARQUE -->
+      @if(marquesDisponibles.length > 0){
+      <div class="d-flex m-3 flex-column">
+        <label class="block mb-1">Marque</label>
+        <select formControlName="marque" class="border p-2 rounded w-full">
+          <option value="">-- Choisir une marque --</option>
+          @for(marque of marquesDisponibles;track marque){
+          <option [value]="marque.nom">
+            {{ marque.nom }}
+          </option>
+          }
+        </select>
+      </div>
+      }
+
+      <!-- TABLEAU DES MODELES -->
+      @if(modelesDisponibles.length > 0){
+      <div class="pt-4">
+        <h3 class="text-lg font-semibold mb-2">Modèles disponibles</h3>
+        <table class="w-full border text-sm w-100">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="border p-1">Nom</th>
+              <th class="border p-1">CV</th>
+              <th class="border p-1">Type Mine</th>
+              <th class="border p-1">Carburant</th>
+              <th class="border p-1">Places</th>
+              <th class="border p-1">Carrosserie</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(m of modelesDisponibles;track m){
+            <tr class="model">
+              <td class="border p-1">{{ m.nom }}</td>
+              <td class="border p-1">{{ m.cv }}</td>
+              <td class="border p-1">{{ m.typeMine }}</td>
+              <td class="border p-1">{{ m.carburant }}</td>
+              <td class="border p-1">{{ m.places }}</td>
+              <td class="border p-1">{{ m.carrosserie }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+    </form>
+  </div>
+  }
 </div>

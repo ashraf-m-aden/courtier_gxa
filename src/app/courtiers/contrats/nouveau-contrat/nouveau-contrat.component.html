@@ -23,6 +23,7 @@
             <produits-contrat
               [vehiculeForm]="contratForm"
               [isEdit]="isEdit"
+              [isContrat]="isContrat"
             ></produits-contrat>
 
             <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
@@ -31,7 +32,7 @@
           <!-- Étape 2 -->
           <mat-step>
             <ng-template matStepLabel>Données administratives</ng-template>
-            <admin-contrat [isEdit]="isEdit"></admin-contrat>
+            <admin-contrat [isEdit]="isEdit" ></admin-contrat>
             <div class="d-flex justify-content-between">
               <button class="btn btn-primary mt-5" matStepperPrevious>
                 PRÉCÉDENT
@@ -47,7 +48,9 @@
             <ng-template matStepLabel
               >Données administratives - Pieces</ng-template
             >
-            <admin-piece-contrat></admin-piece-contrat>
+            <admin-piece-contrat  [isContrat]="isContrat"
+              [formGroup]="contratForm"
+              [isEdit]="isEdit"></admin-piece-contrat>
             <div class="d-flex justify-content-between">
               <button class="btn btn-primary mt-5" matStepperPrevious>
                 PRÉCÉDENT

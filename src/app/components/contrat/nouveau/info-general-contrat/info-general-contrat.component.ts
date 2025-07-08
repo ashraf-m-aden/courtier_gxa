@@ -1,27 +1,29 @@
 import { Component, Input, signal } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'info-general-contrat',
-  imports: [FormsModule,ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './info-general-contrat.component.html',
   styleUrl: './info-general-contrat.component.css'
 })
 export class InfoGeneralContratComponent {
-@Input() isContrat=signal(true); // Indique si c'est un contrat ou une police
-@Input() isEdit=signal(true); // Indique si c'est un contrat ou une police
-@Input() formGroup!:FormGroup;
+  @Input() isContrat = signal(true); // Indique si c'est un contrat
+  @Input() isEdit = signal(true);
+  @Input() formGroup!: FormGroup;
 
-intitule = ""
-constructor(){
-  console.log(this.formGroup);
-}
+  intitule = ""
+  constructor(private fb: FormBuilder) {
+    this.formGroup = this.fb.group({
+      intitule: [''],
+
+    });
+  }
 
 
-ngOnChanges(): void {
-  //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-  //Add '${implements OnChanges}' to the class.
-  console.log(this.formGroup.value);
-  this.intitule = this.formGroup.value.intitule
-}
+  ngOnChanges(): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    this.intitule = this.formGroup?.get('intitule')?.value
+  }
 }

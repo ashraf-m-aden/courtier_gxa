@@ -91,7 +91,7 @@ constructor(private router: Router){}
 
   voirDetails(projet: any) {
     const url = this.router.serializeUrl(
-        this.router.createUrlTree(['/courtiers/projet/details/'+projet.id])
+        this.router.createUrlTree(['/courtiers/projets/details/'+projet.id])
       ); window.open(url, '_blank');
   }
 

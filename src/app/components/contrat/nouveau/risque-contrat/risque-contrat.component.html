@@ -156,11 +156,11 @@
         </fieldset>
       </div>
       <div class="d-flex">
-        <!-- Conducteurs autorisés -->
         <fieldset class="card p-4 w-100">
           <legend class="font-semibold text-lg">Conducteurs autorisés</legend>
 
-          <div class="d-flex flex-column gap-1">
+          <div class="d-flex flex-column gap-3">
+            <!-- Checkboxes -->
             <div class="d-flex items-center gap-4">
               <div class="d-flex gap-1">
                 <input
@@ -170,7 +170,6 @@
                 />
                 <label>Assuré principal</label>
               </div>
-
               <div class="d-flex gap-1">
                 <input
                   type="checkbox"
@@ -181,19 +180,44 @@
               </div>
             </div>
 
-            <table class="table-auto w-full border">
-              <thead>
-                <tr class="bg-gray-100">
+            <!-- Sélecteur + Boutons -->
+            <div class="d-flex gap-3 items-center">
+              <select
+                [(ngModel)]="conducteurSelectionne" [ngModelOptions]="{standalone: true}"
+                class="border p-2 rounded"
+              >
+                <option [ngValue]="null">-- Choisir un conducteur --</option>
+                @for(conducteur of conducteursDisponibles;track conducteur){
+                <option [ngValue]="conducteur">
+                  {{ conducteur.nomPrenom }} ({{ conducteur.titre }})
+                </option>
+                }
+              </select>
+
+              <button
+                class="btn btn-success"
+                (click)="ajouterConducteurDepuisSelect()"
+                [disabled]="!conducteurSelectionne"
+              >
+                + Ajouter
+              </button>
+            </div>
+
+            <!-- Tableau des conducteurs ajoutés -->
+            <table class="table-auto w-full border mt-2">
+              <thead class="bg-gray-100">
+                <tr>
                   <th>Titre</th>
                   <th>Nom et prénom</th>
                   <th>Age</th>
                   <th>Date B</th>
                   <th>Numéro / Permis</th>
                   <th>Permis délivré par</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                @for (driver of conducteurs; track driver.id) {
+                @for(driver of conducteurs;track driver; let i=$index){
                 <tr>
                   <td>{{ driver.titre }}</td>
                   <td>{{ driver.nomPrenom }}</td>
@@ -201,6 +225,14 @@
                   <td>{{ driver.dateB }}</td>
                   <td>{{ driver.numeroPermis }}</td>
                   <td>{{ driver.permisDelivrePar }}</td>
+                  <td>
+                    <button
+                      class="btn btn-sm btn-danger"
+                      (click)="supprimerConducteur(i)"
+                    >
+                      Supprimer
+                    </button>
+                  </td>
                 </tr>
                 }
               </tbody>
