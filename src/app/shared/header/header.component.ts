@@ -18,6 +18,8 @@ import {
   animate
 } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BaseSecurityContext } from "../../../app/Model/BasSoapObject/BasSecurityContext";
+
 @Component({
   selector: 'app-header',
   imports: [
@@ -60,11 +62,14 @@ export class HeaderComponent {
     effect(() => {
 
       if (!this.isAuthenticated()) {
-        this.router.navigate(['/login']);
+        const payLoad = JSON.parse(sessionStorage.getItem('BaseSecurityContext')!) as BaseSecurityContext
+      if (!payLoad?.IsAuthenticated) {
+          this.router.navigate(['/login']);
         this.snackBar.open('Déconnexion réussie.', 'Fermer', {
           duration: 3000,
           panelClass: ['mat-toolbar', 'mat-accent'],
         });
+      }
       }
     });
   }

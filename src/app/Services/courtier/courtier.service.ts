@@ -9,10 +9,10 @@ import { SessionStorage } from "../../Model/Model-SessionStorage/SessionStorage"
 
 @Injectable({ providedIn: 'root' })
 export class CourtierService {
-    baseUrl = "http://localhost:3000/api"
+  baseUrl = "http://localhost:3000/api"
 
   constructor(private http: HttpClient, private store: Store) {
-   }
+  }
 
   getDossiers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/courtiers/Dossiers`);
@@ -106,7 +106,11 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/profile`, payload);
   }
 
-  postTiersSearch(payload: any): Observable<any> {
+  postTiersSearch(): Observable<any> {
+    let payload = {
+      BaseSecurityContext: JSON.parse(sessionStorage.getItem("BaseSecurityContext")!),
+
+    }
     return this.http.post(`${this.baseUrl}/Tiers_Search`, payload);
   }
 

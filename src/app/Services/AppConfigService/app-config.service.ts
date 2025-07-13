@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 //import { AuthService } from '../auth/auth.service';
-//import { BasSecurityContext } from '../../Model/BasSoapObject/BasSecurityContext';
+//import { BaseSecurityContext } from '../../Model/BasSoapObject/BasSecurityContext';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +55,7 @@ private _sec:any =null
       });
   }
 
-  
+
   public GetURlAuthService(): string {
     return `${this.apiEndpoint}${this.authService}`;
   //  return `${this.baseUrl}:${this.port}${this.apiEndpoint}${this.authService}`;
@@ -70,6 +70,6 @@ private _sec:any =null
     return `${this.apiEndpoint}${this.webAuthService}`;
   }
 
- 
+
 
 }

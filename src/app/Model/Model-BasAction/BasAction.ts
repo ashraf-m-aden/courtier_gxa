@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { BasParams } from "../BasSoapObject/BasParams";
-import { BasSecurityContext } from "../BasSoapObject/BasSecurityContext";
+import { BaseSecurityContext } from "../BasSoapObject/BasSecurityContext";
 import { BasSoapClient } from "../Model-BasSoapClient/BasSoapClient";
 import * as Xpath from "xpath";
 import { BasSoapFault } from "../BasSoapObject/BasSoapFault";
@@ -12,10 +12,10 @@ export class BasAction {
 
     constructor(private BasSoapCLient: BasSoapClient, private http: HttpClient, private appConfigService: AppConfigService) { }
 
-    public async RunAction(actionName: string, basParams: BasParams, basSecurityContext: BasSecurityContext): Promise<string> {
-        let body = "<ns1:RunAction>" + basSecurityContext.ToSoapVar() + `<name xsi:type=\"xsd:string\">${actionName}</name>`;
+    public async RunAction(actionName: string, basParams: BasParams, baseSecurityContext: BaseSecurityContext): Promise<string> {
+        let body = "<ns1:RunAction>" + baseSecurityContext.ToSoapVar() + `<name xsi:type=\"xsd:string\">${actionName}</name>`;
         body += basParams.ToSoapVar();
-        body += '</ns1:RunAction>';         
+        body += '</ns1:RunAction>';
         let response = await this.BasSoapCLient.SoapRequest(this.appConfigService.GetURlActionService(), body);
         if (BasSoapFault.IsBasError(response))
             BasSoapFault.ThrowError(response);
@@ -24,7 +24,7 @@ export class BasAction {
 
     public GetLogEntry(soapEnv: string): Array<string> {
         let result = new Array<string>();
-        return  result;    
+        return  result;
     }
 
     public GetDataFromSoapEnv(soapEnv: string): string {
@@ -44,25 +44,25 @@ export class BasAction {
    public parseSoapXmlToJson(xmlString: string): any {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-      
+
         // ✅ Trouve automatiquement la balise de données : <data>...</data>
         const dataElement = xmlDoc.getElementsByTagName('prods')[0];
         if (!dataElement) return {};
-      
+
         const json: any = {};
         for (const node of Array.from(dataElement.children)) {
           const key = node.tagName;
           const value = node.textContent?.trim();
           json[key] = value ?? null;
         }
-      
+
         return json;
       }
 
-      public New_RunAction(actionName: string, basParams: BasParams, basSecurityContext: BasSecurityContext): Observable<any> {
-        let body = "<ns1:RunAction>" + basSecurityContext.ToSoapVar() + `<name xsi:type=\"xsd:string\">${actionName}</name>`;
+      public New_RunAction(actionName: string, basParams: BasParams, baseSecurityContext: BaseSecurityContext): Observable<any> {
+        let body = "<ns1:RunAction>" + baseSecurityContext.ToSoapVar() + `<name xsi:type=\"xsd:string\">${actionName}</name>`;
         body += basParams.ToSoapVar();
-        body += '</ns1:RunAction>';         
+        body += '</ns1:RunAction>';
       return this.BasSoapCLient.New_SoapRequest(this.appConfigService.GetURlActionService(), body).pipe
       (map(res =>{
         if (BasSoapFault.IsBasError(res))
@@ -79,16 +79,16 @@ export class BasAction {
         // ✅ Trouve automatiquement la balise de données : <data>...</data>
         const dataElement = xmlDoc.getElementsByTagName(tag)[0];
         if (!dataElement) return {};
-      
+
         const json: any = {};
         for (const node of Array.from(dataElement.children)) {
           const key = node.tagName;
           const value = node.textContent?.trim();
           json[key] = value ?? null;
         }
-      
+
         return json;
       }
-    
-      
+
+
 }

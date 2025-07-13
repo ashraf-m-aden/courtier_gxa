@@ -76,6 +76,8 @@ export class TierListComponent {
   }
 
   private loadTiers(): void {
+    console.log("ici");
+
    this.courtierStore.dispatch(loadTiersData())
 
   }

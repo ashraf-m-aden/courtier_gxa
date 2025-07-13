@@ -34,7 +34,7 @@ export class WelcomeComponent {
   @HostBinding('@fadeIn') fadeIn = true;
   @HostListener('document:keydown.enter', ['$event'])
 handleEnter(event: KeyboardEvent) {
-  this.gotologin();
+ // this.gotologin();
 }
   constructor(){}
   private router = inject(Router);

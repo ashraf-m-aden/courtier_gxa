@@ -1,4 +1,4 @@
-import { BasSecurityContext } from "../../../Model/BasSoapObject/BasSecurityContext";
+import { BaseSecurityContext } from "../../../Model/BasSoapObject/BasSecurityContext";
 import { User } from "../../../Model/user.model";
 
 /**
@@ -6,7 +6,7 @@ import { User } from "../../../Model/user.model";
  */
 export interface AuthState {
   user: User;                     // Stores the detailed user profile (e.g. from getProfileSuccess)
-  BasSec: BasSecurityContext | null; // Stores security context info from login (nullable)
+  BasSec: BaseSecurityContext | null; // Stores security context info from login (nullable)
   isAuthenticated: boolean;       // Flag indicating if the user is authenticated
   loading: boolean;               // Flag indicating if an auth-related operation is in progress
   error: any;                    // Stores any error messages or objects (can be string or object)

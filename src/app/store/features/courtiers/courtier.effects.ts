@@ -23,7 +23,8 @@ loadTiersData$ = createEffect(() =>
   this.actions$.pipe(
     ofType(CourtierActions.loadTiersData),
     switchMap(() =>
-      this.courtierService.postTiersSearch("").pipe(
+
+      this.courtierService.postTiersSearch().pipe(
         map(tiers => CourtierActions.loadTiersDataSuccess({ tiers })),
         catchError(error => of(CourtierActions.loadTiersDataFailure({ error })))
       )
