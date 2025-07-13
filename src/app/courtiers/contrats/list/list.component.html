@@ -1,4 +1,10 @@
 <div class="container-fluid">
+
+  <div class="row">
+    <div class="col-12">
+      <h5>Liste des contrats</h5>
+    </div>
+  </div>
   <div class="row card p-3 m-0">
     <div class="col-12">
       @if(isContrat){
@@ -22,7 +28,7 @@
             <th>Intitulé</th>
             <th>Date début</th>
             <th>Date fin</th>
-            <th>Actions</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -33,22 +39,16 @@
 
             <td>{{ contrat.debcours | date : "dd/MM/yyyy" }}</td>
             <td>{{ contrat.fincours | date : "dd/MM/yyyy" }}</td>
+
             <td>
-              @if(isContrat){
-
               <button
-                class="btn btn-sm btn-primary"
-                (click)="voirDetailsContrat(contrat)"
+                class="btn btn-group btn-primary"
+                (click)="voir(contrat)"
               >
-                Voir</button
-              >} @else{
+                <mat-icon>visibility</mat-icon>
 
-              <button
-                class="btn btn-sm btn-primary"
-                (click)="voirDetailsProjet(contrat)"
-              >
-                Voir</button
-              >}
+                Voir
+              </button>
             </td>
           </tr>
           }

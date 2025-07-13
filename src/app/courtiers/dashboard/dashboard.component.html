@@ -1,1 +1,131 @@
-<p>dashboard works!</p>
+<div class="container py-4">
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Contrats actifs</h5>
+          <p class="card-text h3">{{ totalContrats }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Primes encaissées</h5>
+          <p class="card-text h3">{{ primesEncaissees }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Nouveaux contrats</h5>
+          <p class="card-text h3">{{ nouveauxContrats }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Taux conversion</h5>
+          <p class="card-text h3">{{ tauxConversion }}%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Répartition par produit et nouveaux clients -->
+  <div class="row g-4 mb-4">
+    <!-- Répartition des primes par produit -->
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div
+          class="card-header bg-primary text-white d-flex align-items-center"
+        >
+          <i class="bi bi-pie-chart-fill me-2"></i>
+          Répartition des primes par produit
+        </div>
+        <ul class="list-group list-group-flush">
+          @for(c of contratsParProduit; track c) {
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <span>{{ c.type }}</span>
+            <span class="badge bg-primary rounded-pill">{{ c.montant }}</span>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Nouveaux clients -->
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div
+          class="card-header bg-success text-white d-flex align-items-center"
+        >
+          <i class="bi bi-people-fill me-2"></i>
+          Nouveaux clients
+        </div>
+        <ul class="list-group list-group-flush">
+          @for(client of clientsRecents; track client) {
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <i class="bi bi-person-circle me-1 text-secondary"></i>
+              {{ client.nom }}
+            </div>
+            <small class="text-muted">{{ client.dateCreation }}</small>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sinistres récents -->
+  <div class="row g-4">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-warning text-dark d-flex align-items-center">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          Sinistres récents
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover mb-0 align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Client</th>
+                <th>Statut</th>
+                <th class="text-end">Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(s of sinistres; track s) {
+              <tr>
+                <td>{{ s.id }}</td>
+                <td>{{ s.client }}</td>
+                <td>
+                  <span
+                    class="badge"
+                    [class]="{
+                      'bg-warning text-dark': s.statut === 'En attente',
+                      'bg-success': s.statut === 'Réglé',
+                      'bg-info text-dark': s.statut === 'En cours'
+                    }"
+                  >
+                    {{ s.statut }}
+                  </span>
+                </td>
+                <td class="text-end">{{ s.montant }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

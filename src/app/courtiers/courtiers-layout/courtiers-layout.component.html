@@ -1,106 +1,121 @@
-    <mat-sidenav-container class="layout-container">
-      <mat-sidenav
-        #drawer
-        class="sidebar"
-        [mode]="(isDesktop$ | async) ? 'side' : 'over'"
-        [opened]="(isDesktop$ | async) ? true : false"
+<mat-sidenav-container class="layout-container">
+  <mat-sidenav
+    #drawer
+    class="sidebar"
+    [mode]="(isDesktop$ | async) ? 'side' : 'over'"
+    [opened]="(isDesktop$ | async) ? true : false"
+  >
+    <mat-toolbar color="primary" class="logo-bar"> GXA Courtiers </mat-toolbar>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="dashboard"
+        routerLinkActive="active-link"
+
       >
-        <mat-toolbar color="primary" class="logo-bar">
-          GXA Courtiers
-        </mat-toolbar>
-        <mat-nav-list>
-          <a
-            mat-list-item
-            routerLink="dashboard"
-            routerLinkActive="active-link"
-            (click)="drawer.close()"
-          >
-            <mat-icon>dashboard</mat-icon>
-            Tableau de bord
-          </a>
-          <a
-            mat-list-item
-            routerLink="tiers"
-            routerLinkActive="active-link"
-            (click)="drawer.close()"
-          >
-            <mat-icon>attach_folder</mat-icon>
-            Gestion des Tiers
-          </a>
-            <a
-            mat-list-item
-            routerLink="projets"
-            routerLinkActive="active-link"
-            (click)="drawer.close()"
-          >
-            <mat-icon>attach_folder</mat-icon>
-            Gestion des projets
-          </a>
-              <a
-            mat-list-item
-            routerLink="contrats"
-            routerLinkActive="active-link"
-            (click)="drawer.close()"
-          >
-            <mat-icon>attach_folder</mat-icon>
-            Gestion des Contrats
-          </a>
-          <a
-            mat-list-item
-            routerLink="produits"
-            routerLinkActive="active-link"
-            (click)="drawer.close()"
-          >
-            <mat-icon>inventory</mat-icon>
-            Produits
-          </a>
-          <a
-            mat-list-item
-            routerLink="commissions"
-            routerLinkActive="active-link"
-            (click)="drawer.close()"
-          >
-            <mat-icon>attach_money</mat-icon>
-            Commissions
-          </a>
-          <a
-            mat-list-item
-            routerLink="profile"
-            routerLinkActive="active-link"
-            (click)="drawer.close()"
-          >
-            <mat-icon>person</mat-icon>
-            Profil
-          </a>
-        </mat-nav-list>
-      </mat-sidenav>
+        <mat-icon>dashboard</mat-icon>
+        Tableau de bord
+      </a>
+      <a
+        mat-list-item
+        routerLink="tiers"
+        routerLinkActive="active-link"
 
-      <mat-sidenav-content>
-        <!-- Toolbar mobile -->
+      >
+        <mat-icon>attach_folder</mat-icon>
+        Gestion des Tiers
+      </a>
+      <a
+        mat-list-item
+        routerLink="projets"
+        routerLinkActive="active-link"
 
+      >
+        <mat-icon>attach_folder</mat-icon>
+        Gestion des projets
+      </a>
+      <a
+        mat-list-item
+        routerLink="contrats"
+        routerLinkActive="active-link"
 
-        <!-- Header desktop -->
-       @if(isDesktop$ | async){
-          <div class="desktop-header" >
-          <app-header (drawerOpen)="drawer.toggle()" ></app-header>
-        </div>
-       }
-       @else {
-        <mat-toolbar color="primary" class="mobile-toolbar" >
-          <button mat-icon-button (click)="drawer.toggle()">
-            <mat-icon>menu</mat-icon>
-          </button>
-          <span>GXA Courtiers</span>
-        </mat-toolbar>
-       }
+      >
+        <mat-icon>attach_folder</mat-icon>
+        Gestion des Contrats
+      </a>
+      <a
+        mat-list-item
+        routerLink="produits"
+        routerLinkActive="active-link"
 
-        <div class="">
-        <div [@routeAnimations]="getRouteAnimation(routerOutlet)" class="content">
-           <router-outlet #routerOutlet="outlet"></router-outlet>
-        </div>
+      >
+        <mat-icon>inventory</mat-icon>
+        Produits
+      </a>
+      <a
+        mat-list-item
+        routerLink="bordereaux/list"
+        routerLinkActive="active-link"
 
-        </div>
+      >
+        <mat-icon>folder</mat-icon>
+        Liste des bordereaux
+      </a>
 
-        <app-footer></app-footer>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
+            <!-- <a
+        mat-list-item
+        routerLink="encaissement/list"
+        routerLinkActive="active-link"
+
+      >
+        <mat-icon>money</mat-icon>
+        Liste des encaissements
+      </a> -->
+
+      <a
+        mat-list-item
+        routerLink="commissions"
+        routerLinkActive="active-link"
+
+      >
+        <mat-icon>attach_money</mat-icon>
+        Commissions
+      </a>
+      <a
+        mat-list-item
+        routerLink="profile"
+        routerLinkActive="active-link"
+
+      >
+        <mat-icon>person</mat-icon>
+        Profil
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Toolbar mobile -->
+
+    <!-- Header desktop -->
+    @if(isDesktop$ | async){
+    <div class="desktop-header">
+      <app-header (drawerOpen)="drawer.toggle()"></app-header>
+    </div>
+    } @else {
+    <mat-toolbar color="primary" class="mobile-toolbar">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>GXA Courtiers</span>
+    </mat-toolbar>
+    }
+
+    <div class="">
+      <div [@routeAnimations]="getRouteAnimation(routerOutlet)" class="content">
+        <router-outlet #routerOutlet="outlet"></router-outlet>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

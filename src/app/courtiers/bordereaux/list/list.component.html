@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h5>Liste des bordereaux</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive mt-4">
+        <table class="table table-bordered table-hover table-sm">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>Nom</th>
+              <th>Année</th>
+              <th>Mois</th>
+              <th>Nature</th>
+              <th>Gestion</th>
+              <th>Nb quitt.</th>
+              <th>Total à encaisser</th>
+              <th>Commissions</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(b of MOCK_BORDEREAUX; track b.numero) {
+            <tr>
+              <td>{{ b.numero }}</td>
+              <td>{{ b.nom }}</td>
+              <td>{{ b.annee }}</td>
+              <td>{{ b.mois }}</td>
+              <td>{{ b.nature }}</td>
+              <td>{{ b.modegest }}</td>
+              <td>{{ b.nbquitt }}</td>
+              <td>{{ b.totpte }} {{ b.totpte1 }}</td>
+              <td>{{ b.totcomm }} {{ b.totcomm1 }}</td>
+              <td>{{ b.totpn }} {{ b.totpn1 }}</td>
+              <td>
+                <button
+                  class="btn btn-primary"
+                  [routerLink]="['/courtiers/bordereaux/quittance/list']"
+                  routerLinkActive="router-link-active"
+                >
+                  <mat-icon>visibility</mat-icon> Voir quittances
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

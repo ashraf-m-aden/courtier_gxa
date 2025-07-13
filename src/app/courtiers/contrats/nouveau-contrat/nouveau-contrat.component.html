@@ -1,11 +1,19 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      @if(isContrat()){
+ @if(isEdit()){
+     @if(isContrat()){
+      <h5>Modifier un contrat</h5>
+      } @else {
+      <h5>Modifier un projet</h5>
+      }
+ }@else {
+     @if(isContrat()){
       <h5>Création d'un nouveau contrat</h5>
       } @else {
       <h5>Création d'un nouveau projet</h5>
       }
+ }
     </div>
     <div class="col-12">
       <!-- contrat-stepper.component.html -->
@@ -15,10 +23,16 @@
             <ng-template matStepLabel
               >Informations générales et choix du produits</ng-template
             >
-            <info-general-contrat [isContrat]="isContrat"
+            <info-general-contrat
+              [isContrat]="isContrat"
               [formGroup]="contratForm"
+              [isEdit]="isEdit"
             ></info-general-contrat>
-            <produits-contrat></produits-contrat>
+            <produits-contrat
+              [vehiculeForm]="contratForm"
+              [isEdit]="isEdit"
+              [isContrat]="isContrat"
+            ></produits-contrat>
 
             <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
           </mat-step>
@@ -26,7 +40,7 @@
           <!-- Étape 2 -->
           <mat-step>
             <ng-template matStepLabel>Données administratives</ng-template>
-            <admin-contrat></admin-contrat>
+            <admin-contrat [isEdit]="isEdit" ></admin-contrat>
             <div class="d-flex justify-content-between">
               <button class="btn btn-primary mt-5" matStepperPrevious>
                 PRÉCÉDENT
@@ -42,7 +56,9 @@
             <ng-template matStepLabel
               >Données administratives - Pieces</ng-template
             >
-            <admin-piece-contrat></admin-piece-contrat>
+            <admin-piece-contrat  [isContrat]="isContrat"
+              [formGroup]="contratForm"
+              [isEdit]="isEdit"></admin-piece-contrat>
             <div class="d-flex justify-content-between">
               <button class="btn btn-primary mt-5" matStepperPrevious>
                 PRÉCÉDENT

@@ -1,4 +1,9 @@
 <div class="container-fluid my-4">
+  <div class="row">
+    <div class="col-12">
+      <h5>Liste des projets</h5>
+    </div>
+  </div>
   <!-- 🔍 Barre de recherche -->
   <div class="row mb-3">
     <div class="col-md-6">
@@ -36,17 +41,10 @@
           </td>
 
           <td>
-            <button
-              class="btn btn-sm btn-primary"
-              (click)="voirDetails(projet)"
-            >
+            <button class="btn btn-primary" (click)="voirDetails(projet)">
+              <mat-icon>visibility</mat-icon>
+
               Voir
-            </button>
-            <button
-              class="btn btn-sm btn-danger"
-              (click)="supprimerProjet(projet)"
-            >
-              Supprimer
             </button>
           </td>
         </tr>

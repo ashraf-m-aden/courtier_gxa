@@ -1,14 +1,27 @@
 <div class="row">
-  @if(isContrat()){
+  @if(isContrat()){ @if(isEdit()){
   <div class="col-md-6 mb-3">
-    <label>Intitulé du contrat</label>
-    <input class="form-control" formControlName="intitule" />
+    <h6>Intitulé du contrat</h6>
+    {{ intitule }}
   </div>
-  } @else {
+  }@else {
   <div class="col-md-6 mb-3">
-    <label>Intitulé du projet</label>
-    <input class="form-control" formControlName="intitule" />
+    <h6>Intitulé du contrat</h6>
+    <input class="form-control" [(ngModel)]="intitule" />
   </div>
+  } } @else {
+
+    @if(isEdit()){
+        <div class="col-md-6 mb-3">
+    <h6>Intitulé du projet</h6>
+    <input class="form-control" [(ngModel)]="intitule" />
+  </div>
+    } @else {
+        <div class="col-md-6 mb-3">
+    <h6>Intitulé du projet</h6>
+    <input class="form-control" [(ngModel)]="intitule" />
+  </div>
+    }
   }
   <!-- Ajoute les autres champs de cette étape ici -->
 </div>

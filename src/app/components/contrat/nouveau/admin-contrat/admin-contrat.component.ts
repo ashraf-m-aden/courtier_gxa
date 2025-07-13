@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angul
 export class AdminContratComponent {
 
 form!: FormGroup;
+@Input() isEdit=signal(true); // Indique si c'est un contrat ou une police
 
   fractionnements = ['Annuel', 'Semestriel', 'Trimestriel', 'Mensuel'];
 
