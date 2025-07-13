@@ -30,7 +30,7 @@ console.log(this.isEdit());
   ngOnInit(): void {
     this.contratForm = this.fb.group({
       contrat: [null, Validators.required],
-      numtiers: [null],
+      Numtiers: [null],
       frac: [''],
       echpjj: [''],
       echpmm: [''],
@@ -129,7 +129,7 @@ console.log(this.isEdit());
     if (this.isEdit()) {
       this.contratForm.setValue({
         contrat: 'C12345',
-        numtiers: 'T67890',
+        Numtiers: 'T67890',
         frac: 'Mensuel',
         echpjj: '15',
         echpmm: '06',

@@ -1,46 +1,46 @@
 export interface Xtlog {
     /** N° de tiers */
-    numtiers: number;
-  
+    Numtiers: number;
+
     /** N° d'ordre extension */
     ordreext: number;
-  
+
     /** Site concerné */
     site?: string;
-  
+
     /** Login utilisateur */
     login?: string;
-  
+
     /** mot de passe */
     password?: string;
-  
+
     /** Role pour ce login */
     role?: string;
-  
+
     /** Utilisateur Belair */
     util?: string;
-  
+
     /** Dernière connexion */
     dercon?: Date;
-  
+
     /** Nombre de connexion */
     nbconn?: number;
-  
+
     /** Email de l'utilisateur */
     email?: string;
-  
+
     /** Login envoyé à l'utilisateur */
     envoye?: boolean;
-  
+
     /** Mot de passe en clair */
     mdpclair?: string;
-  
+
     /** Identifiant du courtier */
     court?: number;
   }
-  
+
   export const xtlogTagMap: Record<keyof Xtlog, string> = {
-    numtiers: 'numtiers',
+    Numtiers: 'Numtiers',
     ordreext: 'ordreext',
     site: 'site',
     login: 'login',
@@ -54,9 +54,9 @@ export interface Xtlog {
     mdpclair: 'mdpclair',
     court: 'court',
   };
-  
+
   export const xtlogFieldMap: Record<string, keyof Xtlog> = {
-    numtiers: 'numtiers',
+    Numtiers: 'Numtiers',
     ordreext: 'ordreext',
     site: 'site',
     login: 'login',
@@ -70,4 +70,3 @@ export interface Xtlog {
     mdpclair: 'mdpclair',
     court: 'court',
   };
-  

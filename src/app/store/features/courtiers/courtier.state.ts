@@ -2,7 +2,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
   export const tiersData: TierDisplay[] = [
   // Personnes physiques
   {
-    numtiers: 1001,
+    Numtiers: 1001,
     nom: 'Ali Mohamed',
     adresse: 'Quartier 6, Rue du Stade',
     type: 'physique',
@@ -11,7 +11,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'accent'
   },
   {
-    numtiers: 1002,
+    Numtiers: 1002,
     nom: 'Fatouma Ibrahim',
     adresse: 'Avenue Nasser, Lot 45',
     type: 'physique',
@@ -20,7 +20,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'accent'
   },
   {
-    numtiers: 1003,
+    Numtiers: 1003,
     nom: 'Hassan Youssouf',
     adresse: 'PK12, Immeuble A1',
     type: 'physique',
@@ -29,7 +29,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'accent'
   },
   {
-    numtiers: 1004,
+    Numtiers: 1004,
     nom: 'Noura Abdallah',
     adresse: 'Cité Einguella, Blok C',
     type: 'physique',
@@ -38,7 +38,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'accent'
   },
   {
-    numtiers: 1005,
+    Numtiers: 1005,
     nom: 'Mohamed Warsama',
     adresse: 'Rue Cheik Osman, Villa 17',
     type: 'physique',
@@ -49,7 +49,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
 
   // Personnes morales
   {
-    numtiers: 2001,
+    Numtiers: 2001,
     nom: 'Entreprise Al Amal SARL',
     adresse: 'Zone industrielle, Lot 12',
     type: 'morale',
@@ -58,7 +58,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'primary'
   },
   {
-    numtiers: 2002,
+    Numtiers: 2002,
     nom: 'Clinique Al-Rahma',
     adresse: 'Boulaos, rue 10',
     type: 'morale',
@@ -67,7 +67,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'primary'
   },
   {
-    numtiers: 2003,
+    Numtiers: 2003,
     nom: 'Logistics Horn of Africa',
     adresse: 'Route de l’aéroport',
     type: 'morale',
@@ -76,7 +76,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'primary'
   },
   {
-    numtiers: 2004,
+    Numtiers: 2004,
     nom: 'StarTech SARL',
     adresse: 'Zone Franche, Bâtiment 3',
     type: 'morale',
@@ -85,7 +85,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'primary'
   },
   {
-    numtiers: 2005,
+    Numtiers: 2005,
     nom: 'Groupe Educatif Lumière',
     adresse: 'Heron, rue du lycée',
     type: 'morale',
@@ -96,7 +96,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
 
   // Données supplémentaires (optionnel)
   {
-    numtiers: 1006,
+    Numtiers: 1006,
     nom: 'Yasmine Dirieh',
     adresse: 'Salines Ouest, rue 3',
     type: 'physique',
@@ -105,7 +105,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'accent'
   },
   {
-    numtiers: 2006,
+    Numtiers: 2006,
     nom: 'ONG Aide Djibouti',
     adresse: 'Ambouli, avenue 15',
     type: 'morale',
@@ -114,7 +114,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'primary'
   },
   {
-    numtiers: 1007,
+    Numtiers: 1007,
     nom: 'Abdillahi Aden',
     adresse: 'Arhiba, Immeuble 8',
     type: 'physique',
@@ -123,7 +123,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'accent'
   },
   {
-    numtiers: 2007,
+    Numtiers: 2007,
     nom: 'TransGaz Africa',
     adresse: 'Port de Doraleh',
     type: 'morale',
@@ -132,7 +132,7 @@ import { TierDisplay } from "../../../Model/tierDisplay.model";
     color: 'primary'
   },
   {
-    numtiers: 1008,
+    Numtiers: 1008,
     nom: 'Saida Moussa',
     adresse: 'Gabode 5, rue 21',
     type: 'physique',

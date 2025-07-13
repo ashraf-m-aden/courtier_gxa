@@ -108,7 +108,7 @@ export class CourtierService {
 
   postTiersSearch(): Observable<any> {
     let payload = {
-      BaseSecurityContext: JSON.parse(sessionStorage.getItem("BaseSecurityContext")!),
+      BasSecurityContext: JSON.parse(sessionStorage.getItem("BasSecurityContext")!),
 
     }
     return this.http.post(`${this.baseUrl}/Tiers_Search`, payload);

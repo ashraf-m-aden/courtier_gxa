@@ -46,7 +46,7 @@ export class TierEffects {
   update= createEffect(() => {
     return this.actions$.pipe(
       ofType(tierActions.update),
-      mergeMap(({ item }) => this.service.update(item, item.numtiers).pipe(
+      mergeMap(({ item }) => this.service.update(item, item.Numtiers).pipe(
         map(item => tierActions.updateSuccess({ item })),
         catchError(error => of(tierActions.updateFailure({ error: error.message })))
       ))

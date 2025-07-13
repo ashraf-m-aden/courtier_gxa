@@ -48,7 +48,7 @@ export class DpmProfilComponent {
   convCollOptions = Object.values(ConvColl);
   currencyCodes = ['EUR', 'USD', 'GBP', 'XAF']; // Add your currency codes
 dpmData: DpmModel = {
-  numtiers: 3001,
+  Numtiers: 3001,
   statutju: Statutju.SARL,
   capital: 1500000,
   capital1: "DJF",
@@ -118,7 +118,7 @@ dpmData: DpmModel = {
   initForm() {
 
     this.dpmForm = this.fb.group({
-      numtiers: [null],
+      Numtiers: [null],
       statutju: [''],
       capital: [null],
       capital1: [''],

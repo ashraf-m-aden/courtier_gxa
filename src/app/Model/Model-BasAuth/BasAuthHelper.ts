@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { BaseSecurityContext } from "../BasSoapObject/BasSecurityContext";
+import { BasSecurityContext } from "../BasSoapObject/BasSecurityContext";
 import { BasSoapClient } from "../Model-BasSoapClient/BasSoapClient";
 import { SessionStorage } from "../Model-SessionStorage/SessionStorage";
 import { BasAuth } from "./BasAuth";
@@ -11,7 +11,7 @@ import { inject } from "@angular/core";
 
 export class AuthenticationHelper {
 
-    private baseSecurityContext!: BaseSecurityContext;
+    private basSecurityContext!: BasSecurityContext;
     private basAuth: BasAuth;
     private authService = inject(AuthService);   // Your custom Auth API service
 
@@ -21,16 +21,16 @@ export class AuthenticationHelper {
 
 
 
-    public New_AuthenticateUser(username: string, password: string, domain?:string): Observable<BaseSecurityContext> {
+    public New_AuthenticateUser(username: string, password: string, domain?:string): Observable<BasSecurityContext> {
       return this.authService.login(username, password, domain).pipe(
        map(res =>{
         console.log("HTTP RESPONSES in BASHELPER:!!!=="+JSON.stringify(res))
-         this.baseSecurityContext =res
+         this.basSecurityContext =res
 
-       this.sessionStorage.Set(this.sessionStorage.SESSION_ID_TOKEN, this.baseSecurityContext.SessionId);
-       this.sessionStorage.Set(this.sessionStorage.SESSION_AUTHENTICATED, String(this.baseSecurityContext.IsAuthenticated));
-       this.sessionStorage.SetContext(this.baseSecurityContext);
-       return this.baseSecurityContext
+       this.sessionStorage.Set(this.sessionStorage.SESSION_ID_TOKEN, this.basSecurityContext.SessionId);
+       this.sessionStorage.Set(this.sessionStorage.SESSION_AUTHENTICATED, String(this.basSecurityContext.IsAuthenticated));
+       this.sessionStorage.SetContext(this.basSecurityContext);
+       return this.basSecurityContext
      }
      ),catchError((error: Error) => {
       return throwError(() => error);
@@ -39,29 +39,29 @@ export class AuthenticationHelper {
 
     public async LogOut(): Promise<void>
     {
-      let baseSecurityContext: BaseSecurityContext = this.sessionStorage.GetContext();
-      if (baseSecurityContext.SessionId != undefined && baseSecurityContext.SessionId != null && baseSecurityContext.SessionId != "" && baseSecurityContext.SessionId != "null") {
-        await this.basAuth.CloseSession(baseSecurityContext);
+      let basSecurityContext: BasSecurityContext = this.sessionStorage.GetContext();
+      if (basSecurityContext.SessionId != undefined && basSecurityContext.SessionId != null && basSecurityContext.SessionId != "" && basSecurityContext.SessionId != "null") {
+        await this.basAuth.CloseSession(basSecurityContext);
       }
       this.sessionStorage.Clear();
     }
 
     //Method For Restoring the token values to session storage service — — -//
     private SetSessionToken(): void {
-      let baseSecurityContext: BaseSecurityContext = this.sessionStorage.GetContext();
-      if (baseSecurityContext.SessionId != undefined && baseSecurityContext.SessionId != null && baseSecurityContext.SessionId != "" && baseSecurityContext.SessionId != "null") {
-        this.sessionStorage.Set(this.sessionStorage.SESSION_ID_TOKEN, this.baseSecurityContext.SessionId);
-        this.sessionStorage.Set(this.sessionStorage.SESSION_AUTHENTICATED, String(this.baseSecurityContext.IsAuthenticated));
+      let basSecurityContext: BasSecurityContext = this.sessionStorage.GetContext();
+      if (basSecurityContext.SessionId != undefined && basSecurityContext.SessionId != null && basSecurityContext.SessionId != "" && basSecurityContext.SessionId != "null") {
+        this.sessionStorage.Set(this.sessionStorage.SESSION_ID_TOKEN, this.basSecurityContext.SessionId);
+        this.sessionStorage.Set(this.sessionStorage.SESSION_AUTHENTICATED, String(this.basSecurityContext.IsAuthenticated));
       } else {
 
-        baseSecurityContext = this.getSecurityContext;
-        this.sessionStorage.Set(this.sessionStorage.SESSION_ID_TOKEN, this.baseSecurityContext.SessionId);
-        this.sessionStorage.Set(this.sessionStorage.SESSION_AUTHENTICATED, String(this.baseSecurityContext.IsAuthenticated));
+        basSecurityContext = this.getSecurityContext;
+        this.sessionStorage.Set(this.sessionStorage.SESSION_ID_TOKEN, this.basSecurityContext.SessionId);
+        this.sessionStorage.Set(this.sessionStorage.SESSION_AUTHENTICATED, String(this.basSecurityContext.IsAuthenticated));
       }
-      this.sessionStorage.SetContext(baseSecurityContext)
+      this.sessionStorage.SetContext(basSecurityContext)
     }
     //Method for getting access token from session model
-    public get getSecurityContext(): BaseSecurityContext {
+    public get getSecurityContext(): BasSecurityContext {
       let accessToken;
       accessToken = this.sessionStorage.GetContext();
       return accessToken;
@@ -78,11 +78,11 @@ export class AuthenticationHelper {
 
     //Method for checking login state from auth guard
     async LoginState(): Promise<boolean> {
-      let _baseSecurityContext: BaseSecurityContext = this.sessionStorage.GetContext();
-      if (_baseSecurityContext.IsAuthenticated)
+      let _basSecurityContext: BasSecurityContext = this.sessionStorage.GetContext();
+      if (_basSecurityContext.IsAuthenticated)
       {
         try {
-          let result = await this.basAuth.CheckSession(_baseSecurityContext);
+          let result = await this.basAuth.CheckSession(_basSecurityContext);
           return result;
         }
         catch (error) {

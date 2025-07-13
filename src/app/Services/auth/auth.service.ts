@@ -3,7 +3,7 @@ import { BasSoapClient } from '../../Model/Model-BasSoapClient/BasSoapClient';
 import { SessionStorage } from '../../Model/Model-SessionStorage/SessionStorage';
 //import { login } from '../../store/features/auth/auth.actions';
 import { AppConfigService } from '../AppConfigService/app-config.service';
-import { BaseSecurityContext } from '../../Model/BasSoapObject/BasSecurityContext';
+import { BasSecurityContext } from '../../Model/BasSoapObject/BasSecurityContext';
 import { BasAction } from '../../Model/Model-BasAction/BasAction';
 import { BasParams } from '../../Model/BasSoapObject/BasParams';
 import { DataAccessService } from '../data-access.service';
@@ -50,7 +50,7 @@ export class AuthService {
     let body = {
       login: username,
       domain: domain,
-      BaseSecurityContext: JSON.parse(sessionStorage.getItem("BaseSecurityContext")!),
+      BasSecurityContext: JSON.parse(sessionStorage.getItem("BasSecurityContext")!),
 
     }
     return this.courtierService.getProfil(body)
@@ -61,11 +61,11 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/auth/me`);
   }
 
-  login(username: string, password: string, domain?: string): Observable<BaseSecurityContext> {
+  login(username: string, password: string, domain?: string): Observable<BasSecurityContext> {
     this.isLoading$ = of(true)
     console.log("FROM authService.login After .... this.isLoading$=of(true) ")
-    return this.http.post<BaseSecurityContext>(`${this.baseUrl}/login`, { username, password, domain }).pipe(
-      map((response: BaseSecurityContext) => {
+    return this.http.post<BasSecurityContext>(`${this.baseUrl}/login`, { username, password, domain }).pipe(
+      map((response: BasSecurityContext) => {
         console.log("FROM authService.login .New_AuthenticateUser .... response== " + response.SessionId)
         //  user: response.SessionId,
         return response
@@ -75,11 +75,11 @@ export class AuthService {
       ))
   }
 
-  //   login(username: string, password: string, domain?:string): Observable<BaseSecurityContext> {
+  //   login(username: string, password: string, domain?:string): Observable<BasSecurityContext> {
   //   this.isLoading$=of(true)
   //   console.log("FROM authService.login After .... this.isLoading$=of(true) ")
   //   return this._authenticationHelper.New_AuthenticateUser(username, password, domain).pipe(
-  //     map((response: BaseSecurityContext) => {
+  //     map((response: BasSecurityContext) => {
   //       console.log("FROM authService.login .New_AuthenticateUser .... response== "+response.GetSessionId)
   //     //  user: response.SessionId,
   //      return response

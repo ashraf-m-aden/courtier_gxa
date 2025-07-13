@@ -8,7 +8,7 @@ export interface RisaModel {
   risque: number;
 
   /** N° tiers concerné */
-  numtiers?: number;
+  Numtiers?: number;
 
   /** Apellation courante du risque */
   appel?: string;
@@ -51,7 +51,7 @@ export interface RisaModel {
 }
 export const RisaFieldMap: Record<keyof RisaModel, string> = {
     risque: 'N° risque',
-    numtiers: 'N° tiers concerné',
+    Numtiers: 'N° tiers concerné',
     appel: 'Apellation courante du risque',
     ext: 'liste d\'extensions de risque',
     images: 'Chemins vers fichiers images',
@@ -66,10 +66,10 @@ export const RisaFieldMap: Record<keyof RisaModel, string> = {
     datebia: 'Date réception du B.I.A.',
     ole: 'Porte documents'
   };
-  
+
   export const RisaTagMap: Record<string, keyof RisaModel> = {
     risque: 'risque',
-    numtiers: 'numtiers',
+    Numtiers: 'Numtiers',
     appel: 'appel',
     ext: 'ext',
     images: 'images',

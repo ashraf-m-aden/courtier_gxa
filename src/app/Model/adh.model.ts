@@ -19,7 +19,7 @@ export interface Adh {
     /** Prime annuelle (ISO 4217) */
     prime1?: string;
     /** Tiers concerné */
-    numtiers?: number;
+    Numtiers?: number;
     /** Motif sortie */
     motif?: string;
     /** Panier de garanties choisi */

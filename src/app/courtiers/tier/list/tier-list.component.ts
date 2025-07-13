@@ -19,6 +19,7 @@ import { Store } from '@ngrx/store';
 import { loadTiersData } from '../../../store/features/courtiers/courtier.actions';
 import { selectTiers } from '../../../store/features/courtiers/courtier.selector';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
+import { Tier } from '../../../Model/tier.model';
 
 @Component({
   selector: 'app-tier-list',
@@ -51,7 +52,7 @@ export class TierListComponent {
     ville: [''],
   });
 
-  allTiers = signal<TierDisplay[]>([]);
+  allTiers = signal<Tier[]>([]);
 
   searchTerm = signal('');
   selectedType = signal('all');
@@ -61,24 +62,26 @@ export class TierListComponent {
 
 
   constructor(private facade: TierFacade, private courtierStore: Store,private courtierService:CourtierService, private router:Router) {
-    this.courtierStore.select(selectTiers).subscribe(this.allTiers.set);
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.filtersForm.valueChanges.pipe(debounceTime(300)).subscribe(value => {
       this.searchTerm.set(value.search?.toLowerCase().trim() || '');
       this.selectedType.set(value.typtiers || 'all');
       this.selectedCity.set(value.ville || '');
     });
 
-    this.loadTiers();
+   await this.loadTiers();
   }
 
-  private loadTiers(): void {
+  async loadTiers() {
     console.log("ici");
-
-   this.courtierStore.dispatch(loadTiersData())
+    this.courtierService.postTiersSearch().subscribe({
+      next: (data:Tier[])=>{
+        this.allTiers.set(data)
+      }
+    })
 
   }
   allCities = computed(() =>
@@ -91,28 +94,28 @@ export class TierListComponent {
     )
   );
 
-  filteredTiers = computed(() => {
-    const term = this.searchTerm().toLowerCase();
-    const type = this.selectedType();
-    const city = this.selectedCity().toLowerCase();
+  // filteredTiers = computed(() => {
+  //   const term = this.searchTerm().toLowerCase();
+  //   const type = this.selectedType();
+  //   const city = this.selectedCity().toLowerCase();
 
-    return this.allTiers().filter(tier => {
-      const matchesSearch = [
-        tier.nom?.toLowerCase(),
-        tier.adresse?.toLowerCase(),
-        tier.numtiers?.toString(),
-        tier.ville?.toLowerCase()
-      ].some(field => field?.includes(term));
+  //   return this.allTiers().filter(tier => {
+  //     const matchesSearch = [
+  //       tier.nom?.toLowerCase(),
+  //       tier.adresse?.toLowerCase(),
+  //       tier.Numtiers?.toString(),
+  //       tier.ville?.toLowerCase()
+  //     ].some(field => field?.includes(term));
 
-      const matchesType = type === 'all' || tier.type === type;
-      const matchesCity = city === '' || tier.ville?.toLowerCase() === city;
+  //     const matchesType = type === 'all' || tier.type === type;
+  //     const matchesCity = city === '' || tier.ville?.toLowerCase() === city;
 
-      return matchesSearch && matchesType && matchesCity;
-    });
-  });
+  //     return matchesSearch && matchesType && matchesCity;
+  //   });
+  // });
 
-  editTier(tier: TierDisplay): void {
-    this.router.navigate(['/courtiers/tiers/details/'+tier.numtiers])
+  editTier(tier: Tier): void {
+    this.router.navigate(['/courtiers/tiers/details/'+tier.Numtiers])
   }
 
   viewTier(tier: TierDisplay): void {

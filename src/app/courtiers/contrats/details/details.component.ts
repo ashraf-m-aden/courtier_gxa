@@ -29,7 +29,7 @@ export class DetailsContratComponent {
 
  this.contratForm.patchValue({
   contrat: 'C-2025001',
-  numtiers: 'T-987654',
+  Numtiers: 'T-987654',
   frac: 'Annuel',
   echpjj: '30',
   echpmm: '06',

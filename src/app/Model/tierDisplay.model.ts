@@ -1,5 +1,5 @@
 export interface TierDisplay {
-  numtiers: number;         // Numéro unique du tiers
+  Numtiers: number;         // Numéro unique du tiers
   nom: string;              // Nom (concaténé pour personnes physiques, SIRET pour morales)
   adresse: string;          // Adresse ou lieu d'activité
   type: 'physique' | 'morale';  // Type de tiers

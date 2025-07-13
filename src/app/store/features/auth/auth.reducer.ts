@@ -26,7 +26,7 @@ export const authReducer = createReducer(
   })),
 
   // When login succeeds:
-  // - Store the returned BaseSecurityContext user info in state under BasSec
+  // - Store the returned BasSecurityContext user info in state under BasSec
   // - Set isAuthenticated to true
   // - Set loading to false to indicate completion
   on(AuthActions.loginSuccess, (state, { user }) => ({

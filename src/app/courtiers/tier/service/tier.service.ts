@@ -27,7 +27,7 @@ export class TierService {
 
   create(item: Tier): Observable<Tier> {
     const entity="Tier"
-    return this.da.create(entity,item.numtiers,item);
+    return this.da.create(entity,item.Numtiers,item);
   }
 
   update(item: Tier, id:any): Observable<Tier> {

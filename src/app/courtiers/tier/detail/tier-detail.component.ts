@@ -58,7 +58,7 @@ export class TierDetailComponent {
   currencyCodes = ['EUR', 'USD', 'GBP', 'XAF']; // Add your currency codes
 
   exempleTier: Tier = {
-    numtiers: 12345,
+    Numtiers: 12345,
     typtiers: "Client",
     nattiers: "Particulier",
     numdpp: 67890,

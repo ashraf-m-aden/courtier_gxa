@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 //import { AuthService } from '../auth/auth.service';
-//import { BaseSecurityContext } from '../../Model/BasSoapObject/BasSecurityContext';
+//import { BasSecurityContext } from '../../Model/BasSoapObject/BasSecurityContext';
 
 @Injectable({
   providedIn: 'root'

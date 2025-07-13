@@ -6,166 +6,166 @@ import { RisaModel } from "./risa.model";
 export interface RvehModel {
     /** N° ordre */
     risque: number;
-  
+
     /** N° tiers */
-    numtiers?: number;
-  
+    Numtiers?: number;
+
     /** N° immatriculation */
     immat?: string;
-  
+
     /** Date carte grise */
     datecg?: Date;
-  
+
     /** Date de mise en circulation */
     datecirc?: Date;
-  
+
     /** Genre */
     genre?: string; // GENREVEH
-  
+
     /** Marque */
     marque?: string; // MARQUES
-  
+
     /** Type */
     type?: string;
-  
+
     /** Modèle */
     modele?: string;
-  
+
     /** Type mine */
     symbmine?: string;
-  
+
     /** N° dans la Série du Type */
     nserie?: string;
-  
+
     /** Carrosserie */
     carross?: string; // CARROSSERI
-  
+
     /** Energie */
     energie?: string; // ENERGIE
-  
+
     /** Cv fiscaux */
     pfiscale?: number;
-  
+
     /** Puissance */
     puissan?: number;
-  
+
     /** Places assises */
     places?: number;
-  
+
     /** Poids à vide */
     poidvide?: string;
-  
+
     /** Poids total Roulant */
     poidstr?: string;
-  
+
     /** Valeur à neuf */
     valneuf?: number;
-  
+
     /** Valeur à neuf (ISO code) */
     valneuf1?: string;
-  
+
     /** Code GTA */
     codegta?: string;
-  
+
     /** Groupe */
     groupe?: number;
-  
+
     /** Classe */
     classe?: string;
-  
+
     /** Couleur principale */
     couleur?: string;
-  
+
     /** Avec alarme */
     alarme?: boolean;
-  
+
     /** Avec marquage */
     marquage?: boolean;
-  
+
     /** Avec antivol */
     antivol?: boolean;
-  
+
     /** Avec ABS */
     abs?: boolean;
-  
+
     /** Remorque +750kg (ou side) */
     remorque?: boolean;
-  
+
     /** Immatriculation remorque */
     numremor?: string;
-  
+
     /** Marque remorque */
     marquere?: string; // MARQUEREM
-  
+
     /** Année remorque */
     anneerem?: Date;
-  
+
     /** Valeur remorque */
     vanrem?: number;
-  
+
     /** Valeur remorque (ISO code) */
     vanrem1?: string;
-  
+
     /** Poids TC remorque */
     ptcrem?: string;
-  
+
     /** Lieu habituel de garage */
     garage?: string;
-  
+
     /** Code postal garage */
     cpgar?: string;
-  
+
     /** Type de garage */
     typegar?: string; // TYPEGARA
-  
+
     /** Zone */
     zone?: string;
-  
+
     /** Sous-zone */
     szone?: string;
-  
+
     /** Nombre de kilometres */
     nkm?: number;
-  
+
     /** Dernier controle technique */
     conttech?: Date;
-  
+
     /** Prochain controle technique */
     pct?: Date;
-  
+
     /** Organisme de leasing */
     orgleas?: string;
-  
+
     /** Date 1ère traite */
     dateprtr?: Date;
-  
+
     /** Date dernière traite */
     datdertr?: Date;
-  
+
     /** Nombre de traites */
     nbtraite?: number;
-  
+
     /** Usage */
     usage?: string; // USAGE
-  
+
     /** CRM (Coeff. Réduction/Majoration) */
     crm?: number;
-  
+
     /** Date du CRM */
     datecrm?: Date;
-  
+
     /** Date CRM minimum */
     crmmaxi?: Date;
-  
+
     /** CRM sans interruption depuis */
     crmdepui?: Date;
-  
+
     /** Sinistre resp. non imputé CRM */
     joker?: boolean;
   }
   export const RisaTagMap: Record<string, keyof RisaModel> = {
     risque: 'risque',
-    numtiers: 'numtiers',
+    Numtiers: 'Numtiers',
     appel: 'appel',
     ext: 'ext',
     images: 'images',
@@ -180,10 +180,10 @@ export interface RvehModel {
     datebia: 'datebia',
     ole: 'ole'
   };
-  
+
   export const RvehFieldMap: Record<keyof RvehModel, string> = {
     risque: 'N° ordre',
-    numtiers: 'N° tiers',
+    Numtiers: 'N° tiers',
     immat: 'N° immatriculation',
     datecg: 'date carte grise',
     datecirc: 'date de Mise en circulation',
@@ -236,10 +236,9 @@ export interface RvehModel {
     crmdepui: 'CRM sans interruption depuis',
     joker: 'Sinistre resp. non imputé CRM',
   };
-  
+
   export const RvehTagMap: Record<string, keyof RvehModel> = Object.entries(RvehFieldMap).reduce((acc, [key]) => {
     acc[key] = key as keyof RvehModel;
     return acc;
   }, {} as Record<string, keyof RvehModel>);
-  
-  
+

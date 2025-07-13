@@ -1,5 +1,5 @@
 export interface Tier {
-  numtiers: number;
+  Numtiers: number;
   typtiers?: string;
   nattiers?: string;
   numdpp?: number;
@@ -42,7 +42,7 @@ export interface Tier {
 }
 
 export const TierTagMap: Record<keyof Tier, string> = {
-  numtiers: 'N° de tiers',
+  Numtiers: 'N° de tiers',
   typtiers: 'type de tiers',
   nattiers: 'type de personne  ( P ou M )',
   numdpp: 'Numéro de personne physique',

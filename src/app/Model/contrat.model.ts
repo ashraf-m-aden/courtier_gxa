@@ -1,6 +1,6 @@
 export interface Contrat {
     contrat: number;
-    numtiers?: number;
+    Numtiers?: number;
     frac?: string;
     echpjj?: string;
     echpmm?: string;
@@ -95,4 +95,3 @@ export interface Contrat {
     daterefindice?: string;
     typesignature?: string;
   }
-  

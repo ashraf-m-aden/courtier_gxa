@@ -2,7 +2,7 @@
 import { createAction, props } from '@ngrx/store';
 
 // Custom types from your application
-import { BaseSecurityContext } from '../../../Model/BasSoapObject/BasSecurityContext';
+import { BasSecurityContext } from '../../../Model/BasSoapObject/BasSecurityContext';
 import { User } from '../../../Model/user.model';
 
 // --------------------------------------
@@ -32,7 +32,7 @@ export const login = createAction(
  */
 export const loginSuccess = createAction(
   '[Auth] Login Success',
-  props<{ user: BaseSecurityContext; username: string; domain: string }>()
+  props<{ user: BasSecurityContext; username: string; domain: string }>()
 );
 
 /**

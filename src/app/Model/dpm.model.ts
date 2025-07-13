@@ -1,6 +1,6 @@
 export interface DpmModel {
     /** Numéro de tiers */
-    numtiers: number;
+    Numtiers: number;
 
     /** statut juridique */
     statutju?: Statutju;

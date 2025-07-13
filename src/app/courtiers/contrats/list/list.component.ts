@@ -14,7 +14,7 @@ export class ListContratComponent {
   contrats: Contrat[] = [
     {
       contrat: 1001,
-      numtiers: 501,
+      Numtiers: 501,
       frac: "Mensuel",
       echpjj: "15",
       echpmm: "06",
@@ -111,7 +111,7 @@ export class ListContratComponent {
     },
     {
       contrat: 1002,
-      numtiers: 502,
+      Numtiers: 502,
       frac: "Annuel",
       echpjj: "01",
       echpmm: "01",
@@ -208,7 +208,7 @@ export class ListContratComponent {
     },
     {
       contrat: 1003,
-      numtiers: 503,
+      Numtiers: 503,
       frac: "Trimestriel",
       echpjj: "10",
       echpmm: "03",

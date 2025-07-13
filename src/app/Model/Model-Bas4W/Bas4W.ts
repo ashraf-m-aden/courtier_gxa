@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { BaseSecurityContext } from "../BasSoapObject/BasSecurityContext";
+import { BasSecurityContext } from "../BasSoapObject/BasSecurityContext";
 import { BasSoapClient } from "../Model-BasSoapClient/BasSoapClient";
 import * as Xpath from "xpath";
 import { BasSoapFault } from "../BasSoapObject/BasSoapFault";
@@ -17,12 +17,12 @@ export class Bas4W {
 
     constructor(private BasSoapCLient: BasSoapClient, private http: HttpClient, private appConfigService: AppConfigService) { }
 
-    public async GetWebInfo(baseSecurityContext: BaseSecurityContext | undefined, type: number): Promise<string> {
+    public async GetWebInfo(basSecurityContext: BasSecurityContext | undefined, type: number): Promise<string> {
         let body = "";
-        if ((type !== 0) && (baseSecurityContext !== undefined))
-            body = "<ns1:GetWebInfo>" + baseSecurityContext.ToSoapVar() + `<bas4WebInfoType xsi:type=\"xsd:string\">bas4WebView</bas4WebInfoType>`;
+        if ((type !== 0) && (basSecurityContext !== undefined))
+            body = "<ns1:GetWebInfo>" + basSecurityContext.ToSoapVar() + `<bas4WebInfoType xsi:type=\"xsd:string\">bas4WebView</bas4WebInfoType>`;
         else
-            body = `<ns1:GetWebInfo><sc xsi:type="ns1:BaseSecurityContext"></sc><bas4WebInfoType xsi:type=\"xsd:string\">bas4WebInfoGeneric</bas4WebInfoType>`;
+            body = `<ns1:GetWebInfo><sc xsi:type="ns1:BasSecurityContext"></sc><bas4WebInfoType xsi:type=\"xsd:string\">bas4WebInfoGeneric</bas4WebInfoType>`;
         body += '</ns1:GetWebInfo>';
         let response = await this.BasSoapCLient.SoapRequest(this.appConfigService["GetURlB4WService"](), body);
         if (BasSoapFault.IsBasError(response))

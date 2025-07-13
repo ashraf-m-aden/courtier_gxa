@@ -76,7 +76,7 @@ export class TierNouveauComponent {
       territory: [''],
       latitude: [null],
       longitude: [null],
-      numtiers: [null],
+      Numtiers: [null],
       statutju: [''],
       capital: [null],
       capital1: [''],

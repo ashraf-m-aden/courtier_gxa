@@ -1,7 +1,7 @@
 // models/risque.model.ts
 export interface Risa {
     risque: number;
-    numtiers?: number;
+    Numtiers?: number;
     appel?: string;
     ext?: string;
     images?: string;
@@ -16,4 +16,3 @@ export interface Risa {
     datebia?: Date;
     ole?: string;
   }
-  

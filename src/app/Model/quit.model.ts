@@ -72,7 +72,7 @@
 //     frcbt1?: string;
 //     memo?: string;
 //     prorata?: number;
-//     numtiers?: number;
+//     Numtiers?: number;
 //     prelevok?: boolean;
 //     datenc?: Date;
 //     commatt?: number;
@@ -178,7 +178,7 @@ export interface QuitModel {
   frcbt1?: string;
   memo?: string;
   prorata?: number;
-  numtiers?: number;
+  Numtiers?: number;
   prelevok?: boolean;
   datenc?: Date;
   commatt?: number;

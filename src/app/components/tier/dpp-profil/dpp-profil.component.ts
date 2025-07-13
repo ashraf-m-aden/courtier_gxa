@@ -49,7 +49,7 @@ export class DppProfilComponent {
   currencyCodes = ['EUR', 'USD', 'GBP', 'XAF']; // Add your currency codes
 dppData: Dpp = {
   numdpp: 1001,
-  numtiers: 2001,
+  Numtiers: 2001,
   titre: "Monsieur",
   nom: "Ali",
   prenom: "Omar",
@@ -129,7 +129,7 @@ dppData: Dpp = {
 
     this.dppForm = this.fb.group({
       numdpp: [null, [Validators.required]],
-      numtiers: [null],
+      Numtiers: [null],
       titre: [''],
       nom: [''],
       prenom: [''],

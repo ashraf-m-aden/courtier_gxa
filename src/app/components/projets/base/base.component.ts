@@ -8,7 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 interface Contrat {
   intitule: string;
-  numtiers: number;
+  Numtiers: number;
   debcours: string;
   fincours: string;
   primann: number;
@@ -58,7 +58,7 @@ projets: Projet[] = [
         valide: true,
         contrat: {
           intitule: 'Contrat premium santé',
-          numtiers: 1001,
+          Numtiers: 1001,
           debcours: '2025-01-01',
           fincours: '2026-01-01',
           primann: 1200,
@@ -156,7 +156,7 @@ validerProposition() {
     this.propositionSelectionnee.valide = true;
     this.propositionSelectionnee.contrat = {
       intitule: this.propositionSelectionnee.intitule,
-      numtiers: 0,
+      Numtiers: 0,
       debcours: new Date().toISOString().split('T')[0],
       fincours: '',
       primann: 0,

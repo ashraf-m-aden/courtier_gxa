@@ -159,7 +159,7 @@ export class TierProfilComponent {
     });
     this.dppForm = this.fb.group({
       numdpp: [null, [Validators.required]],
-      numtiers: [null],
+      Numtiers: [null],
       titre: [''],
       nom: [''],
       prenom: [''],
@@ -221,7 +221,7 @@ export class TierProfilComponent {
       datevalvl: [''],
     });
     this.dpmForm = this.fb.group({
-      numtiers: [null],
+      Numtiers: [null],
       statutju: [''],
       capital: [null],
       capital1: [''],

@@ -18,7 +18,7 @@ import {
   animate
 } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BaseSecurityContext } from "../../../app/Model/BasSoapObject/BasSecurityContext";
+import { BasSecurityContext } from "../../../app/Model/BasSoapObject/BasSecurityContext";
 
 @Component({
   selector: 'app-header',
@@ -62,7 +62,7 @@ export class HeaderComponent {
     effect(() => {
 
       if (!this.isAuthenticated()) {
-        const payLoad = JSON.parse(sessionStorage.getItem('BaseSecurityContext')!) as BaseSecurityContext
+        const payLoad = JSON.parse(sessionStorage.getItem('BasSecurityContext')!) as BasSecurityContext
       if (!payLoad?.IsAuthenticated) {
           this.router.navigate(['/login']);
         this.snackBar.open('Déconnexion réussie.', 'Fermer', {

@@ -1,4 +1,4 @@
-import { BaseSecurityContext } from "../BasSoapObject/BasSecurityContext";
+import { BasSecurityContext } from "../BasSoapObject/BasSecurityContext";
 
 export class SessionStorage {
 
@@ -35,16 +35,16 @@ export class SessionStorage {
         sessionStorage.removeItem(this._SESSION_AUTHENTICATED);
     }
 
-    public SetContext(baseSecurityContext: BaseSecurityContext): void {
+    public SetContext(basSecurityContext: BasSecurityContext): void {
 
-        sessionStorage.setItem(this._SESSION_ID_TOKEN, baseSecurityContext.SessionId);
-        sessionStorage.setItem(this._SESSION_AUTHENTICATED, String(baseSecurityContext.IsAuthenticated));
+        sessionStorage.setItem(this._SESSION_ID_TOKEN, basSecurityContext.SessionId);
+        sessionStorage.setItem(this._SESSION_AUTHENTICATED, String(basSecurityContext.IsAuthenticated));
     }
 
-    public GetContext(): BaseSecurityContext {
-        let baseSecurityContext: BaseSecurityContext = new BaseSecurityContext();
-        baseSecurityContext.SessionId = String(sessionStorage.getItem(this._SESSION_ID_TOKEN));
-        baseSecurityContext.IsAuthenticated = Boolean(sessionStorage.getItem(this._SESSION_AUTHENTICATED));
-        return baseSecurityContext;
+    public GetContext(): BasSecurityContext {
+        let basSecurityContext: BasSecurityContext = new BasSecurityContext();
+        basSecurityContext.SessionId = String(sessionStorage.getItem(this._SESSION_ID_TOKEN));
+        basSecurityContext.IsAuthenticated = Boolean(sessionStorage.getItem(this._SESSION_AUTHENTICATED));
+        return basSecurityContext;
     }
 }

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import * as Xpath from "xpath";
 import { BasSoapFault } from "./BasSoapFault";
 
-export class BaseSecurityContext {
+export class BasSecurityContext {
 
     private _SessionId: string = "";
     public get SessionId(): string {
@@ -32,14 +32,14 @@ export class BaseSecurityContext {
                     "lg": "http://belair-info.com/bas/services"
                 }
             );
-            let val: any = XPathSelect("//envlp:Envelope/envlp:Body/lg:BaseSecurityContext", XmlDoc);
+            let val: any = XPathSelect("//envlp:Envelope/envlp:Body/lg:BasSecurityContext", XmlDoc);
             if (val.length > 0) {
-                let valSessionId: any = XPathSelect("//envlp:Envelope/envlp:Body/lg:BaseSecurityContext/SessionId", XmlDoc);
+                let valSessionId: any = XPathSelect("//envlp:Envelope/envlp:Body/lg:BasSecurityContext/SessionId", XmlDoc);
                 if (valSessionId.length > 0) {
                     if ((valSessionId[0] as Node).textContent !== null)
                         this.SessionId = String((valSessionId[0] as Node).textContent);
                 }
-                let valIsAuthenticated: any = XPathSelect("//envlp:Envelope/envlp:Body/lg:BaseSecurityContext/IsAuthenticated", XmlDoc);
+                let valIsAuthenticated: any = XPathSelect("//envlp:Envelope/envlp:Body/lg:BasSecurityContext/IsAuthenticated", XmlDoc);
                 if (valIsAuthenticated.length > 0) {
                     if ((valIsAuthenticated[0] as Node).textContent !== null)
                         this.IsAuthenticated = Boolean((valIsAuthenticated[0] as Node).textContent);
@@ -56,7 +56,7 @@ export class BaseSecurityContext {
 
     public ToSoapVar(): string
     {
-        return `<sc xsi:type="ns1:BaseSecurityContext"><SessionId xsi:type="xsd:string">${this.SessionId}</SessionId><IsAuthenticated xsi:type="xsd:boolean">${this.IsAuthenticated}</IsAuthenticated></sc>`
+        return `<sc xsi:type="ns1:BasSecurityContext"><SessionId xsi:type="xsd:string">${this.SessionId}</SessionId><IsAuthenticated xsi:type="xsd:boolean">${this.IsAuthenticated}</IsAuthenticated></sc>`
     }
 
     public Clean() {
