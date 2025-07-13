@@ -18,6 +18,7 @@ import { TierService } from '../service/tier.service';
 import { Store } from '@ngrx/store';
 import { loadTiersData } from '../../../store/features/courtiers/courtier.actions';
 import { selectTiers } from '../../../store/features/courtiers/courtier.selector';
+import { CourtierService } from '../../../Services/courtier/courtier.service';
 
 @Component({
   selector: 'app-tier-list',
@@ -59,7 +60,7 @@ export class TierListComponent {
   displayedColumns: string[] = ['type', 'nom', 'tel', 'adresse', 'ville', 'actions'];
 
 
-  constructor(private facade: TierFacade, private courtierStore: Store, private router:Router) {
+  constructor(private facade: TierFacade, private courtierStore: Store,private courtierService:CourtierService, private router:Router) {
     this.courtierStore.select(selectTiers).subscribe(this.allTiers.set);
 
   }
@@ -75,59 +76,7 @@ export class TierListComponent {
   }
 
   private loadTiers(): void {
-    // const dppList: Dpp[] = [
-    //   {
-    //     numdpp: 1,
-    //     titre: 'M.',
-    //     nom: 'Ali',
-    //     prenom: 'Omar',
-    //     numtiers: 1001,
-    //     portable: '77223344',
-    //     numemail: 'ali@example.com',
-    //     activite: 'Médecin'
-    //   }
-    // ];
-
-    // const dpmList: DpmModel[] = [
-    //   {
-    //     numtiers: 2001,
-    //     nsiret: '12345678900010',
-    //     nrc: 'RC123456',
-    //     nrm: 'RM789456',
-    //     url: 'https://entreprise.example.com',
-    //     capital: 50000,
-    //     capital1: 'EUR',
-    //     codeape: '6201Z',
-    //     lieuimm: 'Paris',
-    //     tvaintra: 'FR123456789'
-    //   }
-    // ];
-
-    // const tiers: TierDisplay[] = [
-    //   ...dppList.map((dpp): TierDisplay => ({
-    //     numtiers: dpp.numtiers!,
-    //     nom: `${dpp.nom} ${dpp.prenom}`,
-    //     adresse: dpp.portable ?? '',
-    //     type: 'physique',
-    //     ville: 'Djibouti',
-    //     icon: 'person',
-    //     color: 'accent'
-    //   })),
-    //   ...dpmList.map((dpm): TierDisplay => ({
-    //     numtiers: dpm.numtiers,
-    //     nom: dpm.nsiret ?? 'N/A',
-    //     adresse: dpm.lieuimm ?? '',
-    //     type: 'morale',
-    //     ville: dpm.lieuimm ?? '',
-    //     icon: 'apartment',
-    //     color: 'primary'
-    //   }))
-    // ];
-
-    // this.facade.loadAll();
-    // this.items.set(this.facade.all());
-    this.courtierStore.dispatch(loadTiersData())
-    // this.allTiers.set(tiers);
+   this.courtierStore.dispatch(loadTiersData())
 
   }
   allCities = computed(() =>

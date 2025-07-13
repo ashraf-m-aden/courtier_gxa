@@ -8,6 +8,8 @@ import { AuthService } from '../../../Services/auth/auth.service';
 import { User } from '../../../Model/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthenticationHelper } from '../../../Model/Model-BasAuth/BasAuthHelper';
+import { SessionStorage } from '../../../Model/Model-SessionStorage/SessionStorage';
 
 @Injectable()
 export class AuthEffects {
@@ -15,10 +17,14 @@ export class AuthEffects {
   private router = inject(Router);
   private actions$ = inject(Actions);           // Stream of dispatched actions from NgRx
   private authService = inject(AuthService);   // Your custom Auth API service
+  private sessionStorage: SessionStorage;
+  basSecurityContext!: BasSecurityContext;
 
   constructor(
     private snackBar: MatSnackBar                // Angular Material Snackbar for notifications
-  ) { }
+  ) {
+    this.sessionStorage = new SessionStorage()
+  }
 
   /**
    * Effect listening for 'login' action.
@@ -35,7 +41,9 @@ export class AuthEffects {
       switchMap(({ username, password, domain }) =>
         this.authService.login(username, password, domain).pipe(
           map((user: BasSecurityContext) => {
-            console.log("FROM EFFECT After .... this.authService.login");
+            this.basSecurityContext = user;
+
+          sessionStorage.setItem("BaseSecurityContext",JSON.stringify(user))
             return AuthActions.loginSuccess({ user, username, domain });
           }),
           catchError((error: Error) =>
@@ -53,6 +61,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.loginSuccess),
       map(({ user, username, domain }) =>
+
         AuthActions.getProfile({ username, domain })
       )
     )

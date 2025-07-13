@@ -54,14 +54,6 @@ export class BasSecurityContext {
         }
     }
 
-    public GetSessionId(): string {
-        return this.SessionId;
-    }
-
-    public GetIsAuthenticated(): boolean {
-        return this.IsAuthenticated;
-    }
-
     public ToSoapVar(): string
     {
         return `<sc xsi:type="ns1:BasSecurityContext"><SessionId xsi:type="xsd:string">${this.SessionId}</SessionId><IsAuthenticated xsi:type="xsd:boolean">${this.IsAuthenticated}</IsAuthenticated></sc>`

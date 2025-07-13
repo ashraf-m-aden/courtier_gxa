@@ -57,16 +57,16 @@ export class HeaderComponent {
 
 
   constructor() {
-    // effect(() => {
+    effect(() => {
 
-    //   if (!this.isAuthenticated()) {
-    //     this.router.navigate(['/login']);
-    //     this.snackBar.open('Déconnexion réussie.', 'Fermer', {
-    //       duration: 3000,
-    //       panelClass: ['mat-toolbar', 'mat-accent'],
-    //     });
-    //   }
-    // });
+      if (!this.isAuthenticated()) {
+        this.router.navigate(['/login']);
+        this.snackBar.open('Déconnexion réussie.', 'Fermer', {
+          duration: 3000,
+          panelClass: ['mat-toolbar', 'mat-accent'],
+        });
+      }
+    });
   }
 
 

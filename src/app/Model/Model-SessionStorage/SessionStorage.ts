@@ -17,7 +17,7 @@ export class SessionStorage {
         this._SESSION_AUTHENTICATED = value;
     }
     constructor() { }
-    
+
     public Set(key: string, value: string) {
         sessionStorage.setItem(key, value);
     }
@@ -37,8 +37,8 @@ export class SessionStorage {
 
     public SetContext(basSecurityContext: BasSecurityContext): void {
 
-        sessionStorage.setItem(this._SESSION_ID_TOKEN, basSecurityContext.GetSessionId());
-        sessionStorage.setItem(this._SESSION_AUTHENTICATED, String(basSecurityContext.GetIsAuthenticated()));
+        sessionStorage.setItem(this._SESSION_ID_TOKEN, basSecurityContext.SessionId);
+        sessionStorage.setItem(this._SESSION_AUTHENTICATED, String(basSecurityContext.IsAuthenticated));
     }
 
     public GetContext(): BasSecurityContext {
