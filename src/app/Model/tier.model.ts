@@ -1,85 +1,91 @@
 export interface Tier {
   Numtiers: number;
-  typtiers?: string;
-  nattiers?: string;
-  numdpp?: number;
-  titre?: string;
+  Typtiers?: string;
+  Nattiers?: string;
+  Numdpp?: number;
+  Titre?: string;
+  Rsociale?: string;
   rsociale?: string;
-  referenc?: string;
-  connexe?: string;
-  refext?: string;
-  adr1?: string;
-  adr2?: string;
-  adr3?: string;
+  Referenc?: string;
+  Connexe?: string;
+  Refext?: string;
+  Adr1?: string;
+  Adr2?: string;
+  Adr3?: string;
+  Codp?: string;
   codp?: string;
+  Ville?: string;
   ville?: string;
-  codepays?: string;
-  pays?: string;
-  ntel?: string;
-  nfax?: string;
-  numemail?: string;
-  memo?: string;
-  ext?: string;
-  images?: string;
-  titnom?: string;
-  gommette?: string;
-  ole?: string;
-  titrecou?: string;
-  datdermo?: string; // ISO 8601 format date-time
-  modifpar?: string;
-  nbpercha?: number;
-  const?: string;
-  histo?: string;
-  adrinsee?: boolean;
-  adresse1?: string;
-  adresse2?: string;
-  adresse3?: string;
-  grcok?: boolean;
-  nonepur?: boolean;
-  territory?: string;
-  latitude?: number;
-  longitude?: number;
+  Codepays?: string;
+  Pays?: string;
+  Ntel?: string;
+  Nfax?: string;
+  Numemail?: string;
+  Memo?: string;
+  Ext?: string;
+  Images?: string;
+  Titnom?: string;
+  Gommette?: string;
+  Ole?: string;
+  Titrecou?: string;
+  Datdermo?: string; // ISO 8601 format date-time
+  Modifpar?: string;
+  Nbpercha?: number;
+  Const?: string;
+  Histo?: string;
+  Adrinsee?: boolean;
+  Adresse1?: string;
+  Adresse2?: string;
+  Adresse3?: string;
+  Grcok?: boolean;
+  Nonepur?: boolean;
+  Territory?: string;
+  Latitude?: number;
+  Longitude?: number;
 }
-
 export const TierTagMap: Record<keyof Tier, string> = {
   Numtiers: 'N° de tiers',
-  typtiers: 'type de tiers',
-  nattiers: 'type de personne  ( P ou M )',
-  numdpp: 'Numéro de personne physique',
-  titre: 'titre',
+  Typtiers: 'Type de tiers',
+  Nattiers: 'Type de personne (p ou m)',
+  Numdpp: 'Numéro de personne physique',
+  Titre: 'Titre',
+  Rsociale: 'Nom-prénom',
   rsociale: 'Nom-prénom',
-  referenc: 'référence de classement',
-  connexe: 'nom connexe',
-  refext: 'Référence externe (Cie,etc...)',
-  adr1: 'Numéro et voie',
-  adr2: 'auxiliaire de voie',
-  adr3: 'Lieu dit',
-  codp: 'code postal',
-  ville: 'bureau distributeur',
-  codepays: 'Code Pays',
-  pays: 'pays',
-  ntel: 'téléphone domicile',
-  nfax: 'fax domicile',
-  numemail: 'E mail internet domicile',
-  memo: 'commentaires',
-  ext: 'Liste des extensions',
-  images: 'Images',
-  titnom: 'Titre, nom, prénom',
-  gommette: 'gommette',
-  ole: 'ole',
-  titrecou: 'titre pour courriers',
-  datdermo: 'date de dernière modif',
-  modifpar: 'modifié par',
-  nbpercha: 'nb de personnes à charge',
-  const: 'constante : "T"',
-  histo: 'Historique des modifications',
-  adrinsee: 'Adresse au format INSEE',
-  adresse1: 'Adresse 1',
-  adresse2: 'Adresse 2',
-  adresse3: 'Adresse 3',
-  grcok: 'Grc migrée en volume',
-  nonepur: 'A conserver si épuration',
-  territory: 'Territoire',
-  latitude: 'Latitude',
-  longitude: 'Longitude',
+  Referenc: 'Référence de classement',
+  Connexe: 'Nom connexe',
+  Refext: 'Référence externe (cie, etc...)',
+  Adr1: 'Numéro et voie',
+  Adr2: 'Auxiliaire de voie',
+  Adr3: 'Lieu dit',
+  Codp: 'Code postal',
+  codp: 'Code postal',
+  Ville: 'Bureau distributeur',
+  ville: 'Bureau distributeur',
+  Codepays: 'Code pays',
+  Pays: 'Pays',
+  Ntel: 'Téléphone domicile',
+  Nfax: 'Fax domicile',
+  Numemail: 'E mail internet domicile',
+  Memo: 'Commentaires',
+  Ext: 'Liste des extensions',
+  Images: 'Images',
+  Titnom: 'Titre, nom, prénom',
+  Gommette: 'Gommette',
+  Ole: 'Ole',
+  Titrecou: 'Titre pour courriers',
+  Datdermo: 'Date de dernière modif',
+  Modifpar: 'Modifié par',
+  Nbpercha: 'Nb de personnes à charge',
+  Const: 'Constante : "t"',
+  Histo: 'Historique des modifications',
+  Adrinsee: 'Adresse au format insee',
+  Adresse1: 'Adresse 1',
+  Adresse2: 'Adresse 2',
+  Adresse3: 'Adresse 3',
+  Grcok: 'Grc migrée en volume',
+  Nonepur: 'A conserver si épuration',
+  Territory: 'Territoire',
+  Latitude: 'Latitude',
+  Longitude: 'Longitude',
 };
+

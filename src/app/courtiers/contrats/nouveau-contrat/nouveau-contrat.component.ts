@@ -7,6 +7,8 @@ import { AdminPieceContratComponent } from '../../../components/contrat/nouveau/
 import { RisqueContratComponent } from '../../../components/contrat/nouveau/risque-contrat/risque-contrat.component';
 import { ProduitsContratComponent } from '../../../components/contrat/nouveau/produits-contrat/produits-contrat.component';
 import { ActivatedRoute } from '@angular/router';
+import { Contrat } from '../../../Model/contrat.model';
+import { CourtierService } from '../../../Services/courtier/courtier.service';
 
 @Component({
   selector: 'nouveau-contrat',
@@ -18,17 +20,20 @@ export class NouveauContratComponent {
   contratForm!: FormGroup;
   isContrat = signal<boolean>(true);
   isEdit = signal<boolean>(true);
-
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+  contratDetails: Contrat | null = null;
+  idContrat = 0
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService) {
 
     this.isContrat.set(this.route.snapshot.data['isContrat'])
     this.isEdit.set(this.route.snapshot.data['isEdit'])
-console.log(this.isEdit());
+    console.log(this.isEdit());
+    this.idContrat = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id']) : 0;
 
   }
 
-  ngOnInit(): void {
-    this.contratForm = this.fb.group({
+
+  async ngOnInit() {
+       this.contratForm = this.fb.group({
       contrat: [null, Validators.required],
       Numtiers: [null],
       frac: [''],
@@ -126,105 +131,27 @@ console.log(this.isEdit());
       typesignature: ['']
     });
 
-    if (this.isEdit()) {
-      this.contratForm.setValue({
-        contrat: 'C12345',
-        Numtiers: 'T67890',
-        frac: 'Mensuel',
-        echpjj: '15',
-        echpmm: '06',
-        intitule: 'Contrat auto',
-        affnouv: 'Nouvelle affaire',
-        tacite: true,
-        prelev: 'Oui',
-        prelbank: 'BANQUE123',
-        jourp: '5',
-        querab: 'Aucun',
-        realis: '2024-01-15',
-        apport1: 5000,
-        apport2: 2500,
-        tauxrea: 12.5,
-        tauxap1: 6.25,
-        tauxap2: 3.12,
-        gestionn: 'Dupont',
-        portef: 'Portefeuille A',
-        remplace: 'Ancien contrat',
-        remppar: 'Contrat B',
-        derpiece: '2024-06-30',
-        memo: 'Notes internes',
-        ext: 'Extension A',
-        primann: 1200,
-        primann1: '1 200 EUR',
-        commann: 150,
-        commann1: '150 EUR',
-        totann: 1350,
-        totann1: '1 350 EUR',
-        dateresi: '2025-01-01',
-        debcours: '2024-01-01',
-        fincours: '2024-12-31',
-        debsuiv: '2025-01-01',
-        finsuiv: '2025-12-31',
-        debann: '2024-01-01',
-        finann: '2024-12-31',
-        nbsin: 2,
-        impaye: 300,
-        impaye1: '300 EUR',
-        acompte: 500,
-        acompte1: '500 EUR',
-        netimp: 200,
-        netimp1: '200 EUR',
-        lima: 1000,
-        retrorea: 'Retro Réa',
-        retroap1: 'Retro Ap1',
-        retroap2: 'Retro Ap2',
-        kprretro: 50,
-        kprretem: 25,
-        retroemi: true,
-        datdermo: '2024-06-01',
-        modifpar: 'Admin',
-        ole: 'OLE123',
-        txcomm: 7.5,
-        comges: 2.5,
-        polinter: false,
-        polrefus: 'Pas de refus',
-        modrev: 'Révision annuelle',
-        sansquit: false,
-        duree: 3,
-        modegest: 'Gestion directe',
-        echu: true,
-        echeance: '2024-06-15',
-        ddebpiec: '2024-01-01',
-        dfinpiec: '2024-12-31',
-        hono: 500,
-        hono1: '500 EUR',
-        frprel: 100,
-        frprel1: '100 EUR',
-        datereal: '2024-01-01',
-        histo: 'Historique des modifications',
-        typretrr: 'Type R',
-        typretr1: 'Type 1',
-        typretr2: 'Type 2',
-        ptini: 1000,
-        ptini1: '1 000 EUR',
-        pnini: 800,
-        pnini1: '800 EUR',
-        comini: 150,
-        comini1: '150 EUR',
-        agelimit: 65,
-        fiscal: 'Fiscalité A',
-        numproj: 123,
-        propproj: 456,
-        archive: 'Non',
-        indic: 10,
-        nonepur: true,
-        mandat: 'Mandat spécial',
-        prevsusp: '2024-09-01',
-        prevresi: '2024-12-01',
-        fvahom: false,
-        daterefindice: '2024-06-30',
-        typesignature: 'Électronique'
-      });
+    if (this.idContrat != 0 && this.isEdit()) {
+      await this.courtierService.postDetailContrat(this.idContrat).subscribe({
+        next: (data: any) => {
+          this.contratDetails = data;
+          this.contratForm.patchValue(this.contratDetails!);
+          console.log('Contrat details:', this.contratDetails);
+
+        },
+        error: (error) => {
+          console.error('Error fetching contract details:', error);
+        },
+        complete: () => {
+          console.log('Contract details fetched successfully');
+        }
+      })
     }
+
+
+
+
+
 
   }
 

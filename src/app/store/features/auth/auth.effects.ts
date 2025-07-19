@@ -29,7 +29,7 @@ export class AuthEffects {
 
   /**
    * Effect listening for 'login' action.
-   * Calls authService.login() with username, password, and domain.
+   * Calls authService.login() with login, password, and domain.
    * On success dispatches loginSuccess with user data.
    * On error dispatches loginFailure with error message.
    */
@@ -39,13 +39,13 @@ export class AuthEffects {
       tap(() => {
         console.log("FROM EFFECT After .... this.authService.login");
       }),
-      switchMap(({ username, password, domain }) =>
-        this.authService.login(username, password, domain).pipe(
+      switchMap(({ login, password, domain }) =>
+        this.authService.login(login, password, domain).pipe(
           map((user: BasSecurityContext) => {
             this.basSecurityContext = user;
 
           sessionStorage.setItem("BasSecurityContext",JSON.stringify(user))
-            return AuthActions.loginSuccess({ user, username, domain });
+            return AuthActions.loginSuccess({ user, login, domain });
           }),
           catchError((error: Error) =>
             of(AuthActions.loginFailure({ error: error.message }))
@@ -61,8 +61,8 @@ export class AuthEffects {
   loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginSuccess),
-      map(({ user, username, domain }) =>
-        AuthActions.getProfile({ username, domain })
+      map(({ user, login, domain }) =>
+        AuthActions.getProfile({ login, domain })
       )
     )
   );
@@ -76,8 +76,8 @@ export class AuthEffects {
   getProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.getProfile),
-      switchMap(({ username, domain }) =>
-        this.authService.getUserProfile(username, domain).pipe(
+      switchMap(({ login, domain }) =>
+        this.authService.getUserProfile(login, domain).pipe(
           map((user: User) => {
             console.log("FROM EFFECT After .... this.authService.login " + JSON.stringify(user));
             return AuthActions.getProfileSuccess({ user });

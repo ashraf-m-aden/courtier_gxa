@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, effect, Input, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,8 +18,8 @@ import { Tier } from '../../../Model/tier.model';
 
 @Component({
   selector: 'app-tier-profil',
-  imports: [    CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
-    MatCardModule, MatTabsModule,MatDatepickerModule,    MatNativeDateModule,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
+    MatCardModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule,
     MatInputModule, MatCheckboxModule,
     MatButtonModule, MatIconModule],
   templateUrl: './tier-profil.component.html',
@@ -27,14 +27,14 @@ import { Tier } from '../../../Model/tier.model';
 })
 export class TierProfilComponent {
 
- public id: string
-  selected = signal<Tier | null>(null);
+  public id: string
+  @Input() retrieveData : any[] | null = null;
   selectedDPP = signal<Dpp | null>(null);
   selectedDPM = signal<DpmModel | null>(null);
+  tier = signal<Tier | null>(null);
   editMode = false;
   tierForm!: FormGroup;
   dppForm!: FormGroup;
-
   titres = ['M.', 'Mme', 'Mlle']; // example titles
   sexes = ['M', 'F'];
   nationals = ['FR', 'US', 'GB']; // example ISO country codes
@@ -100,14 +100,26 @@ export class TierProfilComponent {
 
   constructor(private route: ActivatedRoute, private facade: TierFacade, private fb: FormBuilder) {
     this.id! = this.route.snapshot.paramMap.get('id') ?? "";
+
+    effect(() => {
+
+      if (this.retrieveData) {
+        const data = this.retrieveData;
+        if (data && data.length > 0) {
+          this.tier.set(data[0]);
+          // this.tierForm.patchValue(this.selected);
+        }
+        // this.tierForm.patchValue(this.selected); // ou dpmTierData
+      }
+    });
   }
+
 
   ngOnInit() {
     // const id = parseInt(window.location.pathname.split('/').pop() || '0', 10);
     // if (id) this.facade.getById(id);
     // this.selected.set(this.facade.selected());
     this.initForm();
-    this.tierForm.patchValue(this.ddpTierData); // ou dpmTierData
   }
 
   initForm() {
@@ -304,14 +316,14 @@ export class TierProfilComponent {
       this.editMode = false;
     }
   }
-    onSubmitDPM() {
+  onSubmitDPM() {
     if (this.dpmForm.valid) {
       console.log('Form Value:', this.dpmForm.value);
     } else {
       console.log('Form invalid');
     }
   }
-    onSubmitDPP() {
+  onSubmitDPP() {
     if (this.dpmForm.valid) {
       console.log('Form Value:', this.dpmForm.value);
     } else {

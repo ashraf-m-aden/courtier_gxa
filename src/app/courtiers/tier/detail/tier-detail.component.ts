@@ -22,20 +22,21 @@ import { DpmProfilComponent } from '../../../components/tier/dpm-profil/dpm-prof
 import { DppProfilComponent } from '../../../components/tier/dpp-profil/dpp-profil.component';
 import { ProjetBaseComponent } from '../../../components/projets/base/base.component';
 import { ListContratComponent } from '../../contrats/list/list.component';
+import { CourtierService } from '../../../Services/courtier/courtier.service';
 @Component({
   selector: 'app-tier-detail',
   standalone: true,
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
     MatCardModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule,
-    MatInputModule, MatCheckboxModule,ProjetBaseComponent,ListContratComponent,
+    MatInputModule, MatCheckboxModule, ProjetBaseComponent, ListContratComponent,
     MatButtonModule, MatIconModule, TierProfilComponent, DpmProfilComponent, DppProfilComponent
   ],
   styleUrls: ['./tier-detail.component.scss'],
   templateUrl: './tier-detail.component.html'
 })
 export class TierDetailComponent {
-  public id: string
+  public id: number
   selected = signal<Tier | null>(null);
   selectedDPP = signal<Dpp | null>(null);
   selectedDPM = signal<DpmModel | null>(null);
@@ -52,65 +53,48 @@ export class TierDetailComponent {
   csps = ['Profession libérale', 'Agriculteur', 'Commerçant']; // example
 
   dpmForm!: FormGroup;
-
+  isLoading = signal<boolean>(true);
   statutjuOptions = Object.values(Statutju);
   convCollOptions = Object.values(ConvColl);
   currencyCodes = ['EUR', 'USD', 'GBP', 'XAF']; // Add your currency codes
 
-  exempleTier: Tier = {
-    Numtiers: 12345,
-    typtiers: "Client",
-    nattiers: "Particulier",
-    numdpp: 67890,
-    titre: "M.",
-    rsociale: "Société Exemple SARL",
-    referenc: "REF-2025-001",
-    connexe: "C123",
-    refext: "EXT-456",
-    adr1: "10 rue de la Paix",
-    adr2: "Bâtiment B",
-    adr3: "2ème étage",
-    codp: "75002",
-    ville: "Paris",
-    codepays: "FR",
-    pays: "France",
-    ntel: "+33 1 23 45 67 89",
-    nfax: "+33 1 23 45 67 80",
-    numemail: "contact@example.com",
-    memo: "Client important, préférer contact par email.",
-    ext: "EXT01",
-    images: "logo_exemple.png",
-    titnom: "Exemple",
-    gommette: "rouge",
-    ole: "OLE123",
-    titrecou: "M.",
-    datdermo: "2025-06-01T10:30:00Z",
-    modifpar: "admin",
-    nbpercha: 3,
-    const: "CONST456",
-    histo: "Historique des commandes disponibles.",
-    adrinsee: true,
-    adresse1: "10 rue de la Paix",
-    adresse2: "Bâtiment B",
-    adresse3: "2ème étage",
-    grcok: false,
-    nonepur: false,
-    territory: "Île-de-France",
-    latitude: 48.8686,
-    longitude: 2.3444
-  };
 
-
-  constructor(private route: ActivatedRoute, private facade: TierFacade, private fb: FormBuilder) {
-    this.id! = this.route.snapshot.paramMap.get('id') ?? "";
+  retrievedTier :any[] = [];
+  contrats :any[] = [];
+  projets:any[] = [];
+  constructor(private route: ActivatedRoute, private facade: TierFacade, private fb: FormBuilder, private courtierService: CourtierService) {
+    this.id! = parseInt(this.route.snapshot.paramMap.get('id')!) ?? undefined;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     // const id = parseInt(window.location.pathname.split('/').pop() || '0', 10);
     // if (id) this.facade.getById(id);
     // this.selected.set(this.facade.selected());
     this.initForm();
-    this.tierForm.patchValue(this.exempleTier); // ou dpmTierData
+    this.courtierService.postDetailTier(this.id).subscribe({
+      next: async (data: any) => {
+        this.retrievedTier = data;
+        if (this.retrievedTier.length > 0) {
+          console.log('Tier data retrieved:', this.retrievedTier);
+          this.editMode = false; // Disable edit mode after loading data
+        } else {
+          console.warn('No tier data found for the given ID');
+        }
+        await this.courtierService.postListeDesContratsDUnTier(this.id).subscribe({
+          next: async (dataC: any) => {
+            this.contrats = dataC;
+          }
+        }
+        );
+      },
+      error: (error) => {
+        console.error('Error fetching tier details:', error);
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      }
+    })
+
   }
 
   initForm() {

@@ -34,11 +34,11 @@
         <tbody>
           @for(contrat of contrats;track contrat){
           <tr>
-            <td>{{ contrat.contrat }}</td>
-            <td>{{ contrat.intitule || "-" }}</td>
+            <td>{{ contrat.Contrat }}</td>
+            <td>{{ contrat.Intitule || "-" }}</td>
 
-            <td>{{ contrat.debcours | date : "dd/MM/yyyy" }}</td>
-            <td>{{ contrat.fincours | date : "dd/MM/yyyy" }}</td>
+            <td>{{ contrat.Debcours | date : "dd/MM/yyyy" }}</td>
+            <td>{{ contrat.Fincours | date : "dd/MM/yyyy" }}</td>
 
             <td>
               <button

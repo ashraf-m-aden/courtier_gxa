@@ -62,21 +62,22 @@ export class HeaderComponent {
     effect(() => {
 
       if (!this.isAuthenticated()) {
-        const payLoad = JSON.parse(sessionStorage.getItem('BasSecurityContext')!) as BasSecurityContext
-      if (!payLoad?.IsAuthenticated) {
+        const payLoad = JSON.parse(sessionStorage.getItem('BasSecurityContext')!)
+        console.log("FROM HEADER payLoad", payLoad._IsAuthenticated);
+        if (!payLoad?._IsAuthenticated) {
           this.router.navigate(['/login']);
-        this.snackBar.open('Déconnexion réussie.', 'Fermer', {
-          duration: 3000,
-          panelClass: ['mat-toolbar', 'mat-accent'],
-        });
-      }
+          this.snackBar.open('Déconnexion réussie.', 'Fermer', {
+            duration: 3000,
+            panelClass: ['mat-toolbar', 'mat-accent'],
+          });
+        }
       }
     });
   }
 
 
   openProfileDialog() {
-      const dialogRef = this.dialog.open(this.profileDialog);
+    const dialogRef = this.dialog.open(this.profileDialog);
 
   }
   closeProfileDialog() {
@@ -87,7 +88,12 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.store.dispatch(AuthActions.logout());
+        this.store.dispatch(AuthActions.logout());
+    this.router.navigate(['/login']);
+    this.snackBar.open('Déconnexion réussie.', 'Fermer', {
+      duration: 3000,
+      panelClass: ['mat-toolbar', 'mat-accent'],
+    });
   }
 
   editProfile() {

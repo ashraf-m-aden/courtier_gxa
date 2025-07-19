@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection, isDevMode, importProvidersFrom } from '@angular/core';
 import { provideRouter, withDebugTracing, withRouterConfig } from '@angular/router';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appRoutes } from './app.routes';
@@ -16,6 +16,7 @@ import { AuthEffects } from './store/features/auth/auth.effects';
 import { TierEffects } from './courtiers/tier/store/tier.effects';
 import { TierReducer } from './courtiers/tier/store/tier.reducer';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { authInterceptor } from './Services/auth/auth.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -33,6 +34,7 @@ export const appConfig: ApplicationConfig = {
     provideState('auth', authReducer),
     provideEffects(AuthEffects),
     provideNativeDateAdapter(),
+    provideHttpClient(withInterceptors([authInterceptor])),
 
 
     // provideAnimations(),

@@ -18,12 +18,12 @@ export const loginStart = createAction(
 );
 
 /**
- * Dispatched with login credentials (username, password, domain).
+ * Dispatched with login credentials (login, password, domain).
  * Triggers the effect that sends login request to the backend.
  */
 export const login = createAction(
   '[Auth] Login',
-  props<{ username: string; password: string; domain: string }>()
+  props<{ login: string; password: string; domain: string }>()
 );
 
 /**
@@ -32,7 +32,7 @@ export const login = createAction(
  */
 export const loginSuccess = createAction(
   '[Auth] Login Success',
-  props<{ user: BasSecurityContext; username: string; domain: string }>()
+  props<{ user: BasSecurityContext; login: string; domain: string }>()
 );
 
 /**
@@ -54,7 +54,7 @@ export const loginFailure = createAction(
  */
 export const getProfile = createAction(
   '[Auth] Get Prof',
-  props<{ username: string; domain: string }>()
+  props<{ login: string; domain: string }>()
 );
 
 /**

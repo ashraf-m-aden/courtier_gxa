@@ -36,19 +36,19 @@ export class AuthService {
       .set('Content-Type', 'application/json')
       .set('X-Requested-Width', 'XMLHttpRequest')
   }
-  // _login(username: string, password: string): Observable<any> {
-  // return this.http.post(`${this.baseUrl}/auth/login`, { username, password });
+  // _login(login: string, password: string): Observable<any> {
+  // return this.http.post(`${this.baseUrl}/auth/login`, { login, password });
   // }
 
   // _logout(): Observable<any> {
   // return this.http.post(`${this.baseUrl}/auth/logout`, {});
   // }
-  getUserProfile(username: string, domain: string) {
+  getUserProfile(login: string, domain: string) {
     let actionName: string = "Xtlog_Get";
     console.log("Debut fonction Xtlog_Get-profile() .....:")
     let basParams = new BasParams();
     let body = {
-      login: username,
+      login: login,
       domain: domain,
       BasSecurityContext: JSON.parse(sessionStorage.getItem("BasSecurityContext")!),
 
@@ -61,10 +61,10 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/auth/me`);
   }
 
-  login(username: string, password: string, domain?: string): Observable<BasSecurityContext> {
+  login(login: string, password: string, domain?: string): Observable<BasSecurityContext> {
     this.isLoading$ = of(true)
     console.log("FROM authService.login After .... this.isLoading$=of(true) ")
-    return this.http.post<BasSecurityContext>(`${this.baseUrl}/login`, { username, password, domain }).pipe(
+    return this.http.post<BasSecurityContext>(`${this.baseUrl}/login`, { login, password, domain }).pipe(
       map((response: BasSecurityContext) => {
         console.log("FROM authService.login .New_AuthenticateUser .... response== " + response.SessionId)
         //  user: response.SessionId,
@@ -75,10 +75,10 @@ export class AuthService {
       ))
   }
 
-  //   login(username: string, password: string, domain?:string): Observable<BasSecurityContext> {
+  //   login(login: string, password: string, domain?:string): Observable<BasSecurityContext> {
   //   this.isLoading$=of(true)
   //   console.log("FROM authService.login After .... this.isLoading$=of(true) ")
-  //   return this._authenticationHelper.New_AuthenticateUser(username, password, domain).pipe(
+  //   return this._authenticationHelper.New_AuthenticateUser(login, password, domain).pipe(
   //     map((response: BasSecurityContext) => {
   //       console.log("FROM authService.login .New_AuthenticateUser .... response== "+response.GetSessionId)
   //     //  user: response.SessionId,
@@ -90,5 +90,6 @@ export class AuthService {
   // }
 
   logout() {
+    sessionStorage.removeItem("BasSecurityContext");
   }
 }

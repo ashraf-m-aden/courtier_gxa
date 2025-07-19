@@ -1,443 +1,544 @@
-
-          <div class="container-fluid mt-4 p-2">
-            <div class="row">
-              <div class="col-12">
-                <!-- Action Buttons -->
-                <div class="d-flex justify-content-end mb-3">
-                  <div class="btn-group">
-                    <button class="btn btn-primary" (click)="toggleEditMode()">
-                      {{ editMode ? "Annuler" : "Modifier" }}
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <!-- Form -->
-                <form [formGroup]="tierForm" (ngSubmit)="save()">
-                  <div class="row d-flex flex-wrap gap-3 justify-content-start">
-                    <!-- typtiers -->
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Type de Tiers</mat-label>
-                        <mat-select
-                          [disabled]="!editMode"
-                          formControlName="typtiers"
-                          [value]="selected()?.typtiers"
-                        >
-                          <mat-option value="ddp">Personne Physique</mat-option>
-                          <mat-option value="dpm">Personne Morale</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <!-- nattiers -->
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Nature du Tiers</mat-label>
-                        <input
-                          matInput
-                          formControlName="nattiers"
-                          [value]="selected()?.nattiers"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- numdpp, titre, rsociale -->
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Num DPP</mat-label>
-                        <input
-                          matInput
-                          type="number"
-                          formControlName="numdpp"
-                          [value]="selected()?.numdpp"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Titre</mat-label>
-                        <input
-                          matInput
-                          formControlName="titre"
-                          [value]="selected()?.titre"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Raison Sociale</mat-label>
-                        <input
-                          matInput
-                          formControlName="rsociale"
-                          [value]="selected()?.rsociale"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- referenc, connexe, refext -->
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Référence</mat-label>
-                        <input
-                          matInput
-                          formControlName="referenc"
-                          [value]="selected()?.referenc"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Connexe</mat-label>
-                        <input
-                          matInput
-                          formControlName="connexe"
-                          [value]="selected()?.connexe"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Référence Externe</mat-label>
-                        <input
-                          matInput
-                          formControlName="refext"
-                          [value]="selected()?.refext"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- adresse -->
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Adresse 1</mat-label>
-                        <input
-                          matInput
-                          formControlName="adr1"
-                          [value]="selected()?.adr1"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Adresse 2</mat-label>
-                        <input
-                          matInput
-                          formControlName="adr2"
-                          [value]="selected()?.adr2"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Adresse 3</mat-label>
-                        <input
-                          matInput
-                          formControlName="adr3"
-                          [value]="selected()?.adr3"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- ville, code postal, pays -->
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Ville</mat-label>
-                        <input
-                          matInput
-                          formControlName="ville"
-                          [value]="selected()?.ville"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Code Postal</mat-label>
-                        <input
-                          matInput
-                          formControlName="codp"
-                          [value]="selected()?.codp"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Pays</mat-label>
-                        <input
-                          matInput
-                          formControlName="pays"
-                          [value]="selected()?.pays"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- téléphone, fax, email -->
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Téléphone</mat-label>
-                        <input
-                          matInput
-                          formControlName="ntel"
-                          [value]="selected()?.ntel"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Fax</mat-label>
-                        <input
-                          matInput
-                          formControlName="nfax"
-                          [value]="selected()?.nfax"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Email</mat-label>
-                        <input
-                          matInput
-                          type="email"
-                          formControlName="numemail"
-                          [value]="selected()?.numemail"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- infos supplémentaires -->
-                    <div class="col-md-6 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Mémo</mat-label>
-                        <textarea
-                          matInput
-                          formControlName="memo"
-                          [value]="selected()?.memo"
-                          rows="3"
-                        ></textarea>
-                      </mat-form-field>
-                    </div>
-
-                    <!-- checkboxes -->
-                    <div class="col-md-12 d-flex flex-wrap gap-4 px-3">
-                      <mat-checkbox
-                        formControlName="adrinsee"
-                        [checked]="selected()?.adrinsee"
-                        >Adresse INSEE</mat-checkbox
-                      >
-                      <mat-checkbox
-                        formControlName="grcok"
-                        [checked]="selected()?.grcok"
-                        >GRC OK</mat-checkbox
-                      >
-                      <mat-checkbox
-                        formControlName="nonepur"
-                        [checked]="selected()?.nonepur"
-                        >Non épuré</mat-checkbox
-                      >
-                    </div>
-
-                    <!-- Autres champs en ligne avec labels compréhensibles -->
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Extension</mat-label>
-                        <input
-                          matInput
-                          formControlName="ext"
-                          [value]="selected()?.ext"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Image</mat-label>
-                        <input
-                          matInput
-                          formControlName="images"
-                          [value]="selected()?.images"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Nom sur Titre</mat-label>
-                        <input
-                          matInput
-                          formControlName="titnom"
-                          [value]="selected()?.titnom"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Gommette</mat-label>
-                        <input
-                          matInput
-                          formControlName="gommette"
-                          [value]="selected()?.gommette"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>OLE</mat-label>
-                        <input
-                          matInput
-                          formControlName="ole"
-                          [value]="selected()?.ole"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Titre de Courtoisie</mat-label>
-                        <input
-                          matInput
-                          formControlName="titrecou"
-                          [value]="selected()?.titrecou"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Modifié par</mat-label>
-                        <input
-                          matInput
-                          formControlName="modifpar"
-                          [value]="selected()?.modifpar"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Constitution</mat-label>
-                        <input
-                          matInput
-                          formControlName="const"
-                          [value]="selected()?.const"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Historique</mat-label>
-                        <input
-                          matInput
-                          formControlName="histo"
-                          [value]="selected()?.histo"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Adresse complémentaire 1</mat-label>
-                        <input
-                          matInput
-                          formControlName="adresse1"
-                          [value]="selected()?.adresse1"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Adresse complémentaire 2</mat-label>
-                        <input
-                          matInput
-                          formControlName="adresse2"
-                          [value]="selected()?.adresse2"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Adresse complémentaire 3</mat-label>
-                        <input
-                          matInput
-                          formControlName="adresse3"
-                          [value]="selected()?.adresse3"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 col-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Territoire</mat-label>
-                        <input
-                          matInput
-                          formControlName="territory"
-                          [value]="selected()?.territory"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- latitude / longitude -->
-                    <div class="col-md-6 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Latitude</mat-label>
-                        <input
-                          matInput
-                          type="number"
-                          formControlName="latitude"
-                          [value]="selected()?.latitude"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Longitude</mat-label>
-                        <input
-                          matInput
-                          type="number"
-                          formControlName="longitude"
-                          [value]="selected()?.longitude"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- nbpercha -->
-                    <div class="col-md-12 mb-3">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Nombre de personnes à charge</mat-label>
-                        <input
-                          matInput
-                          type="number"
-                          formControlName="nbpercha"
-                          [value]="selected()?.nbpercha"
-                        />
-                      </mat-form-field>
-                    </div>
-
-                    <!-- Submit -->
-                    @if(editMode){
-                    <div class="col-12 text-end mt-4">
-                      <button class="btn btn-group btn-primary" type="submit">
-                        <mat-icon>save</mat-icon> Mettre à jour
-                      </button>
-                    </div>
-                    }
-                  </div>
-                </form>
-              </div>
-            </div>
+<div class="container-fluid mt-4 p-2">
+  <div class="row">
+    <div class="col-12">
+      <!-- Action Buttons -->
+      <div class="d-flex justify-content-end mb-3">
+        <div class="btn-group">
+          <button class="btn btn-primary" (click)="toggleEditMode()">
+            {{ editMode ? "Annuler" : "Modifier" }}
+          </button>
+        </div>
+      </div>
+    </div>
+    @if(editMode){
+    <div class="col-12">
+      <!-- Form -->
+      <form [formGroup]="tierForm" (ngSubmit)="save()">
+        <div class="row d-flex flex-wrap gap-3 justify-content-start">
+          <!-- typtiers -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Type de Tiers</mat-label>
+              <mat-select
+                [disabled]="!editMode"
+                formControlName="typtiers"
+                [value]="tier()?.Typtiers"
+              >
+                <mat-option value="ddp">Personne Physique</mat-option>
+                <mat-option value="dpm">Personne Morale</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
+
+          <!-- nattiers -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nature du Tiers</mat-label>
+              <input
+                matInput
+                formControlName="nattiers"
+                [value]="tier()?.Nattiers"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- numdpp, titre, rsociale -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Num DPP</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="numdpp"
+                [value]="tier()?.Numdpp"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Titre</mat-label>
+              <input matInput formControlName="titre" [value]="tier()?.Titre" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Raison Sociale</mat-label>
+              <input
+                matInput
+                formControlName="rsociale"
+                [value]="tier()?.Rsociale"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- referenc, connexe, refext -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Référence</mat-label>
+              <input
+                matInput
+                formControlName="referenc"
+                [value]="tier()?.Referenc"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Connexe</mat-label>
+              <input
+                matInput
+                formControlName="connexe"
+                [value]="tier()?.Connexe"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Référence Externe</mat-label>
+              <input
+                matInput
+                formControlName="refext"
+                [value]="tier()?.Refext"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- adresse -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse 1</mat-label>
+              <input matInput formControlName="adr1" [value]="tier()?.Adr1" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse 2</mat-label>
+              <input matInput formControlName="adr2" [value]="tier()?.Adr2" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse 3</mat-label>
+              <input matInput formControlName="adr3" [value]="tier()?.Adr3" />
+            </mat-form-field>
+          </div>
+
+          <!-- ville, code postal, pays -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Ville</mat-label>
+              <input matInput formControlName="ville" [value]="tier()?.Ville" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Code Postal</mat-label>
+              <input matInput formControlName="codp" [value]="tier()?.Codp" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Pays</mat-label>
+              <input matInput formControlName="pays" [value]="tier()?.Pays" />
+            </mat-form-field>
+          </div>
+
+          <!-- téléphone, fax, email -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Téléphone</mat-label>
+              <input matInput formControlName="ntel" [value]="tier()?.Ntel" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Fax</mat-label>
+              <input matInput formControlName="nfax" [value]="tier()?.Nfax" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="numemail"
+                [value]="tier()?.Numemail"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- infos supplémentaires -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Mémo</mat-label>
+              <textarea
+                matInput
+                formControlName="memo"
+                [value]="tier()?.Memo"
+                rows="3"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <!-- checkboxes -->
+          <div class="col-md-12 d-flex flex-wrap gap-4 px-3">
+            <mat-checkbox
+              formControlName="adrinsee"
+              [checked]="tier()?.Adrinsee"
+              >Adresse INSEE</mat-checkbox
+            >
+            <mat-checkbox formControlName="grcok" [checked]="tier()?.Grcok"
+              >GRC OK</mat-checkbox
+            >
+            <mat-checkbox formControlName="nonepur" [checked]="tier()?.Nonepur"
+              >Non épuré</mat-checkbox
+            >
+          </div>
+
+          <!-- Autres champs en ligne avec labels compréhensibles -->
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Extension</mat-label>
+              <input matInput formControlName="ext" [value]="tier()?.Ext" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Image</mat-label>
+              <input
+                matInput
+                formControlName="images"
+                [value]="tier()?.Images"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nom sur Titre</mat-label>
+              <input
+                matInput
+                formControlName="titnom"
+                [value]="tier()?.Titnom"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Gommette</mat-label>
+              <input
+                matInput
+                formControlName="gommette"
+                [value]="tier()?.Gommette"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>OLE</mat-label>
+              <input matInput formControlName="ole" [value]="tier()?.Ole" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Titre de Courtoisie</mat-label>
+              <input
+                matInput
+                formControlName="titrecou"
+                [value]="tier()?.Titrecou"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Modifié par</mat-label>
+              <input
+                matInput
+                formControlName="modifpar"
+                [value]="tier()?.Modifpar"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Constitution</mat-label>
+              <input matInput formControlName="const" [value]="tier()?.Const" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Historique</mat-label>
+              <input matInput formControlName="histo" [value]="tier()?.Histo" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse complémentaire 1</mat-label>
+              <input
+                matInput
+                formControlName="adresse1"
+                [value]="tier()?.Adresse1"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse complémentaire 2</mat-label>
+              <input
+                matInput
+                formControlName="adresse2"
+                [value]="tier()?.Adresse2"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Adresse complémentaire 3</mat-label>
+              <input
+                matInput
+                formControlName="adresse3"
+                [value]="tier()?.Adresse3"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Territoire</mat-label>
+              <input
+                matInput
+                formControlName="territory"
+                [value]="tier()?.Territory"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- latitude / longitude -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Latitude</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="latitude"
+                [value]="tier()?.Latitude"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Longitude</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="longitude"
+                [value]="tier()?.Longitude"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- nbpercha -->
+          <div class="col-md-12 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nombre de personnes à charge</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="nbpercha"
+                [value]="tier()?.Nbpercha"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- Submit -->
+          @if(editMode){
+          <div class="col-12 text-end mt-4">
+            <button class="btn btn-group btn-primary" type="submit">
+              <mat-icon>save</mat-icon> Mettre à jour
+            </button>
+          </div>
+          }
+        </div>
+      </form>
+    </div>
+    } @else {
+ <div class="col-12">
+  <div class="row d-flex flex-wrap gap-3 justify-content-start">
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Type de Tiers:</label>
+      <span>{{
+        tier()?.Typtiers === "ddp" ? "Personne Physique" : "Personne Morale"
+      }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Nature du Tiers:</label>
+      <span>{{ tier()?.Nattiers }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Num DPP:</label>
+      <span>{{ tier()?.Numdpp }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Titre:</label>
+      <span>{{ tier()?.Titre }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Raison Sociale:</label>
+      <span>{{ tier()?.Rsociale }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Référence:</label>
+      <span>{{ tier()?.Referenc }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Connexe:</label>
+      <span>{{ tier()?.Connexe }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Référence Externe:</label>
+      <span>{{ tier()?.Refext }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Adresse 1:</label>
+      <span>{{ tier()?.Adr1 }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Adresse 2:</label>
+      <span>{{ tier()?.Adr2 }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Adresse 3:</label>
+      <span>{{ tier()?.Adr3 }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Ville:</label>
+      <span>{{ tier()?.Ville }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Code Postal:</label>
+      <span>{{ tier()?.Codp }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Pays:</label>
+      <span>{{ tier()?.Pays }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Téléphone:</label>
+      <span>{{ tier()?.Ntel }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Fax:</label>
+      <span>{{ tier()?.Nfax }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Email:</label>
+      <span>{{ tier()?.Numemail }}</span>
+    </div>
+    <div class="col-md-6 col-12 mb-3">
+      <label class="fw-bold">Mémo:</label>
+      <span>{{ tier()?.Memo }}</span>
+    </div>
+    <div class="col-md-12 d-flex flex-wrap gap-4 px-3">
+      <div>
+        <strong>Adresse INSEE:</strong>
+        {{ tier()?.Adrinsee ? "Oui" : "Non" }}
+      </div>
+      <div>
+        <strong>GRC OK:</strong> {{ tier()?.Grcok ? "Oui" : "Non" }}
+      </div>
+      <div>
+        <strong>Non épuré:</strong> {{ tier()?.Nonepur ? "Oui" : "Non" }}
+      </div>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Extension:</label>
+      <span>{{ tier()?.Ext }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Image:</label>
+      <span>{{ tier()?.Images }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Nom sur Titre:</label>
+      <span>{{ tier()?.Titnom }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Gommette:</label>
+      <span>{{ tier()?.Gommette }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">OLE:</label>
+      <span>{{ tier()?.Ole }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Titre de Courtoisie:</label>
+      <span>{{ tier()?.Titrecou }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Modifié par:</label>
+      <span>{{ tier()?.Modifpar }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Constitution:</label>
+      <span>{{ tier()?.Const }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Historique:</label>
+      <span>{{ tier()?.Histo }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Adresse complémentaire 1:</label>
+      <span>{{ tier()?.Adresse1 }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Adresse complémentaire 2:</label>
+      <span>{{ tier()?.Adresse2 }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Adresse complémentaire 3:</label>
+      <span>{{ tier()?.Adresse3 }}</span>
+    </div>
+    <div class="col-md-3 col-12 mb-3">
+      <label class="fw-bold">Territoire:</label>
+      <span>{{ tier()?.Territory }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="fw-bold">Latitude:</label>
+      <span>{{ tier()?.Latitude }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="fw-bold">Longitude:</label>
+      <span>{{ tier()?.Longitude }}</span>
+    </div>
+    <div class="col-md-12 mb-3">
+      <label class="fw-bold">Nombre de personnes à charge:</label>
+      <span>{{ tier()?.Nbpercha }}</span>
+    </div>
+  </div>
+</div>
+
+    }
+  </div>
+</div>

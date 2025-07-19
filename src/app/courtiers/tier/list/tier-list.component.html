@@ -9,7 +9,7 @@
         <!-- Recherche -->
         <div class="col-md-6 col-10">
           <label for="search" class="form-label">
-            <h5>Recherche</h5>
+            <h5>Recherche de tiers</h5>
           </label>
           <div class="input-group">
             <input
@@ -44,7 +44,14 @@
 
     <div class="col-12 mt-5">
       <!-- Tableau Bootstrap -->
-      <table class="table table-striped table-bordered w-100">
+
+      @if(isLoading()){
+<div class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+    }
+   @else {
+       <table class="table table-striped table-bordered w-100">
         <thead class="table-dark">
           <tr>
             <th>Code P</th>
@@ -76,6 +83,7 @@
           }
         </tbody>
       </table>
+   }
     </div>
   </div>
 </div>

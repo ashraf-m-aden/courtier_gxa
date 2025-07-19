@@ -10,6 +10,7 @@ import { SessionStorage } from "../../Model/Model-SessionStorage/SessionStorage"
 @Injectable({ providedIn: 'root' })
 export class CourtierService {
   baseUrl = "http://localhost:3000/api"
+  BasSecurityContext = JSON.parse(sessionStorage.getItem("BasSecurityContext")!)
 
   constructor(private http: HttpClient, private store: Store) {
   }
@@ -52,7 +53,16 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/create_tier`, payload);
   }
 
-  postDetailContrat(payload: any): Observable<any> {
+  postDetailContrat(contrat: number): Observable<any> {
+    let payload = {
+      "BasSecurityContext": this.BasSecurityContext,
+      "contrat": contrat,
+      "Allpieces": true,
+      "DetailAdh": true,
+      "Garanties": true,
+      "Extensions": true,
+      "infosCieProd": true
+    }
     return this.http.post(`${this.baseUrl}/detail_contrat`, payload);
   }
 
@@ -64,7 +74,11 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/detail_quittance`, payload);
   }
 
-  postDetailTier(payload: any): Observable<any> {
+  postDetailTier(id: number): Observable<Object> {
+    let payload = {
+      BasSecurityContext: this.BasSecurityContext,
+      Dossier: id
+    };
     return this.http.post(`${this.baseUrl}/detail_tier`, payload);
   }
 
@@ -72,7 +86,13 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/liste_des_contrats`, payload);
   }
 
-  postListeDesContratsDUnTier(payload: any): Observable<any> {
+  postListeDesContratsDUnTier(id: number): Observable<any> {
+    let payload = {
+      BasSecurityContext: this.BasSecurityContext,
+      dossier: id,
+      IncludeAll: true
+
+    };
     return this.http.post(`${this.baseUrl}/liste_des_contrats_d_un_tier`, payload);
   }
 
@@ -108,8 +128,8 @@ export class CourtierService {
 
   postTiersSearch(): Observable<any> {
     let payload = {
-      BasSecurityContext: JSON.parse(sessionStorage.getItem("BasSecurityContext")!),
-
+      BasSecurityContext: this.BasSecurityContext,
+      reference: "default"
     }
     return this.http.post(`${this.baseUrl}/Tiers_Search`, payload);
   }

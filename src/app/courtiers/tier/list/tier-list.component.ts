@@ -20,13 +20,13 @@ import { loadTiersData } from '../../../store/features/courtiers/courtier.action
 import { selectTiers } from '../../../store/features/courtiers/courtier.selector';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
 import { Tier } from '../../../Model/tier.model';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-tier-list',
   standalone: true,
   imports: [
-    CommonModule,
-    MatTableModule, MatInputModule, MatSelectModule,RouterModule,RouterLink,RouterLinkActive,
+    CommonModule,MatProgressSpinnerModule,
+    MatTableModule, MatInputModule, MatSelectModule, RouterModule, RouterLink, RouterLinkActive,
     MatFormFieldModule, FormsModule, ReactiveFormsModule,
     MatIconModule, MatCardModule
   ],
@@ -59,9 +59,9 @@ export class TierListComponent {
   selectedCity = signal('');
 
   displayedColumns: string[] = ['type', 'nom', 'tel', 'adresse', 'ville', 'actions'];
+  isLoading = signal(true);
 
-
-  constructor(private facade: TierFacade, private courtierStore: Store,private courtierService:CourtierService, private router:Router) {
+  constructor(private facade: TierFacade, private courtierStore: Store, private courtierService: CourtierService, private router: Router) {
 
   }
 
@@ -72,14 +72,24 @@ export class TierListComponent {
       this.selectedCity.set(value.ville || '');
     });
 
-   await this.loadTiers();
+    await this.loadTiers();
   }
 
   async loadTiers() {
-    console.log("ici");
     this.courtierService.postTiersSearch().subscribe({
-      next: (data:Tier[])=>{
+      next: (data: Tier[]) => {
         this.allTiers.set(data)
+        this.isLoading.set(false);
+      },
+      error: (error) => {
+        console.error('Error loading tiers:', error);
+        this.isLoading.set(false);
+
+      },
+      complete: () => {
+        console.log('Tiers loaded successfully');
+        this.isLoading.set(false);
+
       }
     })
 
@@ -88,7 +98,7 @@ export class TierListComponent {
     Array.from(
       new Set(
         this.allTiers()
-          .map(t => t.ville)
+          .map(t => t.Ville)
           .filter((v): v is string => typeof v === 'string')
       )
     )
@@ -115,7 +125,7 @@ export class TierListComponent {
   // });
 
   editTier(tier: Tier): void {
-    this.router.navigate(['/courtiers/tiers/details/'+tier.Numtiers])
+    this.router.navigate(['/courtiers/tiers/details/' + tier.Numtiers])
   }
 
   viewTier(tier: TierDisplay): void {

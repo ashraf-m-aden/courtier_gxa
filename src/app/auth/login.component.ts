@@ -54,7 +54,7 @@ export class LoginComponent {
   private router = inject(Router);
   public loading$!: Observable<Boolean>;
   loginForm = this.fb.group({
-    username: ['Maintech', Validators.required],
+    login: ['Maintech', Validators.required],
     password: ['maintech', Validators.required],
     domain: ['Maintech', Validators.required]
   });
@@ -79,12 +79,12 @@ export class LoginComponent {
     console.log("In SUBMIT befor If !!!!this.loginForm.invalid===" + this.loginForm.invalid)
 
     if (this.loginForm.invalid) return;
-    const { username, password, domain } = this.loginForm.value;
-    //console.log("User !!!!==="+username)
+    const { login, password, domain } = this.loginForm.value;
+    //console.log("User !!!!==="+login)
     // console.log("passs !!!!==="+password)
     //this.store.dispatch(AuthActions.loginStart());
 
-    this.store.dispatch(AuthActions.login({ username: username!, password: password!, domain: domain! }));
+    this.store.dispatch(AuthActions.login({ login: login!, password: password!, domain: domain! }));
   }
 
 
