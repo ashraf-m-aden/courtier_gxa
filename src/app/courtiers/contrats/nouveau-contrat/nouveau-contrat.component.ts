@@ -34,7 +34,7 @@ export class NouveauContratComponent {
 
   async ngOnInit() {
        this.contratForm = this.fb.group({
-      contrat: [null, Validators.required],
+      contrat: [null],
       Numtiers: [null],
       frac: [''],
       echpjj: [''],

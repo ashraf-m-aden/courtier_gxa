@@ -11,12 +11,10 @@ export class InfoGeneralContratComponent {
   @Input() isContrat = signal(true); // Indique si c'est un contrat
   @Input() isEdit = signal(true);
   @Input() formGroup!: FormGroup;
-
   intitule = ""
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
       intitule: [''],
-
     });
   }
 

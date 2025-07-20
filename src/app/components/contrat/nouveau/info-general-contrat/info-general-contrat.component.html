@@ -1,27 +1,21 @@
 <div class="row">
-  @if(isContrat()){ @if(isEdit()){
-  <div class="col-md-6 mb-3">
-    <h6>Intitulé du contrat</h6>
-    {{ intitule }}
-  </div>
-  }@else {
-  <div class="col-md-6 mb-3">
-    <h6>Intitulé du contrat</h6>
-    <input class="form-control" [(ngModel)]="intitule" />
-  </div>
-  } } @else {
-
-    @if(isEdit()){
-        <div class="col-md-6 mb-3">
-    <h6>Intitulé du projet</h6>
-    <input class="form-control" [(ngModel)]="intitule" />
-  </div>
-    } @else {
-        <div class="col-md-6 mb-3">
-    <h6>Intitulé du projet</h6>
-    <input class="form-control" [(ngModel)]="intitule" />
-  </div>
-    }
+  @if (isContrat()) {
+    <div class="col-md-6 mb-3">
+      <h6>Intitulé du contrat</h6>
+      @if (isEdit()) {
+        <div>{{ formGroup.get('intitule')?.value }}</div>
+      } @else {
+        <input class="form-control" formControlName="intitule" />
+      }
+    </div>
+  } @else {
+    <div class="col-md-6 mb-3">
+      <h6>Intitulé du projet</h6>
+      @if (isEdit()) {
+        <div>{{ formGroup.get('intitule')?.value }}</div>
+      } @else {
+        <input class="form-control" formControlName="intitule" />
+      }
+    </div>
   }
-  <!-- Ajoute les autres champs de cette étape ici -->
 </div>
