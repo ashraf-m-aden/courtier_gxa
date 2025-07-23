@@ -32,6 +32,8 @@ export class ProduitsContratComponent {
   @Input() vehiculeForm!: FormGroup;
   @Input() isEdit = signal(false); // Indique si c'est un contrat ou une police
   @Input() isContrat = signal(true); // Indique si c'est un contrat ou une police
+    @Input() contratDetails = signal<any>(null);
+
   categoriesVehicules: CategorieVehicule[] = [
     {
       code: 'GXA_1CAT',

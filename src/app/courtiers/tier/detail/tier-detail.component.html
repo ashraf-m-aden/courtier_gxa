@@ -29,11 +29,11 @@
         </mat-tab>
         <!-- Tab 2: Contrat -->
         <mat-tab label="Liste des contrats">
-          <app-list-contrat [isContrat]="true" [contrats]="contrats"></app-list-contrat>
+          <app-list-contrat [isContrat]="true" [idTier]="id"></app-list-contrat>
         </mat-tab>
 
         <mat-tab label="Liste des projets">
-          <app-list-contrat [isContrat]="false"></app-list-contrat>
+          <app-list-contrat [isContrat]="false" [idTier]="id"></app-list-contrat>
         </mat-tab>
       </mat-tab-group>
       }

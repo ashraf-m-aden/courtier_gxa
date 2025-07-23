@@ -1,49 +1,56 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, effect, Input, signal } from '@angular/core';
 import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'admin-contrat',
-  imports: [FormsModule,ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './admin-contrat.component.html',
   styleUrl: './admin-contrat.component.css'
 })
 export class AdminContratComponent {
 
-form!: FormGroup;
-@Input() isEdit=signal(true); // Indique si c'est un contrat ou une police
+  form!: FormGroup;
+  @Input() isEdit = signal(true); // Indique si c'est un contrat ou une police
+  @Input() contratDetails = signal<any>(null);
 
-  fractionnements = ['Annuel', 'Semestriel', 'Trimestriel', 'Mensuel'];
+  fractionnements = ['A', 'S', 'T', 'M'];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+
+    effect(() => {
+      this.patchForm(this.contratDetails())
+    })
+
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       echeances: this.fb.group({
-        fractionnement: ['Semestriel'],
-        jour: [20],
-        mois: [7],
-        termeEchu: [true],
-        sansTaciteReconduction: [true],
-        prochaineEcheance: ['2025-07-20'],
+        fractionnement: [''],
+        jour: [],
+        mois: [],
+        termeEchu: [false],
+        sansTaciteReconduction: [false],
+        prochaineEcheance: [''],
         periodeEnCours: [''],
         periodeAnniversaire: [''],
         dateSuspensionPrevisionnelle: [''],
-        dateResiliationPrevisionnelle: ['2024-10-09']
+        dateResiliationPrevisionnelle: ['']
       }),
       situationComptable: this.fb.group({
-        net: ['-14749 FDJ'],
-        impayes: ['-14749 FDJ'],
+        net: [''],
+        impayes: [''],
         actes: ['']
       }),
       gestion: this.fb.group({
-        gestionnaire: ['AUTRES CLIENTS'],
-        centreGestionCie: ['GXA ASSURANCES'],
+        gestionnaire: [''],
+        centreGestionCie: [''],
         modeGestion: [''],
         destinataireTaxes: [''],
         commissionAttendue: [0],
         commissionGestion: [0],
         pollicitationInterdite: [false],
-        aConserverSiEpuration: [true],
+        aConserverSiEpuration: [false],
         dateRealisation: [''],
         signature: [''],
         preavisResiliation: [''],
@@ -52,4 +59,43 @@ form!: FormGroup;
       })
     });
   }
+
+
+  patchForm(data: any): void {
+    this.form.patchValue({
+      echeances: {
+        fractionnement: this.contratDetails().Frac ?? '',
+        jour: this.contratDetails().Echpjj ?? '',
+        mois: this.contratDetails().Echpmm ?? '',
+        termeEchu: this.contratDetails().Echu ?? false,
+        sansTaciteReconduction: this.contratDetails().Tacite !== true, // inversion logique
+        prochaineEcheance: this.contratDetails().Echeance ?? null,
+        periodeEnCours: (this.contratDetails().Debcours && this.contratDetails().Fincours) ? `${this.contratDetails().Debcours} - ${this.contratDetails().Fincours}` : null,
+        periodeAnniversaire: (this.contratDetails().Debann && this.contratDetails().Finann) ? `${this.contratDetails().Debann} - ${this.contratDetails().Finann}` : null,
+        dateSuspensionPrevisionnelle: this.contratDetails().Prevsusp ?? null,
+        dateResiliationPrevisionnelle: this.contratDetails().Prevresi ?? null,
+      },
+      situationComptable: {
+        net: this.contratDetails().Netimp ?? null,
+        impayes: this.contratDetails().Impaye ?? null,
+        actes: this.contratDetails().Hono ?? null,
+      },
+      gestion: {
+        gestionnaire: this.contratDetails().Gestionn ?? '',
+        centreGestionCie: this.contratDetails().Centre ?? '',
+        modeGestion: this.contratDetails().Modegest ?? '',
+        destinataireTaxes: this.contratDetails().external_cie_nomcie ?? '', // affichage du libellé
+        commissionAttendue: this.contratDetails().Tauxcom ?? 0,
+        commissionGestion: this.contratDetails().Comges ?? 0,
+        pollicitationInterdite: this.contratDetails().Polinter ?? false,
+        aConserverSiEpuration: this.contratDetails().Sansquit ?? false,
+        dateRealisation: this.contratDetails().Datereal ?? null,
+        signature: this.contratDetails().TypeSignature ?? '',
+        preavisResiliation: this.contratDetails().Preavis ?? '',
+        modalitesRevision: this.contratDetails().Modrev ?? '',
+        dureeFixe: this.contratDetails().Duree ?? 0,
+      },
+    });
+  }
+
 }

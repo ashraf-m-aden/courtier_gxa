@@ -3,18 +3,18 @@
     <div class="col-md-6 mb-3">
       <h6>Intitulé du contrat</h6>
       @if (isEdit()) {
-        <div>{{ formGroup.get('intitule')?.value }}</div>
+        <div>{{ formGroup.get('Intitule')?.value }}</div>
       } @else {
-        <input class="form-control" formControlName="intitule" />
+        <input class="form-control" formControlName="Intitule" />
       }
     </div>
   } @else {
     <div class="col-md-6 mb-3">
       <h6>Intitulé du projet</h6>
       @if (isEdit()) {
-        <div>{{ formGroup.get('intitule')?.value }}</div>
+        <div>{{ formGroup.get('Intitule')?.value }}</div>
       } @else {
-        <input class="form-control" formControlName="intitule" />
+        <input class="form-control" formControlName="Intitule" />
       }
     </div>
   }

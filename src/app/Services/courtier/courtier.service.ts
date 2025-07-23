@@ -15,6 +15,30 @@ export class CourtierService {
   constructor(private http: HttpClient, private store: Store) {
   }
 
+  public mergeObjects(data: any[]): any {
+    const result: any = {};
+
+    for (const item of data) {
+      for (const key in item) {
+        if (item.hasOwnProperty(key)) {
+          if (result[key] === undefined || result[key] === null || result[key] === "") {
+            result[key] = item[key];
+          } else if (result[key] !== item[key] && item[key] !== null && item[key] !== "") {
+            // Merge into an array if values conflict and are not null or empty
+            if (!Array.isArray(result[key])) {
+              result[key] = [result[key]];
+            }
+            if (!result[key].includes(item[key])) {
+              result[key].push(item[key]);
+            }
+          }
+        }
+      }
+    }
+
+    return result;
+  }
+
   getDossiers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/courtiers/Dossiers`);
   }

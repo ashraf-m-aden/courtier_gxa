@@ -11,6 +11,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 export class AdminPieceContratComponent {
   @Input() isContrat = signal(true); // Indique si c'est un contrat
   @Input() isEdit = signal(true);
+    @Input() contratDetails = signal<any>(null);
+
   pieces = [
     { id: 1, motif: 'affaire nouvelle', dateEffet: new Date('2023-08-26'), situation: 'Nouvelle pièce' },
     { id: 2, motif: 'renouvellement', dateEffet: new Date('2023-11-26'), situation: 'Nouvelle pièce' },

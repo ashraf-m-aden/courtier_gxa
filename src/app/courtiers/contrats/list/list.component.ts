@@ -3,6 +3,7 @@ import { Contrat } from '../../../Model/contrat.model';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { CourtierService } from '../../../Services/courtier/courtier.service';
 
 @Component({
   selector: 'app-list-contrat',
@@ -11,11 +12,34 @@ import { Router } from '@angular/router';
   styleUrl: './list.component.css'
 })
 export class ListContratComponent {
-  @Input() contrats: Contrat[] = [];
   @Input() isContrat = false;
+  @Input() idTier = 0;
+  contrats: Contrat[] = []
+  projets: Contrat[] = []
+  constructor(private router: Router, private courtierService: CourtierService) { }
 
-  constructor(private router: Router) { }
+  async ngOnInit() {
+    if (this.isContrat) {
+      console.log("conrat");
 
+      await this.courtierService.postListeDesContratsDUnTier(this.idTier).subscribe({
+        next: async (dataC: any) => {
+          this.contrats = dataC;
+        }
+      }
+      );
+    } else {
+      console.log("projet");
+
+      await this.courtierService.postListeDesContratsDUnTier(this.idTier).subscribe({
+        next: async (dataC: Contrat[]) => {
+          this.contrats = dataC.filter((c) => { return !c.Contrat });
+        }
+      }
+      );
+    }
+
+  }
   nouveauContrat(): void {
     const url = this.router.serializeUrl(
       this.router.createUrlTree(['/courtiers/contrats/nouveau'])
@@ -30,16 +54,16 @@ export class ListContratComponent {
     );
     window.open(url, '_blank');
   }
-  voir(contrat:any): void {
+  voir(contrat: any): void {
 
     if (this.isContrat) {
       const url = this.router.serializeUrl(
-        this.router.createUrlTree(['/courtiers/contrats/details/'+contrat.Contrat])
+        this.router.createUrlTree(['/courtiers/contrats/details/' + contrat.Contrat])
       ); window.open(url, '_blank');
 
     } else {
       const url = this.router.serializeUrl(
-        this.router.createUrlTree(['/courtiers/projets/details/'+contrat.Contrat])
+        this.router.createUrlTree(['/courtiers/projets/details/' + contrat.Contrat])
       ); window.open(url, '_blank');
 
     }

@@ -80,12 +80,7 @@ export class TierDetailComponent {
         } else {
           console.warn('No tier data found for the given ID');
         }
-        await this.courtierService.postListeDesContratsDUnTier(this.id).subscribe({
-          next: async (dataC: any) => {
-            this.contrats = dataC;
-          }
-        }
-        );
+
       },
       error: (error) => {
         console.error('Error fetching tier details:', error);

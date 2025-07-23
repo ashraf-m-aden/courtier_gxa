@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, effect, Input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -8,20 +8,42 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
   styleUrl: './info-general-contrat.component.css'
 })
 export class InfoGeneralContratComponent {
-  @Input() isContrat = signal(true); // Indique si c'est un contrat
+  @Input() isContrat = signal(true);
   @Input() isEdit = signal(true);
-  @Input() formGroup!: FormGroup;
-  intitule = ""
+  @Input() contratDetails = signal<any>(null);
+
+  formGroup: FormGroup;
+
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
-      intitule: [''],
+      Intitule: [''],
+    });
+    effect(() => {
+      const details = this.contratDetails();
+      if (this.isEdit() && details) {
+        this.formGroup.patchValue({
+          Intitule: details.Intitule || '',
+        });
+      }
     });
   }
 
-
   ngOnChanges(): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    this.intitule = this.formGroup?.get('intitule')?.value
+    const details = this.contratDetails();
+    if (this.isEdit() && details) {
+      this.formGroup.patchValue({
+        Intitule: details.Intitule || '',
+      });
+    } else {
+      this.formGroup.reset();
+    }
+
+  }
+
+  ngOnInit(): void {
+    // Optionnel si tu veux surveiller en continu les changements de contratDetails
+
   }
 }
+
+

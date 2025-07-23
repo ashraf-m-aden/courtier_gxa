@@ -1,19 +1,15 @@
 <div class="container-fluid">
-
-  <div class="row">
-    <div class="col-12">
-      <h5>Liste des contrats</h5>
-    </div>
-  </div>
   <div class="row card p-3 m-0">
-    <div class="col-12">
+    <div class="col-12 d-flex justify-content-between">
       @if(isContrat){
+      <h5>Liste des contrats</h5>
       <button class="btn btn-group btn-primary" (click)="nouveauContrat()">
         <mat-icon>add</mat-icon>
 
         Nouveau contrat
       </button>
       } @else {
+      <h5>Liste des projets</h5>
       <button class="btn btn-group btn-primary" (click)="nouveauProjet()">
         <mat-icon>add</mat-icon>
 
@@ -41,10 +37,7 @@
             <td>{{ contrat.Fincours | date : "dd/MM/yyyy" }}</td>
 
             <td>
-              <button
-                class="btn btn-group btn-primary"
-                (click)="voir(contrat)"
-              >
+              <button class="btn btn-group btn-primary" (click)="voir(contrat)">
                 <mat-icon>visibility</mat-icon>
 
                 Voir
