@@ -21,6 +21,7 @@ export class NouveauContratComponent {
   isContrat = signal<boolean>(true);
   isEdit = signal<boolean>(true);
   contratDetails = signal<any>(null);
+  retrievedcontratDetails = signal<any>(null);
   idContrat = 0
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService) {
 
@@ -39,6 +40,7 @@ export class NouveauContratComponent {
       await this.courtierService.postDetailContrat(this.idContrat).subscribe({
         next: (data: any) => {
           this.contratDetails.set(this.courtierService.mergeObjects(data));
+          this.retrievedcontratDetails.set(data);
           console.log('Contrat details:', this.contratDetails());
 
         },

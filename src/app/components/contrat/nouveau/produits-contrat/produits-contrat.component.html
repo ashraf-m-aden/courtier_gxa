@@ -5,48 +5,39 @@
 
     <!-- CATEGORIE -->
     <div class="mb-2">
-      <label class="fw-bold">Catégorie :</label>
+      <label class="fw-bold">Produit :</label>
       <span>{{
-        vehiculeForm.get("categorie")?.value || "Non sélectionnée"
+        vehiculeForm.get('codeprod')?.value
       }}</span>
     </div>
 
     <!-- MARQUE -->
     <div class="mb-2">
-      <label class="fw-bold">Marque :</label>
-      <span>{{ vehiculeForm.get("marque")?.value || "Non sélectionnée" }}</span>
+      <label class="fw-bold">Détails du produit :</label>
+<table class="table-auto w-full border">
+  <thead>
+    <tr>
+      @for (entry of visibleProductEntries(); track entry.label) {
+        <th class="border px-2 py-1 text-sm">{{ entry.label }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      @for (entry of visibleProductEntries(); track entry.label) {
+        <td class="border px-2 py-1 text-sm">
+          @if (entry.isDate) {
+            {{ getPieceValue(entry) | date: 'dd/MM/yyyy' }}
+          } @else {
+            {{ getPieceValue(entry) ?? '-' }}
+          }
+        </td>
+      }
+    </tr>
+  </tbody>
+</table>
     </div>
 
-    <!-- TABLEAU DES MODELES -->
-    @if(modelesDisponibles.length > 0){
-    <div class="pt-4">
-      <h3 class="text-lg font-semibold mb-2">Modèles disponibles</h3>
-      <table class="w-full border text-sm w-100">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="border p-1">Nom</th>
-            <th class="border p-1">CV</th>
-            <th class="border p-1">Type Mine</th>
-            <th class="border p-1">Carburant</th>
-            <th class="border p-1">Places</th>
-            <th class="border p-1">Carrosserie</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for(m of modelesDisponibles;track m){
-          <tr>
-            <td class="border p-1">{{ m.nom }}</td>
-            <td class="border p-1">{{ m.cv }}</td>
-            <td class="border p-1">{{ m.typeMine }}</td>
-            <td class="border p-1">{{ m.carburant }}</td>
-            <td class="border p-1">{{ m.places }}</td>
-            <td class="border p-1">{{ m.carrosserie }}</td>
-          </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-    }
   </div>
 
   } @else {
@@ -57,61 +48,40 @@
       <!-- CATEGORIE -->
       <div class="d-flex m-3 flex-column">
         <label class="block mb-1">Catégorie</label>
-        <select formControlName="categorie" class="border p-2 rounded w-full">
+        <select formControlName="codeprod" class="border p-2 rounded w-full">
           <option value="">-- Choisir une catégorie --</option>
-          @for(cat of categoriesVehicules;track cat){
-          <option [value]="cat.code">
+          @for(cat of listProduits;track cat){
+          <option [value]="cat.codeprod">
             {{ cat.libelle }}
           </option>
           }
         </select>
       </div>
 
-      <!-- MARQUE -->
-      @if(marquesDisponibles.length > 0){
-      <div class="d-flex m-3 flex-column">
-        <label class="block mb-1">Marque</label>
-        <select formControlName="marque" class="border p-2 rounded w-full">
-          <option value="">-- Choisir une marque --</option>
-          @for(marque of marquesDisponibles;track marque){
-          <option [value]="marque.nom">
-            {{ marque.nom }}
-          </option>
+<table class="table-auto w-full border">
+  <thead>
+    <tr>
+      @for (entry of visibleProductEntries(); track entry.label) {
+        <th class="border px-2 py-1 text-sm">{{ entry.label }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      @for (entry of visibleProductEntries(); track entry.label) {
+        <td class="border px-2 py-1 text-sm">
+          @if (entry.isDate) {
+            {{ getPieceValue(entry) | date: 'dd/MM/yyyy' }}
+          } @else {
+            {{ getPieceValue(entry) ?? '-' }}
           }
-        </select>
-      </div>
+        </td>
       }
+    </tr>
+  </tbody>
+</table>
 
-      <!-- TABLEAU DES MODELES -->
-      @if(modelesDisponibles.length > 0){
-      <div class="pt-4">
-        <h3 class="text-lg font-semibold mb-2">Modèles disponibles</h3>
-        <table class="w-full border text-sm w-100">
-          <thead class="bg-gray-100">
-            <tr>
-              <th class="border p-1">Nom</th>
-              <th class="border p-1">CV</th>
-              <th class="border p-1">Type Mine</th>
-              <th class="border p-1">Carburant</th>
-              <th class="border p-1">Places</th>
-              <th class="border p-1">Carrosserie</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for(m of modelesDisponibles;track m){
-            <tr class="model">
-              <td class="border p-1">{{ m.nom }}</td>
-              <td class="border p-1">{{ m.cv }}</td>
-              <td class="border p-1">{{ m.typeMine }}</td>
-              <td class="border p-1">{{ m.carburant }}</td>
-              <td class="border p-1">{{ m.places }}</td>
-              <td class="border p-1">{{ m.carrosserie }}</td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-      }
+
     </form>
   </div>
   } } @else{
@@ -122,61 +92,18 @@
       <!-- CATEGORIE -->
       <div class="d-flex m-3 flex-column">
         <label class="block mb-1">Catégorie</label>
-        <select formControlName="categorie" class="border p-2 rounded w-full">
+        <select formControlName="codeprod" class="border p-2 rounded w-full">
           <option value="">-- Choisir une catégorie --</option>
-          @for(cat of categoriesVehicules;track cat){
-          <option [value]="cat.code">
+          @for(cat of listProduits;track cat){
+          <option [value]="cat.codeprod">
             {{ cat.libelle }}
           </option>
           }
         </select>
       </div>
 
-      <!-- MARQUE -->
-      @if(marquesDisponibles.length > 0){
-      <div class="d-flex m-3 flex-column">
-        <label class="block mb-1">Marque</label>
-        <select formControlName="marque" class="border p-2 rounded w-full">
-          <option value="">-- Choisir une marque --</option>
-          @for(marque of marquesDisponibles;track marque){
-          <option [value]="marque.nom">
-            {{ marque.nom }}
-          </option>
-          }
-        </select>
-      </div>
-      }
 
-      <!-- TABLEAU DES MODELES -->
-      @if(modelesDisponibles.length > 0){
-      <div class="pt-4">
-        <h3 class="text-lg font-semibold mb-2">Modèles disponibles</h3>
-        <table class="w-full border text-sm w-100">
-          <thead class="bg-gray-100">
-            <tr>
-              <th class="border p-1">Nom</th>
-              <th class="border p-1">CV</th>
-              <th class="border p-1">Type Mine</th>
-              <th class="border p-1">Carburant</th>
-              <th class="border p-1">Places</th>
-              <th class="border p-1">Carrosserie</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for(m of modelesDisponibles;track m){
-            <tr class="model">
-              <td class="border p-1">{{ m.nom }}</td>
-              <td class="border p-1">{{ m.cv }}</td>
-              <td class="border p-1">{{ m.typeMine }}</td>
-              <td class="border p-1">{{ m.carburant }}</td>
-              <td class="border p-1">{{ m.places }}</td>
-              <td class="border p-1">{{ m.carrosserie }}</td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-      }
+
     </form>
   </div>
   }

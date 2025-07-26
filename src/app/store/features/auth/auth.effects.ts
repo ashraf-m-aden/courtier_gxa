@@ -45,6 +45,7 @@ export class AuthEffects {
             this.basSecurityContext = user;
 
           sessionStorage.setItem("BasSecurityContext",JSON.stringify(user))
+          localStorage.setItem("BasSecurityContext",JSON.stringify(user))
             return AuthActions.loginSuccess({ user, login, domain });
           }),
           catchError((error: Error) =>

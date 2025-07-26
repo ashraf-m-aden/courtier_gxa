@@ -76,9 +76,9 @@ export class AdminContratComponent {
         dateResiliationPrevisionnelle: this.contratDetails().Prevresi ?? null,
       },
       situationComptable: {
-        net: this.contratDetails().Netimp ?? null,
-        impayes: this.contratDetails().Impaye ?? null,
-        actes: this.contratDetails().Hono ?? null,
+        net: this.contratDetails().Netimp ?? 0,
+        impayes: this.contratDetails().Impaye ?? 0,
+        actes: this.contratDetails().Hono ?? 0,
       },
       gestion: {
         gestionnaire: this.contratDetails().Gestionn ?? '',

@@ -91,5 +91,6 @@ export class AuthService {
 
   logout() {
     sessionStorage.removeItem("BasSecurityContext");
+    localStorage.removeItem("BasSecurityContext");
   }
 }

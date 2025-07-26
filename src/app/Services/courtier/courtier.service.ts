@@ -10,7 +10,7 @@ import { SessionStorage } from "../../Model/Model-SessionStorage/SessionStorage"
 @Injectable({ providedIn: 'root' })
 export class CourtierService {
   baseUrl = "http://localhost:3000/api"
-  BasSecurityContext = JSON.parse(sessionStorage.getItem("BasSecurityContext")!)
+  BasSecurityContext = JSON.parse(localStorage.getItem("BasSecurityContext")!)
 
   constructor(private http: HttpClient, private store: Store) {
   }
@@ -54,7 +54,7 @@ export class CourtierService {
 
 
   postAjoutPieceAuContrat(payload: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/ajout_pièce_au_contrat`, payload);
+    return this.http.post(`${this.baseUrl}/ajout_piece_au_contrat`, payload);
   }
 
   postCheckSession(payload: any): Observable<any> {
@@ -90,7 +90,12 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/detail_contrat`, payload);
   }
 
-  postDetailProduit(payload: any): Observable<any> {
+  postDetailProduit(code: string): Observable<any> {
+    let payload = {
+      BasSecurityContext: this.BasSecurityContext,
+      code: code,
+
+    };
     return this.http.post(`${this.baseUrl}/detail_produit`, payload);
   }
 
@@ -120,9 +125,11 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/liste_des_contrats_d_un_tier`, payload);
   }
 
-  postListeDesProduits(payload: any): Observable<any> {
-    // You mentioned this one without a /api prefix
-    return this.http.post(`/liste_des_produits`, payload);
+  postListeDesProduits(): Observable<any> {
+    let payload = {
+      BasSecurityContext: this.BasSecurityContext,
+
+    }; return this.http.post(`${this.baseUrl}/liste_des_produits`, payload);
   }
 
   postListeDesQuittances(payload: any): Observable<any> {
@@ -135,11 +142,6 @@ export class CourtierService {
 
   postTabs(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/tabs`, payload);
-  }
-
-  postLogin(payload: any): Observable<any> {
-    // No /api prefix in your registration
-    return this.http.post(`/login`, payload);
   }
 
   postLogout(payload: any): Observable<any> {
@@ -167,7 +169,7 @@ export class CourtierService {
   }
 
   postUpdatePieceDuContrat(payload: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/update_pièce_contrat`, payload);
+    return this.http.put(`${this.baseUrl}/update_piece_contrat`, payload);
   }
 }
 
