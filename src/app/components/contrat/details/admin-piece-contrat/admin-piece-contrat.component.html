@@ -1,0 +1,35 @@
+<div class="row card">
+  <div class="col-12">
+    <!-- Table: Pièces successives -->
+    <table class="table w-full border">
+      <thead>
+        <tr>
+          @for (key of visiblePieceKeys; track key) {
+          <th class="text-left px-2 py-1 bg-gray-100 border-b">
+            {{ pieceDisplayMap[key]?.label || key }}
+          </th>
+          }
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (piece of pieces; track piece) {
+        <tr>
+          @for (key of visiblePieceKeys; track key) {
+          <td class="border px-2 py-1 text-sm">
+            @if ((pieceDisplayMap)[key]?.isDate) {
+            {{ getPieceValue(piece, key) | date : "dd/MM/yyyy" }}
+            } @else {
+            {{ getPieceValue(piece, key) ?? "-" }}
+            }
+          </td>
+          }
+
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

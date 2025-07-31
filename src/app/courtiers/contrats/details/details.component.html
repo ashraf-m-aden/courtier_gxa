@@ -2,92 +2,53 @@
   <div class="row">
     <div class="col-12">
       @if(isContrat()){
-      <h5>Détails du contrat numero:</h5>
+      <h5>Détails du contrat numero: {{contratDetails()?.Contrat}}</h5>
       } @else {
-      <h5>Détails du projet numero:</h5>
+      <h5>Détails du projet numero: {{contratDetails()?.Contrat}}</h5>
       }
     </div>
-    <div class="col-12">
+    @if(contratDetails()){
+      <div class="col-12">
       <!-- contrat-stepper.component.html -->
-      <form [formGroup]="contratForm">
-        <mat-horizontal-stepper [linear]="true" #stepper>
-          <mat-step>
-            <ng-template matStepLabel
-              >Informations générales et choix du produits</ng-template
-            >
-            <info-general-contrat
-              [isContrat]="isContrat"
-              [formGroup]="contratForm"
-            ></info-general-contrat>
-            <produits-contrat></produits-contrat>
 
-            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
-          </mat-step>
+      <h5
+        >Informations générales et choix du produits</h5
+      >
+      <details-info-general-contrat
+        [isContrat]="isContrat"
+        [contratDetails]="contratDetails"
+      ></details-info-general-contrat>
+      <details-produits-contrat
+        [isContrat]="isContrat"
+        [contratDetails]="contratDetails"
+      ></details-produits-contrat>
 
-          <!-- Étape 2 -->
-          <mat-step>
-            <ng-template matStepLabel>Données administratives</ng-template>
-            <admin-contrat></admin-contrat>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-primary mt-5" matStepperPrevious>
-                PRÉCÉDENT
-              </button>
-              <button class="btn btn-primary mt-5" matStepperNext>
-                SUIVANT
-              </button>
-            </div>
-          </mat-step>
 
-          <!-- Étape 2 -->
-          <mat-step>
-            <ng-template matStepLabel
-              >Données administratives - Pieces</ng-template
-            >
-            <admin-piece-contrat></admin-piece-contrat>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-primary mt-5" matStepperPrevious>
-                PRÉCÉDENT
-              </button>
-              <button class="btn btn-primary mt-5" matStepperNext>
-                SUIVANT
-              </button>
-            </div>
-          </mat-step>
+      <h5>Données administratives</h5>
+      <details-admin-contrat
+        [contratDetails]="contratDetails"
+      ></details-admin-contrat>
 
-          <!-- Étape 2 -->
-          <mat-step>
-            <ng-template matStepLabel>Risques</ng-template>
-            <risque-contrat></risque-contrat>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-primary mt-5" matStepperPrevious>
-                PRÉCÉDENT
-              </button>
-              <button class="btn btn-primary mt-5" matStepperNext>
-                SUIVANT
-              </button>
-            </div>
-          </mat-step>
 
-          <!-- Ajoute les autres étapes ici -->
+      <h5>Données administratives - Pieces</h5>
+      <details-admin-piece-contrat
+        [contratDetails]="retrievedcontratDetails"
+      ></details-admin-piece-contrat>
 
-          <mat-step>
-            <ng-template matStepLabel>Enregistrement</ng-template>
-            <p>Vérifiez les informations saisies.</p>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-primary mt-5" matStepperPrevious>
-                PRÉCÉDENT
-              </button>
-              <button
-                class="btn btn-warning"
-                color="primary"
-                (click)="onSubmit()"
-              >
-                Enregistrer
-              </button>
-            </div>
-          </mat-step>
-        </mat-horizontal-stepper>
-      </form>
+
+      <h5>Risques</h5>
+      <details-risque-contrat
+        [contratDetails]="contratDetails"
+      ></details-risque-contrat>
+
+
+
+      <list-quittance-details
+        [contratDetails]="contratDetails"
+      ></list-quittance-details>
+
+      <!-- Ajoute les autres étapes ici -->
     </div>
+    }
   </div>
 </div>

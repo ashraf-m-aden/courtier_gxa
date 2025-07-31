@@ -1,4 +1,4 @@
-import { Component, computed, Input, Signal, signal } from '@angular/core';
+import { Component, computed, effect, Input, Signal, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -27,48 +27,48 @@ interface CategorieVehicule {
 }
 
 @Component({
-  selector: 'produits-contrat',
+  selector: 'details-produits-contrat',
   imports: [FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule, DatePipe],
   templateUrl: './produits-contrat.component.html',
   styleUrl: './produits-contrat.component.scss'
 })
-export class ProduitsContratComponent {
+export class DetailsProduitsContratComponent {
   @Input() vehiculeForm!: FormGroup;
   @Input() isEdit = signal(false); // Indique si c'est un contrat ou une police
   @Input() isContrat = signal(true); // Indique si c'est un contrat ou une police
   @Input() contratDetails = signal<any>(null);
 
   codeprodSignal!: Signal<any>;
-  listProduits: Produit[] = []
+  productObject= signal<Produit | undefined> (undefined)
 
-  constructor(private fb: FormBuilder, private courtierService: CourtierService) {
-        this.vehiculeForm = this.fb.group({
-      codeprod: [''],
+
+
+  // Auto-fetch when contratDetails().Codeprod changes
+  constructor(private courtierService: CourtierService) {
+    effect(() => {
+      const codeProd = this.contratDetails().Codeprod;
+      if (codeProd) {
+        this.fetchProductDetails(codeProd);
+      }
     });
-    this.codeprodSignal = toSignal(
-      this.vehiculeForm.get('codeprod')!.valueChanges,
-      { initialValue: "" }
-    );
-   }
-
-  async ngOnInit() {
-
-    this.courtierService.getListeDesProduits().subscribe({
-      next: (data: Produit[]) => {
-        this.listProduits = data
-        this.vehiculeForm.get('codeprod')?.setValue(
-          this.contratDetails().Codeprod
-        );
-        console.log("recuper ");
-
-      }
-    })
-    this.courtierService.getDetailProduit(this.contratDetails().Codeprod).subscribe({
-      next: (data: Produit[]) => {
-        this.listProduits = data
-      }
-    })
   }
+
+  // API call
+  private fetchProductDetails(codeProd: string) {
+    this.courtierService.getDetailProduit(codeProd).subscribe({
+      next: (data: Produit) => {
+        this.productObject.set(data ?? undefined);
+        console.log("ici");
+        console.log(data);
+
+      },
+      error: (err) => {
+        console.error('Error loading product details', err);
+        this.productObject.set(undefined);
+      }
+    });
+  }
+
   ngOnChanges(): void {
 
   }
@@ -84,22 +84,17 @@ export class ProduitsContratComponent {
 
 
   };
-  visibleProductEntries = computed(() => {
-    const codeprod = this.codeprodSignal();
-    const productObject = this.listProduits.find((p)=>{return p.codeprod===codeprod});
-    console.log("ici "+codeprod)
-    console.log("ici "+productObject)
+visibleProductEntries = computed(() => {
+  const product = this.productObject() ?? {}; // ✅ prevent null errors
 
-    if (!productObject) return [];
-
-    return Object.entries(productObject)
-      .filter(([key]) => this.productDisplayMap[key])
-      .map(([key, value]) => ({
-        label: this.productDisplayMap[key]?.label || key,
-        value,
-        isDate: this.productDisplayMap[key]?.isDate || false,
-      }));
-  });
+  return Object.entries(product)
+    .filter(([key]) => !!this.productDisplayMap[key])
+    .map(([key, value]) => ({
+      label: this.productDisplayMap[key]?.label || key,
+      value,
+      isDate: this.productDisplayMap[key]?.isDate || false,
+    }));
+});
 
   // Helper to safely access dynamic property
   getPieceValue(entry: any): any {

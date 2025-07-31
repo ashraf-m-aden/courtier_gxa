@@ -15,7 +15,7 @@
       }
  }
     </div>
-    @if(contratDetails()){
+    @if(contratDetails() && isEdit()){
           <div class="col-12">
       <!-- contrat-stepper.component.html -->
         <mat-horizontal-stepper [linear]="true" #stepper>
@@ -37,7 +37,7 @@
             <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
           </mat-step>
 
-          <!-- Étape 2 -->
+
           <mat-step>
             <ng-template matStepLabel>Données administratives</ng-template>
             <admin-contrat [isEdit]="isEdit" [contratDetails]="contratDetails" ></admin-contrat>
@@ -51,7 +51,7 @@
             </div>
           </mat-step>
 
-          <!-- Étape 2 -->
+
           <mat-step>
             <ng-template matStepLabel
               >Données administratives - Pieces</ng-template
@@ -69,7 +69,95 @@
             </div>
           </mat-step>
 
-          <!-- Étape 2 -->
+
+          <mat-step>
+            <ng-template matStepLabel>Risques</ng-template>
+            <risque-contrat></risque-contrat>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary mt-5" matStepperPrevious>
+                PRÉCÉDENT
+              </button>
+              <button class="btn btn-primary mt-5" matStepperNext>
+                SUIVANT
+              </button>
+            </div>
+          </mat-step>
+
+          <!-- Ajoute les autres étapes ici -->
+
+          <mat-step>
+            <ng-template matStepLabel>Enregistrement</ng-template>
+            <p>Vérifiez les informations saisies.</p>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary mt-5" matStepperPrevious>
+                PRÉCÉDENT
+              </button>
+              <button
+                class="btn btn-warning"
+                color="primary"
+                (click)="onSubmit()"
+              >
+                Enregistrer
+              </button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+    }@else {
+              <div class="col-12">
+      <!-- contrat-stepper.component.html -->
+        <mat-horizontal-stepper [linear]="true" #stepper>
+          <mat-step>
+            <ng-template matStepLabel
+              >Informations générales et choix du produits</ng-template
+            >
+            <info-general-contrat
+              [isContrat]="isContrat"
+              [contratDetails]="contratDetails"
+              [isEdit]="isEdit"
+            ></info-general-contrat>
+            <produits-contrat
+              [contratDetails]="contratDetails"
+              [isEdit]="isEdit"
+              [isContrat]="isContrat"
+            ></produits-contrat>
+
+            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+          </mat-step>
+
+
+          <mat-step>
+            <ng-template matStepLabel>Données administratives</ng-template>
+            <admin-contrat [isEdit]="isEdit" [contratDetails]="contratDetails" ></admin-contrat>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary mt-5" matStepperPrevious>
+                PRÉCÉDENT
+              </button>
+              <button class="btn btn-primary mt-5" matStepperNext>
+                SUIVANT
+              </button>
+            </div>
+          </mat-step>
+
+
+          <mat-step>
+            <ng-template matStepLabel
+              >Données administratives - Pieces</ng-template
+            >
+            <admin-piece-contrat  [isContrat]="isContrat"
+              [contratDetails]="retrievedcontratDetails"
+              [isEdit]="isEdit"></admin-piece-contrat>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary mt-5" matStepperPrevious>
+                PRÉCÉDENT
+              </button>
+              <button class="btn btn-primary mt-5" matStepperNext>
+                SUIVANT
+              </button>
+            </div>
+          </mat-step>
+
+
           <mat-step>
             <ng-template matStepLabel>Risques</ng-template>
             <risque-contrat></risque-contrat>

@@ -6,12 +6,12 @@ import { Piec } from '../../../../Model/piec.model';
 import { CourtierService } from '../../../../Services/courtier/courtier.service';
 
 @Component({
-  selector: 'admin-piece-contrat',
+  selector: 'edit-admin-piece-contrat',
   imports: [FormsModule, ReactiveFormsModule, DatePipe],
   templateUrl: './admin-piece-contrat.component.html',
   styleUrl: './admin-piece-contrat.component.css'
 })
-export class AdminPieceContratComponent {
+export class EditAdminPieceContratComponent {
   @Input() isContrat = signal(true); // Indique si c'est un contrat
   @Input() isEdit = signal(true); // Indique si c'est un contrat ou une police
   @Input() contratDetails = signal<any>(null);

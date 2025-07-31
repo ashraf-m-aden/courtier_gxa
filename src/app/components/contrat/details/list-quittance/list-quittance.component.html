@@ -1,0 +1,24 @@
+<h5>Liste des quittances</h5>
+<table class="table table-bordered table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Numéro</th>
+      <th>Police</th>
+      <th>Contrat</th>
+      <th>Total Quit</th>
+      <th>Date Début Effet</th>
+    </tr>
+  </thead>
+  <tbody>
+
+   @for(quit of list_quittances;track quit){
+     <tr>
+      <td>{{ quit.Numero }}</td>
+      <td>{{ quit.Police }}</td>
+      <td>{{ quit.Contrat }}</td>
+      <td>{{ quit.Totquit }}</td>
+      <td>{{ quit.Debeffet | date: 'yyyy-MM-dd' }}</td>
+    </tr>
+   }
+  </tbody>
+</table>

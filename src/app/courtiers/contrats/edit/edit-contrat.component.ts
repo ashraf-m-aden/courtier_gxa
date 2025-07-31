@@ -9,14 +9,19 @@ import { ProduitsContratComponent } from '../../../components/contrat/nouveau/pr
 import { ActivatedRoute } from '@angular/router';
 import { Contrat } from '../../../Model/contrat.model';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
+import { EditAdminContratComponent } from '../../../components/contrat/edit/admin-contrat/admin-contrat.component';
+import { EditAdminPieceContratComponent } from '../../../components/contrat/edit/admin-piece-contrat/admin-piece-contrat.component';
+import { EditInfoGeneralContratComponent } from '../../../components/contrat/edit/info-general-contrat/info-general-contrat.component';
+import { EditProduitsContratComponent } from '../../../components/contrat/edit/produits-contrat/produits-contrat.component';
+import { EditRisqueContratComponent } from '../../../components/contrat/edit/risque-contrat/risque-contrat.component';
 
 @Component({
-  selector: 'nouveau-contrat',
-  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, InfoGeneralContratComponent, AdminContratComponent, AdminPieceContratComponent, RisqueContratComponent, ProduitsContratComponent],
-  templateUrl: './nouveau-contrat.component.html',
-  styleUrl: './nouveau-contrat.component.css'
+  selector: 'edit-contrat',
+  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, EditInfoGeneralContratComponent, EditAdminContratComponent, EditAdminPieceContratComponent, EditRisqueContratComponent, EditProduitsContratComponent],
+  templateUrl: './edit-contrat.component.html',
+  styleUrl: './edit-contrat.component.css'
 })
-export class NouveauContratComponent {
+export class EditContratComponent {
   contratForm!: FormGroup;
   isContrat = signal<boolean>(true);
   isEdit = signal<boolean>(true);

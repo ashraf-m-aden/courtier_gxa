@@ -24,19 +24,19 @@
       </tr>
     </thead>
     <tbody>
-      @for(q of quittances; track q.numero) {
+      @for(q of quittances; track q.Numero) {
         <tr>
-          <td>{{ q.numero }}</td>
-          <td>{{ q.police }}</td>
-          <td>{{ q.libelle }}</td>
-          <td>{{ q.nature }}</td>
-          <td>{{ q.contrat }}</td>
-          <td>{{ q.entite }}</td>
-          <td>{{ q.cie }}</td>
-          <td>{{ q.totquit }} {{ q.totquit1 }}</td>
-          <td>{{ q.pnette }} {{ q.pnette1 }}</td>
-          <td>{{ q.comm }} {{ q.comm1 }}</td>
-          <td>{{ q.taxe }} {{ q.taxe1 }}</td>
+          <td>{{ q.Numero }}</td>
+          <td>{{ q.Police }}</td>
+          <td>{{ q.Libelle }}</td>
+          <td>{{ q.Nature }}</td>
+          <td>{{ q.Contrat }}</td>
+          <td>{{ q.Entite }}</td>
+          <td>{{ q.Cie }}</td>
+          <td>{{ q.Totquit }} {{ q.Totquit1 }}</td>
+          <td>{{ q.Pnette }} {{ q.Pnette1 }}</td>
+          <td>{{ q.Comm }} {{ q.Comm1 }}</td>
+          <td>{{ q.Taxe }} {{ q.Taxe1 }}</td>
           <td>
          <button class="btn btn-primary" (dblclick)="encaisser()">Encaisser</button>
           </td>

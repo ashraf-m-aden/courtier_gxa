@@ -36,11 +36,16 @@
             <td>{{ contrat.Debcours | date : "dd/MM/yyyy" }}</td>
             <td>{{ contrat.Fincours | date : "dd/MM/yyyy" }}</td>
 
-            <td>
+            <td class="d-flex gap-2">
               <button class="btn btn-group btn-primary" (click)="voir(contrat)">
                 <mat-icon>visibility</mat-icon>
 
                 Voir
+              </button>
+               <button class="btn btn-group btn-primary" (click)="edit(contrat)">
+                <mat-icon>edit</mat-icon>
+
+                Modifier
               </button>
             </td>
           </tr>

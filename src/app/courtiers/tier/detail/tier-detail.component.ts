@@ -71,7 +71,7 @@ export class TierDetailComponent {
     // if (id) this.facade.getById(id);
     // this.selected.set(this.facade.selected());
     this.initForm();
-    this.courtierService.postDetailTier(this.id).subscribe({
+    this.courtierService.getDetailTier(this.id).subscribe({
       next: async (data: any) => {
         this.retrievedTier = data;
         if (this.retrievedTier.length > 0) {

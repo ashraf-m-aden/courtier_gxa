@@ -24,7 +24,7 @@ loadTiersData$ = createEffect(() =>
     ofType(CourtierActions.loadTiersData),
     switchMap(() =>
 
-      this.courtierService.postTiersSearch().pipe(
+      this.courtierService.getTiersSearch().pipe(
         map(tiers => CourtierActions.loadTiersDataSuccess({ tiers })),
         catchError(error => of(CourtierActions.loadTiersDataFailure({ error })))
       )

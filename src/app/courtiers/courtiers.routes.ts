@@ -1,3 +1,5 @@
+import { DetailsContratComponent } from './contrats/details/details.component';
+import { EditContratComponent } from './contrats/edit/edit-contrat.component';
 import { ListBordereauxComponent } from './bordereaux/list/list.component';
 import { NouveauContratComponent } from './contrats/nouveau-contrat/nouveau-contrat.component';
 import { ListContratComponent } from './contrats/list/list.component';
@@ -34,9 +36,15 @@ export const courtiersRoutes: Routes = [
       },
       { path: 'projets', loadComponent: () => import('./projets/projets.component').then(m => m.ProjetsComponent) },
       { path: 'contrats', loadComponent: () => import('./contrats/list/list.component').then(m => m.ListContratComponent) },
+
       { path: 'contrats/nouveau', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat: true } },
-      { path: 'contrats/details/:id', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat: true, isEdit: true } },
-      { path: 'projets/details/:id', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat: false, isEdit: true } },
+
+      { path: 'contrats/edit/:id', loadComponent: () => import('./contrats/edit/edit-contrat.component').then(m => m.EditContratComponent), data: { isContrat: true, isEdit: true } },
+      { path: 'projets/edit/:id', loadComponent: () => import('./contrats/edit/edit-contrat.component').then(m => m.EditContratComponent), data: { isContrat: false, isEdit: true } },
+
+        { path: 'contrats/details/:id', loadComponent: () => import('./contrats/details/details.component').then(m => m.DetailsContratComponent), data: { isContrat: true } },
+      { path: 'projets/details/:id', loadComponent: () => import('./contrats/details/details.component').then(m => m.DetailsContratComponent), data: { isContrat: false } },
+
       { path: 'commissions', loadComponent: () => import('./commissions/commissions.component').then(m => m.CommissionsComponent) },
       { path: 'profile', loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
       { path: 'tiers', loadComponent: () => import('./tier/list/tier-list.component').then(m => m.TierListComponent) },

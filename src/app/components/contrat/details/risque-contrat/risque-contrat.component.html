@@ -1,0 +1,186 @@
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex flex-column gap-4 p-4">
+      <div class="d-flex gap-4">
+        <!-- Vehicle Details -->
+        <fieldset class="card p-4 w-100">
+          <legend class="font-semibold text-lg">Véhicule</legend>
+
+          <div class="d-flex flex-column gap-1">
+            <label>Véhicule </label>
+            <span class="input">{{ contratDetails().vehicule }}</span>
+
+            <label>Usage </label>
+            <span class="input">{{ contratDetails().usage }}</span>
+
+            <label>Valeur à neuf </label>
+            <span class="input">{{ contratDetails().valeurNeuve }}</span>
+
+            <label>Expertise </label>
+            <span class="input">{{ contratDetails().expertise }}</span>
+
+            <label>Date acquisition </label>
+            <span class="input">{{ contratDetails().dateAcquisition | date:'yyyy-MM-dd' }}</span>
+
+            <label>Type </label>
+            <span class="input">{{ contratDetails().type }}</span>
+
+            <label>Dérogation FVA </label>
+            <span class="input">{{ contratDetails().derogationFVA }}</span>
+          </div>
+        </fieldset>
+
+        <!-- Carte Grise -->
+        <fieldset class="card p-4 w-100">
+          <legend class="font-semibold text-lg">Carte Grise</legend>
+
+          <label>Titulaire </label>
+          <span class="input">{{ contratDetails().titulaire }}</span>
+
+          <label>Nom </label>
+          <span class="input">{{ contratDetails().titulaireNom }}</span>
+
+          <div class="d-flex flex-column gap-1">
+            <label>Marque </label>
+            <span class="input">{{ contratDetails().marque }}</span>
+
+            <label>Pays d'immat. </label>
+            <span class="input">{{ contratDetails().paysImmat }}</span>
+
+            <label>Modèle </label>
+            <span class="input">{{ contratDetails().modele }}</span>
+
+            <label>Type </label>
+            <span class="input">{{ contratDetails().typeMine }}</span>
+
+            <label>Immatriculation </label>
+            <span class="input">{{ contratDetails().immatriculation }}</span>
+
+            <label>Date carte grise </label>
+            <span class="input">{{ contratDetails().dateCarteGrise | date:'yyyy-MM-dd' }}</span>
+
+            <label>1ère circulation </label>
+            <span class="input">{{ contratDetails().datePremiereCirculation | date:'yyyy-MM-dd' }}</span>
+
+            <label>Genre </label>
+            <span class="input">{{ contratDetails().genre }}</span>
+
+            <label>Carrosserie </label>
+            <span class="input">{{ contratDetails().carrosserie }}</span>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="d-flex gap-4 w-100">
+        <!-- Infos Techniques -->
+        <fieldset class="card p-4 w-100">
+          <legend class="font-semibold text-lg">Carte grise</legend>
+
+          <div class="d-flex flex-column gap-1">
+            <div class="d-flex gap-3 m-2">
+              <label>Energie </label>
+              <span class="input">{{ contratDetails().energie }}</span>
+
+              <label>Transmission </label>
+              <span class="input">{{ contratDetails().transmission }}</span>
+
+              <label>Précédente immat. </label>
+              <span class="input">{{ contratDetails().precedenteImmat }}</span>
+
+              <label>Type mine </label>
+              <span class="input">{{ contratDetails().typeMine }}</span>
+            </div>
+
+            <div class="d-flex gap-3 m-2">
+              <label>VIN / N° identification </label>
+              <span class="input">{{ contratDetails().numeroIdentification }}</span>
+
+              <label>Puissance fiscale </label>
+              <span class="input">{{ contratDetails().puissanceFiscale }}</span>
+
+              <label>Cat. </label>
+              <span class="input">{{ contratDetails().categorie }}</span>
+
+              <label>Places assises </label>
+              <span class="input">{{ contratDetails().placesAssises }}</span>
+            </div>
+
+            <div class="d-flex gap-3 m-2">
+              <label>Poids à vide </label>
+              <span class="input">{{ contratDetails().poidsVide }}</span>
+
+              <label>Poids T.R. </label>
+              <span class="input">{{ contratDetails().poidsTR }}</span>
+
+              <label>Tx CO2 </label>
+              <span class="input">{{ contratDetails().txCO2 }}</span>
+
+              <label>Cat. CO2 </label>
+              <span class="input">{{ contratDetails().catCO2 }}</span>
+            </div>
+
+            <div class="d-flex gap-3 m-2">
+              <label>Cv </label>
+              <span class="input">{{ contratDetails().cv }}</span>
+
+              <label>Kilométrage </label>
+              <span class="input">{{ contratDetails().kilometrage }}</span>
+
+              <label>Couleur </label>
+              <span class="input">{{ contratDetails().couleur }}</span>
+
+              <label>Clé Rép. </label>
+              <span class="input">{{ contratDetails().cleRep }}</span>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="d-flex">
+        <fieldset class="card p-4 w-100">
+          <legend class="font-semibold text-lg">Conducteurs autorisés</legend>
+
+          <div class="d-flex flex-column gap-3">
+            <!-- Checkboxes as disabled -->
+
+
+            <!-- Tableau des conducteurs ajoutés -->
+            <table class="table-auto w-full border mt-2">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th>Titre</th>
+                  <th>Nom et prénom</th>
+                  <th>Age</th>
+                  <th>Date B</th>
+                  <th>Numéro / Permis</th>
+                  <th>Permis délivré par</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(driver of conducteurs;track driver; let i=$index){
+                <tr>
+                  <td>{{ driver.titre }}</td>
+                  <td>{{ driver.nomPrenom }}</td>
+                  <td>{{ driver.age }}</td>
+                  <td>{{ driver.dateB }}</td>
+                  <td>{{ driver.numeroPermis }}</td>
+                  <td>{{ driver.permisDelivrePar }}</td>
+                  <td>
+                    <button
+                      class="btn btn-sm btn-danger"
+                      (click)="supprimerConducteur(i)"
+                    >
+                      Supprimer
+                    </button>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>

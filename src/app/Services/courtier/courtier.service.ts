@@ -51,33 +51,41 @@ export class CourtierService {
     return this.http.get<any[]>(`${this.baseUrl}/courtiers/commissions`);
   }
 
+  getRisque(contrat: number, piece: number): Observable<any[]> {
+    const payload = {
+      "BasSecurityContext": this.BasSecurityContext,
+      contrat, piece
+    };
+    return this.http.post<any[]>(`${this.baseUrl}/risk/risk_listitems`, payload);
+  }
 
 
-  postAjoutPieceAuContrat(payload: any): Observable<any> {
+
+  getAjoutPieceAuContrat(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/ajout_piece_au_contrat`, payload);
   }
 
-  postCheckSession(payload: any): Observable<any> {
+  getCheckSession(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/check_session`, payload);
   }
 
-  postCreateContrat(payload: any): Observable<any> {
+  getCreateContrat(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/create_contrat`, payload);
   }
 
-  postCreateQuittance(payload: any): Observable<any> {
+  getCreateQuittance(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/create_quittance`, payload);
   }
 
-  postCreateReglement(payload: any): Observable<any> {
+  getCreateReglement(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/create_reglement`, payload);
   }
 
-  postCreateTier(payload: any): Observable<any> {
+  getCreateTier(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/create_tier`, payload);
   }
 
-  postDetailContrat(contrat: number): Observable<any> {
+  getDetailContrat(contrat: number): Observable<any> {
     let payload = {
       "BasSecurityContext": this.BasSecurityContext,
       "contrat": contrat,
@@ -90,7 +98,7 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/detail_contrat`, payload);
   }
 
-  postDetailProduit(code: string): Observable<any> {
+  getDetailProduit(code: string): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
       code: code,
@@ -99,11 +107,11 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/detail_produit`, payload);
   }
 
-  postDetailQuittance(payload: any): Observable<any> {
+  getDetailQuittance(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/detail_quittance`, payload);
   }
 
-  postDetailTier(id: number): Observable<Object> {
+  getDetailTier(id: number): Observable<Object> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
       Dossier: id
@@ -111,11 +119,11 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/detail_tier`, payload);
   }
 
-  postListeDesContrats(payload: any): Observable<any> {
+  getListeDesContrats(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/liste_des_contrats`, payload);
   }
 
-  postListeDesContratsDUnTier(id: number): Observable<any> {
+  getListeDesContratsDUnTier(id: number): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
       dossier: id,
@@ -125,26 +133,31 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/liste_des_contrats_d_un_tier`, payload);
   }
 
-  postListeDesProduits(): Observable<any> {
+  getListeDesProduits(): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
 
     }; return this.http.post(`${this.baseUrl}/liste_des_produits`, payload);
   }
 
-  postListeDesQuittances(payload: any): Observable<any> {
+  getListeDesQuittances(dossier:number, contrat:number): Observable<any> {
+    let payload  ={
+      BasSecurityContext: this.BasSecurityContext,
+      dossier:dossier,
+      contrat:contrat
+    }
     return this.http.post(`${this.baseUrl}/liste_des_quittances`, payload);
   }
 
-  postProjects(payload: any): Observable<any> {
+  getProjects(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/projects`, payload);
   }
 
-  postTabs(payload: any): Observable<any> {
+  getTabs(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/tabs`, payload);
   }
 
-  postLogout(payload: any): Observable<any> {
+  getLogout(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/logout`, payload);
   }
 
@@ -152,7 +165,7 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/profile`, payload);
   }
 
-  postTiersSearch(): Observable<any> {
+  getTiersSearch(): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
       reference: "default"
@@ -160,15 +173,15 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/Tiers_Search`, payload);
   }
 
-  postContratUpdate(payload: any): Observable<any> {
+  getContratUpdate(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/Contrat_Update`, payload);
   }
 
-  postTiersUpdate(payload: any): Observable<any> {
+  getTiersUpdate(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/Tiers_Update`, payload);
   }
 
-  postUpdatePieceDuContrat(payload: any): Observable<any> {
+  getUpdatePieceDuContrat(payload: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/update_piece_contrat`, payload);
   }
 }

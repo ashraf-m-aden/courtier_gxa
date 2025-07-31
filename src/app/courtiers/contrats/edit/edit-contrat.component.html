@@ -1,0 +1,99 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      @if(isContrat()){
+      <h5>Modifier un contrat</h5>
+      } @else {
+      <h5>Modifier un projet</h5>
+      }
+    </div>
+    @if(contratDetails() ){
+    <div class="col-12">
+      <!-- contrat-stepper.component.html -->
+      <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-step>
+          <ng-template matStepLabel
+            >Informations générales et choix du produits</ng-template
+          >
+          <edit-info-general-contrat
+            [isContrat]="isContrat"
+            [contratDetails]="contratDetails"
+            [isEdit]="isEdit"
+          ></edit-info-general-contrat>
+          <edit-produits-contrat
+            [contratDetails]="contratDetails"
+            [isEdit]="isEdit"
+            [isContrat]="isContrat"
+          ></edit-produits-contrat>
+
+          <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+        </mat-step>
+
+
+        <mat-step>
+          <ng-template matStepLabel>Données administratives</ng-template>
+          <edit-admin-contrat
+            [isEdit]="isEdit"
+            [contratDetails]="contratDetails"
+          ></edit-admin-contrat>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary mt-5" matStepperPrevious>
+              PRÉCÉDENT
+            </button>
+            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+          </div>
+        </mat-step>
+
+
+        <mat-step>
+          <ng-template matStepLabel
+            >Données administratives - Pieces</ng-template
+          >
+          <edit-admin-piece-contrat
+            [isContrat]="isContrat"
+            [contratDetails]="retrievedcontratDetails"
+            [isEdit]="isEdit"
+          ></edit-admin-piece-contrat>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary mt-5" matStepperPrevious>
+              PRÉCÉDENT
+            </button>
+            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+          </div>
+        </mat-step>
+
+
+        <mat-step>
+          <ng-template matStepLabel>Risques</ng-template>
+          <edit-risque-contrat></edit-risque-contrat>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary mt-5" matStepperPrevious>
+              PRÉCÉDENT
+            </button>
+            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+          </div>
+        </mat-step>
+
+        <!-- Ajoute les autres étapes ici -->
+
+        <mat-step>
+          <ng-template matStepLabel>Enregistrement</ng-template>
+          <p>Vérifiez les informations saisies.</p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary mt-5" matStepperPrevious>
+              PRÉCÉDENT
+            </button>
+            <button
+              class="btn btn-warning"
+              color="primary"
+              (click)="onSubmit()"
+            >
+              Enregistrer
+            </button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+    }
+  </div>
+</div>

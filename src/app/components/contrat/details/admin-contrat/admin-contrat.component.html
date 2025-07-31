@@ -1,0 +1,192 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <!-- Échéances -->
+      <div class="d-flex gap-5 mb-5">
+        <fieldset class="d-flex gap-4 card flex-column w-100 m-2">
+          <legend class="font-semibold text-lg">Échéances</legend>
+          <div class="d-flex gap-5">
+            <div class="d-flex flex-column gap-4">
+
+              <div class="d-flex flex-sm-column gap-4">
+
+                <div class="flex-column">
+                  <label>Fractionnement: </label>
+                  <span class="border p-1 rounded block">
+                    {{ contratDetails()?.Frac }}
+                  </span>
+                </div>
+
+                <div class="flex-column">
+                  <label>Jour: </label>
+                  <span class="border p-1 rounded w-16 block">
+                    {{ contratDetails()?.Echpjj }}
+                  </span>
+                </div>
+
+                <div class="flex-column">
+                  <label>Mois: </label>
+                  <span class="border p-1 rounded w-16 block">
+                    {{ contratDetails()?.Echpmm }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="d-flex gap-4">
+                <label>
+                  <input type="checkbox" disabled
+                    [checked]="contratDetails()?.Echu" />
+                  Terme échu
+                </label>
+
+                <label>
+                  <input type="checkbox" disabled
+                    [checked]="!contratDetails()?.Tacite" />
+                  Sans tacite reconduction
+                </label>
+              </div>
+
+              <label>
+                Prochaine échéance :
+                <span class="border p-1 rounded w-full block">
+                  {{ contratDetails()?.Finsuiv | date:'yyyy-MM-dd' }}
+                </span>
+              </label>
+
+              <label>
+                Période en cours :
+                <span class="border p-1 rounded w-full block">
+                  {{ contratDetails()?.Debcours }} - {{ contratDetails()?.Fincours }}
+                </span>
+              </label>
+
+              <label>
+                Période anniversaire :
+                <span class="border p-1 rounded w-full block">
+                  {{ contratDetails()?.Debann }} - {{ contratDetails()?.Finann }}
+                </span>
+              </label>
+
+              <label>
+                Date de suspension prévisionnelle :
+                <span class="border p-1 rounded w-full block">
+                  {{ contratDetails()?.Prevsusp | date:'yyyy-MM-dd' }}
+                </span>
+              </label>
+
+              <label>
+                Date de résiliation prévisionnelle :
+                <span class="border p-1 rounded w-full block">
+                  {{ contratDetails()?.Prevresi | date:'yyyy-MM-dd' }}
+                </span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Situation Comptable -->
+        <fieldset class="d-flex gap-4 flex-column w-100 card m-2">
+          <legend class="font-semibold text-lg">Situation comptable</legend>
+          <p>Net : {{ contratDetails()?.Netimp }}</p>
+          <p>Impayés : {{ contratDetails()?.Impaye }}</p>
+          <p>Actes : {{ contratDetails()?.Actes }}</p>
+        </fieldset>
+      </div>
+
+      <!-- Gestion -->
+      <fieldset class="d-flex gap-4 flex-column w-100 m-2 card">
+        <legend class="font-semibold text-lg">Informations de gestion</legend>
+
+        <label>
+          Gestionnaire :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.Gestionn }}
+          </span>
+        </label>
+
+        <label>
+          Centre de gestion Cie :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.Centre }}
+          </span>
+        </label>
+
+        <label>
+          Mode de gestion :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.Modegest }}
+          </span>
+        </label>
+
+        <label>
+          Destinataire des taxes :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.DestinataireTaxes }}
+          </span>
+        </label>
+
+        <div class="flex gap-4">
+          <label>
+            % Commission attendue :
+            <span class="border p-1 rounded w-24 block">
+              {{ contratDetails()?.CommissionAttendue }}
+            </span>
+          </label>
+
+          <label>
+            dont commission de gestion :
+            <span class="border p-1 rounded w-24 block">
+              {{ contratDetails()?.CommissionGestion }}
+            </span>
+          </label>
+        </div>
+
+        <div class="flex gap-4">
+          <label>
+            <input type="checkbox" disabled
+              [checked]="contratDetails()?.Polinter === false" />
+            Pollicitation interdite
+          </label>
+
+          <label>
+            <input type="checkbox" disabled
+              [checked]="contratDetails()?.Nonepur" />
+            À conserver si épuration
+          </label>
+        </div>
+
+        <label>
+          Date de réalisation :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.Datereal | date:'yyyy-MM-dd' }}
+          </span>
+        </label>
+
+        <label>
+          Signature :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.TypeSignature }}
+          </span>
+        </label>
+
+        <label>
+          Préavis résiliation (mois) :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.Preavis }}
+          </span>
+        </label>
+
+        <label>
+          Modalités de révision :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.Modrev }}
+          </span>
+        </label>
+
+        <label>
+          Durée fixe (ans) :
+          <span class="border p-1 rounded w-full block">
+            {{ contratDetails()?.Duree }}
+          </span>
+        </label>
+      <

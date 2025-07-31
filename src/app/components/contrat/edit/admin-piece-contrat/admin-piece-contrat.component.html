@@ -1,0 +1,101 @@
+<div class="row card">
+  <div class="col-12">
+    <!-- Table: Pièces successives -->
+    <table class="table w-full border">
+      <thead>
+        <tr>
+          @for (key of visiblePieceKeys; track key) {
+          <th class="text-left px-2 py-1 bg-gray-100 border-b">
+            {{ pieceDisplayMap[key]?.label || key }}
+          </th>
+          }
+                    <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        @for (piece of pieces; track piece) {
+        <tr>
+          @for (key of visiblePieceKeys; track key) {
+          <td class="border px-2 py-1 text-sm">
+            @if ((pieceDisplayMap)[key]?.isDate) {
+            {{ getPieceValue(piece, key) | date : "dd/MM/yyyy" }}
+            } @else {
+            {{ getPieceValue(piece, key) ?? "-" }}
+            }
+          </td>
+
+          }
+          <td>
+            <button class="btn btn-primary" (click)="update(piece)">Mise à jour</button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12 col-md-6">
+    <!-- Form: Ajouter / Modifier une pièce -->
+<form [formGroup]="pieceForm" class="card p-4 mt-5 w-100 shadow-sm" (ngSubmit)="onSubmit()">
+  <h5 class="mb-4">Détails de la pièce</h5>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">N° Pièce</label>
+      <input formControlName="Piece" type="text" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">N° Avenant</label>
+      <input formControlName="Navenant" type="text" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Réf. CG</label>
+      <input formControlName="Cg" type="text" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Origine</label>
+      <select formControlName="Origine" class="form-select">
+        <option value="">-- Sélectionner --</option>
+        <option value="affaire nouvelle">Affaire nouvelle</option>
+        <option value="renouvellement">Renouvellement</option>
+        <option value="résiliation">Résiliation</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Effet le</label>
+      <input formControlName="Effet" type="date" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Heure</label>
+      <input formControlName="HeureEffet" type="time" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Motif</label>
+      <input formControlName="Motif" type="text" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Situation</label>
+      <select formControlName="Situation" class="form-select">
+        <option value="">-- Sélectionner --</option>
+        <option value="Nouvelle pièce">Nouvelle pièce</option>
+        <option value="Résiliée">Résiliée</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Boutons -->
+  <div class="d-flex justify-content-end gap-3 mt-4">
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">Annuler</button>
+    <button type="submit" class="btn btn-primary" [disabled]="pieceForm.invalid">Valider</button>
+  </div>
+</form>
+
+  </div>
+</div>

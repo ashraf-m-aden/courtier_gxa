@@ -27,12 +27,12 @@ interface CategorieVehicule {
 }
 
 @Component({
-  selector: 'produits-contrat',
+  selector: 'edit-produits-contrat',
   imports: [FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule, DatePipe],
   templateUrl: './produits-contrat.component.html',
   styleUrl: './produits-contrat.component.scss'
 })
-export class ProduitsContratComponent {
+export class EditProduitsContratComponent {
   @Input() vehiculeForm!: FormGroup;
   @Input() isEdit = signal(false); // Indique si c'est un contrat ou une police
   @Input() isContrat = signal(true); // Indique si c'est un contrat ou une police

@@ -3,15 +3,13 @@
     @if (isContrat()) {
     <div class="col-md-6 mb-3">
       <h6>Intitulé du contrat</h6>
-
-        <input class="form-control" formControlName="Intitule" />
+        <div>{{ formGroup.get('Intitule')?.value }}</div>
 
     </div>
   } @else {
     <div class="col-md-6 mb-3">
       <h6>Intitulé du projet</h6>
-
-        <input class="form-control" formControlName="Intitule" />
+        <div>{{ formGroup.get('Intitule')?.value }}</div>
 
     </div>
   }

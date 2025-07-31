@@ -22,7 +22,7 @@ export class ListContratComponent {
     if (this.isContrat) {
       console.log("conrat");
 
-      await this.courtierService.postListeDesContratsDUnTier(this.idTier).subscribe({
+      await this.courtierService.getListeDesContratsDUnTier(this.idTier).subscribe({
         next: async (dataC: any) => {
           this.contrats = dataC;
         }
@@ -31,7 +31,7 @@ export class ListContratComponent {
     } else {
       console.log("projet");
 
-      await this.courtierService.postListeDesContratsDUnTier(this.idTier).subscribe({
+      await this.courtierService.getListeDesContratsDUnTier(this.idTier).subscribe({
         next: async (dataC: Contrat[]) => {
           this.contrats = dataC.filter((c) => { return !c.Contrat });
         }
@@ -64,6 +64,21 @@ export class ListContratComponent {
     } else {
       const url = this.router.serializeUrl(
         this.router.createUrlTree(['/courtiers/projets/details/' + contrat.Contrat])
+      ); window.open(url, '_blank');
+
+    }
+  }
+
+    edit(contrat: any): void {
+
+    if (this.isContrat) {
+      const url = this.router.serializeUrl(
+        this.router.createUrlTree(['/courtiers/contrats/edit/' + contrat.Contrat])
+      ); window.open(url, '_blank');
+
+    } else {
+      const url = this.router.serializeUrl(
+        this.router.createUrlTree(['/courtiers/projets/edit/' + contrat.Contrat])
       ); window.open(url, '_blank');
 
     }

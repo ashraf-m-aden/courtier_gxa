@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="card p-3">
+    <h2 class="text-xl font-bold mb-3">Informations Véhicule</h2>
+
+    <!-- CATEGORIE -->
+    <div class="mb-2">
+      <label class="fw-bold">Produit :</label>
+      <span>{{ contratDetails().Codeprod }}</span>
+    </div>
+
+    <!-- MARQUE -->
+    <div class="mb-2">
+      <label class="fw-bold">Détails du produit :</label>
+      <table class="table-auto w-full border">
+        <thead>
+          <tr>
+            @for (entry of visibleProductEntries(); track entry.label) {
+            <th class="border px-2 py-1 text-sm">{{ entry.label }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            @for (entry of visibleProductEntries(); track entry.label) {
+            <td class="border px-2 py-1 text-sm">
+              @if (entry.isDate) {
+              {{ getPieceValue(entry) | date : "dd/MM/yyyy" }}
+              } @else {
+              {{ getPieceValue(entry) ?? "-" }}
+              }
+            </td>
+            }
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
