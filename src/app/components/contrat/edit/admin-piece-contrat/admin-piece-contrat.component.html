@@ -27,7 +27,13 @@
 
           }
           <td>
+            @if(piece.Contrat){
             <button class="btn btn-primary" (click)="update(piece)">Mise à jour</button>
+
+            }@else {
+            <button class="btn btn-primary" (click)="onSubmit()">Ajouter</button>
+
+            }
           </td>
         </tr>
         }

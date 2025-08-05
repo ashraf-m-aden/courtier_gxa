@@ -15,6 +15,7 @@ export class EditAdminPieceContratComponent {
   @Input() isContrat = signal(true); // Indique si c'est un contrat
   @Input() isEdit = signal(true); // Indique si c'est un contrat ou une police
   @Input() contratDetails = signal<any>(null);
+  @Input() retrievedcontratDetails = signal<any>(null);
 
   pieces: Piec[] = []
 
@@ -50,7 +51,7 @@ export class EditAdminPieceContratComponent {
 
   constructor(private fb: FormBuilder, private courtierService: CourtierService) {
     effect(() => {
-      this.pieces = this.contratDetails().filter((c: any) => { return c.typename == "piec" })
+      this.pieces = this.retrievedcontratDetails().filter((c: any) => { return c.typename == "piec" })
       console.log("UPDATE");
 
       this.patchPieceForm(this.piece())
@@ -167,7 +168,7 @@ export class EditAdminPieceContratComponent {
 
   ngOnChanges(): void {
 
-    console.log(this.contratDetails());
+    console.log(this.retrievedcontratDetails());
 
   }
 
@@ -209,16 +210,22 @@ export class EditAdminPieceContratComponent {
     if (this.pieceForm.valid) {
 
       let payload = {
-        "contrat": this.pieceForm.get("Contrat")?.value,
-        "produit": this.pieceForm.get("Codeprod")?.value,
+        // "contrat": this.contratDetails().Contrat,
+
+        "dossier": this.contratDetails().Contrat,
+        "produit": this.contratDetails().Codeprod,
         "Effet": this.pieceForm.get("Effet")?.value,
         "data": this.pieceForm.value,
         "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!)
       }
+      console.log(payload);
+      console.log(this.contratDetails());
+
+
       if (payload.produit && payload.produit != "" && payload.produit != null && payload.produit != undefined) {
         this.courtierService.getUpdatePieceDuContrat(payload).subscribe({
           next: () => {
-            this.courtierService.getDetailContrat(payload.contrat).subscribe({
+            this.courtierService.getDetailContrat(payload.dossier).subscribe({
               next: (data: any) => {
                 this.contratDetails.set(data)
               }
@@ -228,7 +235,7 @@ export class EditAdminPieceContratComponent {
       } else {
         this.courtierService.getAjoutPieceAuContrat(payload).subscribe({
           next: () => {
-            this.courtierService.getDetailContrat(payload.contrat).subscribe({
+            this.courtierService.getDetailContrat(payload.dossier).subscribe({
               next: (data: any) => {
                 this.contratDetails.set(data)
               }
@@ -242,7 +249,7 @@ export class EditAdminPieceContratComponent {
 
   onCancel() {
     this.pieceForm.reset();
-    this.pieceForm.get("Contrat")?.setValue(this.contratDetails()[0].Contrat)
-     this.pieceForm.get("Codeprod")?.setValue(this.contratDetails()[0].Codeprod)
+    this.pieceForm.get("Contrat")?.setValue(this.retrievedcontratDetails()[0].Contrat)
+    this.pieceForm.get("Codeprod")?.setValue(this.retrievedcontratDetails()[0].Codeprod)
   }
 }

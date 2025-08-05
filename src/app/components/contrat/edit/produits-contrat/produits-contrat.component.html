@@ -1,7 +1,7 @@
 <div class="row">
   @if( isContrat()){
   <div class="card p-3">
-    <h2 class="text-xl font-bold mb-3">Informations Véhicule</h2>
+    <h2 class="text-xl font-bold mb-3">Produit</h2>
 
     <!-- CATEGORIE -->
     <div class="mb-2">
@@ -44,9 +44,9 @@
 
       <!-- CATEGORIE -->
       <div class="d-flex m-3 flex-column">
-        <label class="block mb-1">Catégorie</label>
+        <label class="block mb-1">Liste des produits</label>
         <select formControlName="codeprod" class="border p-2 rounded w-full">
-          <option value="">-- Choisir une catégorie --</option>
+          <option value="">-- Choisir un produit --</option>
           @for(cat of listProduits;track cat){
           <option [value]="cat.codeprod">
             {{ cat.libelle }}

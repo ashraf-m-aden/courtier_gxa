@@ -1,23 +1,24 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ActivatedRoute } from '@angular/router';
-import { CourtierService } from '../../../Services/courtier/courtier.service';
 import { DetailsAdminContratComponent } from '../../../components/contrat/details/admin-contrat/admin-contrat.component';
 import { DetailsAdminPieceContratComponent } from '../../../components/contrat/details/admin-piece-contrat/admin-piece-contrat.component';
 import { DetailsInfoGeneralContratComponent } from '../../../components/contrat/details/info-general-contrat/info-general-contrat.component';
+import { ListQuittanceDetailsComponent } from '../../../components/contrat/details/list-quittance/list-quittance.component';
 import { DetailsProduitsContratComponent } from '../../../components/contrat/details/produits-contrat/produits-contrat.component';
 import { DetailsRisqueContratComponent } from '../../../components/contrat/details/risque-contrat/risque-contrat.component';
-import { ListQuittanceDetailsComponent } from '../../../components/contrat/details/list-quittance/list-quittance.component';
+import { CourtierService } from '../../../Services/courtier/courtier.service';
 
 @Component({
-  selector: 'details',
+  selector: 'app-details-contrat',
   imports: [FormsModule, MatStepperModule,ListQuittanceDetailsComponent, ReactiveFormsModule, DetailsInfoGeneralContratComponent, DetailsAdminContratComponent, DetailsAdminPieceContratComponent, DetailsRisqueContratComponent, DetailsProduitsContratComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
 export class DetailsContratComponent {
-  isContrat = signal<boolean>(true);
+
+ isContrat = signal<boolean>(true);
   isEdit = signal<boolean>(true);
   contratDetails = signal<any>(null);
   retrievedcontratDetails = signal<any>(null);
