@@ -1,3 +1,4 @@
+import { Piec } from './../../../../Model/piec.model';
 import { Component, effect, Input, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourtierService } from '../../../../Services/courtier/courtier.service';
@@ -88,6 +89,8 @@ export class EditRisqueContratComponent {
       } else {
         this.riskForm.reset();
       }
+
+
     }
     );
   }
@@ -98,48 +101,23 @@ export class EditRisqueContratComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-this.riskForm.get('Datecg')!.valueChanges.subscribe(value => {
-  if (value) {
-    const date = new Date(value);
-    this.riskForm.get('Datecg')!.setValue(date, { emitEvent: false });
-  }
-});
-this.riskForm.get('Datecirc')!.valueChanges.subscribe(value => {
-  if (value) {
-    const date = new Date(value);
-    this.riskForm.get('Datecirc')!.setValue(date, { emitEvent: false });
-  }
-});
+    this.riskForm.get('Datecg')!.valueChanges.subscribe(value => {
+      if (value) {
+        const date = new Date(value);
+        this.riskForm.get('Datecg')!.setValue(date, { emitEvent: false });
+      }
+    });
+    this.riskForm.get('Datecirc')!.valueChanges.subscribe(value => {
+      if (value) {
+        const date = new Date(value);
+        this.riskForm.get('Datecirc')!.setValue(date, { emitEvent: false });
+      }
+    });
     this.riskForm.valueChanges.subscribe(values => {
       this.risa().Appel = values?.Appel;
       this.risa().Dateori = null;
-      console.log(this.riskForm.value);
 
-      let payload = {
-        // "contrat": this.contratDetails().Contrat,
 
-        "piece": this.contratDetails().Piece,
-        "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!),
-        "contrat": this.contratDetails().Contrat,
-        "data": { "RISA": this.risa(), "rveh": this.riskForm.value },
-      }
-      this.courtierService.postupdateRisk(payload).subscribe({
-        next: (data: any) => {
-          console.log("Contrat mis à jour avec succès", data);
-          this.courtierService.getDetailContrat(payload.contrat).subscribe({
-            next: (data: any) => {
-              this.contratDetails.set(this.courtierService.mergeObjects(data));
-            },
-            error: (err) => {
-              console.error("Erreur lors de la récupération des détails du contrat", err);
-            }
-          });
-        }
-        , error: (err) => {
-          console.error("Erreur lors de la mise à jour du contrat", err);
-        }
-
-      });
     });
   }
 
@@ -164,6 +142,8 @@ this.riskForm.get('Datecirc')!.valueChanges.subscribe(value => {
     if (changes['conducteurSelectionne']) {
       console.log(this.conducteurSelectionne)
     }
+
+
   }
 
 
@@ -203,5 +183,33 @@ this.riskForm.get('Datecirc')!.valueChanges.subscribe(value => {
       "typename": 'rveh'
 
     }, { emitEvent: false });
+  }
+
+  updateRisque() {
+    let payload = {
+      // "contrat": this.contratDetails().Contrat,
+
+      "piece": this.contratDetails().Piece,
+      "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!),
+      "contrat": this.contratDetails().Contrat,
+      "data": { "RISA": this.risa(), "rveh": this.riskForm.value },
+    }
+    this.courtierService.postupdateRisk(payload).subscribe({
+      next: (data: any) => {
+        console.log("Contrat mis à jour avec succès", data);
+        this.courtierService.getDetailContrat(payload.contrat).subscribe({
+          next: (data: any) => {
+            this.contratDetails.set(this.courtierService.mergeObjects(data));
+          },
+          error: (err) => {
+            console.error("Erreur lors de la récupération des détails du contrat", err);
+          }
+        });
+      }
+      , error: (err) => {
+        console.error("Erreur lors de la mise à jour du contrat", err);
+      }
+
+    });
   }
 }

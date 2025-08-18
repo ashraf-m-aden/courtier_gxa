@@ -99,7 +99,7 @@ export class CourtierService {
   }
 
   getDetailAdhesion(adh: number): Observable<any> {
-    console.log("adhesion : " +adh);
+    console.log("adhesion : " + adh);
 
     let payload = {
       "BasSecurityContext": this.BasSecurityContext,
@@ -191,6 +191,10 @@ export class CourtierService {
 
   postupdateRisk(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/Risk/risk_update`, payload);
+  }
+
+  postcreateeRisk(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Risk/risk_create`, payload);
   }
 
   getTiersUpdate(payload: any): Observable<any> {

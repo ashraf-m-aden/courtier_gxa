@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <form [formGroup]="riskForm" class="d-flex flex-column gap-4 p-4">
+    <form [formGroup]="riskForm" class="d-flex flex-column gap-4 p-4" (ngSubmit)="updateRisque()">
       <div class="d-flex gap-4">
         <!-- Vehicle Details -->
         <fieldset class="card p-4 w-100">
@@ -121,7 +121,11 @@
             </div>
           </div>
         </fieldset>
+
       </div>
+        <div>
+          <button class="btn btn-group btn-primar"> Mettre à jour</button>
+        </div>
       <!-- <div class="d-flex">
         <fieldset class="card p-4 w-100">
           <legend class="font-semibold text-lg">Conducteurs autorisés</legend>

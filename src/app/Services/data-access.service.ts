@@ -8,7 +8,6 @@ import { BasSoapClient } from '../Model/Model-BasSoapClient/BasSoapClient';
 import { Tier, TierTagMap } from '../Model/tier.model';
 import { AppConfigService } from './AppConfigService/app-config.service';
 //import { isEntityName } from 'typescript';
-import { produitTagMap } from '../Model/produit.model';
 import { SessionStorage } from '../Model/Model-SessionStorage/SessionStorage';
 import { xtlogTagMap,Xtlog } from '../Model/xtlog.model';
 
@@ -224,7 +223,7 @@ public update(entity:string, id:number, data:any){
     private getTagMap(entity:string){
       let tagmap:any
       switch(entity) {
-        case "prod": return produitTagMap ;
+//        case "prod": return produitTagMap ;
         case "tier": return TierTagMap;
         case "xtlog": return xtlogTagMap;
         default:

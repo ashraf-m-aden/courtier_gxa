@@ -22,14 +22,14 @@ export class ProduitService {
     this.sessionStorage = new SessionStorage();
       this._basAction = new BasAction(this.basSoapClient, this.httpClient, this.appConfigService);
       this._authenticationHelper = new AuthenticationHelper(this.sessionStorage, this.httpClient, this.basSoapClient, this.appConfigService);
-  
+
   }
 
   async getAll(): Promise<Observable<Produit[]> | undefined>
     {
         let username: string = "superviseur";
         let password: string = "21032024";
-    
+
          // let actionName: string = "Bran_ListItems";
        // let actionName: string = "Sys_Echo";
       let actionName: string = "Produit_ListItems";
@@ -41,15 +41,15 @@ export class ProduitService {
                 console.log("Resulta connection.....:"+this._authenticationHelper.getSecurityContext.SessionId)
                 let basParams = new BasParams();
                 basParams.AddStr('message', "Test From Angular");
-              
+
             basParams.AddBool('disponible', true);
           let testresult= await (this._basAction.RunAction(actionName, basParams, this._authenticationHelper.getSecurityContext))
           .catch(e=>
             console.log("Resulta de RunAction dans Catch.....:"+ e +"===============================================================================================================================")
           )
            //.then((testresult) =>{
-          
-           
+
+
            if(testresult){
             console.log("Resulta de RunAction.....:"+testresult)
             console.log(":===============================================================================================================================")
@@ -59,20 +59,20 @@ export class ProduitService {
            console.log(":===============================================================================================================================")
 
            let produits:Produit[]= this.parseSoapResponse(testresult)
-            //  this.parseSoapResponse(testresult) 
+            //  this.parseSoapResponse(testresult)
             console.log("Resulta Produit_ListItems.....:"+JSON.stringify(produits.forEach(p=>p.codeprod))) ;
            // let produits:Produit[] =[]
           //  produitss.
-           // JSON.parse(produitss) 
+           // JSON.parse(produitss)
             return of(produits )
         }
         else{
             throwError(new Error(`Erreur de reccuperation des donnees sur Produit_ListItems`))
             console.log("ERREUR Resulta Produit_ListItems.....Pas de donn2es recus:");
-         
-            return 
+
+            return
        // } })
-    }  
+    }
             // disconnect
           //  this._authenticationHelper.LogOut();})  }
       //  catch(error: any){ console.error("ERREUR Resulta Produit_ListItems.....dans Catch....."+ error)
@@ -98,7 +98,7 @@ export class ProduitService {
 
   public parseSoapResponse(xmlString: string): Produit[] {
     const produits: Produit[] = [];
-  
+
     const cleaned = xmlString
       .replace(/\\</g, '<')
       .replace(/\\>/g, '>')
@@ -107,27 +107,27 @@ export class ProduitService {
       .replace(/\\\\/g, '\\')
       .replace(/&gt;/g, '>')
       .replace(/&lt;/g, '<');
-  
+
     const match = cleaned.match(/<prods[^>]*>[\s\S]*?<\/prods>/);
     if (!match) return produits;
-  
+
     const wrappedXml = match[0];
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(wrappedXml, 'text/xml');
     const prodElements = xmlDoc.getElementsByTagName('prod');
-  
+
     for (let i = 0; i < prodElements.length; i++) {
         const defaults: Partial<Produit> = {
             taxatt: 0,
             tauxano: 0,
           };
-          
+
           const produit = this.autoMapXmlToObject<Produit>(prodElements[i], produitTagMap, defaults);
-          
+
       //const produit = this.mapXmlToObject<Produit>(prodElements[i], produitFieldMap);
       produits.push(produit);
     }
-  
+
     return produits;
   }
 
@@ -149,19 +149,19 @@ export class ProduitService {
     .replace('&lt;', '<')
     .replace(/&gt;/g, '>')
     .replace(/&lt;/g, '<');
-         
+
     const rawContentMatch = _xmlContent.match(/<prods[^>]*>([\s\S]*?)<\/prods>/);
     if (!rawContentMatch) return produits;
   const xmlContent = rawContentMatch[0]
-    
+
 
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
- 
+
     const prodElements = xmlDoc.getElementsByTagName('prod');
 
 console.log(":===============================================================================================================================")
- 
+
 console.log('£££££prodElements.length  =.....'+prodElements.length)
     for (let i = 0; i < prodElements.length; i++) {
       const prod = prodElements[i];
@@ -205,15 +205,15 @@ console.log('Produit extrait et reconstituee  =.....'+produit.codeprod)
 
 private mapXmlToObject<T>(element: Element, fieldMap: Record<keyof T, string>): T {
     const obj = {} as T;
-  
+
     for (const key in fieldMap) {
       const tag = fieldMap[key];
       const el = element.getElementsByTagName(tag)[0];
       const value = el?.textContent?.trim() ?? undefined;
-  
+
       (obj as any)[key] = value;
     }
-  
+
     return obj;
   }
  */
@@ -229,22 +229,22 @@ private mapXmlToObject<T>(element: Element, fieldMap: Record<keyof T, string>): 
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&apos;');
-  
+
     let xml = `<${rootTag}>`;
-  
+
     for (const key in tagMap) {
       const tagName = tagMap[key];
       const value = (obj as any)[key];
-  
+
       if (value !== undefined && value !== null) {
         xml += `<${tagName}>${escapeXml(value)}</${tagName}>`;
       }
     }
-  
+
     xml += `</${rootTag}>`;
     return xml;
   }
-  
+
 
   private autoMapXmlToObject<T>(
     element: Element,
@@ -252,20 +252,20 @@ private mapXmlToObject<T>(element: Element, fieldMap: Record<keyof T, string>): 
     defaults?: Partial<T>
   ): T {
     const obj = { ...(defaults ?? {}) } as T;
-  
+
     for (const key in tagMap) {
       const tagName = tagMap[key];
       const el = element.getElementsByTagName(tagName)?.[0];
       const text = el?.textContent?.trim();
-  
+
       if (text == null) {
         (obj as any)[key] = undefined;
         continue;
       }
-  
+
       // 🔍 auto-detection du type cible selon la valeur par défaut ou sa présence
       const exampleValue = (defaults?.[key] ?? obj[key]) as any;
-  
+
       if (typeof exampleValue === 'number') {
         (obj as any)[key] = parseFloat(text);
       } else if (typeof exampleValue === 'boolean') {
@@ -276,9 +276,9 @@ private mapXmlToObject<T>(element: Element, fieldMap: Record<keyof T, string>): 
         (obj as any)[key] = text;
       }
     }
-  
+
     return obj;
   }
-  
+
 
 }

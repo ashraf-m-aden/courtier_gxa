@@ -1,5 +1,5 @@
-import { Contrat } from './../../../Model/contrat.model';
 import { Component, Input } from '@angular/core';
+import { Contrat } from '../../../Model/contrat.model';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
@@ -23,27 +23,25 @@ export class ListContratComponent {
 
 
 
-    await this.courtierService.getListeDesContratsDUnTier(this.idTier).subscribe({
-      next: async (dataC: any) => {
-        if (Array.isArray(dataC)) {
-          console.log("projet dataC", dataC);
+       this.courtierService.getListeDesContratsDUnTier(this.idTier).subscribe({
+        next: async (dataC: any) => {
+          if(Array.isArray(dataC)) {
+            console.log("projet dataC", dataC);
 
-          this.contrats = dataC.filter((c: any) => { return c.Contrat });
-        } else {
-          console.log("projet dataC not array", dataC);
-          if (dataC.Contrat) {
-
+            this.contrats = dataC.filter((c:any) => { return c.Contrat });
+          } else {
+            if( dataC.Contrat) {
             this.contrats.push(dataC);
-          }
+            }
         }
       }
-    });
+      });
 
 
   }
   nouveauContrat(): void {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/courtiers/contrats/nouveau'])
+      this.router.createUrlTree(['/courtiers/contrats/nouveau/'+this.idTier])
     );
     window.open(url, '_blank');
   }
@@ -70,7 +68,7 @@ export class ListContratComponent {
     }
   }
 
-  edit(contrat: any): void {
+    edit(contrat: any): void {
 
     if (this.isContrat) {
       const url = this.router.serializeUrl(

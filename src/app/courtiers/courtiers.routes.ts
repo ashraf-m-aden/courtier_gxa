@@ -37,7 +37,7 @@ export const courtiersRoutes: Routes = [
       { path: 'projets', loadComponent: () => import('./projets/projets.component').then(m => m.ProjetsComponent) },
       { path: 'contrats', loadComponent: () => import('./contrats/list/list.component').then(m => m.ListContratComponent) },
 
-      { path: 'contrats/nouveau', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat: true } },
+      { path: 'contrats/nouveau/:id', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat: true } },
 
       { path: 'contrats/edit/:id', loadComponent: () => import('./contrats/edit/edit-contrat.component').then(m => m.EditContratComponent), data: { isContrat: true, isEdit: true } },
       { path: 'projets/edit/:id', loadComponent: () => import('./contrats/edit/edit-contrat.component').then(m => m.EditContratComponent), data: { isContrat: false, isEdit: true } },

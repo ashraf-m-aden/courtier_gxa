@@ -28,7 +28,7 @@ export class EditContratComponent {
   isContrat = signal<boolean>(true);
   isEdit = signal<boolean>(true);
   contratDetails = signal<any>(null);
-  piece = signal<Piec|undefined>(undefined);
+  piece = signal<Piec | undefined>(undefined);
   retrievedcontratDetails = signal<any>(null);
   adhesion = signal<any>(undefined);
   risa = signal<any>(undefined);
@@ -45,31 +45,35 @@ export class EditContratComponent {
   }
 
 
-   ngOnInit() {
+  ngOnInit() {
 
 
     if (this.idContrat != 0 && this.isEdit()) {
-       this.courtierService.getDetailContrat(this.idContrat).subscribe({
+      this.courtierService.getDetailContrat(this.idContrat).subscribe({
         next: (data: any) => {
           this.contratDetails.set(this.courtierService.mergeObjects(data));
           this.retrievedcontratDetails.set(data);
           this.piece.set(data.filter((p: any) => p.typename == "piec")[0]);
           console.log('Contrat details:', this.retrievedcontratDetails());
-      this.courtierService.getDetailAdhesion(this.piece()?.Adhprin!).subscribe({
-        next: (data: any) => {
-          this.adhesion.set(data.filter((p: any) => p.typename == "adh")[0]);
-          this.risa.set(data.filter((p: any) => p.typename == "RISA")[0]);
-          this.rveh.set(data.filter((p: any) => p.typename == "rveh")[0]);
-          this.garant.set(data.filter((p: any) => p.typename == "garan"));
-
-        },
-        error: (error) => {
-          console.error('Error fetching adhesion details:', error);
-        },
-        complete: () => {
-          console.log('adhesion details fetched successfully');
-        }
-      })
+          this.courtierService.getDetailAdhesion(this.piece()?.Adhprin!).subscribe({
+            next: (data: any) => {
+              this.adhesion.set(data.filter((p: any) => p.typename == "adh")[0]);
+              this.risa.set(data.filter((p: any) => p.typename == "RISA")[0]);
+              this.rveh.set(data.filter((p: any) => p.typename == "rveh")[0]);
+              this.garant.set(data.filter((p: any) => p.typename == "garan"));
+              if (!this.risa()) {
+                console.log("no riza ici")
+              } else {
+                console.log("riza ici", this.risa());
+              }
+            },
+            error: (error) => {
+              console.error('Error fetching adhesion details:', error);
+            },
+            complete: () => {
+              console.log('adhesion details fetched successfully');
+            }
+          })
         },
         error: (error) => {
           console.error('Error fetching adhesion details:', error);
@@ -105,5 +109,56 @@ export class EditContratComponent {
     } else {
       console.warn('Formulaire invalide');
     }
+  }
+
+  createRisque() {
+    let payload = {
+      "contrat": this.contratDetails().Contrat,
+      "piece": this.adhesion().Piece,
+      "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!),
+      "data": {
+        "adh": this.adhesion(),
+        "RISA": {
+          "Appel": "",
+          "Centre": null,
+          "Datebia": null,
+          "Dateori": null,
+          "Datetar": null,
+          "Ext": null,
+          "Identifi": null,
+          "Images": null,
+          "Memo": null,
+          "Numtiers": this.adhesion()?.Numtiers,
+          "Ole": null,
+          "Tarif": null,
+          "Zone": null
+        },
+
+      }
+    }
+    this.courtierService.postcreateeRisk(payload).subscribe({
+      next: (data: any) => {
+        console.log("Contrat mis à jour avec succès", data);
+        this.courtierService.getDetailAdhesion(this.adhesion()?.Adhesion!).subscribe({
+          next: (data: any) => {
+            this.adhesion.set(data.filter((p: any) => p.typename == "adh")[0]);
+            this.risa.set(data.filter((p: any) => p.typename == "RISA")[0]);
+            this.rveh.set(data.filter((p: any) => p.typename == "rveh")[0]);
+            this.garant.set(data.filter((p: any) => p.typename == "garan"));
+
+          },
+          error: (error) => {
+            console.error('Error fetching adhesion details:', error);
+          },
+          complete: () => {
+            console.log('adhesion details fetched successfully');
+          }
+        })
+      }
+      , error: (err) => {
+        console.error("Erreur lors de la mise à jour du contrat", err);
+      }
+
+    });
   }
 }

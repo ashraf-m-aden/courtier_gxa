@@ -22,13 +22,13 @@ export class NouveauContratComponent {
   isEdit = signal<boolean>(true);
   contratDetails = signal<any>(null);
   retrievedcontratDetails = signal<any>(null);
-  idContrat = 0
+  numtier = signal(0);
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService) {
 
     this.isContrat.set(this.route.snapshot.data['isContrat'])
     this.isEdit.set(this.route.snapshot.data['isEdit'])
     console.log(this.isEdit());
-    this.idContrat = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id']) : 0;
+    this.route.snapshot.params['id'] ? this.numtier.set(parseInt(this.route.snapshot.params['id'])) : this.numtier.set(0);
 
   }
 
@@ -36,22 +36,6 @@ export class NouveauContratComponent {
   async ngOnInit() {
 
 
-    if (this.idContrat != 0 && this.isEdit()) {
-      await this.courtierService.getDetailContrat(this.idContrat).subscribe({
-        next: (data: any) => {
-          this.contratDetails.set(this.courtierService.mergeObjects(data));
-          this.retrievedcontratDetails.set(data);
-          console.log('Contrat details:', this.retrievedcontratDetails());
-
-        },
-        error: (error) => {
-          console.error('Error fetching contract details:', error);
-        },
-        complete: () => {
-          console.log('Contract details fetched successfully');
-        }
-      })
-    }
 
 
 
@@ -60,22 +44,5 @@ export class NouveauContratComponent {
 
   }
 
-  onSubmit(): void {
-    if (this.contratForm.valid) {
-      const contratData = this.contratForm.value;
-      if (this.isContrat()) {
-        console.log('Contrat soumis :', contratData);
-        alert("Contrat enregistré avec succés")
 
-      } else {
-        console.log('Projet soumis :', contratData);
-        alert("Projet enregistré avec succés")
-
-      }
-
-      // TODO : Envoyer contratData à l’API
-    } else {
-      console.warn('Formulaire invalide');
-    }
-  }
 }
