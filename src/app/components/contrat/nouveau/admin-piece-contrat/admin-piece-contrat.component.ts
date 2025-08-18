@@ -212,7 +212,7 @@ export class AdminPieceContratComponent {
         "contrat": this.pieceForm.get("Contrat")?.value,
         "produit": this.pieceForm.get("Codeprod")?.value,
         "Effet": this.pieceForm.get("Effet")?.value,
-        "data": this.pieceForm.value,
+        "data": {"PIEC": this.pieceForm.value},
         "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!)
       }
       if (payload.produit && payload.produit != "" && payload.produit != null && payload.produit != undefined) {

@@ -93,6 +93,6 @@ export interface Contrat {
   Prevresi?: string;
   Fvahom?: boolean;
   Daterefindice?: string;
-  Typesignature?: string;
+  TypeSignature?: string;
 }
 

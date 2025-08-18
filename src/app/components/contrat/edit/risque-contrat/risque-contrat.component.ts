@@ -1,5 +1,8 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component, effect, Input, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CourtierService } from '../../../../Services/courtier/courtier.service';
+import { RvehModel } from '../../../../Model/rveh.model';
+import { D } from '@angular/cdk/bidi-module.d-D-fEBKdS';
 
 @Component({
   selector: 'edit-risque-contrat',
@@ -11,95 +14,194 @@ export class EditRisqueContratComponent {
 
 
   riskForm!: FormGroup;
+  @Input() contratDetails = signal<any>(undefined);
+  @Input() adhesion = signal<any>(undefined);
+  @Input() risa = signal<any>(undefined);
+  @Input() rveh = signal<any>(undefined);
+  @Input() garant = signal<any[]>([]);
+  conducteurs: any[] = [];
 
-conducteurs: any[] = [];
-
-conducteursDisponibles = [
-  {
-    id: 1,
-    titre: 'M.',
-    nomPrenom: 'Ali Mohamed',
-    age: 32,
-    dateB: '2015-06-01',
-    numeroPermis: 'ABC12345',
-    permisDelivrePar: 'Préfecture Djibouti'
-  },
-  {
-    id: 2,
-    titre: 'Mme',
-    nomPrenom: 'Fatouma Ibrahim',
-    age: 28,
-    dateB: '2018-09-20',
-    numeroPermis: 'XYZ78910',
-    permisDelivrePar: 'Préfecture Balbala'
-  }
-];
-conducteurSelectionne: any = null;
-  constructor(private fb: FormBuilder) {
+  conducteursDisponibles = [
+    {
+      id: 1,
+      titre: 'M.',
+      nomPrenom: 'Ali Mohamed',
+      age: 32,
+      dateB: '2015-06-01',
+      numeroPermis: 'ABC12345',
+      permisDelivrePar: 'Préfecture Djibouti'
+    },
+    {
+      id: 2,
+      titre: 'Mme',
+      nomPrenom: 'Fatouma Ibrahim',
+      age: 28,
+      dateB: '2018-09-20',
+      numeroPermis: 'XYZ78910',
+      permisDelivrePar: 'Préfecture Balbala'
+    }
+  ];
+  conducteurSelectionne: any = null;
+  constructor(private fb: FormBuilder, private courtierService: CourtierService) {
     this.riskForm = this.fb.group({
-      vehicule: ['MITSUBISHI L200 PICK-UP -- 617D99'],
-      usage: ['Promenade / Trajet'],
-      valeurNeuve: [''],
-      expertise: [''],
-      dateAcquisition: [''],
-      type: [''],
 
-      derogationFVA: [''],
-      marque: ['MITSUBISHI'],
-      paysImmat: ['JAPON'],
-      modele: ['PICK-UP'],
-      typeMine: ['L200'],
-      immatriculation: ['617D99'],
-      dateCarteGrise: [''],
-      datePremiereCirculation: [''],
-      genre: ['VL'],
-      carrosserie: ['Pick up'],
+      Appel: [null],
+      Usage: ['Promenade / Trajet'],
+      Valneuf: [null],
+      Valexp: [null],
+      Dateach: [new Date()],
+      Type: [null],
+      DerogationFVA: [null],
 
-      energie: ['DIESEL'],
-      transmission: [''],
-      precedenteImmat: ['MMBNGV547PH01'],
-      numeroIdentification: ['MMBNGV547PH01'],
-      puissanceFiscale: [10],
-      categorie: ['2'],
-      placesAssises: [5],
-      poidsVide: [''],
-      poidsTR: [''],
-      txCO2: [''],
-      catCO2: [''],
-      cv: [''],
-      kilometrage: [''],
-      couleur: [''],
-      cleRep: [''],
+      Titulai: [null],
+      Titulq: [null],
+      Marque: [null],
+      Paysimmat: [null],
+      Modele: [null],
+      Symbmine: [null],
+      Immat: [null],
+      Datecg: [new Date()],
+      Datecirc: [new Date()],
+      Genre: [null],
+      Carross: [null],
 
-      titulaire: [''],
-      titulaireNom: [''],
-      assurePrincipal: [false],
-      enfantAssure: [false],
+      Energie: [null],
+      Transmis: [null],
+      Ancimmat: [null],
+      Nserie: [null],
+      Pfiscale: [0],
+      Cate: [null],
+      Places: [0],
+      Poidvide: [null],
+      Poidstr: [null],
+      Co2: [null],
+      Catco2: [null],
+      Risque: [null],
+      Numtiers: [this.contratDetails()?.Numtiers ?? this.risa()?.Numtiers ?? null],
+
+      "typename": ['rveh']
+
+    });
+    effect(() => {
+      if (this.rveh()) {
+        this.patchRiskForm(this.rveh());
+      } else {
+        this.riskForm.reset();
+      }
+    }
+    );
+  }
+
+
+
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+this.riskForm.get('Datecg')!.valueChanges.subscribe(value => {
+  if (value) {
+    const date = new Date(value);
+    this.riskForm.get('Datecg')!.setValue(date, { emitEvent: false });
+  }
+});
+this.riskForm.get('Datecirc')!.valueChanges.subscribe(value => {
+  if (value) {
+    const date = new Date(value);
+    this.riskForm.get('Datecirc')!.setValue(date, { emitEvent: false });
+  }
+});
+    this.riskForm.valueChanges.subscribe(values => {
+      this.risa().Appel = values?.Appel;
+      this.risa().Dateori = null;
+      console.log(this.riskForm.value);
+
+      let payload = {
+        // "contrat": this.contratDetails().Contrat,
+
+        "piece": this.contratDetails().Piece,
+        "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!),
+        "contrat": this.contratDetails().Contrat,
+        "data": { "RISA": this.risa(), "rveh": this.riskForm.value },
+      }
+      this.courtierService.postupdateRisk(payload).subscribe({
+        next: (data: any) => {
+          console.log("Contrat mis à jour avec succès", data);
+          this.courtierService.getDetailContrat(payload.contrat).subscribe({
+            next: (data: any) => {
+              this.contratDetails.set(this.courtierService.mergeObjects(data));
+            },
+            error: (err) => {
+              console.error("Erreur lors de la récupération des détails du contrat", err);
+            }
+          });
+        }
+        , error: (err) => {
+          console.error("Erreur lors de la mise à jour du contrat", err);
+        }
+
+      });
     });
   }
 
+  ajouterConducteurDepuisSelect() {
+    if (this.conducteurSelectionne) {
+      const existe = this.conducteurs.some(c => { return c.id == this.conducteurSelectionne.id });
+      if (!existe) {
+        this.conducteurs.push(this.conducteurSelectionne);
+        console.log(this.conducteurSelectionne.id);
+      }
+    }
+    this.conducteurSelectionne = null;
+  }
 
-ajouterConducteurDepuisSelect() {
-  if (this.conducteurSelectionne) {
-    const existe = this.conducteurs.some(c => {return c.id == this.conducteurSelectionne.id});
-    if (!existe) {
-      this.conducteurs.push(this.conducteurSelectionne );
-  console.log(this.conducteurSelectionne.id);
+  supprimerConducteur(index: number) {
+    this.conducteurs.splice(index, 1);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    if (changes['conducteurSelectionne']) {
+      console.log(this.conducteurSelectionne)
     }
   }
-  this.conducteurSelectionne = null;
-}
 
-supprimerConducteur(index: number) {
-  this.conducteurs.splice(index, 1);
-}
 
-ngOnChanges(changes: SimpleChanges): void {
-  //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-  //Add '${implements OnChanges}' to the class.
-  if(changes['conducteurSelectionne']){
-    console.log(this.conducteurSelectionne)
+  patchRiskForm(data: RvehModel): void {
+    this.riskForm.patchValue({
+
+
+
+      Appel: this.risa()?.Appel ?? null,
+      Usage: data.Usage ?? null,
+      Valneuf: data.Valneuf ?? null,
+      Valexp: data.Valexp ?? null,
+      Dateach: data.Dateach ?? null,
+      Type: data.Type?.toString() ?? null,
+      Modele: data.Modele ?? null,
+      Symbmine: data.Symbmine?.toString() ?? null,
+      Nserie: data.Nserie ?? null,
+      Immat: data.Immat?.toString() ?? null,
+      Datecg: data.Datecg ?? null,
+      Datecirc: data.Datecirc ?? null,
+      Genre: data.Genre ?? null,
+      Carross: data.Carross ?? null,
+      Energie: data.Energie ?? null,
+      Puissan: data.Puissan ?? null,
+      Pfiscale: data.Pfiscale ?? 0,
+      Places: data.Places ?? 0,
+      Poidvide: data.Poidvide ?? null,
+      Poidstr: data.Poidstr ?? null,
+      Remorque: data.Remorque ?? false,
+      Numtiers: data?.Numtiers ?? this.risa()?.Numtiers ?? null,
+      Risque: data?.Risque ?? this.risa()?.Risque ?? null,
+
+
+      DerogationFVA: data.DerogationFVA ?? null,
+
+
+      "typename": 'rveh'
+
+    }, { emitEvent: false });
   }
-}
-
 }

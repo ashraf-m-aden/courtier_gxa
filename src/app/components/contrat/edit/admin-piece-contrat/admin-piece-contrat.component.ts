@@ -40,7 +40,7 @@ export class EditAdminPieceContratComponent {
     Globalte: "",
     Preavis: 0,
     Memo: "",
-    Coeffcom: 0,
+    // Coeffcom: 0,
     Centre: "",
     Heure: "",
     Datemed: "",
@@ -85,20 +85,22 @@ export class EditAdminPieceContratComponent {
       Globalte: [''],
       Preavis: [0],
       Memo: [''],
-      Coeffcom: [0],
+      //  Coeffcom: [0],
       Centre: [''],
       Datemed: [''],
       Datcreat: [''],
       Cg: [''],
+      typename: "PIEC"
+
     });
 
   }
 
-  update(existing: Piec) {
+  update(existing: any) {
     console.log(existing)
     this.piece.set({
       ...existing,
-      Adhprin: existing.Adhprin ?? 0,
+   /*   Adhprin: existing.Adhprin ?? 0,
       Contrat: existing.Contrat ?? 0,
       Piece: existing.Piece ?? 0,
       Codeprod: existing.Codeprod ?? "",
@@ -117,12 +119,29 @@ export class EditAdminPieceContratComponent {
       Globalte: existing.Globalte ?? "",
       Preavis: existing.Preavis ?? 0,
       Memo: existing.Memo ?? "",
-      Coeffcom: existing.Coeffcom ?? 0,
+      // Coeffcom: existing.Coeffcom ?? 0,
       Centre: existing.Centre ?? "",
       Heure: existing.Heure ?? "",
       Datemed: existing.Datemed ?? "",
       Datcreat: existing.Datcreat ?? "",
-      Cg: existing.Cg ?? "",
+      Cg: existing.Cg ?? "",*/
+      typename: "PIEC",
+      Cie: 201,
+      Cieprime: existing.Cieprime ?? null,
+      Cietaxes: existing.Cietaxes ?? null,
+      Commsup: existing.Commsup ?? null,
+      Coutpol: existing.Coutpol ?? null,
+      Coutpol1: existing.Coutpol1 ?? null,
+      external_cie_nomcie: existing.external_cie_nomcie ?? "GXA ASSURANCES",
+      PolGroupe:existing.PolGroupe ??  null,
+      Police: existing.Police ?? null,
+      Reference: existing.Reference ?? null,
+      Role:existing.Role ?? "P",
+      Tauxcn: existing.Tauxcn ??null,
+      Tauxcom: existing.Tauxcom ??null,
+      Tauxcout:existing.Tauxcout ?? null,
+      Tauxpart: existing.Tauxpart ??null,
+
     });
 
   }
@@ -135,34 +154,51 @@ export class EditAdminPieceContratComponent {
   }
   patchPieceForm(piece: Piec) {
     this.pieceForm.patchValue({
-      Origine: piece.Oripiece || '',
-      DateEffet: piece.Effet ? new Date(piece.Effet) : new Date(),
-      HeureEffet: piece.Heure || '',
-      Motif: piece.Motif || '',
+      /*    Origine: piece.Oripiece || '',
+          DateEffet: piece.Effet ? new Date(piece.Effet) : new Date(),
+          HeureEffet: piece.Heure || '',
+          Motif: piece.Motif || '',
 
-      Contrat: piece.Contrat ?? 0,
-      Piece: piece.Piece ?? 0,
-      Adhprin: piece.Adhprin ?? 0,
-      Codeprod: piece.Codeprod || '',
-      Oripiece: piece.Oripiece || '',
+          Contrat: piece.Contrat ?? 0,
+          Piece: piece.Piece ?? 0,
+          Adhprin: piece.Adhprin ?? 0,
+          Codeprod: piece.Codeprod || '',
+          Oripiece: piece.Oripiece || '',
+          Sitpiece: piece.Sitpiece || '',
+          Datesit: piece.Datesit ? new Date(piece.Datesit) : '',
+          Suspens: piece.Suspens ? new Date(piece.Suspens) : '',
+          Finpiece: piece.Finpiece || '',
+          Datefin: piece.Datefin ? new Date(piece.Datefin) : '',
+          Entite: piece.Entite ?? 0,
+          Ciemaj: piece.Ciemaj ?? 0,
+          Navenant: piece.Navenant || '',
+          Globalor: piece.Globalor || '',
+          Globalte: piece.Globalte || '',
+          Preavis: piece.Preavis ?? 0,
+          Memo: piece.Memo || '',
+          // Coeffcom: piece.Coeffcom ?? "",
+          Centre: piece.Centre || '',
+          Datemed: piece.Datemed ? new Date(piece.Datemed) : '',
+          Datcreat: piece.Datcreat ? new Date(piece.Datcreat) : '',
+          Cg: piece.Cg || '',*/
+      Cie: 201,
+      Cieprime: null,
+      Cietaxes: null,
+      Commsup: null,
+      Coutpol: null,
+      Coutpol1: null,
+      external_cie_nomcie: "GXA ASSURANCES",
+      PolGroupe: null,
+      Police: null,
+      Reference: null,
+      Role: "P",
+      Tauxcn: null,
+      Tauxcom: null,
+      Tauxcout: null,
+      Tauxpart: null,
+      typename: "PIEC",
       Effet: piece.Effet || '',
-      Sitpiece: piece.Sitpiece || '',
-      Datesit: piece.Datesit ? new Date(piece.Datesit) : '',
-      Suspens: piece.Suspens ? new Date(piece.Suspens) : '',
-      Finpiece: piece.Finpiece || '',
-      Datefin: piece.Datefin ? new Date(piece.Datefin) : '',
-      Entite: piece.Entite ?? 0,
-      Ciemaj: piece.Ciemaj ?? 0,
-      Navenant: piece.Navenant || '',
-      Globalor: piece.Globalor || '',
-      Globalte: piece.Globalte || '',
-      Preavis: piece.Preavis ?? 0,
-      Memo: piece.Memo || '',
-      Coeffcom: piece.Coeffcom ?? 0,
-      Centre: piece.Centre || '',
-      Datemed: piece.Datemed ? new Date(piece.Datemed) : '',
-      Datcreat: piece.Datcreat ? new Date(piece.Datcreat) : '',
-      Cg: piece.Cg || '',
+
     });
   }
 
@@ -212,18 +248,19 @@ export class EditAdminPieceContratComponent {
       let payload = {
         // "contrat": this.contratDetails().Contrat,
 
-        "dossier": this.contratDetails().Contrat,
+        "dossier": this.contratDetails().Numtiers,
         "produit": this.contratDetails().Codeprod,
         "Effet": this.pieceForm.get("Effet")?.value,
-        "data": this.pieceForm.value,
-        "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!)
+        "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!),
+        "contrat": this.contratDetails().Contrat,
+        "data": { "PIEC": this.pieceForm.value, "CONT": this.contratDetails(), },
       }
       console.log(payload);
       console.log(this.contratDetails());
 
 
       if (payload.produit && payload.produit != "" && payload.produit != null && payload.produit != undefined) {
-        this.courtierService.getUpdatePieceDuContrat(payload).subscribe({
+        this.courtierService.getAjoutPieceAuContrat(payload).subscribe({
           next: () => {
             this.courtierService.getDetailContrat(payload.dossier).subscribe({
               next: (data: any) => {

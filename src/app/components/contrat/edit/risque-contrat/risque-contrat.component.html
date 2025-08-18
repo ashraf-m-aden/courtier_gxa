@@ -8,30 +8,28 @@
 
           <div class="d-flex flex-column gap-1">
             <label>Véhicule </label>
-            <input formControlName="vehicule" type="text" class="input" />
+            <input formControlName="Appel" type="text" class="input" />
 
             <label>Usage </label>
-            <select formControlName="usage" class="input">
+            <select formControlName="Usage" class="input">
               <option value="Promenade / Trajet">Promenade / Trajet</option>
               <option value="Affaires">Affaires</option>
             </select>
+
             <label>Valeur à neuf </label>
-            <input formControlName="valeurNeuve" type="text" class="input" />
+            <input formControlName="Valneuf" type="text" class="input" />
 
             <label>Expertise </label>
-            <input formControlName="expertise" type="text" class="input" />
+            <input formControlName="Valexp" type="text" class="input" />
 
             <label>Date acquisition </label>
-            <input
-              formControlName="dateAcquisition"
-              type="date"
-              class="input"
-            />
+            <input formControlName="Dateori" type="date" class="input" />
+
             <label>Type </label>
-            <input formControlName="type" type="text" class="input" />
+            <input formControlName="Type" type="text" class="input" />
 
             <label>Dérogation FVA </label>
-            <input formControlName="derogationFVA" type="text" class="input" />
+            <input formControlName="DerogationFVA" type="text" class="input" />
           </div>
         </fieldset>
 
@@ -39,42 +37,37 @@
         <fieldset class="card p-4 w-100">
           <legend class="font-semibold text-lg">Carte Grise</legend>
           <label>Titulaire </label>
-          <input formControlName="titulaire" type="text" class="input" />
+          <input formControlName="Titulai" type="text" class="input" />
           <label>Nom </label>
-          <input formControlName="titulaireNom" type="text" class="input" />
+          <input formControlName="Titulq" type="text" class="input" />
 
           <div class="d-flex flex-column gap-1">
             <label>Marque </label>
-            <input formControlName="marque" type="text" class="input" />
+            <input formControlName="Marque" type="text" class="input" />
 
             <label>Pays d'immat. </label>
-            <input formControlName="paysImmat" type="text" class="input" />
+            <input formControlName="Paysimmat" type="text" class="input" />
 
             <label>Modèle </label>
-            <input formControlName="modele" type="text" class="input" />
+            <input formControlName="Modele" type="text" class="input" />
 
             <label>Type </label>
-            <input formControlName="typeMine" type="text" class="input" />
+            <input formControlName="Symbmine" type="text" class="input" />
 
             <label>Immatriculation </label>
-            <input
-              formControlName="immatriculation"
-              type="text"
-              class="input"
-            />
+            <input formControlName="Immat" type="text" class="input" />
+
             <label>Date carte grise </label>
-            <input formControlName="dateCarteGrise" type="date" class="input" />
+            <input formControlName="Datecg" type="date" class="input" />
+
             <label>1ère circulation </label>
-            <input
-              formControlName="datePremiereCirculation"
-              type="date"
-              class="input"
-            />
+            <input formControlName="Datecirc" type="date" class="input" />
+
             <label>Genre </label>
-            <input formControlName="genre" type="text" class="input" />
+            <input formControlName="Genre" type="text" class="input" />
 
             <label>Carrosserie </label>
-            <input formControlName="carrosserie" type="text" class="input" />
+            <input formControlName="Carross" type="text" class="input" />
           </div>
         </fieldset>
       </div>
@@ -82,85 +75,58 @@
       <div class="d-flex gap-4 w-100">
         <!-- Infos Techniques -->
         <fieldset class="card p-4 w-100">
-          <legend class="font-semibold text-lg">Carte grise</legend>
+          <legend class="font-semibold text-lg">Infos Techniques</legend>
 
           <div class="d-flex flex-column gap-1">
             <div class="d-flex gap-3 m-2">
               <label>Energie </label>
-              <input formControlName="energie" type="text" class="input" />
+              <input formControlName="Energie" type="text" class="input" />
 
               <label>Transmission </label>
-              <input formControlName="transmission" type="text" class="input" />
+              <input formControlName="Transmis" type="text" class="input" />
 
               <label>Précédente immat. </label>
-              <input
-                formControlName="precedenteImmat"
-                type="text"
-                class="input"
-              />
+              <input formControlName="Ancimmat" type="text" class="input" />
+
               <label>Type mine </label>
-              <input formControlName="typeMine" type="text" class="input" />
+              <input formControlName="Symbmine" type="text" class="input" />
             </div>
 
             <div class="d-flex gap-3 m-2">
               <label>VIN / N° identification </label>
-              <input
-                formControlName="numeroIdentification"
-                type="text"
-                class="input"
-              />
+              <input formControlName="Nserie" type="text" class="input" />
+
               <label>Puissance fiscale </label>
-              <input
-                formControlName="puissanceFiscale"
-                type="number"
-                class="input"
-              />
+              <input formControlName="Pfiscale" type="number" class="input" />
+
               <label>Cat. </label>
-              <input formControlName="categorie" type="text" class="input" />
+              <input formControlName="Cate" type="text" class="input" />
 
               <label>Places assises </label>
-              <input
-                formControlName="placesAssises"
-                type="number"
-                class="input"
-              />
+              <input formControlName="Places" type="number" class="input" />
             </div>
+
             <div class="d-flex gap-3 m-2">
               <label>Poids à vide </label>
-              <input formControlName="poidsVide" type="text" class="input" />
+              <input formControlName="Poidvide" type="text" class="input" />
 
               <label>Poids T.R. </label>
-              <input formControlName="poidsTR" type="text" class="input" />
+              <input formControlName="Poidstr" type="text" class="input" />
 
               <label>Tx CO2 </label>
-              <input formControlName="txCO2" type="text" class="input" />
+              <input formControlName="Co2" type="text" class="input" />
 
               <label>Cat. CO2 </label>
-              <input formControlName="catCO2" type="text" class="input" />
-            </div>
-
-            <div class="d-flex gap-3 m-2">
-              <label>Cv </label>
-              <input formControlName="cv" type="text" class="input" />
-
-              <label>Kilométrage </label>
-              <input formControlName="kilometrage" type="text" class="input" />
-
-              <label>Couleur </label>
-              <input formControlName="couleur" type="text" class="input" />
-
-              <label>Clé Rép. </label>
-              <input formControlName="cleRep" type="text" class="input" />
+              <input formControlName="Catco2" type="text" class="input" />
             </div>
           </div>
         </fieldset>
       </div>
-      <div class="d-flex">
+      <!-- <div class="d-flex">
         <fieldset class="card p-4 w-100">
           <legend class="font-semibold text-lg">Conducteurs autorisés</legend>
 
           <div class="d-flex flex-column gap-3">
-            <!-- Checkboxes -->
             <div class="d-flex items-center gap-4">
               <div class="d-flex gap-1">
                 <input
@@ -180,7 +146,6 @@
               </div>
             </div>
 
-            <!-- Sélecteur + Boutons -->
             <div class="d-flex gap-3 items-center">
               <select
                 [(ngModel)]="conducteurSelectionne" [ngModelOptions]="{standalone: true}"
@@ -203,7 +168,6 @@
               </button>
             </div>
 
-            <!-- Tableau des conducteurs ajoutés -->
             <table class="table-auto w-full border mt-2">
               <thead class="bg-gray-100">
                 <tr>
@@ -239,7 +203,7 @@
             </table>
           </div>
         </fieldset>
-      </div>
+      </div> -->
     </form>
   </div>
 </div>

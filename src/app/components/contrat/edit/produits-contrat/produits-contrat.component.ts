@@ -68,6 +68,8 @@ export class EditProduitsContratComponent {
         this.listProduits = data
       }
     })
+
+
   }
   ngOnChanges(): void {
 

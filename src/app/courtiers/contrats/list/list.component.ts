@@ -1,5 +1,5 @@
+import { Contrat } from './../../../Model/contrat.model';
 import { Component, Input } from '@angular/core';
-import { Contrat } from '../../../Model/contrat.model';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
@@ -19,25 +19,26 @@ export class ListContratComponent {
   constructor(private router: Router, private courtierService: CourtierService) { }
 
   async ngOnInit() {
-    if (this.isContrat) {
-      console.log("conrat");
 
-      await this.courtierService.getListeDesContratsDUnTier(this.idTier).subscribe({
-        next: async (dataC: any) => {
-          this.contrats = dataC;
+
+
+
+    await this.courtierService.getListeDesContratsDUnTier(this.idTier).subscribe({
+      next: async (dataC: any) => {
+        if (Array.isArray(dataC)) {
+          console.log("projet dataC", dataC);
+
+          this.contrats = dataC.filter((c: any) => { return c.Contrat });
+        } else {
+          console.log("projet dataC not array", dataC);
+          if (dataC.Contrat) {
+
+            this.contrats.push(dataC);
+          }
         }
       }
-      );
-    } else {
-      console.log("projet");
+    });
 
-      await this.courtierService.getListeDesContratsDUnTier(this.idTier).subscribe({
-        next: async (dataC: Contrat[]) => {
-          this.contrats = dataC.filter((c) => { return !c.Contrat });
-        }
-      }
-      );
-    }
 
   }
   nouveauContrat(): void {
@@ -69,7 +70,7 @@ export class ListContratComponent {
     }
   }
 
-    edit(contrat: any): void {
+  edit(contrat: any): void {
 
     if (this.isContrat) {
       const url = this.router.serializeUrl(

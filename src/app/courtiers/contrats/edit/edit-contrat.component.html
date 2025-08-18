@@ -29,12 +29,12 @@
           <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
         </mat-step>
 
-
         <mat-step>
           <ng-template matStepLabel>Données administratives</ng-template>
           <edit-admin-contrat
             [isEdit]="isEdit"
             [contratDetails]="contratDetails"
+            [piece]="piece"
           ></edit-admin-contrat>
           <div class="d-flex justify-content-between">
             <button class="btn btn-primary mt-5" matStepperPrevious>
@@ -43,7 +43,6 @@
             <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
           </div>
         </mat-step>
-
 
         <mat-step>
           <ng-template matStepLabel
@@ -63,10 +62,16 @@
           </div>
         </mat-step>
 
-
         <mat-step>
           <ng-template matStepLabel>Risques</ng-template>
-          <edit-risque-contrat></edit-risque-contrat>
+          <edit-risque-contrat
+            [adhesion]="retrievedcontratDetails"
+            [contratDetails]="contratDetails"
+            [risa]="risa"
+            [rveh]="rveh"
+            [garant]="garant"
+            [adhesion]="adhesion"
+          ></edit-risque-contrat>
           <div class="d-flex justify-content-between">
             <button class="btn btn-primary mt-5" matStepperPrevious>
               PRÉCÉDENT

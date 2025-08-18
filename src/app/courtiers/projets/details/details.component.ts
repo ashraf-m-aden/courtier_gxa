@@ -122,7 +122,7 @@ export class DetailsProjetsComponent {
   prevresi: 'Résiliation prévue à échéance',
   fvahom: true,
   daterefindice: '2025-12-31',
-  typesignature: 'Électronique'
+  typeSignature: 'Électronique'
 });
 
   }

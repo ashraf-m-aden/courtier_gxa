@@ -98,6 +98,17 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/detail_contrat`, payload);
   }
 
+  getDetailAdhesion(adh: number): Observable<any> {
+    console.log("adhesion : " +adh);
+
+    let payload = {
+      "BasSecurityContext": this.BasSecurityContext,
+      "adhesion": adh,
+
+    }
+    return this.http.post(`${this.baseUrl}/detail_adhesion`, payload);
+  }
+
   getDetailProduit(code: string): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
@@ -140,11 +151,11 @@ export class CourtierService {
     }; return this.http.post(`${this.baseUrl}/liste_des_produits`, payload);
   }
 
-  getListeDesQuittances(dossier:number, contrat:number): Observable<any> {
-    let payload  ={
+  getListeDesQuittances(dossier: number, contrat: number): Observable<any> {
+    let payload = {
       BasSecurityContext: this.BasSecurityContext,
-      dossier:dossier,
-      contrat:contrat
+      dossier: dossier,
+      contrat: contrat
     }
     return this.http.post(`${this.baseUrl}/liste_des_quittances`, payload);
   }
@@ -174,7 +185,12 @@ export class CourtierService {
   }
 
   getContratUpdate(payload: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Contrat_Update`, payload);
+    return this.http.post(`${this.baseUrl}/update_contrat`, payload);
+  }
+
+
+  postupdateRisk(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Risk/risk_update`, payload);
   }
 
   getTiersUpdate(payload: any): Observable<any> {

@@ -1,3 +1,4 @@
+import { filter } from 'rxjs';
 import { Component, Input, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -14,6 +15,7 @@ import { EditAdminPieceContratComponent } from '../../../components/contrat/edit
 import { EditInfoGeneralContratComponent } from '../../../components/contrat/edit/info-general-contrat/info-general-contrat.component';
 import { EditProduitsContratComponent } from '../../../components/contrat/edit/produits-contrat/produits-contrat.component';
 import { EditRisqueContratComponent } from '../../../components/contrat/edit/risque-contrat/risque-contrat.component';
+import { Piec } from '../../../Model/piec.model';
 
 @Component({
   selector: 'edit-contrat',
@@ -26,7 +28,12 @@ export class EditContratComponent {
   isContrat = signal<boolean>(true);
   isEdit = signal<boolean>(true);
   contratDetails = signal<any>(null);
+  piece = signal<Piec|undefined>(undefined);
   retrievedcontratDetails = signal<any>(null);
+  adhesion = signal<any>(undefined);
+  risa = signal<any>(undefined);
+  rveh = signal<any>(undefined);
+  garant = signal<any[]>([]);
   idContrat = 0
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService) {
 
@@ -38,24 +45,40 @@ export class EditContratComponent {
   }
 
 
-  async ngOnInit() {
+   ngOnInit() {
 
 
     if (this.idContrat != 0 && this.isEdit()) {
-      await this.courtierService.getDetailContrat(this.idContrat).subscribe({
+       this.courtierService.getDetailContrat(this.idContrat).subscribe({
         next: (data: any) => {
           this.contratDetails.set(this.courtierService.mergeObjects(data));
           this.retrievedcontratDetails.set(data);
+          this.piece.set(data.filter((p: any) => p.typename == "piec")[0]);
           console.log('Contrat details:', this.retrievedcontratDetails());
+      this.courtierService.getDetailAdhesion(this.piece()?.Adhprin!).subscribe({
+        next: (data: any) => {
+          this.adhesion.set(data.filter((p: any) => p.typename == "adh")[0]);
+          this.risa.set(data.filter((p: any) => p.typename == "RISA")[0]);
+          this.rveh.set(data.filter((p: any) => p.typename == "rveh")[0]);
+          this.garant.set(data.filter((p: any) => p.typename == "garan"));
 
         },
         error: (error) => {
-          console.error('Error fetching contract details:', error);
+          console.error('Error fetching adhesion details:', error);
+        },
+        complete: () => {
+          console.log('adhesion details fetched successfully');
+        }
+      })
+        },
+        error: (error) => {
+          console.error('Error fetching adhesion details:', error);
         },
         complete: () => {
           console.log('Contract details fetched successfully');
         }
       })
+
     }
 
 
