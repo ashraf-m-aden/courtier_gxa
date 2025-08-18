@@ -17,6 +17,7 @@ import { TierEffects } from './courtiers/tier/store/tier.effects';
 import { TierReducer } from './courtiers/tier/store/tier.reducer';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { authInterceptor } from './Services/auth/auth.interceptor';
+import { provideToastr } from 'ngx-toastr';
 
 
 export const appConfig: ApplicationConfig = {
@@ -24,6 +25,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: false }),
     importProvidersFrom(BrowserAnimationsModule),
+        provideToastr(), // Toastr providers
 
     //provideRouter(appRoutes),
     provideHttpClient(withFetch()),

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angul
 import { Contrat } from '../../../../Model/contrat.model';
 import { CourtierService } from '../../../../Services/courtier/courtier.service';
 import { Piec } from '../../../../Model/piec.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'edit-admin-contrat',
@@ -15,11 +16,11 @@ export class EditAdminContratComponent {
   form!: FormGroup;
   @Input() isEdit = signal(true); // Indique si c'est un contrat ou une police
   @Input() contratDetails = signal<any>(undefined);
-  @Input()  piece = signal<Piec|undefined>(undefined);
+  @Input() piece = signal<Piec | undefined>(undefined);
 
-  fractionnements = ['A', 'S', 'T', 'M','D'];
+  fractionnements = ['A', 'S', 'T', 'M', 'D'];
 
-  constructor(private fb: FormBuilder, private courtierService: CourtierService) {
+  constructor(private fb: FormBuilder, private courtierService: CourtierService,private toastr: ToastrService) {
 
     effect(() => {
       this.patchForm(this.contratDetails()!)
@@ -129,33 +130,7 @@ export class EditAdminContratComponent {
     });
 
 
-    this.form.valueChanges.subscribe(values => {
-      let payload = {
-        // "contrat": this.contratDetails().Contrat,
 
-        "piece": this.contratDetails().Piece,
-        "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!),
-        "contrat": this.contratDetails().Contrat,
-        "data": { "CONT": this.form.value,"PIEC":this.piece() },
-      }
-      this.courtierService.getContratUpdate(payload).subscribe({
-        next: (data: any) => {
-          console.log("Contrat mis à jour avec succès", data);
-          this.courtierService.getDetailContrat(payload.contrat).subscribe({
-            next: (data: any) => {
-              this.contratDetails.set(this.courtierService.mergeObjects(data));
-            },
-            error: (err) => {
-              console.error("Erreur lors de la récupération des détails du contrat", err);
-            }
-          });
-        }
-        , error: (err) => {
-          console.error("Erreur lors de la mise à jour du contrat", err);
-        }
-
-      });
-    });
 
   }
 
@@ -257,11 +232,45 @@ export class EditAdminContratComponent {
       Fvahom: data?.Fvahom ?? false,
       Daterefindice: data?.Daterefindice ?? '',
       TypeSignature: data?.TypeSignature ?? '',
-              "typename": "CONT"
+      "typename": "CONT"
 
     }, { emitEvent: false }  // <--- n’émet pas de valueChanges
     );
   }
 
+
+
+  updateContrat() {
+    let payload = {
+      // "contrat": this.contratDetails().Contrat,
+
+      "piece": this.contratDetails().Piece,
+      "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!),
+      "contrat": this.contratDetails().Contrat,
+      "data": { "CONT": this.form.value, "PIEC": this.piece() },
+    }
+    this.courtierService.getContratUpdate(payload).subscribe({
+      next: (data: any) => {
+        console.log("Contrat mis à jour avec succès", data);
+        this.courtierService.getDetailContrat(payload.contrat).subscribe({
+          next: (data: any) => {
+            this.toastr.success('Contrat mis à jour avec succès!');
+
+            this.contratDetails.set(this.courtierService.mergeObjects(data));
+          },
+          error: (err) => {
+            console.error("Erreur lors de la récupération des détails du contrat", err);
+          }
+        });
+      }
+      , error: (err) => {
+        console.error("Erreur lors de la mise à jour du contrat", err);
+                    this.toastr.error("Erreur lors de la mise à jour du contrat", err);
+
+      }
+
+    });
+
+  }
 
 }

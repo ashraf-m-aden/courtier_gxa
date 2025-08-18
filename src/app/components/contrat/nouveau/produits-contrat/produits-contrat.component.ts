@@ -6,6 +6,7 @@ import { CourtierService } from '../../../../Services/courtier/courtier.service'
 import { Produit } from '../../../../Model/produit.model';
 import { DatePipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ToastrService } from 'ngx-toastr';
 interface Modele {
   nom: string;
   cv: number;
@@ -41,7 +42,7 @@ export class ProduitsContratComponent {
   codeprodSignal = signal("");
   listProduits: Produit[] = []
   visibleProductEntries: any[] = [];
-  constructor(private fb: FormBuilder, private courtierService: CourtierService) {
+  constructor(private fb: FormBuilder, private courtierService: CourtierService,private toastr: ToastrService) {
     this.vehiculeForm = this.fb.group({
       codeprod: [''],
     });
@@ -81,7 +82,9 @@ export class ProduitsContratComponent {
       next: (data: Produit[]) => {
         this.listProduits = data
 
-
+      },
+      error: (error) => {
+                    this.toastr.error('Erreur lors de la récupération de la liste des produits ', error);
       }
     })
     this.vehiculeForm.valueChanges.subscribe(values => {

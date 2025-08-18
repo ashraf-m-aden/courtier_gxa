@@ -5,6 +5,7 @@ import { CourtierService } from '../../../../Services/courtier/courtier.service'
 import { D } from '@angular/cdk/bidi-module.d-D-fEBKdS';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'info-general-contrat',
@@ -25,7 +26,7 @@ export class InfoGeneralContratComponent {
   detailProduit: Produit = {} as Produit;
 
   visibleProductEntries: any[] = [];
-  constructor(private fb: FormBuilder, private courtierService: CourtierService, private router: Router) {
+  constructor(private fb: FormBuilder, private courtierService: CourtierService, private router: Router, private toastr: ToastrService) {
     this.formGroup = this.fb.group({
       Intitule: ['', Validators.required],
       codeprod: ['', Validators.required],
@@ -221,9 +222,8 @@ export class InfoGeneralContratComponent {
     }
     this.courtierService.getCreateContrat(payload).subscribe({
       next: (data: any) => {
-        console.log(data);
-
-
+        console.log("Contrat créé avec succès", data);
+        this.toastr.success('Contrat créé avec succès!');
         if (this.isContrat()) {
           const url = this.router.serializeUrl(
             this.router.createUrlTree(['/courtiers/contrats/edit/' + data.piec.contrat])
@@ -238,6 +238,7 @@ export class InfoGeneralContratComponent {
       },
       error: (err) => {
         console.error(err);
+        this.toastr.error("Une erreur est survenu lors de la création du contrat: " + err)
       }
     });
   }

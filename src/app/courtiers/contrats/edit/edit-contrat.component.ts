@@ -16,6 +16,7 @@ import { EditInfoGeneralContratComponent } from '../../../components/contrat/edi
 import { EditProduitsContratComponent } from '../../../components/contrat/edit/produits-contrat/produits-contrat.component';
 import { EditRisqueContratComponent } from '../../../components/contrat/edit/risque-contrat/risque-contrat.component';
 import { Piec } from '../../../Model/piec.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'edit-contrat',
@@ -35,7 +36,7 @@ export class EditContratComponent {
   rveh = signal<any>(undefined);
   garant = signal<any[]>([]);
   idContrat = 0
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService,private toastr: ToastrService) {
 
     this.isContrat.set(this.route.snapshot.data['isContrat'])
     this.isEdit.set(this.route.snapshot.data['isEdit'])
@@ -69,6 +70,8 @@ export class EditContratComponent {
             },
             error: (error) => {
               console.error('Error fetching adhesion details:', error);
+                          this.toastr.error('Erreur lors de la récupération des détails de l’adhésion', error);
+
             },
             complete: () => {
               console.log('adhesion details fetched successfully');
@@ -141,6 +144,7 @@ export class EditContratComponent {
         console.log("Contrat mis à jour avec succès", data);
         this.courtierService.getDetailAdhesion(this.adhesion()?.Adhesion!).subscribe({
           next: (data: any) => {
+
             this.adhesion.set(data.filter((p: any) => p.typename == "adh")[0]);
             this.risa.set(data.filter((p: any) => p.typename == "RISA")[0]);
             this.rveh.set(data.filter((p: any) => p.typename == "rveh")[0]);
@@ -149,6 +153,7 @@ export class EditContratComponent {
           },
           error: (error) => {
             console.error('Error fetching adhesion details:', error);
+            this.toastr.error('Erreur lors de la récupération des détails de l’adhésion', error);
           },
           complete: () => {
             console.log('adhesion details fetched successfully');

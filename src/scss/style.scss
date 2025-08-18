@@ -48,7 +48,7 @@
 @import "browser/_ie10.scss";
 @import "browser/_ie11.scss";
 
-
+@import "./toast.scss";
 :host {
   --bright-blue: oklch(51.01% 0.274 263.83);
   --electric-violet: oklch(53.18% 0.28 296.97);

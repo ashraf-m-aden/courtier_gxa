@@ -3,7 +3,7 @@ import { Component, effect, Input, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourtierService } from '../../../../Services/courtier/courtier.service';
 import { RvehModel } from '../../../../Model/rveh.model';
-import { D } from '@angular/cdk/bidi-module.d-D-fEBKdS';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'edit-risque-contrat',
@@ -43,7 +43,7 @@ export class EditRisqueContratComponent {
     }
   ];
   conducteurSelectionne: any = null;
-  constructor(private fb: FormBuilder, private courtierService: CourtierService) {
+  constructor(private fb: FormBuilder, private courtierService: CourtierService,private toastr: ToastrService) {
     this.riskForm = this.fb.group({
 
       Appel: [null],
@@ -197,17 +197,21 @@ export class EditRisqueContratComponent {
     this.courtierService.postupdateRisk(payload).subscribe({
       next: (data: any) => {
         console.log("Contrat mis à jour avec succès", data);
+            this.toastr.success('Contrat mis à jour avec succès!');
+
         this.courtierService.getDetailContrat(payload.contrat).subscribe({
           next: (data: any) => {
             this.contratDetails.set(this.courtierService.mergeObjects(data));
           },
           error: (err) => {
             console.error("Erreur lors de la récupération des détails du contrat", err);
+            this.toastr.error("Erreur lors de la récupération des détails du contrat", err);
           }
         });
       }
       , error: (err) => {
         console.error("Erreur lors de la mise à jour du contrat", err);
+        this.toastr.error("Erreur lors de la mise à jour du contrat", err);
       }
 
     });

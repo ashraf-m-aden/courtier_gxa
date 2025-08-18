@@ -33,6 +33,7 @@
     "bootstrap": "^5.3.6",
     "courtiers": "file:",
     "express": "^4.18.2",
+    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "xpath": "^0.0.34",

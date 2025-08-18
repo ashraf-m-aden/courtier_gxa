@@ -4,6 +4,7 @@ import { Component, effect, Input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Piec } from '../../../../Model/piec.model';
 import { CourtierService } from '../../../../Services/courtier/courtier.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'edit-admin-piece-contrat',
@@ -49,7 +50,7 @@ export class EditAdminPieceContratComponent {
   });
 
 
-  constructor(private fb: FormBuilder, private courtierService: CourtierService) {
+  constructor(private fb: FormBuilder, private courtierService: CourtierService, private toastr: ToastrService) {
     effect(() => {
       this.pieces = this.retrievedcontratDetails().filter((c: any) => { return c.typename == "piec" })
       console.log("UPDATE");
@@ -100,31 +101,31 @@ export class EditAdminPieceContratComponent {
     console.log(existing)
     this.piece.set({
       ...existing,
-   /*   Adhprin: existing.Adhprin ?? 0,
-      Contrat: existing.Contrat ?? 0,
-      Piece: existing.Piece ?? 0,
-      Codeprod: existing.Codeprod ?? "",
-      Oripiece: existing.Oripiece ?? "",
-      Effet: existing.Effet ?? "",
-      Sitpiece: existing.Sitpiece ?? "",
-      Datesit: existing.Datesit ?? "",
-      Suspens: existing.Suspens ?? "",
-      Finpiece: existing.Finpiece ?? "",
-      Datefin: existing.Datefin ?? "",
-      Entite: existing.Entite ?? 0,
-      Ciemaj: existing.Ciemaj ?? 0,
-      Navenant: existing.Navenant ?? "",
-      Motif: existing.Motif ?? "",
-      Globalor: existing.Globalor ?? "",
-      Globalte: existing.Globalte ?? "",
-      Preavis: existing.Preavis ?? 0,
-      Memo: existing.Memo ?? "",
-      // Coeffcom: existing.Coeffcom ?? 0,
-      Centre: existing.Centre ?? "",
-      Heure: existing.Heure ?? "",
-      Datemed: existing.Datemed ?? "",
-      Datcreat: existing.Datcreat ?? "",
-      Cg: existing.Cg ?? "",*/
+      /*   Adhprin: existing.Adhprin ?? 0,
+         Contrat: existing.Contrat ?? 0,
+         Piece: existing.Piece ?? 0,
+         Codeprod: existing.Codeprod ?? "",
+         Oripiece: existing.Oripiece ?? "",
+         Effet: existing.Effet ?? "",
+         Sitpiece: existing.Sitpiece ?? "",
+         Datesit: existing.Datesit ?? "",
+         Suspens: existing.Suspens ?? "",
+         Finpiece: existing.Finpiece ?? "",
+         Datefin: existing.Datefin ?? "",
+         Entite: existing.Entite ?? 0,
+         Ciemaj: existing.Ciemaj ?? 0,
+         Navenant: existing.Navenant ?? "",
+         Motif: existing.Motif ?? "",
+         Globalor: existing.Globalor ?? "",
+         Globalte: existing.Globalte ?? "",
+         Preavis: existing.Preavis ?? 0,
+         Memo: existing.Memo ?? "",
+         // Coeffcom: existing.Coeffcom ?? 0,
+         Centre: existing.Centre ?? "",
+         Heure: existing.Heure ?? "",
+         Datemed: existing.Datemed ?? "",
+         Datcreat: existing.Datcreat ?? "",
+         Cg: existing.Cg ?? "",*/
       typename: "PIEC",
       Cie: 201,
       Cieprime: existing.Cieprime ?? null,
@@ -133,14 +134,14 @@ export class EditAdminPieceContratComponent {
       Coutpol: existing.Coutpol ?? null,
       Coutpol1: existing.Coutpol1 ?? null,
       external_cie_nomcie: existing.external_cie_nomcie ?? "GXA ASSURANCES",
-      PolGroupe:existing.PolGroupe ??  null,
+      PolGroupe: existing.PolGroupe ?? null,
       Police: existing.Police ?? null,
       Reference: existing.Reference ?? null,
-      Role:existing.Role ?? "P",
-      Tauxcn: existing.Tauxcn ??null,
-      Tauxcom: existing.Tauxcom ??null,
-      Tauxcout:existing.Tauxcout ?? null,
-      Tauxpart: existing.Tauxpart ??null,
+      Role: existing.Role ?? "P",
+      Tauxcn: existing.Tauxcn ?? null,
+      Tauxcom: existing.Tauxcom ?? null,
+      Tauxcout: existing.Tauxcout ?? null,
+      Tauxpart: existing.Tauxpart ?? null,
 
     });
 
@@ -261,12 +262,19 @@ export class EditAdminPieceContratComponent {
 
       if (payload.produit && payload.produit != "" && payload.produit != null && payload.produit != undefined) {
         this.courtierService.getAjoutPieceAuContrat(payload).subscribe({
+
           next: () => {
+            this.toastr.success('Contrat mis à jour avec succès!')
+
             this.courtierService.getDetailContrat(payload.dossier).subscribe({
               next: (data: any) => {
                 this.contratDetails.set(data)
               }
             })
+          },
+          error: (err) => {
+            console.error("Erreur lors de l'ajout de la pièce au contrat", err);
+            this.toastr.error("Erreur lors de l'ajout de la pièce au contrat", err);
           }
         })
       } else {
@@ -277,6 +285,10 @@ export class EditAdminPieceContratComponent {
                 this.contratDetails.set(data)
               }
             })
+          }
+          , error: (err) => {
+            console.error("Erreur lors de l'ajout de la pièce au contrat", err);
+            this.toastr.error("Erreur lors de l'ajout de la pièce au contrat", err);
           }
         })
       }
