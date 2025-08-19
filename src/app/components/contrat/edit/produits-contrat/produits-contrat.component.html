@@ -1,12 +1,12 @@
 <div class="row">
-  @if( isContrat()){
+  <!-- @if( isContrat()){ -->
   <div class="card p-3">
     <h2 class="text-xl font-bold mb-3">Produit</h2>
 
     <!-- CATEGORIE -->
     <div class="mb-2">
       <label class="fw-bold">Produit :</label>
-      <span>{{ vehiculeForm.get("codeprod")?.value }}</span>
+      <span>{{ detailProduit()?.libelle }}</span>
     </div>
 
     <!-- MARQUE -->
@@ -15,14 +15,14 @@
       <table class="table-auto w-full border">
         <thead>
           <tr>
-            @for (entry of visibleProductEntries(); track entry.label) {
+            @for (entry of visibleProductEntries; track entry.label) {
             <th class="border px-2 py-1 text-sm">{{ entry.label }}</th>
             }
           </tr>
         </thead>
         <tbody>
           <tr>
-            @for (entry of visibleProductEntries(); track entry.label) {
+            @for (entry of visibleProductEntries; track entry.label) {
             <td class="border px-2 py-1 text-sm">
               @if (entry.isDate) {
               {{ getPieceValue(entry) | date : "dd/MM/yyyy" }}
@@ -37,12 +37,11 @@
     </div>
   </div>
 
-  } @else {
+  <!-- } @else {
   <div class="col-12">
     <form [formGroup]="vehiculeForm" class="card">
       <h2 class="text-xl font-bold">Formulaire Véhicule</h2>
 
-      <!-- CATEGORIE -->
       <div class="d-flex m-3 flex-column">
         <label class="block mb-1">Liste des produits</label>
         <select formControlName="codeprod" class="border p-2 rounded w-full">
@@ -58,14 +57,14 @@
       <table class="table-auto w-full border">
         <thead>
           <tr>
-            @for (entry of visibleProductEntries(); track entry.label) {
+            @for (entry of visibleProductEntries; track entry.label) {
             <th class="border px-2 py-1 text-sm">{{ entry.label }}</th>
             }
           </tr>
         </thead>
         <tbody>
           <tr>
-            @for (entry of visibleProductEntries(); track entry.label) {
+            @for (entry of visibleProductEntries; track entry.label) {
             <td class="border px-2 py-1 text-sm">
               @if (entry.isDate) {
               {{ getPieceValue(entry) | date : "dd/MM/yyyy" }}
@@ -79,5 +78,5 @@
       </table>
     </form>
   </div>
-  }
+  } -->
 </div>

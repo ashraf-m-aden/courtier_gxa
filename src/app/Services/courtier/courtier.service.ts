@@ -185,7 +185,7 @@ export class CourtierService {
   }
 
   getContratUpdate(payload: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/update_contrat`, payload);
+    return this.http.post(`${this.baseUrl}/Contrat_update`, payload);
   }
 
 

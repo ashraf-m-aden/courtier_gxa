@@ -62,6 +62,7 @@ export class EditRisqueContratComponent {
       Symbmine: [null],
       Immat: [null],
       Datecg: [new Date()],
+      Dateori: [new Date()],
       Datecirc: [new Date()],
       Genre: [null],
       Carross: [null],
@@ -114,8 +115,10 @@ export class EditRisqueContratComponent {
       }
     });
     this.riskForm.valueChanges.subscribe(values => {
-      this.risa().Appel = values?.Appel;
+      if(this.risa()){
+        this.risa().Appel = values?.Appel;
       this.risa().Dateori = null;
+      }
 
 
     });

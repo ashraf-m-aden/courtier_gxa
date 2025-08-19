@@ -1,8 +1,8 @@
+import { Piec } from './../../../../Model/piec.model';
 import { filter } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { Component, effect, Input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Piec } from '../../../../Model/piec.model';
 import { CourtierService } from '../../../../Services/courtier/courtier.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -58,40 +58,40 @@ export class EditAdminPieceContratComponent {
       this.patchPieceForm(this.piece())
     })
     this.pieceForm = this.fb.group({
-      Numero: [''],
-      NumeroPolice: [''],
-      NumeroAvenant: [''],
-      RefCg: [''],
-      Origine: [''],
+      Numero: [null],
+      NumeroPolice: [null],
+      NumeroAvenant: [null],
+      RefCg: [null],
+      Origine: [null],
       Effet: [new Date()],
-      HeureEffet: [''],
-      Motif: [''],
-      Situation: [''],
+      HeureEffet: [null],
+      Motif: [null],
+      Situation: [null],
 
       // Champs manquants ajoutés ci-dessous :
-      Contrat: [],
+      Contrat: [this.contratDetails()?.Contrat || 0],
       Piece: [0],
       Adhprin: [0],
-      Codeprod: [],
-      Oripiece: [''],
-      Sitpiece: [''],
-      Datesit: [''],
-      Suspens: [''],
-      Finpiece: [''],
-      Datefin: [''],
+      Codeprod: [""],
+      Oripiece: [null],
+      Sitpiece: [null],
+      Datesit: [null],
+      Suspens: [null],
+      Finpiece: [null],
+      Datefin: [null],
       Entite: [0],
       Ciemaj: [0],
-      Navenant: [''],
-      Globalor: [''],
-      Globalte: [''],
+      Navenant: [null],
+      Globalor: [null],
+      Globalte: [null],
       Preavis: [0],
-      Memo: [''],
+      Memo: [null],
       //  Coeffcom: [0],
-      Centre: [''],
-      Datemed: [''],
-      Datcreat: [''],
-      Cg: [''],
-      typename: "PIEC"
+      Centre: [null],
+      Datemed: [null],
+      Datcreat: [null],
+      Cg: [null],
+      typename: ["PIEC"]
 
     });
 
@@ -101,31 +101,31 @@ export class EditAdminPieceContratComponent {
     console.log(existing)
     this.piece.set({
       ...existing,
-      /*   Adhprin: existing.Adhprin ?? 0,
-         Contrat: existing.Contrat ?? 0,
-         Piece: existing.Piece ?? 0,
-         Codeprod: existing.Codeprod ?? "",
-         Oripiece: existing.Oripiece ?? "",
-         Effet: existing.Effet ?? "",
-         Sitpiece: existing.Sitpiece ?? "",
-         Datesit: existing.Datesit ?? "",
-         Suspens: existing.Suspens ?? "",
-         Finpiece: existing.Finpiece ?? "",
-         Datefin: existing.Datefin ?? "",
-         Entite: existing.Entite ?? 0,
-         Ciemaj: existing.Ciemaj ?? 0,
-         Navenant: existing.Navenant ?? "",
-         Motif: existing.Motif ?? "",
-         Globalor: existing.Globalor ?? "",
-         Globalte: existing.Globalte ?? "",
-         Preavis: existing.Preavis ?? 0,
-         Memo: existing.Memo ?? "",
-         // Coeffcom: existing.Coeffcom ?? 0,
-         Centre: existing.Centre ?? "",
-         Heure: existing.Heure ?? "",
-         Datemed: existing.Datemed ?? "",
-         Datcreat: existing.Datcreat ?? "",
-         Cg: existing.Cg ?? "",*/
+      Adhprin: existing.Adhprin ?? 0,
+      Contrat: existing.Contrat ?? 0,
+      Piece: existing.Piece ?? 0,
+      Codeprod: existing.Codeprod ?? "",
+      Oripiece: existing.Oripiece ?? "",
+      Effet: existing.Effet ?? "",
+      Sitpiece: existing.Sitpiece ?? "",
+      Datesit: existing.Datesit ?? "",
+      Suspens: existing.Suspens ?? "",
+      Finpiece: existing.Finpiece ?? "",
+      Datefin: existing.Datefin ?? "",
+      Entite: existing.Entite ?? 0,
+      Ciemaj: existing.Ciemaj ?? 0,
+      Navenant: existing.Navenant ?? "",
+      Motif: existing.Motif ?? "",
+      Globalor: existing.Globalor ?? "",
+      Globalte: existing.Globalte ?? "",
+      Preavis: existing.Preavis ?? 0,
+      Memo: existing.Memo ?? "",
+      // Coeffcom: existing.Coeffcom ?? 0,
+      Centre: existing.Centre ?? "",
+      Heure: existing.Heure ?? "",
+      Datemed: existing.Datemed ?? "",
+      Datcreat: existing.Datcreat ?? "",
+      Cg: existing.Cg ?? "",
       typename: "PIEC",
       Cie: 201,
       Cieprime: existing.Cieprime ?? null,
@@ -155,33 +155,32 @@ export class EditAdminPieceContratComponent {
   }
   patchPieceForm(piece: Piec) {
     this.pieceForm.patchValue({
-      /*    Origine: piece.Oripiece || '',
-          DateEffet: piece.Effet ? new Date(piece.Effet) : new Date(),
-          HeureEffet: piece.Heure || '',
-          Motif: piece.Motif || '',
+      Origine: piece.Oripiece || null,
+      DateEffet: piece.Effet ? new Date(piece.Effet) : new Date(),
+      HeureEffet: piece.Heure || null,
+      Motif: piece.Motif || null,
 
-          Contrat: piece.Contrat ?? 0,
-          Piece: piece.Piece ?? 0,
-          Adhprin: piece.Adhprin ?? 0,
-          Codeprod: piece.Codeprod || '',
-          Oripiece: piece.Oripiece || '',
-          Sitpiece: piece.Sitpiece || '',
-          Datesit: piece.Datesit ? new Date(piece.Datesit) : '',
-          Suspens: piece.Suspens ? new Date(piece.Suspens) : '',
-          Finpiece: piece.Finpiece || '',
-          Datefin: piece.Datefin ? new Date(piece.Datefin) : '',
-          Entite: piece.Entite ?? 0,
-          Ciemaj: piece.Ciemaj ?? 0,
-          Navenant: piece.Navenant || '',
-          Globalor: piece.Globalor || '',
-          Globalte: piece.Globalte || '',
-          Preavis: piece.Preavis ?? 0,
-          Memo: piece.Memo || '',
-          // Coeffcom: piece.Coeffcom ?? "",
-          Centre: piece.Centre || '',
-          Datemed: piece.Datemed ? new Date(piece.Datemed) : '',
-          Datcreat: piece.Datcreat ? new Date(piece.Datcreat) : '',
-          Cg: piece.Cg || '',*/
+      Piece: piece.Piece ?? 0,
+      Adhprin: piece.Adhprin ?? 0,
+      Codeprod: piece.Codeprod || null,
+      Oripiece: piece.Oripiece || null,
+      Sitpiece: piece.Sitpiece || null,
+      Datesit: piece.Datesit ? new Date(piece.Datesit) : null,
+      Suspens: piece.Suspens ? new Date(piece.Suspens) : null,
+      Finpiece: piece.Finpiece || null,
+      Datefin: piece.Datefin ? new Date(piece.Datefin) : null,
+      Entite: piece.Entite ?? 0,
+      Ciemaj: piece.Ciemaj ?? 0,
+      Navenant: piece.Navenant || null,
+      Globalor: piece.Globalor || null,
+      Globalte: piece.Globalte || null,
+      Preavis: piece.Preavis ?? 0,
+      Memo: piece.Memo || null,
+      // Coeffcom: piece.Coeffcom ?? "",
+      Centre: piece.Centre || null,
+      Datemed: piece.Datemed ? new Date(piece.Datemed) : null,
+      Datcreat: piece.Datcreat ? new Date(piece.Datcreat) : null,
+      Cg: piece.Cg || null,
       Cie: 201,
       Cieprime: null,
       Cietaxes: null,
@@ -198,7 +197,7 @@ export class EditAdminPieceContratComponent {
       Tauxcout: null,
       Tauxpart: null,
       typename: "PIEC",
-      Effet: piece.Effet || '',
+      Effet: piece.Effet || null,
 
     });
   }
@@ -245,23 +244,22 @@ export class EditAdminPieceContratComponent {
 
   onSubmit() {
     if (this.pieceForm.valid) {
-
+      let cont = this.retrievedcontratDetails().filter((c: any) => { return c.typename == "CONT" })[0];
+      cont.Echpjj = cont.Echpjj.toString()
       let payload = {
         // "contrat": this.contratDetails().Contrat,
 
         "dossier": this.contratDetails().Numtiers,
-        "produit": this.contratDetails().Codeprod,
+        "produit": this.contratDetails()?.Codeprod ?? this.pieces[0]?.Codeprod,
         "Effet": this.pieceForm.get("Effet")?.value,
         "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!),
         "contrat": this.contratDetails().Contrat,
-        "data": { "PIEC": this.pieceForm.value, "CONT": this.contratDetails(), },
+        "data": { "PIEC": this.pieceForm.value, "CONT": cont },
       }
-      console.log(payload);
-      console.log(this.contratDetails());
 
 
-      if (payload.produit && payload.produit != "" && payload.produit != null && payload.produit != undefined) {
-        this.courtierService.getAjoutPieceAuContrat(payload).subscribe({
+      if (this.pieceForm.get("Piece")?.value > 0) {
+        this.courtierService.getUpdatePieceDuContrat(payload).subscribe({
 
           next: () => {
             this.toastr.success('Contrat mis à jour avec succès!')
@@ -274,12 +272,14 @@ export class EditAdminPieceContratComponent {
           },
           error: (err) => {
             console.error("Erreur lors de l'ajout de la pièce au contrat", err);
-            this.toastr.error("Erreur lors de l'ajout de la pièce au contrat", err);
+            this.toastr.error("Erreur lors de l'ajout de la pièce au contrat ", err.error);
           }
         })
       } else {
         this.courtierService.getAjoutPieceAuContrat(payload).subscribe({
           next: () => {
+            this.toastr.success('Contrat mis à jour avec succès!')
+
             this.courtierService.getDetailContrat(payload.dossier).subscribe({
               next: (data: any) => {
                 this.contratDetails.set(data)
@@ -288,7 +288,7 @@ export class EditAdminPieceContratComponent {
           }
           , error: (err) => {
             console.error("Erreur lors de l'ajout de la pièce au contrat", err);
-            this.toastr.error("Erreur lors de l'ajout de la pièce au contrat", err);
+            this.toastr.error("Erreur lors de l'ajout de la pièce au contrat", err.error);
           }
         })
       }

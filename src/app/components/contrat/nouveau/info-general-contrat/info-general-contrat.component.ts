@@ -124,6 +124,7 @@ export class InfoGeneralContratComponent {
           "Apport1": null,
           "Apport2": null,
           "Archive": null,
+          "Codeprod": this.detailProduit.codeprod,
           "Comges": null,
           "Comini": null,
           "Comini1": null,
@@ -206,6 +207,8 @@ export class InfoGeneralContratComponent {
           "Cie": 201,
           "Cieprime": null,
           "Cietaxes": null,
+          "Codeprod": this.detailProduit.codeprod,
+
           "Commsup": null,
           "Coutpol": null,
           "Coutpol1": null,
