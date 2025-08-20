@@ -12,7 +12,7 @@
         <mat-tab label="Tier">
           <app-tier-profil [tier]="tierObject"></app-tier-profil>
         </mat-tab>
-        @if(tierObject()?.Typtiers ==1){
+        @if(tierObject()?.Typtiers =="1" || tierObject()?.Typtiers =="A"){
         <mat-tab label="Liste Dpp">
           <app-dpp-profil [listdpp]="dpplist"></app-dpp-profil>
         </mat-tab>
