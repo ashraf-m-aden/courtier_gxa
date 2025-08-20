@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, effect, Input, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,8 +18,8 @@ import { Tier } from '../../../Model/tier.model';
 
 @Component({
   selector: 'app-dpp-profil',
-  imports: [  CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
-    MatCardModule, MatTabsModule,MatDatepickerModule,    MatNativeDateModule,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
+    MatCardModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule,
     MatInputModule, MatCheckboxModule,
     MatButtonModule, MatIconModule],
   templateUrl: './dpp-profil.component.html',
@@ -28,11 +28,13 @@ import { Tier } from '../../../Model/tier.model';
 export class DppProfilComponent {
 
 
- public id: string
-  selected = signal<Tier | null>(null);
+  public id: string
+  selected = signal<Dpp | null>(null);
   selectedDPP = signal<Dpp | null>(null);
-  selectedDPM = signal<DpmModel | null>(null);
+  @Input() listdpp = signal<Dpp[]>([]);
+
   editMode = false;
+  detailMode = false;
   dppForm!: FormGroup;
 
   titres = ['M.', 'Mme', 'Mlle']; // example titles
@@ -47,74 +49,17 @@ export class DppProfilComponent {
   statutjuOptions = Object.values(Statutju);
   convCollOptions = Object.values(ConvColl);
   currencyCodes = ['EUR', 'USD', 'GBP', 'XAF']; // Add your currency codes
-dppData: Dpp = {
-  numdpp: 1001,
-  Numtiers: 2001,
-  titre: "Monsieur",
-  nom: "Ali",
-  prenom: "Omar",
-  nompre: "Ali Omar",
-  nomfille: "",
-  alias: "Omar Djib",
-  sexe: "M",
-  datenais: new Date("1985-05-15"),
-  age: 40,
-  agemsme: 1985,
-  national: "DJ", // code ISO3166 pour Djibouti
-  numss: "1234567890123",
-  sitfam: "Marié",
-  activite: "Employé",
-  catprof: "Cadre",
-  csp: "3",
-  profess: "Ingénieur électricien",
-  employe: "EDD",
-  filiale: "Direction Réseaux",
-  dateent: new Date("2012-09-01"),
-  salaire: 25000,
-  salaire1: "DJF",
-  datesal: 2025,
-  telprof: "+25321345678",
-  postetel: "101",
-  faxpro: "+25321340000",
-  portable: "+25377234567",
-  npermis: "DJ987654",
-  lieuperm: "Djibouti",
-  condacc: false,
-  dateca: undefined,
-  datemoto: new Date("2006-07-10"),
-  datevl: new Date("2005-04-20"),
-  datepl: undefined,
-  datetc: undefined,
-  images: "https://example.com/photo.jpg",
-  ssregion: "01",
-  sscaisse: "CAISSE-DJ",
-  sscentre: "CENTRE-VILLE",
-  enfass: false,
-  saltra: 8000,
-  saltra1: "DJF",
-  saltrb: 10000,
-  saltrb1: "DJF",
-  saltrc: 7000,
-  saltrc1: "DJF",
-  numemail: "omar.ali@example.com",
-  datea1: new Date("2003-08-01"),
-  datebsr: new Date("2002-06-01"),
-  orgaffil: "CNSS",
-  datea2: new Date("2004-04-04"),
-  dateb1: new Date("2001-01-15"),
-  regimesocial: "Régime Général",
-  regimelocal: "Régime Local Djibouti",
-  emailprof: "omar.ali@edd.dj",
-  lieunaissance: "Djibouti",
-  datepermisbateau: new Date("2018-12-01"),
-  typepermisbateau: "Côtier",
-  datevalvl: new Date("2035-04-20"),
-};
+
 
 
 
   constructor(private route: ActivatedRoute, private facade: TierFacade, private fb: FormBuilder) {
     this.id! = this.route.snapshot.paramMap.get('id') ?? "";
+
+    effect(() => {
+      this.dppForm.patchValue(this.selectedDPP()!); // ou dpmTierData
+
+    })
   }
 
   ngOnInit() {
@@ -122,74 +67,74 @@ dppData: Dpp = {
     // if (id) this.facade.getById(id);
     // this.selected.set(this.facade.selected());
     this.initForm();
-    this.dppForm.patchValue(this.dppData); // ou dpmTierData
   }
 
   initForm() {
 
-    this.dppForm = this.fb.group({
-      numdpp: [null, [Validators.required]],
-      Numtiers: [null],
-      titre: [''],
-      nom: [''],
-      prenom: [''],
-      nompre: [''],
-      nomfille: [''],
-      alias: [''],
-      sexe: [''],
-      datenais: [''],
-      age: [null],
-      agemsme: [null],
-      national: [''],
-      numss: [''],
-      sitfam: [''],
-      activite: [''],
-      catprof: [''],
-      csp: [''],
-      profess: [''],
-      employe: [''],
-      filiale: [''],
-      dateent: [''],
-      salaire: [null],
-      salaire1: [''],
-      datesal: [null],
-      telprof: [''],
-      postetel: [''],
-      faxpro: [''],
-      portable: [''],
-      npermis: [''],
-      lieuperm: [''],
-      condacc: [false],
-      dateca: [''],
-      datemoto: [''],
-      datevl: [''],
-      datepl: [''],
-      datetc: [''],
-      images: [''],
-      ssregion: [''],
-      sscaisse: [''],
-      sscentre: [''],
-      enfass: [false],
-      saltra: [null],
-      saltra1: [''],
-      saltrb: [null],
-      saltrb1: [''],
-      saltrc: [null],
-      saltrc1: [''],
-      numemail: [''],
-      datea1: [''],
-      datebsr: [''],
-      orgaffil: [''],
-      datea2: [''],
-      dateb1: [''],
-      regimesocial: [''],
-      regimelocal: [''],
-      emailprof: [''],
-      lieunaissance: [''],
-      datepermisbateau: [''],
-      typepermisbateau: [''],
-      datevalvl: [''],
-    });
+ this.dppForm = this.fb.group({
+  Numdpp: [null, [Validators.required]],
+  Numtiers: [null],
+  Titre: [null],
+  Nom: [null],
+  Prenom: [null],
+  Nompre: [null],
+  Nomfille: [null],
+  Alias: [null],
+  Sexe: [null],
+  Datenais: [null],
+  Age: [null],
+  Agemsme: [null],
+  National: [null],
+  Numss: [null],
+  Sitfam: [null],
+  Activite: [null],
+  Catprof: [null],
+  Csp: [null],
+  Profess: [null],
+  Employe: [null],
+  Filiale: [null],
+  Dateent: [null],
+  Salaire: [null],
+  Salaire1: [null],
+  Datesal: [null],
+  Telprof: [null],
+  Postetel: [null],
+  Faxpro: [null],
+  Portable: [null],
+  Npermis: [null],
+  Lieuperm: [null],
+  Condacc: [false],
+  Dateca: [null],
+  Datemoto: [null],
+  Datevl: [null],
+  Datepl: [null],
+  Datetc: [null],
+  Images: [null],
+  Ssregion: [null],
+  Sscaisse: [null],
+  Sscentre: [null],
+  Enfass: [false],
+  Saltra: [null],
+  Saltra1: [null],
+  Saltrb: [null],
+  Saltrb1: [null],
+  Saltrc: [null],
+  Saltrc1: [null],
+  Numemail: [null],
+  Datea1: [null],
+  Datebsr: [null],
+  Orgaffil: [null],
+  Datea2: [null],
+  Dateb1: [null],
+  Regimesocial: [null],
+  Regimelocal: [null],
+  Emailprof: [null],
+  Lieunaissance: [null],
+  Datepermisbateau: [null],
+  Typepermisbateau: [null],
+  Datevalvl: [null],
+});
+
 
     this.updateFormState()
   }
@@ -204,16 +149,11 @@ dppData: Dpp = {
   }
   toggleEditMode() {
     this.editMode = !this.editMode;
+    this.detailMode = !this.detailMode;
     this.updateFormState()
   }
 
-  isDPP(): boolean {
-    return this.dppForm.get('typtiers')?.value === 'ddp';
-  }
 
-  isDPM(): boolean {
-    return this.dppForm.get('typtiers')?.value === 'dpm';
-  }
 
   save() {
     if (this.dppForm.valid) {
@@ -222,7 +162,7 @@ dppData: Dpp = {
     }
   }
 
-    onSubmit() {
+  onSubmit() {
     if (this.dppForm.valid) {
       console.log('Form Value:', this.dppForm.value);
     } else {

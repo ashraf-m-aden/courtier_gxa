@@ -23,6 +23,7 @@ import { DppProfilComponent } from '../../../components/tier/dpp-profil/dpp-prof
 import { ProjetBaseComponent } from '../../../components/projets/base/base.component';
 import { ListContratComponent } from '../../contrats/list/list.component';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-tier-detail',
   standalone: true,
@@ -60,9 +61,12 @@ export class TierDetailComponent {
 
 
   retrievedTier :any[] = [];
+  tierObject=signal<Tier | null>(null);
+  dpmObject = signal<DpmModel | null>(null);
+  dpplist = signal<Dpp[]>([]);
   contrats :any[] = [];
   projets:any[] = [];
-  constructor(private route: ActivatedRoute, private facade: TierFacade, private fb: FormBuilder, private courtierService: CourtierService) {
+  constructor(private route: ActivatedRoute, private facade: TierFacade, private fb: FormBuilder, private courtierService: CourtierService,private toastr:ToastrService) {
     this.id! = parseInt(this.route.snapshot.paramMap.get('id')!) ?? undefined;
   }
 
@@ -75,10 +79,14 @@ export class TierDetailComponent {
       next: async (data: any) => {
         this.retrievedTier = data;
         if (this.retrievedTier.length > 0) {
-          console.log('Tier data retrieved:', this.retrievedTier);
+          this.toastr.success('Les données du tiers ont été chargées avec succès.', 'Succès');
           this.editMode = false; // Disable edit mode after loading data
+          this.tierObject.set(this.retrievedTier.filter(t => t.typename === "TIERS")[0]);
+          this.dpmObject.set(this.retrievedTier.filter(t => t.typename === "DPM")[0]);
+          this.dpplist.set(this.retrievedTier.filter(t => t.typename === "DPP"));
         } else {
           console.warn('No tier data found for the given ID');
+          this.toastr.warning('Aucune donnée de tiers trouvée pour cet ID.', 'Attention');
         }
 
       },

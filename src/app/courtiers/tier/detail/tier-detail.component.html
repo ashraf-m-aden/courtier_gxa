@@ -10,15 +10,17 @@
       <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
         <!-- Tab 1: Profil -->
         <mat-tab label="Tier">
-          <app-tier-profil [retrieveData]="retrievedTier"  ></app-tier-profil>
+          <app-tier-profil [tier]="tierObject"></app-tier-profil>
         </mat-tab>
-        <mat-tab label="Profil Dpm">
-          <app-dpm-profil></app-dpm-profil>
-        </mat-tab>
-
+        @if(tierObject()?.Typtiers ==1){
         <mat-tab label="Liste Dpp">
-          <app-dpp-profil></app-dpp-profil>
+          <app-dpp-profil [listdpp]="dpplist"></app-dpp-profil>
         </mat-tab>
+        }@else{
+        <mat-tab label="Profil Dpm">
+          <app-dpm-profil [selectedDPM]="dpmObject"></app-dpm-profil>
+        </mat-tab>
+        }
 
         <!-- Tab 2: Historique -->
         <mat-tab label="Historique">
@@ -31,10 +33,10 @@
         <mat-tab label="Liste des contrats">
           <app-list-contrat [isContrat]="true" [idTier]="id"></app-list-contrat>
         </mat-tab>
-
+        <!--
         <mat-tab label="Liste des projets">
           <app-list-contrat [isContrat]="false" [idTier]="id"></app-list-contrat>
-        </mat-tab>
+        </mat-tab> -->
       </mat-tab-group>
       }
     </div>

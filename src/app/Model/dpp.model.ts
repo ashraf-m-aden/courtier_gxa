@@ -1,214 +1,212 @@
-// dpp.model.ts
 export interface Dpp {
-    /** N° de personne physique */
-    numdpp: number;
+  /** N° de personne physique */
+  Numdpp: number;
 
-    /** N° de tiers */
-    Numtiers?: number;
+  /** N° de tiers */
+  Numtiers?: number;
 
-    /** Titre */
-    titre?: string;
+  /** Titre */
+  Titre?: string;
 
-    /** Nom */
-    nom?: string;
+  /** Nom */
+  Nom?: string;
 
-    /** Prénom */
-    prenom?: string;
+  /** Prénom */
+  Prenom?: string;
 
-    /** Nom et prénom */
-    nompre?: string;
+  /** Nom et prénom */
+  Nompre?: string;
 
-    /** Nom de jeune fille */
-    nomfille?: string;
+  /** Nom de jeune fille */
+  Nomfille?: string;
 
-    /** Alias */
-    alias?: string;
+  /** Alias */
+  Alias?: string;
 
-    /** Sexe */
-    sexe?: string;
+  /** Sexe */
+  Sexe?: string;
 
-    /** date de naissance */
-    datenais?: Date;
+  /** Date de naissance */
+  Datenais?: Date;
 
-    /** age */
-    age?: number;
+  /** Age */
+  Age?: number;
 
-    /** Age millésime */
-    agemsme?: number;
+  /** Age millésime */
+  Agemsme?: number;
 
-    /** nationalité */
-    national?: string;
+  /** Nationalité */
+  National?: string;
 
-    /** N° de sécurité sociale */
-    numss?: string;
+  /** N° de sécurité sociale */
+  Numss?: string;
 
-    /** Situation familiale */
-    sitfam?: string;
+  /** Situation familiale */
+  Sitfam?: string;
 
-    /** Activité */
-    activite?: string;
+  /** Activité */
+  Activite?: string;
 
-    /** catégorie professionnelle */
-    catprof?: string;
+  /** Catégorie professionnelle */
+  Catprof?: string;
 
-    /** Code socio professionnel */
-    csp?: string;
+  /** Code socio professionnel */
+  Csp?: string;
 
-    /** Profession */
-    profess?: string;
+  /** Profession */
+  Profess?: string;
 
-    /** Employeur */
-    employe?: string;
+  /** Employeur */
+  Employe?: string;
 
-    /** Filiale */
-    filiale?: string;
+  /** Filiale */
+  Filiale?: string;
 
-    /** date entrée dans l'entreprise */
-    dateent?: Date;
+  /** Date entrée dans l'entreprise */
+  Dateent?: Date;
 
-    /** Salaire annuel */
-    salaire?: number;
+  /** Salaire annuel */
+  Salaire?: number;
 
-    /** Salaire annuel (ISO 4217 currency code) */
-    salaire1?: string;
+  /** Salaire annuel (ISO 4217 currency code) */
+  Salaire1?: string;
 
-    /** Année du salaire annuel */
-    datesal?: number;
+  /** Année du salaire annuel */
+  Datesal?: number;
 
-    /** Numéro téléphone professionnel */
-    telprof?: string;
+  /** Numéro téléphone professionnel */
+  Telprof?: string;
 
-    /** numéro de poste */
-    postetel?: string;
+  /** Numéro de poste */
+  Postetel?: string;
 
-    /** numéro de FAX professionnel */
-    faxpro?: string;
+  /** Numéro de FAX professionnel */
+  Faxpro?: string;
 
-    /** numéro de téléphone portable */
-    portable?: string;
+  /** Numéro de téléphone portable */
+  Portable?: string;
 
-    /** Numéro du permis de conduire */
-    npermis?: string;
+  /** Numéro du permis de conduire */
+  Npermis?: string;
 
-    /** Permis délivré par : */
-    lieuperm?: string;
+  /** Permis délivré par : */
+  Lieuperm?: string;
 
-    /** Conduite accompagnée */
-    condacc?: boolean;
+  /** Conduite accompagnée */
+  Condacc?: boolean;
 
-    /** att. conduite accompagnée */
-    dateca?: Date;
+  /** Att. conduite accompagnée */
+  Dateca?: Date;
 
-    /** date du permis moto A */
-    datemoto?: Date;
+  /** Date du permis moto A */
+  Datemoto?: Date;
 
-    /** date du permis auto B */
-    datevl?: Date;
+  /** Date du permis auto B */
+  Datevl?: Date;
 
-    /** date du permis Poids-lourds C */
-    datepl?: Date;
+  /** Date du permis Poids-lourds C */
+  Datepl?: Date;
 
-    /** date du permis Transp/Commun D */
-    datetc?: Date;
+  /** Date du permis Transp/Commun D */
+  Datetc?: Date;
 
-    /** photo */
-    images?: string;
+  /** Photo */
+  Images?: string;
 
-    /** Code région */
-    ssregion?: string;
+  /** Code région */
+  Ssregion?: string;
 
-    /** Code caisse */
-    sscaisse?: string;
+  /** Code caisse */
+  Sscaisse?: string;
 
-    /** Centre de paiement */
-    sscentre?: string;
+  /** Centre de paiement */
+  Sscentre?: string;
 
-    /** Enfant d'assuré */
-    enfass?: boolean;
+  /** Enfant d'assuré */
+  Enfass?: boolean;
 
-    /** Salaire tranche A */
-    saltra?: number;
+  /** Salaire tranche A */
+  Saltra?: number;
 
-    /** Salaire tranche A (ISO 4217 currency code) */
-    saltra1?: string;
+  /** Salaire tranche A (ISO 4217 currency code) */
+  Saltra1?: string;
 
-    /** Salaire tranche B */
-    saltrb?: number;
+  /** Salaire tranche B */
+  Saltrb?: number;
 
-    /** Salaire tranche B (ISO 4217 currency code) */
-    saltrb1?: string;
+  /** Salaire tranche B (ISO 4217 currency code) */
+  Saltrb1?: string;
 
-    /** Salaire tranche C */
-    saltrc?: number;
+  /** Salaire tranche C */
+  Saltrc?: number;
 
-    /** Salaire tranche C (ISO 4217 currency code) */
-    saltrc1?: string;
+  /** Salaire tranche C (ISO 4217 currency code) */
+  Saltrc1?: string;
 
-    /** Email personnel */
-    numemail?: string;
+  /** Email personnel */
+  Numemail?: string;
 
-    /** Date permis A1 */
-    datea1?: Date;
+  /** Date permis A1 */
+  Datea1?: Date;
 
-    /** Date obtention BSR */
-    datebsr?: Date;
+  /** Date obtention BSR */
+  Datebsr?: Date;
 
-    /** Organisme d'affiliation */
-    orgaffil?: string;
+  /** Organisme d'affiliation */
+  Orgaffil?: string;
 
-    /** Date permis A2 */
-    datea2?: Date;
+  /** Date permis A2 */
+  Datea2?: Date;
 
-    /** Date du permis B1 (Quad) */
-    dateb1?: Date;
+  /** Date du permis B1 (Quad) */
+  Dateb1?: Date;
 
-    /** Régime Social */
-    regimesocial?: string;
+  /** Régime Social */
+  Regimesocial?: string;
 
-    /** Régime Social Local */
-    regimelocal?: string;
+  /** Régime Social Local */
+  Regimelocal?: string;
 
-    /** Email professionnel */
-    emailprof?: string;
+  /** Email professionnel */
+  Emailprof?: string;
 
-    /** Lieu de Naissance */
-    lieunaissance?: string;
+  /** Lieu de Naissance */
+  Lieunaissance?: string;
 
-    /** Date d'optention du permis bateau */
-    datepermisbateau?: Date;
+  /** Date d'optention du permis bateau */
+  Datepermisbateau?: Date;
 
-    /** Type de Permis Bateau */
-    typepermisbateau?: string;
+  /** Type de Permis Bateau */
+  Typepermisbateau?: string;
 
-    /** Date Validité Permis Moto */
-    datevalvl?: Date;
-  }
-  export enum DppTitre {
-    TITRE = 'TITRE'
-  }
+  /** Date Validité Permis Moto */
+  Datevalvl?: Date;
+}
 
-  export enum DppSexe {
-    SEXE = 'SEXE'
-  }
+export enum DppTitre {
+  TITRE = 'TITRE'
+}
 
-  export enum DppNational {
-    ISO3166 = 'ISO3166'
-  }
+export enum DppSexe {
+  SEXE = 'SEXE'
+}
 
-  export enum DppSitfam {
-    SITFAM = 'SITFAM'
-  }
+export enum DppNational {
+  ISO3166 = 'ISO3166'
+}
 
-  export enum DppActivite {
-    ACTIVITE = 'ACTIVITE'
-  }
+export enum DppSitfam {
+  SITFAM = 'SITFAM'
+}
 
-  export enum DppCatprof {
-    CATPROF = 'CATPROF'
-  }
+export enum DppActivite {
+  ACTIVITE = 'ACTIVITE'
+}
 
-  export enum DppCsp {
-    CSP = 'CSP'
-  }
+export enum DppCatprof {
+  CATPROF = 'CATPROF'
+}
 
-
+export enum DppCsp {
+  CSP = 'CSP'
+}

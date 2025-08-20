@@ -1,6 +1,6 @@
 export interface Tier {
   Numtiers: number;
-  Typtiers?: string;
+  Typtiers?: number;
   Nattiers?: string;
   Numdpp?: number;
   Titre?: string;
