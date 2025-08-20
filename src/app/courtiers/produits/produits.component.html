@@ -19,9 +19,9 @@
       </tr>
     </thead>
     <tbody>
-      @for (prod of produits; track prod.codeprod) {
+      @for (prod of listProduits |async; track prod.codeprod; let i = $index) {
         <tr>
-          <td>{{ produits.indexOf(prod) + 1 }}</td>
+          <td>{{ i + 1}}</td>
           <td>{{ prod.codeprod }}</td>
           <td>{{ prod.libelle }}</td>
           <td>{{ prod.branche }}</td>

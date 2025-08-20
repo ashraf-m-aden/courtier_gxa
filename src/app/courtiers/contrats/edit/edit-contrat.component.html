@@ -10,7 +10,7 @@
     @if(contratDetails() ){
     <div class="col-12">
       <!-- contrat-stepper.component.html -->
-      <mat-horizontal-stepper [linear]="true" #stepper>
+      <mat-stepper [linear]="false" #stepper>
         <mat-step>
           <ng-template matStepLabel
             >Informations générales et choix du produits</ng-template
@@ -19,14 +19,12 @@
             [isContrat]="isContrat"
             [contratDetails]="contratDetails"
             [isEdit]="isEdit"
-
           ></edit-info-general-contrat>
           <edit-produits-contrat
             [contratDetails]="contratDetails"
             [isEdit]="isEdit"
             [isContrat]="isContrat"
-                        [adhesion]="adhesion"
-
+            [adhesion]="adhesion"
           ></edit-produits-contrat>
 
           <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
@@ -79,12 +77,20 @@
             <button class="btn btn-primary mt-5" matStepperPrevious>
               PRÉCÉDENT
             </button>
-            <!-- <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button> -->
+            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
           </div>
         </mat-step>
 
+        <mat-step>
+          <ng-template matStepLabel>Quittances</ng-template>
+          <list-quittance-details
+            [contratDetails]="contratDetails"
+            [isEdit]="isEdit"
+          ></list-quittance-details>
+        </mat-step>
+
         <!-- Ajoute les autres étapes ici -->
-<!--
+        <!--
         <mat-step>
           <ng-template matStepLabel>Enregistrement</ng-template>
           <p>Vérifiez les informations saisies.</p>
@@ -101,7 +107,7 @@
             </button>
           </div>
         </mat-step> -->
-      </mat-horizontal-stepper>
+      </mat-stepper>
     </div>
     }
   </div>

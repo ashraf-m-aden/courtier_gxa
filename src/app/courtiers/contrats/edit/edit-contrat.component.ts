@@ -17,10 +17,11 @@ import { EditProduitsContratComponent } from '../../../components/contrat/edit/p
 import { EditRisqueContratComponent } from '../../../components/contrat/edit/risque-contrat/risque-contrat.component';
 import { Piec } from '../../../Model/piec.model';
 import { ToastrService } from 'ngx-toastr';
+import { ListQuittanceDetailsComponent } from '../../../components/contrat/details/list-quittance/list-quittance.component';
 
 @Component({
   selector: 'edit-contrat',
-  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, EditInfoGeneralContratComponent, EditAdminContratComponent, EditAdminPieceContratComponent, EditRisqueContratComponent, EditProduitsContratComponent],
+  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, EditInfoGeneralContratComponent,ListQuittanceDetailsComponent, EditAdminContratComponent, EditAdminPieceContratComponent, EditRisqueContratComponent, EditProduitsContratComponent],
   templateUrl: './edit-contrat.component.html',
   styleUrl: './edit-contrat.component.css'
 })
@@ -39,8 +40,7 @@ export class EditContratComponent {
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService,private toastr: ToastrService) {
 
     this.isContrat.set(this.route.snapshot.data['isContrat'])
-    this.isEdit.set(this.route.snapshot.data['isEdit'])
-    console.log(this.isEdit());
+    this.isEdit.set(true)
     this.idContrat = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id']) : 0;
 
   }

@@ -19,15 +19,12 @@ import { CourtierService } from '../../../Services/courtier/courtier.service';
 export class NouveauContratComponent {
   contratForm!: FormGroup;
   isContrat = signal<boolean>(true);
-  isEdit = signal<boolean>(true);
   contratDetails = signal<any>(null);
   retrievedcontratDetails = signal<any>(null);
   numtier = signal(0);
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService) {
 
     this.isContrat.set(this.route.snapshot.data['isContrat'])
-    this.isEdit.set(this.route.snapshot.data['isEdit'])
-    console.log(this.isEdit());
     this.route.snapshot.params['id'] ? this.numtier.set(parseInt(this.route.snapshot.params['id'])) : this.numtier.set(0);
 
   }

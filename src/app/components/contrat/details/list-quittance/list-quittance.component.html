@@ -10,15 +10,57 @@
     </tr>
   </thead>
   <tbody>
-
-   @for(quit of list_quittances;track quit){
-     <tr>
+    @for(quit of list_quittances;track quit){
+    <tr>
       <td>{{ quit.Numero }}</td>
       <td>{{ quit.Police }}</td>
       <td>{{ quit.Contrat }}</td>
       <td>{{ quit.Totquit }}</td>
-      <td>{{ quit.Debeffet | date: 'yyyy-MM-dd' }}</td>
+      <td>{{ quit.Debeffet | date : "yyyy-MM-dd" }}</td>
     </tr>
-   }
+    }
   </tbody>
 </table>
+
+@if(isEdit()) {
+<div class="container-fluid mt-4">
+  <h3>Saisie de Quittance</h3>
+
+  <form [formGroup]="quitForm" (ngSubmit)="onSubmit()" class="quit-form">
+    <div class="grid-container">
+      <!-- Nature -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nature</mat-label>
+        <input matInput formControlName="Nature" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Debeffet</mat-label>
+        <input matInput [matDatepicker]="picker3" formControlName="Debeffet" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker3"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Example numeric field -->
+      <mat-form-field appearance="outline">
+        <mat-label>Totquit</mat-label>
+        <input matInput type="number" formControlName="Totquit" />
+      </mat-form-field>
+    </div>
+
+    <!-- Submit -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="quitForm.invalid"
+    >
+      Enregistrer
+    </button>
+  </form>
+</div>
+
+}
