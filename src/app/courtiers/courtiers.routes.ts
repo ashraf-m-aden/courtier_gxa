@@ -32,17 +32,18 @@ export const courtiersRoutes: Routes = [
       { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'produits', loadComponent: () => import('./produits/produits.component').then(m => m.ProduitsComponent) },
       {
-        path: 'projets/nouveau', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat: false }
       },
-      { path: 'projets', loadComponent: () => import('./projets/projets.component').then(m => m.ProjetsComponent) },
+      { path: 'projets', loadComponent: () => import('./projets/list/list.component').then(m => m.ListProjetComponent) },
       { path: 'contrats', loadComponent: () => import('./contrats/list/list.component').then(m => m.ListContratComponent) },
 
       { path: 'contrats/nouveau/:id', loadComponent: () => import('./contrats/nouveau-contrat/nouveau-contrat.component').then(m => m.NouveauContratComponent), data: { isContrat: true } },
-
+      {
+        path: 'projets/nouveau/:id', loadComponent: () => import('./projets/nouveau-projet/nouveau-projet.component').then(m => m.NouveauprojetComponent), data: { isContrat: false }
+      },
       { path: 'contrats/edit/:id', loadComponent: () => import('./contrats/edit/edit-contrat.component').then(m => m.EditContratComponent), data: { isContrat: true, isEdit: true } },
-      { path: 'projets/edit/:id', loadComponent: () => import('./contrats/edit/edit-contrat.component').then(m => m.EditContratComponent), data: { isContrat: false, isEdit: true } },
+      { path: 'projets/edit/:id', loadComponent: () => import('./projets/edit/edit-projet.component').then(m => m.EditProjetComponent), data: { isContrat: false, isEdit: true } },
 
-        { path: 'contrats/details/:id', loadComponent: () => import('./contrats/details/details.component').then(m => m.DetailsContratComponent), data: { isContrat: true } },
+      { path: 'contrats/details/:id', loadComponent: () => import('./contrats/details/details.component').then(m => m.DetailsContratComponent), data: { isContrat: true } },
       { path: 'projets/details/:id', loadComponent: () => import('./contrats/details/details.component').then(m => m.DetailsContratComponent), data: { isContrat: false } },
 
       { path: 'commissions', loadComponent: () => import('./commissions/commissions.component').then(m => m.CommissionsComponent) },

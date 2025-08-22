@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+
+      <h5>Modifier un projet</h5>
+
+    </div>
+    @if(project() ){
+    <div class="col-12">
+      <!-- contrat-stepper.component.html -->
+      <mat-stepper [linear]="false" #stepper>
+        <mat-step>
+          <ng-template matStepLabel
+            >Informations générales et choix du produits</ng-template
+          >
+          <edit-info-general-projet
+            [project]="project"
+          ></edit-info-general-projet>
+          <edit-produits-projet
+            [project]="project"
+            [adhesion]="adhesion"
+          ></edit-produits-projet>
+
+          <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Données administratives</ng-template>
+          <edit-admin-projet
+            [project]="project"
+            [offer]="offer"
+          ></edit-admin-projet>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary mt-5" matStepperPrevious>
+              PRÉCÉDENT
+            </button>
+            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel
+            >Données administratives - Pieces</ng-template
+          >
+          <edit-admin-piece-projet
+            [project]="project"
+          ></edit-admin-piece-projet>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary mt-5" matStepperPrevious>
+              PRÉCÉDENT
+            </button>
+            <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Risques</ng-template>
+          <edit-risque-projet
+       [adhesion]="adhesion"
+            [project]="project"
+            [risa]="risa"
+            [rveh]="rveh"
+            [garant]="garant"
+            [adhesion]="adhesion"
+          ></edit-risque-projet>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary mt-5" matStepperPrevious>
+              PRÉCÉDENT
+            </button>
+          </div>
+        </mat-step>
+
+
+
+      </mat-stepper>
+    </div>
+    }
+  </div>
+</div>

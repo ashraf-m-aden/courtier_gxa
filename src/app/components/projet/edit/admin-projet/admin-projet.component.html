@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="form" class="card" (ngSubmit)="updateContrat()">
+
+      <!-- Échéances -->
+      <div class="d-flex gap-5 mb-5">
+        <fieldset class="d-flex gap-4 card flex-column w-100 m-2">
+          <legend class="font-semibold text-lg">Échéances</legend>
+          <div class="d-flex gap-5 flex-column">
+
+            <div class="flex-column">
+              <label>Fractionnement:</label>
+              <select formControlName="Frac" class="border p-1 rounded">
+                @for(f of fractionnements; track f){
+                <option [value]="f">{{ f }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="flex-column">
+              <label>Jour:</label>
+              <input type="number" formControlName="Echpjj" class="border p-1 rounded w-16" />
+            </div>
+
+            <div class="flex-column">
+              <label>Mois:</label>
+              <input type="number" formControlName="Echpmm" class="border p-1 rounded w-16" />
+            </div>
+
+            <div class="d-flex gap-4">
+              <label><input type="checkbox" formControlName="Echu" /> Terme échu</label>
+              <label><input type="checkbox" formControlName="Tacite" /> Tacite reconduction</label>
+            </div>
+
+            <label>
+              Prochaine échéance :
+              <input type="date" formControlName="Echeance" class="border p-1 rounded w-full" />
+            </label>
+
+            <label>
+              Période en cours :
+              <input type="text" formControlName="Debcours" class="border p-1 rounded w-full" placeholder="Début" />
+              <input type="text" formControlName="Fincours" class="border p-1 rounded w-full" placeholder="Fin" />
+            </label>
+
+            <label>
+              Période anniversaire :
+              <input type="text" formControlName="Debann" class="border p-1 rounded w-full" placeholder="Début" />
+              <input type="text" formControlName="Finann" class="border p-1 rounded w-full" placeholder="Fin" />
+            </label>
+
+            <label>
+              Date de suspension prévisionnelle :
+              <input type="date" formControlName="Prevsusp" class="border p-1 rounded w-full" />
+            </label>
+
+            <label>
+              Date de résiliation prévisionnelle :
+              <input type="date" formControlName="Prevresi" class="border p-1 rounded w-full" />
+            </label>
+
+          </div>
+        </fieldset>
+
+        <!-- Situation Comptable -->
+        <fieldset class="d-flex gap-4 flex-column w-100 card m-2">
+          <legend class="font-semibold text-lg">Situation comptable</legend>
+          <p>Net : {{ form.get("Netimp")?.value }}</p>
+          <p>Impayés : {{ form.get("Impaye")?.value }}</p>
+          <p>Actes : {{ form.get("Hono")?.value }}</p>
+        </fieldset>
+      </div>
+
+      <!-- Gestion -->
+      <fieldset class="d-flex gap-4 flex-column w-100 m-2 card">
+        <legend class="font-semibold text-lg">Informations de gestion</legend>
+
+        <label>Gestionnaire :
+          <input type="text" formControlName="Gestionn" class="border p-1 rounded w-full" />
+        </label>
+
+        <label>Centre de gestion Cie :
+          <input type="text" formControlName="Portef" class="border p-1 rounded w-full" />
+        </label>
+
+        <label>Mode de gestion :
+          <input type="text" formControlName="Modegest" class="border p-1 rounded w-full" />
+        </label>
+
+        <label>Destinataire des taxes :
+          <input type="text" formControlName="Ext" class="border p-1 rounded w-full" />
+        </label>
+
+        <div class="flex gap-4">
+          <label>% Commission attendue :
+            <input type="number" formControlName="Txcomm" class="border p-1 rounded w-24" />
+          </label>
+          <label>Dont commission de gestion :
+            <input type="number" formControlName="Comges" class="border p-1 rounded w-24" />
+          </label>
+        </div>
+
+        <div class="flex gap-4">
+          <label><input type="checkbox" formControlName="Polinter" /> Pollicitation interdite</label>
+          <label><input type="checkbox" formControlName="Sansquit" /> À conserver si épuration</label>
+        </div>
+
+        <label>Date de réalisation :
+          <input type="date" formControlName="Datereal" class="border p-1 rounded w-full" />
+        </label>
+
+        <label>Signature :
+          <input type="text" formControlName="TypeSignature" class="border p-1 rounded w-full" />
+        </label>
+
+        <label>Préavis résiliation (mois) :
+          <input type="text" formControlName="Modrev" class="border p-1 rounded w-full" />
+        </label>
+
+        <label>Durée fixe (ans) :
+          <input type="number" formControlName="Duree" class="border p-1 rounded w-full" />
+        </label>
+
+      </fieldset>
+      <div>
+    <button class="btn btn-group btn-primary mt-4" type="submit" [disabled]="form.invalid">
+    Mettre à jour
+  </button>
+</div>
+    </form>
+  </div>
+
+
+</div>

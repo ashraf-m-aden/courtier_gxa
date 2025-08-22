@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="row card p-3 m-0">
+    <div class="col-12 d-flex justify-content-between">
+      <h5>Liste des projets</h5>
+      <button class="btn btn-group btn-primary" (click)="nouveauProjet()">
+        <mat-icon>add</mat-icon>
+
+        Nouveau projet
+      </button>
+
+    </div>
+    <div class="col-12 mt-5">
+      <table class="table table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Numéro projet</th>
+            <th>Intitulé</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(projet of projets | async ;track projet){
+          @for(project of projet.project; track project) {
+            <tr>
+            <td>{{ project.projet }}</td>
+            <td>{{ project.Intitule || "-" }}</td>
+
+            <td>{{ project.Debcours | date : "dd/MM/yyyy" }}</td>
+            <td>{{ project.Fincours | date : "dd/MM/yyyy" }}</td>
+
+            <td class="d-flex gap-2">
+              <button class="btn btn-group btn-primary" (click)="voir(projet)">
+                <mat-icon>visibility</mat-icon>
+
+                Voir
+              </button>
+               <button class="btn btn-group btn-primary" (click)="edit(projet)">
+                <mat-icon>edit</mat-icon>
+
+                Modifier
+              </button>
+            </td>
+          </tr>
+          }
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

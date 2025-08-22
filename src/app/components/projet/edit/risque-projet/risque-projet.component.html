@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="riskForm" class="d-flex flex-column gap-4 p-4" (ngSubmit)="updateRisque()">
+
+      <!-- Véhicule + Carte Grise -->
+      <div class="row g-4">
+        <div class="col-12 col-md-6">
+          <!-- Vehicle Details -->
+          <fieldset class="card p-4 h-100">
+            <legend class="font-semibold text-lg">Véhicule</legend>
+
+            <div class="d-flex flex-column gap-1">
+              <label>Véhicule </label>
+              <input formControlName="Appel" type="text" class="input" />
+
+              <label>Usage </label>
+              <select formControlName="Usage" class="input">
+                <option value="Promenade / Trajet">Promenade / Trajet</option>
+                <option value="Affaires">Affaires</option>
+              </select>
+
+              <label>Valeur à neuf </label>
+              <input formControlName="Valneuf" type="text" class="input" />
+
+              <label>Expertise </label>
+              <input formControlName="Valexp" type="text" class="input" />
+
+              <label>Date acquisition </label>
+              <input formControlName="Dateori" type="date" class="input" />
+
+              <label>Type </label>
+              <input formControlName="Type" type="text" class="input" />
+
+              <label>Dérogation FVA </label>
+              <input formControlName="DerogationFVA" type="text" class="input" />
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <!-- Carte Grise -->
+          <fieldset class="card p-4 h-100">
+            <legend class="font-semibold text-lg">Carte Grise</legend>
+
+            <label>Titulaire </label>
+            <input formControlName="Titulai" type="text" class="input" />
+
+            <label>Nom </label>
+            <input formControlName="Titulq" type="text" class="input" />
+
+            <div class="d-flex flex-column gap-1">
+              <label>Marque </label>
+              <input formControlName="Marque" type="text" class="input" />
+
+              <label>Pays d'immat. </label>
+              <input formControlName="Paysimmat" type="text" class="input" />
+
+              <label>Modèle </label>
+              <input formControlName="Modele" type="text" class="input" />
+
+              <label>Type </label>
+              <input formControlName="Symbmine" type="text" class="input" />
+
+              <label>Immatriculation </label>
+              <input formControlName="Immat" type="text" class="input" />
+
+              <label>Date carte grise </label>
+              <input formControlName="Datecg" type="date" class="input" />
+
+              <label>1ère circulation </label>
+              <input formControlName="Datecirc" type="date" class="input" />
+
+              <label>Genre </label>
+              <input formControlName="Genre" type="text" class="input" />
+
+              <label>Carrosserie </label>
+              <input formControlName="Carross" type="text" class="input" />
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Infos Techniques -->
+      <div class="row g-4">
+        <div class="col-12">
+          <fieldset class="card p-4">
+            <legend class="font-semibold text-lg">Infos Techniques</legend>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Energie </label>
+                <input formControlName="Energie" type="text" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Transmission </label>
+                <input formControlName="Transmis" type="text" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Précédente immat. </label>
+                <input formControlName="Ancimmat" type="text" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Type mine </label>
+                <input formControlName="Symbmine" type="text" class="input" />
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>VIN / N° identification </label>
+                <input formControlName="Nserie" type="text" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Puissance fiscale </label>
+                <input formControlName="Pfiscale" type="number" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Cat. </label>
+                <input formControlName="Cate" type="text" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Places assises </label>
+                <input formControlName="Places" type="number" class="input" />
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Poids à vide </label>
+                <input formControlName="Poidvide" type="text" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Poids T.R. </label>
+                <input formControlName="Poidstr" type="text" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Tx CO2 </label>
+                <input formControlName="Co2" type="text" class="input" />
+              </div>
+              <div class="col-12 col-sm-6 col-md-3">
+                <label>Cat. CO2 </label>
+                <input formControlName="Catco2" type="text" class="input" />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <button class="btn btn-group btn-primary">Mettre à jour</button>
+      </div>
+
+    </form>
+  </div>
+</div>

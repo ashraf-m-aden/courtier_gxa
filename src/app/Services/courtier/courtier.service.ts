@@ -97,6 +97,13 @@ export class CourtierService {
     }
     return this.http.post(`${this.baseUrl}/detail_contrat`, payload);
   }
+  getDetailProjet(proj: number): Observable<any> {
+    let payload = {
+      "BasSecurityContext": this.BasSecurityContext,
+      "idproj": proj,
+    }
+    return this.http.post(`${this.baseUrl}/projects/Project_OfferListItems`, payload);
+  }
 
   getDetailAdhesion(adh: number): Observable<any> {
     console.log("adhesion : " + adh);
@@ -134,14 +141,27 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/liste_des_contrats`, payload);
   }
 
+  getListeDesProjets(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/projects/project_listitems`, payload);
+  }
+
+
   getListeDesContratsDUnTier(id: number): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
       dossier: id,
-      IncludeAll: true
-
     };
     return this.http.post(`${this.baseUrl}/liste_des_contrats_d_un_tier`, payload);
+  }
+
+
+  getListeDesprojetsDUnTier(id: number): Observable<any> {
+    let payload = {
+      BasSecurityContext: this.BasSecurityContext,
+      dossier: id,
+
+    };
+    return this.http.post(`${this.baseUrl}/projects/project_listitems`, payload);
   }
 
   getListeDesProduits(): Observable<any> {

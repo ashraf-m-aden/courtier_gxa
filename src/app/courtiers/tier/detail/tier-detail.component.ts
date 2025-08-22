@@ -20,7 +20,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TierProfilComponent } from '../../../components/tier/tier-profil/tier-profil.component';
 import { DpmProfilComponent } from '../../../components/tier/dpm-profil/dpm-profil.component';
 import { DppProfilComponent } from '../../../components/tier/dpp-profil/dpp-profil.component';
-import { ProjetBaseComponent } from '../../../components/projets/base/base.component';
 import { ListContratComponent } from '../../contrats/list/list.component';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
 import { ToastrService } from 'ngx-toastr';
@@ -30,7 +29,7 @@ import { ToastrService } from 'ngx-toastr';
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
     MatCardModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule,
-    MatInputModule, MatCheckboxModule, ProjetBaseComponent, ListContratComponent,
+    MatInputModule, MatCheckboxModule, ListContratComponent,
     MatButtonModule, MatIconModule, TierProfilComponent, DpmProfilComponent, DppProfilComponent
   ],
   styleUrls: ['./tier-detail.component.scss'],

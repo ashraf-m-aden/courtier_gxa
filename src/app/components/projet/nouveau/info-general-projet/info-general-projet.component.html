@@ -1,0 +1,64 @@
+<div class="row">
+  <form [formGroup]="formGroup" class="col-12" (ngSubmit)="onSubmit()" >
+    @if (isContrat()) {
+    <div class="col-md-6 mb-3">
+      <h6>Intitulé du contrat</h6>
+
+      <input class="form-control" formControlName="Intitule" />
+    </div>
+    } @else {
+    <div class="col-md-6 mb-3">
+      <h6>Intitulé du projet</h6>
+
+      <input class="form-control" formControlName="Intitule" />
+    </div>
+    }
+
+    <div class="col-12">
+      <form [formGroup]="formGroup" class="card">
+        <h2 class="text-xl font-bold">Formulaire Véhicule</h2>
+
+        <!-- CATEGORIE -->
+        <div class="d-flex m-3 flex-column">
+          <label class="block mb-1">Catégorie</label>
+          <select formControlName="codeprod" class="border p-2 rounded w-full">
+            <option value="">-- Choisir une catégorie --</option>
+            @for(cat of listProduits;track cat){
+            <option [value]="cat.codeprod">
+              {{ cat.libelle }}
+            </option>
+            }
+          </select>
+        </div>
+        <table class="table-auto w-full border">
+          <thead>
+            <tr>
+              @for (entry of visibleProductEntries; track entry.label) {
+              <th class="border px-2 py-1 text-sm">{{ entry.label }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              @for (entry of visibleProductEntries; track entry.label) {
+              <td class="border px-2 py-1 text-sm">
+                @if (entry.isDate) {
+                {{ getPieceValue(entry) | date : "dd/MM/yyyy" }}
+                } @else {
+                {{ getPieceValue(entry) ?? "-" }}
+                }
+              </td>
+              }
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  <div class="d-flex">
+      <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+    <button class="btn btn-warning mt-5" color="primary" type="submit" [disabled]="!formGroup.valid">
+      Créer le contrat
+    </button>
+  </div>
+  </form>
+</div>
