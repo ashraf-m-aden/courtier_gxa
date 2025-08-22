@@ -1,0 +1,50 @@
+<form [formGroup]="vehiculeForm" class="card" (ngSubmit)="submitnewOffer()">
+  <h2 class="text-xl font-bold mb-3">Ajout nouvelle proposition</h2>
+
+  @if (this.project() && this.project().offers.length== 0) {
+
+  <div class="d-flex m-3 flex-column">
+    <label class="block mb-1">Liste des produits</label>
+    <select formControlName="codeprod" class="border p-2 rounded w-full">
+      <option value="">-- Choisir un produit --</option>
+      @for(cat of listProduits;track cat){
+      <option [value]="cat.codeprod">
+        {{ cat.libelle }}
+      </option>
+      }
+    </select>
+  </div>
+  }
+  <table class="table-auto w-full border">
+    <thead>
+      <tr>
+        @for (entry of visibleProductEntries; track entry.label) {
+        <th class="border px-2 py-1 text-sm">{{ entry?.label }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        @for (entry of visibleProductEntries; track entry.label) {
+        <td class="border px-2 py-1 text-sm">
+          @if (entry.isDate) {
+          {{ getPieceValue(entry) | date : "dd/MM/yyyy" }}
+          } @else {
+          {{ getPieceValue(entry) ?? "-" }}
+          }
+        </td>
+        }
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <button
+      class="btn-group btn-primary btn"
+      type="submit"
+      [disabled]="!vehiculeForm.valid"
+    >
+      Nouvelle proposition
+    </button>
+  </div>
+</form>

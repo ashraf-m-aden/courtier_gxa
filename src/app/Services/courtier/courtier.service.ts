@@ -164,6 +164,16 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/projects/project_listitems`, payload);
   }
 
+
+  postNewproposition(idProj: string, produit: string): Observable<any> {
+    let payload = {
+      BasSecurityContext: this.BasSecurityContext,
+      produit: produit,
+      idproj: parseInt(idProj)
+    };
+    return this.http.post(`${this.baseUrl}/projects/project_addoffer`, payload);
+  }
+
   getListeDesProduits(): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,

@@ -23,17 +23,19 @@ import { EditAdminPieceProjetComponent } from '../../../components/projet/edit/a
 import { EditRisqueProjetComponent } from '../../../components/projet/edit/risque-projet/risque-projet.component';
 import { EditProduitsProjetComponent } from '../../../components/projet/edit/produits-projet/produits-projet.component';
 import { EditAdminProjetComponent } from '../../../components/projet/edit/admin-projet/admin-projet.component';
+import { EditProduitsNouveauProjetComponent } from '../../../components/projet/edit/produits-nouveau-projet/produits-nouveau-projet.component';
 
 @Component({
   selector: 'edit-contrat',
-  imports: [FormsModule, MatStepperModule, ReactiveFormsModule,EditInfoGeneralprojetComponent,EditAdminProjetComponent,EditAdminPieceProjetComponent,EditRisqueProjetComponent,EditProduitsProjetComponent],
+  imports: [FormsModule, MatStepperModule, ReactiveFormsModule,EditProduitsNouveauProjetComponent, EditInfoGeneralprojetComponent,EditAdminProjetComponent,EditAdminPieceProjetComponent,EditRisqueProjetComponent,EditProduitsProjetComponent],
   templateUrl: './edit-projet.component.html',
   styleUrl: './edit-projet.component.css'
 })
 export class EditProjetComponent {
   contratForm!: FormGroup;
   project = signal<any>(null);
-  offer = signal<any>(null);
+   offre = signal<any>(null);
+
   projet: Observable<any> = new Observable();
   idProj = 0
     adhesion = signal<any>(undefined);
@@ -45,22 +47,33 @@ export class EditProjetComponent {
     this.idProj = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id']) : 0;
   }
 
+ngOnInit() {
+  this.courtierService.getDetailProjet(this.idProj).subscribe({
+    next: (data: any) => {
+      console.log("result");
 
-  ngOnInit() {
+      this.project.set(data?.project ?? null);
+      console.log("Projet data:", data);
+    },
+    error: (err) => {
+      console.error('API error:', err);
+    }
+  });
+}
 
-
-    this.projet = this.courtierService.getDetailProjet(this.idProj)
-
-    this.projet.subscribe((data) => {
-      this.project.set(data);
-
-    });
-
-
-
-
-  }
-
+refresh(){
+    this.courtierService.getDetailProjet(this.idProj).subscribe({
+    next: (data: any) => {
+      this.toastr.success("Données du projet actualisées");
+      this.project.set(data?.project ?? null);
+      console.log("Projet data:", data);
+    },
+    error: (err) => {
+      console.error('API error:', err);
+      this.toastr.error("Erreur lors de l'actualisation des données du projet",err.toString());
+    }
+  });
+}
   onSubmit(): void {
     if (this.contratForm.valid) {
       const contratData = this.contratForm.value;

@@ -1,34 +1,44 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-
       <h5>Modifier un projet</h5>
 
+      <button class="btn btn-group btn-primary" (click)="refresh()">
+        Rafraichir
+      </button>
     </div>
     @if(project() ){
     <div class="col-12">
       <!-- contrat-stepper.component.html -->
       <mat-stepper [linear]="false" #stepper>
         <mat-step>
-          <ng-template matStepLabel
-            >Informations générales et choix du produits</ng-template
-          >
+          <ng-template matStepLabel>Informations générales</ng-template>
           <edit-info-general-projet
             [project]="project"
           ></edit-info-general-projet>
+          <edit-produits-nouveau-projet
+            [project]="project"
+          ></edit-produits-nouveau-projet>
+
+          <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
+        </mat-step>
+        <!-- <mat-step>
+          <ng-template matStepLabel>Produit</ng-template>
+
           <edit-produits-projet
             [project]="project"
             [adhesion]="adhesion"
           ></edit-produits-projet>
 
           <button class="btn btn-primary mt-5" matStepperNext>SUIVANT</button>
-        </mat-step>
+        </mat-step> -->
+        @if(offre()){
 
         <mat-step>
           <ng-template matStepLabel>Données administratives</ng-template>
           <edit-admin-projet
             [project]="project"
-            [offer]="offer"
+            [offer]="offre"
           ></edit-admin-projet>
           <div class="d-flex justify-content-between">
             <button class="btn btn-primary mt-5" matStepperPrevious>
@@ -44,6 +54,7 @@
           >
           <edit-admin-piece-projet
             [project]="project"
+            [offer]="offre"
           ></edit-admin-piece-projet>
           <div class="d-flex justify-content-between">
             <button class="btn btn-primary mt-5" matStepperPrevious>
@@ -56,12 +67,13 @@
         <mat-step>
           <ng-template matStepLabel>Risques</ng-template>
           <edit-risque-projet
-       [adhesion]="adhesion"
+            [adhesion]="adhesion"
             [project]="project"
             [risa]="risa"
             [rveh]="rveh"
             [garant]="garant"
             [adhesion]="adhesion"
+            [offer]="offre"
           ></edit-risque-projet>
           <div class="d-flex justify-content-between">
             <button class="btn btn-primary mt-5" matStepperPrevious>
@@ -69,9 +81,7 @@
             </button>
           </div>
         </mat-step>
-
-
-
+        }
       </mat-stepper>
     </div>
     }

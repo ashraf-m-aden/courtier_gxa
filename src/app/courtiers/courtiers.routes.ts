@@ -31,8 +31,7 @@ export const courtiersRoutes: Routes = [
       },
       { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'produits', loadComponent: () => import('./produits/produits.component').then(m => m.ProduitsComponent) },
-      {
-      },
+
       { path: 'projets', loadComponent: () => import('./projets/list/list.component').then(m => m.ListProjetComponent) },
       { path: 'contrats', loadComponent: () => import('./contrats/list/list.component').then(m => m.ListContratComponent) },
 

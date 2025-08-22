@@ -7,8 +7,8 @@ import { CourtierService } from '../../../Services/courtier/courtier.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-list-contrat',
-  imports: [DatePipe, MatIconModule,AsyncPipe],
+  selector: 'app-list-projet',
+  imports: [DatePipe, MatIconModule, AsyncPipe],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
@@ -19,16 +19,17 @@ export class ListProjetComponent {
   listProjets: any[] = [];
   constructor(private router: Router, private courtierService: CourtierService) { }
 
-  async ngOnInit() {
-
-
-
-
-    this.projets = this.courtierService.getListeDesprojetsDUnTier(this.idTier)
-
-
-
-  }
+ngOnInit() {
+  this.courtierService.getListeDesprojetsDUnTier(this.idTier).subscribe({
+    next: (data: any) => {
+      // Récupérer le premier élément de projects
+      this.listProjets = data?.projects?.[0]?.project ?? [];
+    },
+    error: (err) => {
+      console.error('API error:', err);
+    }
+  });
+}
 
 
 
@@ -53,18 +54,12 @@ export class ListProjetComponent {
     }
   }
 
-  edit(contrat: any): void {
+  edit(projet: any): void {
 
-    if (this.isContrat) {
+
       const url = this.router.serializeUrl(
-        this.router.createUrlTree(['/courtiers/contrats/edit/' + contrat.Contrat])
+        this.router.createUrlTree(['/courtiers/projets/edit/' + projet.id])
       ); window.open(url, '_blank');
 
-    } else {
-      const url = this.router.serializeUrl(
-        this.router.createUrlTree(['/courtiers/projets/edit/' + contrat.Contrat])
-      ); window.open(url, '_blank');
-
-    }
   }
 }

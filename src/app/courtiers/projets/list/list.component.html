@@ -7,7 +7,6 @@
 
         Nouveau projet
       </button>
-
     </div>
     <div class="col-12 mt-5">
       <table class="table table-striped table-hover">
@@ -16,35 +15,29 @@
             <th>Numéro projet</th>
             <th>Intitulé</th>
             <th>Date début</th>
-            <th>Date fin</th>
+            <th>Crée par</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          @for(projet of projets | async ;track projet){
-          @for(project of projet.project; track project) {
-            <tr>
-            <td>{{ project.projet }}</td>
-            <td>{{ project.Intitule || "-" }}</td>
+          @for(project of listProjets; track project) {
+          <tr>
+            <td>{{ project?.id }}</td>
+            <td>{{ project.libelle || "-" }}</td>
 
-            <td>{{ project.Debcours | date : "dd/MM/yyyy" }}</td>
-            <td>{{ project.Fincours | date : "dd/MM/yyyy" }}</td>
+            <td>{{ project.datecre | date : "dd/MM/yyyy" }}</td>
+            <td>{{ project.creepar }}</td>
 
             <td class="d-flex gap-2">
-              <button class="btn btn-group btn-primary" (click)="voir(projet)">
-                <mat-icon>visibility</mat-icon>
-
-                Voir
-              </button>
-               <button class="btn btn-group btn-primary" (click)="edit(projet)">
+              <button class="btn btn-group btn-primary" (click)="edit(project)">
                 <mat-icon>edit</mat-icon>
 
                 Modifier
               </button>
             </td>
           </tr>
+
           }
-        }
         </tbody>
       </table>
     </div>

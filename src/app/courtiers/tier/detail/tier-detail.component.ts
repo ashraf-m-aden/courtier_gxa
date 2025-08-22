@@ -23,13 +23,14 @@ import { DppProfilComponent } from '../../../components/tier/dpp-profil/dpp-prof
 import { ListContratComponent } from '../../contrats/list/list.component';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
 import { ToastrService } from 'ngx-toastr';
+import { ListProjetComponent } from '../../projets/list/list.component';
 @Component({
   selector: 'app-tier-detail',
   standalone: true,
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
     MatCardModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule,
-    MatInputModule, MatCheckboxModule, ListContratComponent,
+    MatInputModule, MatCheckboxModule, ListContratComponent,ListProjetComponent,
     MatButtonModule, MatIconModule, TierProfilComponent, DpmProfilComponent, DppProfilComponent
   ],
   styleUrls: ['./tier-detail.component.scss'],

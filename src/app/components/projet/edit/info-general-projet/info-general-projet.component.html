@@ -1,17 +1,71 @@
-<div class="row">
-<form [formGroup]="formGroup">
-    @if (isContrat()) {
-    <div class="col-md-6 mb-3">
-      <h6>Intitulé du contrat</h6>
-        <div>{{ formGroup.get('Intitule')?.value }}</div>
 
-    </div>
-  } @else {
-    <div class="col-md-6 mb-3">
-      <h6>Intitulé du projet</h6>
-        <div>{{ formGroup.get('Intitule')?.value }}</div>
+<div class="container py-4">
+  <!-- Vérifie si project existe -->
+    <div class="row mb-4">
+      <div class="col-12 d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="mb-1">
+           {{ formGroup.get('Intitule')?.value }}
+          </h2>
+          <div class="text-muted">
+            ID: <span class="fw-semibold">{{ project().proj_id }}</span>
+            <span class="mx-2">•</span>
+            Tiers: <span class="fw-semibold">{{ project().numtiers }}</span>
+          </div>
+        </div>
 
+      </div>
     </div>
-  }
-</form>
+
+    <!-- Infos principales -->
+    <div class="row g-3 mb-5">
+      <div class="col-md-6">
+        <div class="border rounded p-3 h-100">
+          <div class="text-muted small">Raison sociale</div>
+          <div class="fw-semibold">{{ project().rsociale || '—' }}</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="border rounded p-3 h-100">
+          <div class="text-muted small">Créé par</div>
+          <div class="fw-semibold">{{ project().creepar }}</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="border rounded p-3 h-100">
+          <div class="text-muted small">Date création</div>
+          <div class="fw-semibold">
+            {{ project().datecre | date:'dd/MM/yyyy' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liste des offres -->
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3">Liste de propositions du projet</h4>
+      </div>
+
+      @for (offerWrapper of project().offers; track offerWrapper.offer.id) {
+        <div class="col-md-6 col-lg-4 mb-3">
+          <div class="card h-100 shadow-sm offer-card"
+               role="button"
+               (click)="selectOffer(offerWrapper.offer)">
+            <div class="card-body">
+              <h5 class="card-title mb-2">
+                {{ offerWrapper.offer.prod_libelle }}
+              </h5>
+              <p class="card-text mb-1 text-muted small">
+                Contrat : {{ offerWrapper.offer.offer_contrat }}
+              </p>
+              <p class="card-text mb-0 text-muted small">
+                Compagnie : {{ offerWrapper.offer.cie_nom }}
+              </p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
 </div>
