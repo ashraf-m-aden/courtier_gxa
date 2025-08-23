@@ -23,7 +23,11 @@ ngOnInit() {
   this.courtierService.getListeDesprojetsDUnTier(this.idTier).subscribe({
     next: (data: any) => {
       // Récupérer le premier élément de projects
+      if(Array.isArray(data?.projects?.[0]?.project)) {
       this.listProjets = data?.projects?.[0]?.project ?? [];
+      } else{
+        this.listProjets = [data?.projects?.[0]?.project] ;
+      }
     },
     error: (err) => {
       console.error('API error:', err);

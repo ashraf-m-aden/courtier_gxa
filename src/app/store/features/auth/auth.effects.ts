@@ -44,8 +44,8 @@ export class AuthEffects {
           map((user: BasSecurityContext) => {
             this.basSecurityContext = user;
 
-          sessionStorage.setItem("BasSecurityContext",JSON.stringify(user))
-          localStorage.setItem("BasSecurityContext",JSON.stringify(user))
+            sessionStorage.setItem("BasSecurityContext", JSON.stringify(user))
+            localStorage.setItem("BasSecurityContext", JSON.stringify(user))
             return AuthActions.loginSuccess({ user, login, domain });
           }),
           catchError((error: Error) =>
@@ -63,7 +63,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.loginSuccess),
       map(({ user, login, domain }) =>
-        AuthActions.getProfile({ login, domain })
+        AuthActions.getProfile({ login, domain }),
+
       )
     )
   );
@@ -81,7 +82,10 @@ export class AuthEffects {
         this.authService.getUserProfile(login, domain).pipe(
           map((user: User) => {
             console.log("FROM EFFECT After .... this.authService.login " + JSON.stringify(user));
+                  location.reload()
+
             return AuthActions.getProfileSuccess({ user });
+
           }),
           catchError((error: Error) =>
             of(AuthActions.getProfileFailure({ error: error.message }))

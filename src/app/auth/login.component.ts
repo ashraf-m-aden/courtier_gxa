@@ -67,6 +67,7 @@ export class LoginComponent {
     effect(() => {
       if (this.isAuthenticated()) {
         this.router.navigate(['courtiers']);
+
       }
     });
     this.loading$ = this.store.select(AuthSelectors.selectAuthLoading)

@@ -177,6 +177,14 @@ export class CourtierService {
     };
     return this.http.post(`${this.baseUrl}/projects/project_addoffer`, payload);
   }
+  deleteproposition(idProj: string, idOffer: string): Observable<any> {
+    let payload = {
+      BasSecurityContext: this.BasSecurityContext,
+      idoffer: parseInt(idOffer),
+      idproj: parseInt(idProj)
+    };
+    return this.http.post(`${this.baseUrl}/projects/project_deleteoffer`, payload);
+  }
 
   getListeDesProduits(): Observable<any> {
     let payload = {
@@ -210,7 +218,7 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/profile`, payload);
   }
 
-  getTiersSearch(reference:string): Observable<any> {
+  getTiersSearch(reference: string): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
       reference: reference

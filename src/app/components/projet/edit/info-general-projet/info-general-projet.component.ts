@@ -1,6 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, effect, Input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CourtierService } from '../../../../Services/courtier/courtier.service';
+import { Router } from 'express';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'edit-info-general-projet',
@@ -15,7 +18,7 @@ export class EditInfoGeneralprojetComponent {
   formGroup: FormGroup;
   offerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private courtierservice: CourtierService, private toastr: ToastrService) {
     this.formGroup = this.fb.group({
       Intitule: [''],
     });
@@ -41,6 +44,26 @@ export class EditInfoGeneralprojetComponent {
     console.log('Offre cliquée:', offer);
     this.offre.set(offer);
     // ex: this.router.navigate(['/offers', offer.id]);
+  }
+
+    deleteOffer(offer: any) {
+    this.courtierservice.deleteproposition( this.project().proj_id,offer.id).subscribe({
+      next: (data: any) => {
+        console.log('Offre supprimée:', data);
+        this.toastr.success("L'offre a été supprimée avec succès", "Succès" );
+        // Mettre à jour l'affichage ou notifier l'utilisateur
+        const updatedOffers = this.project().offers.filter((o: any) => o.offer.id !== offer.id);
+        this.project().offers = updatedOffers;
+        if (this.offre() && this.offre().id === offer.id) {
+          this.offre.set(null); // Réinitialiser l'offre sélectionnée si elle a été supprimée
+        }
+      },
+      error: (err) => {
+        console.error('Erreur lors de la suppression de l\'offre:', err);
+        this.toastr.error("Erreur lors de la suppression de l'offre", "Erreur");
+      }
+    });
+
   }
 
 }
