@@ -9,10 +9,12 @@ import { ProduitsContratComponent } from '../../../components/contrat/nouveau/pr
 import { ActivatedRoute } from '@angular/router';
 import { Contrat } from '../../../Model/contrat.model';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
+import { EditInfoGeneralprojetComponent } from '../../../components/projet/edit/info-general-projet/info-general-projet.component';
+import { InfoGeneralProjetComponent } from '../../../components/projet/nouveau/info-general-projet/info-general-projet.component';
 
 @Component({
   selector: 'nouveau-projet',
-  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, InfoGeneralContratComponent, AdminContratComponent, AdminPieceContratComponent, RisqueContratComponent, ProduitsContratComponent],
+  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, InfoGeneralProjetComponent, AdminContratComponent, AdminPieceContratComponent, RisqueContratComponent, ProduitsContratComponent],
   templateUrl: './nouveau-projet.component.html',
   styleUrl: './nouveau-projet.component.css'
 })

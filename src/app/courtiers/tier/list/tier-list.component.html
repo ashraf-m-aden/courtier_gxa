@@ -2,56 +2,50 @@
   <div class="row card p-3 m-0">
     <div class="col-12 form">
       <!-- Formulaire Bootstrap -->
-      <form
-        [formGroup]="filtersForm"
-        class="form-search w-100 row g-3 align-items-end"
-      >
-        <!-- Recherche -->
-        <div class="col-md-6 col-10">
-          <label for="search" class="form-label">
-            <h5>Recherche de tiers</h5>
-          </label>
-          <div class="input-group">
-            <input
-              type="search"
-              id="search"
-              class="form-control"
-              placeholder="Nom, téléphone, adresse..."
-              formControlName="search"
-            />
-            <span class="input-group-text">
-              <mat-icon>search</mat-icon>
-              <!-- Bootstrap Icons, sinon remplacer par une autre icône -->
-            </span>
-          </div>
+
+      <!-- Recherche -->
+      <div class="col-md-6 col-10">
+        <label for="search" class="form-label">
+          <h5>Recherche de tiers</h5>
+        </label>
+        <div class="input-group">
+          <input
+            type="search"
+            id="search"
+            class="form-control"
+            placeholder="Nom, téléphone, adresse..."
+            [(ngModel)]="searchTerm"
+            (keypress)="onKeyPress($event)"
+          />
+          <span class="input-group-text">
+            <mat-icon>search</mat-icon>
+            <!-- Bootstrap Icons, sinon remplacer par une autre icône -->
+          </span>
         </div>
+      </div>
 
-
-
-        <!-- Bouton Nouveau -->
-        <div class="col-md-2 d-flex justify-content-end">
-          <button
-            type="button"
-            class="btn btn-primary"
-            [routerLink]="['/courtiers/tiers/nouveau']"
-            routerLinkActive="active"
-          >
-           <mat-icon>add</mat-icon> Nouveau tier
-          </button>
-        </div>
-      </form>
+      <!-- Bouton Nouveau -->
+      <div class="col-md-2 d-flex justify-content-end">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/courtiers/tiers/nouveau']"
+          routerLinkActive="active"
+        >
+          <mat-icon>add</mat-icon> Nouveau tier
+        </button>
+      </div>
     </div>
 
     <div class="col-12 mt-5">
       <!-- Tableau Bootstrap -->
 
       @if(isLoading()){
-<div class="spinner-border text-primary" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-    }
-   @else {
-       <table class="table table-striped table-bordered w-100">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      } @else {
+      <table class="table table-striped table-bordered w-100">
         <thead class="table-dark">
           <tr>
             <th>Code P</th>
@@ -63,10 +57,9 @@
         <tbody>
           @for (element of allTiers();track element){
           <tr>
-
-            <td>{{ element.codp }}</td>
-            <td>{{ element.rsociale }}</td>
-            <td>{{ element.ville }}</td>
+            <td>{{ element?.codp }}</td>
+            <td>{{ element?.rsociale }}</td>
+            <td>{{ element?.ville }}</td>
             <td>
               <button
                 class="btn btn-sm btn-primary"
@@ -83,7 +76,7 @@
           }
         </tbody>
       </table>
-   }
+      }
     </div>
   </div>
 </div>

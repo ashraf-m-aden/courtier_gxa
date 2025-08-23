@@ -19,17 +19,17 @@ export class CourtierEffects {
       )
     )
   )
-loadTiersData$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(CourtierActions.loadTiersData),
-    switchMap(() =>
+// loadTiersData$ = createEffect(() =>
+//   this.actions$.pipe(
+//     ofType(CourtierActions.loadTiersData),
+//     switchMap(() =>
 
-      this.courtierService.getTiersSearch().pipe(
-        map(tiers => CourtierActions.loadTiersDataSuccess({ tiers })),
-        catchError(error => of(CourtierActions.loadTiersDataFailure({ error })))
-      )
-    )
-  )
-);
+//       this.courtierService.getTiersSearch().pipe(
+//         map(tiers => CourtierActions.loadTiersDataSuccess({ tiers })),
+//         catchError(error => of(CourtierActions.loadTiersDataFailure({ error })))
+//       )
+//     )
+//   )
+// );
 
 }

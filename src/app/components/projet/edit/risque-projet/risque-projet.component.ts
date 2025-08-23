@@ -21,6 +21,7 @@ export class EditRisqueProjetComponent {
   @Input() rveh = signal<any>(undefined);
   @Input() garant = signal<any[]>([]);
   conducteurs: any[] = [];
+  @Input() offer = signal<any>(undefined);
 
 
   conducteurSelectionne: any = null;

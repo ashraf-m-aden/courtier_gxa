@@ -73,7 +73,11 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/create_contrat`, payload);
   }
 
-  getCreateQuittance(payload: any): Observable<any> {
+  postCreateProjet(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/projects/project_create`, payload);
+  }
+
+  postCreateQuittance(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/create_quittance`, payload);
   }
 
@@ -206,10 +210,10 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/profile`, payload);
   }
 
-  getTiersSearch(): Observable<any> {
+  getTiersSearch(reference:string): Observable<any> {
     let payload = {
       BasSecurityContext: this.BasSecurityContext,
-      reference: "default"
+      reference: reference
     }
     return this.http.post(`${this.baseUrl}/Tiers_Search`, payload);
   }

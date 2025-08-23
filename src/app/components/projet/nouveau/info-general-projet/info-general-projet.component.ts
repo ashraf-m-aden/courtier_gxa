@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './info-general-projet.component.html',
   styleUrl: './info-general-projet.component.css'
 })
-export class InfoGeneralContratComponent {
+export class InfoGeneralProjetComponent {
   @Input() isContrat = signal(true);
   @Input() project = signal<any>(null);
   @Input() numtier = signal<any>(0);
@@ -22,7 +22,7 @@ export class InfoGeneralContratComponent {
 
   codeprodSignal = signal("");
   listProduits: Produit[] = []
-  detailProduit: Produit = {} as Produit;
+  detailProduit = signal<any>(undefined);
 
   visibleProductEntries: any[] = [];
   constructor(private fb: FormBuilder, private courtierService: CourtierService, private router: Router, private toastr: ToastrService) {
@@ -31,32 +31,7 @@ export class InfoGeneralContratComponent {
       codeprod: ['', Validators.required],
 
     });
-    effect(() => {
 
-      console.log(this.listProduits);
-
-      const codeprod = this.codeprodSignal();
-      const productObject = this.detailProduit
-      console.log(Object.entries(productObject)
-        .filter(([key]) => this.productDisplayMap[key])
-        .map(([key, value]) => ({
-          label: this.productDisplayMap[key]?.label || key,
-          value,
-          isDate: this.productDisplayMap[key]?.isDate || false,
-        })));
-
-      if (!productObject) this.visibleProductEntries = [];
-
-      this.visibleProductEntries = Object.entries(productObject)
-        .filter(([key]) => this.productDisplayMap[key])
-        .map(([key, value]) => ({
-          label: this.productDisplayMap[key]?.label || key,
-          value,
-          isDate: this.productDisplayMap[key]?.isDate || false,
-        }));
-
-
-    });
   }
 
 
@@ -70,12 +45,20 @@ export class InfoGeneralContratComponent {
 
       }
     })
-    this.formGroup.valueChanges.subscribe(values => {
+    this.formGroup.get('codeprod')?.valueChanges.subscribe(value => {
 
       this.courtierService.getDetailProduit(this.formGroup.get('codeprod')!.value).subscribe({
-        next: (data: Produit) => {
-          this.detailProduit = data
+        next: (data: any) => {
+          this.detailProduit.set(data[0])
+          console.log(data);
 
+          this.visibleProductEntries = Object.entries(data[0])
+            .filter(([key]) => this.productDisplayMap[key])
+            .map(([key, value]) => ({
+              label: this.productDisplayMap[key]?.label || key,
+              value,
+              isDate: this.productDisplayMap[key]?.isDate || false,
+            })) ?? [];
 
           this.codeprodSignal.set(
             this.formGroup.get('codeprod')!.value,
@@ -111,136 +94,26 @@ export class InfoGeneralContratComponent {
 
     let payload = {
       "dossier": this.numtier(),
-      "Effet": new Date().toISOString().split('T')[0],
-      "produit": this.detailProduit.codeprod,
+      "libelle": this.formGroup.get('Intitule')!.value,
+      "produit": this.detailProduit().codeprod,
       "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!)
-      ,
-      "data": {
-        "CONT": {
-          "Acompte": null,
-          "Acompte1": null,
-          "Agelimit": null,
-          "Apport1": null,
-          "Apport2": null,
-          "Archive": null,
-          "Codeprod": this.detailProduit.codeprod,
-          "Comges": null,
-          "Comini": null,
-          "Comini1": null,
-          "Commann1": "???",
-          "Datereal": null,
-          "DateRefIndice": null,
-          "Dateresi": "",
-          "Duree": null,
-          "Echeance": null,
-          "Echpjj": "30",
-          "Echpmm": "6t",
-          "Echu": false,
-          "Ext": null,
-          "ext_cie_ncie": 201,
-          "ext_cie_nomcie": "GXA ASSURANCES",
-          "ext_piec_codeprod": this.detailProduit.codeprod,
-          "ext_poli_police": null,
-          "ext_prod_branc": "AU",
-          "ext_prod_branche": "F1",
-          "ext_prod_libelle": this.detailProduit.libelle,
-          "Fiscal": null,
-          "Frac": "A",
-          "Frprel": null,
-          "Frprel1": null,
-          "Fvahom": null,
-          "Gestionn": "AUTRES",
-          "Histo": "",
-          "Hono": null,
-          "Hono1": null,
-          "Impaye": null,
-          "Impaye1": null,
-          "Indic": null,
-          "Intitule": this.formGroup.get('Intitule')!.value,
-          "Jourp": null,
-          "Kprretem": null,
-          "Kprretro": null,
-          "Lima": null,
-          "Mandat": null,
-          "Memo": null,
-          "Modegest": null,
-          "Modifpar": "ZAKARIA",
-          "Modrev": null,
-          "Nbsin": null,
-          "Nonepur": false,
-          "Numproj": null,
-          "Numtiers": this.numtier(),
-          "Ole": null,
-          "Pnini": null,
-          "Pnini1": null,
-          "Polinter": false,
-          "Polrefus": null,
-          "Portef": null,
-          "Prelbank": null,
-          "Prelev": null,
-          "Primann1": "???",
-          "Propproj": null,
-          "Ptini": null,
-          "Ptini1": null,
-          "Querab": null,
-          "Realis": null,
-          "Remplace": null,
-          "Remppar": null,
-          "Retroap1": null,
-          "Retroap2": null,
-          "Retroemi": false,
-          "Retrorea": null,
-          "Sansquit": false,
-          "Tacite": false,
-          "Tauxap1": null,
-          "Tauxap2": null,
-          "Tauxrea": null,
-          "Totann1": "???",
-          "TypeSignature": null,
-          "Typretr1": null,
-          "Typretr2": null,
-          "Typretrr": null,
-          "typename": "cont"
-        },
-        "PIEC": {
-          "Cie": 201,
-          "Cieprime": null,
-          "Cietaxes": null,
-          "Codeprod": this.detailProduit.codeprod,
 
-          "Commsup": null,
-          "Coutpol": null,
-          "Coutpol1": null,
-          "external_cie_nomcie": "GXA ASSURANCES",
-          "PolGroupe": null,
-          "Reference": null,
-          "Role": "P",
-          "Tauxcn": null,
-          "Tauxcom": null,
-          "Tauxcout": null,
-          "Tauxpart": null
-        }
-      }
+
     }
-    this.courtierService.getCreateContrat(payload).subscribe({
+    this.courtierService.postCreateProjet(payload).subscribe({
       next: (data: any) => {
-        console.log("Contrat créé avec succès", data);
-        this.toastr.success('Contrat créé avec succès!');
-        if (this.isContrat()) {
-          const url = this.router.serializeUrl(
-            this.router.createUrlTree(['/courtiers/contrats/edit/' + data.piec.contrat])
-          ); window.open(url, '_blank');
+        console.log("Le projet créé avec succès", data);
+        this.toastr.success("Le projet a été créé avec succès")
 
-        } else {
-          const url = this.router.serializeUrl(
-            this.router.createUrlTree(['/courtiers/projets/edit/' + data.piec.contrat])
-          ); window.open(url, '_blank');
+        const url = this.router.serializeUrl(
+          this.router.createUrlTree(['/courtiers/projets/edit/' + data.project.proj_id])
+        ); window.open(url, '_blank');
 
-        }
+
       },
       error: (err) => {
         console.error(err);
-        this.toastr.error("Une erreur est survenu lors de la création du contrat: " + err)
+        this.toastr.error("Une erreur est survenu lors de la création du projet: " + err)
       }
     });
   }

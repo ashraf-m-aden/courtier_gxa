@@ -34,9 +34,7 @@ export class InfoGeneralContratComponent {
     });
     effect(() => {
 
-      console.log(this.listProduits);
 
-      const codeprod = this.codeprodSignal();
       const productObject = this.detailProduit
       console.log(Object.entries(productObject)
         .filter(([key]) => this.productDisplayMap[key])
@@ -71,7 +69,7 @@ export class InfoGeneralContratComponent {
 
       }
     })
-    this.formGroup.valueChanges.subscribe(values => {
+    this.formGroup.get('codeprod')?.valueChanges.subscribe(value => {
 
       this.courtierService.getDetailProduit(this.formGroup.get('codeprod')!.value).subscribe({
         next: (data: Produit) => {
@@ -227,17 +225,11 @@ export class InfoGeneralContratComponent {
       next: (data: any) => {
         console.log("Contrat créé avec succès", data);
         this.toastr.success('Contrat créé avec succès!');
-        if (this.isContrat()) {
-          const url = this.router.serializeUrl(
-            this.router.createUrlTree(['/courtiers/contrats/edit/' + data.piec.contrat])
-          ); window.open(url, '_blank');
+        const url = this.router.serializeUrl(
+          this.router.createUrlTree(['/courtiers/contrats/edit/' + data.piec.contrat])
+        ); window.open(url, '_blank');
 
-        } else {
-          const url = this.router.serializeUrl(
-            this.router.createUrlTree(['/courtiers/projets/edit/' + data.piec.contrat])
-          ); window.open(url, '_blank');
 
-        }
       },
       error: (err) => {
         console.error(err);

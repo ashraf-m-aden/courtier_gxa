@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class EditAdminPieceProjetComponent {
   @Input() project = signal<any>(null);
   @Input() retrievedproject = signal<any>(null);
+  @Input() offer = signal<any>(undefined);
 
   pieces: Piec[] = []
 

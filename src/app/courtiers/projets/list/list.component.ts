@@ -35,7 +35,7 @@ ngOnInit() {
 
   nouveauProjet(): void {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/courtiers/projets/nouveau'])
+      this.router.createUrlTree(['/courtiers/projets/nouveau/'+this.idTier])
     );
     window.open(url, '_blank');
   }

@@ -20,12 +20,13 @@ import { loadTiersData } from '../../../store/features/courtiers/courtier.action
 import { selectTiers } from '../../../store/features/courtiers/courtier.selector';
 import { CourtierService } from '../../../Services/courtier/courtier.service';
 import { Tier } from '../../../Model/tier.model';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-tier-list',
   standalone: true,
   imports: [
-    CommonModule,MatProgressSpinnerModule,
+    CommonModule, MatProgressSpinnerModule,
     MatTableModule, MatInputModule, MatSelectModule, RouterModule, RouterLink, RouterLinkActive,
     MatFormFieldModule, FormsModule, ReactiveFormsModule,
     MatIconModule, MatCardModule
@@ -54,36 +55,54 @@ export class TierListComponent {
 
   allTiers = signal<Tier[]>([]);
 
-  searchTerm = signal('');
+  searchTerm = '';
   selectedType = signal('all');
   selectedCity = signal('');
 
   displayedColumns: string[] = ['type', 'nom', 'tel', 'adresse', 'ville', 'actions'];
-  isLoading = signal(true);
+  isLoading = signal(false);
 
-  constructor(private facade: TierFacade, private courtierStore: Store, private courtierService: CourtierService, private router: Router) {
+  constructor(private facade: TierFacade, private toast: ToastrService, private courtierStore: Store, private courtierService: CourtierService, private router: Router) {
 
   }
 
-  async ngOnInit() {
-    this.filtersForm.valueChanges.pipe(debounceTime(300)).subscribe(value => {
-      this.searchTerm.set(value.search?.toLowerCase().trim() || '');
-      this.selectedType.set(value.typtiers || 'all');
-      this.selectedCity.set(value.ville || '');
-    });
+  // async ngOnInit() {
+  //   this.filtersForm.valueChanges.pipe(debounceTime(300)).subscribe(value => {
+  //     this.searchTerm.set(value.search?.toLowerCase().trim() || '');
+  //     this.selectedType.set(value.typtiers || 'all');
+  //     this.selectedCity.set(value.ville || '');
+  //   });
 
-    await this.loadTiers();
-  }
+  //   await this.loadTiers();
+  // }
 
   async loadTiers() {
-    this.courtierService.getTiersSearch().subscribe({
-      next: (data: Tier[]) => {
-        this.allTiers.set(data)
+    this.isLoading.set(true);
+
+    this.courtierService.getTiersSearch(this.searchTerm).subscribe({
+      next: (data: any) => {
+
+        if (Array.isArray(data)) {
+          this.allTiers.set(data)
+          this.toast.success('Tiers récuperés avec succès', 'Succès');
+
+        } else {
+          if (data.searchresult) {
+            this.toast.error('Aucun tier retrouvé', 'Erreur');
+
+          }
+          else {
+            this.allTiers.set([data])
+            this.toast.success('Tiers récuperés avec succès', 'Succès');
+
+          }
+        }
         this.isLoading.set(false);
       },
       error: (error) => {
         console.error('Error loading tiers:', error);
         this.isLoading.set(false);
+        this.toast.error('Erreur lors de la récuperation des tiers', 'Erreur');
 
       },
       complete: () => {
@@ -93,6 +112,12 @@ export class TierListComponent {
       }
     })
 
+  }
+
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.loadTiers();
+    }
   }
   allCities = computed(() =>
     Array.from(
