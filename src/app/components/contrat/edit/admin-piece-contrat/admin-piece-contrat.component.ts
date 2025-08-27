@@ -259,7 +259,7 @@ export class EditAdminPieceContratComponent {
 
 
       if (this.pieceForm.get("Piece")?.value > 0) {
-        this.courtierService.getUpdatePieceDuContrat(payload).subscribe({
+        this.courtierService.getAjoutPieceAuContrat(payload).subscribe({
 
           next: () => {
             this.toastr.success('Contrat mis à jour avec succès!')

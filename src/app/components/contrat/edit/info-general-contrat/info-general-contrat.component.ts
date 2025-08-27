@@ -1,9 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component, effect, Input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'edit-info-general-contrat',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule,DatePipe],
   templateUrl: './info-general-contrat.component.html',
   styleUrl: './info-general-contrat.component.css'
 })

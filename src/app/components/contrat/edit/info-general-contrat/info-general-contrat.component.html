@@ -1,10 +1,20 @@
 <div class="row">
-<form [formGroup]="formGroup">
-    <div class="col-md-6 mb-3">
-      <h6>Intitulé du contrat</h6>
-        <div>{{ formGroup.get('Intitule')?.value }}</div>
 
-    </div>
-
-</form>
 </div>
+  <!-- Vérifie si contratDetails existe -->
+  <div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <div>
+        <h2 class="mb-1">
+          {{ formGroup.get("Intitule")?.value }}
+        </h2>
+        <div class="text-muted">
+          ID: <span class="fw-semibold">{{ contratDetails().Contrat }}</span>
+          <span class="mx-2">•</span>
+          Tiers: <span class="fw-semibold">{{ contratDetails().Numtiers }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

@@ -40,7 +40,7 @@ export class EditProduitsContratComponent {
   @Input() adhesion = signal<any>(undefined);
 
   codeprodSignal = signal("");
-  detailProduit = signal<any>(undefined);
+  detailProduit = signal<any[]>([]);
 
   visibleProductEntries: any[] = [];
   constructor(private fb: FormBuilder, private courtierService: CourtierService) {
@@ -52,13 +52,13 @@ export class EditProduitsContratComponent {
     effect(() => {
       if (this.adhesion()?.Codeprod || this.contratDetails().Codeprod) {
         this.courtierService.getDetailProduit(this.adhesion()?.Codeprod ?? this.contratDetails().Codeprod).subscribe({
-          next: (data: Produit) => {
+          next: (data: any[]) => {
 
             this.detailProduit.set(data);
 
             this.codeprodSignal.set(this.adhesion()?.Codeprod ?? this.contratDetails().Codeprod);
-            console.log(this.detailProduit());
-            const productObject = this.detailProduit()
+            console.log(this.detailProduit()[0]);
+            const productObject = this.detailProduit()[0]
 
             if (!productObject) this.visibleProductEntries = [];
 

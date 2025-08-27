@@ -189,6 +189,15 @@ export class TierNouveauComponent {
 
 
   onSubmit() {
+        let payload = {
+      "typtiers": this.tierForm.get('typtiers')?.value,
+      "nature": null,
+      "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!)
+      ,
+      "data": {
+        "TIERS": this.tierForm.value,
+      }
+    }
     console.log(this.tierForm.value);
   }
 }

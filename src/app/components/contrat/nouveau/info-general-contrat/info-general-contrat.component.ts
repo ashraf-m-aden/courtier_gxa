@@ -23,7 +23,7 @@ export class InfoGeneralContratComponent {
 
   codeprodSignal = signal("");
   listProduits: Produit[] = []
-  detailProduit: Produit = {} as Produit;
+  detailProduit=signal<any>([]);
 
   visibleProductEntries: any[] = [];
   constructor(private fb: FormBuilder, private courtierService: CourtierService, private router: Router, private toastr: ToastrService) {
@@ -35,7 +35,7 @@ export class InfoGeneralContratComponent {
     effect(() => {
 
 
-      const productObject = this.detailProduit
+      const productObject = this.detailProduit()[0]
       console.log(Object.entries(productObject)
         .filter(([key]) => this.productDisplayMap[key])
         .map(([key, value]) => ({
@@ -72,8 +72,8 @@ export class InfoGeneralContratComponent {
     this.formGroup.get('codeprod')?.valueChanges.subscribe(value => {
 
       this.courtierService.getDetailProduit(this.formGroup.get('codeprod')!.value).subscribe({
-        next: (data: Produit) => {
-          this.detailProduit = data
+        next: (data: any[]) => {
+          this.detailProduit.set(data)
 
 
           this.codeprodSignal.set(
@@ -111,7 +111,7 @@ export class InfoGeneralContratComponent {
     let payload = {
       "dossier": this.numtier(),
       "Effet": new Date().toISOString().split('T')[0],
-      "produit": this.detailProduit.codeprod,
+      "produit": this.detailProduit()[0].codeprod,
       "BasSecurityContext": JSON.parse(localStorage.getItem("BasSecurityContext")!)
       ,
       "data": {
@@ -122,7 +122,7 @@ export class InfoGeneralContratComponent {
           "Apport1": null,
           "Apport2": null,
           "Archive": null,
-          "Codeprod": this.detailProduit.codeprod,
+          "Codeprod": this.detailProduit()[0].codeprod,
           "Comges": null,
           "Comini": null,
           "Comini1": null,
@@ -138,11 +138,11 @@ export class InfoGeneralContratComponent {
           "Ext": null,
           "ext_cie_ncie": 201,
           "ext_cie_nomcie": "GXA ASSURANCES",
-          "ext_piec_codeprod": this.detailProduit.codeprod,
+          "ext_piec_codeprod": this.detailProduit()[0].codeprod,
           "ext_poli_police": null,
           "ext_prod_branc": "AU",
           "ext_prod_branche": "F1",
-          "ext_prod_libelle": this.detailProduit.libelle,
+          "ext_prod_libelle": this.detailProduit()[0].codeprod,
           "Fiscal": null,
           "Frac": "A",
           "Frprel": null,
@@ -205,7 +205,7 @@ export class InfoGeneralContratComponent {
           "Cie": 201,
           "Cieprime": null,
           "Cietaxes": null,
-          "Codeprod": this.detailProduit.codeprod,
+          "Codeprod": this.detailProduit()[0].codeprod,
 
           "Commsup": null,
           "Coutpol": null,
