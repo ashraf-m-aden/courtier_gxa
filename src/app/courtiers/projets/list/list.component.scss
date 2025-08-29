@@ -1,0 +1,169 @@
+/* Container and spacing */
+.container-fluid {
+  padding: 1rem 2rem;
+  margin-top: 1.5rem;
+
+  .row {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.95rem;
+
+  th, td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+  }
+
+  th {
+    background-color: #1e3a8a !important; // dark primary
+    color: #fff !important;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  td {
+    background-color: #f9fafb;
+    color: #111827;
+  }
+
+  tr {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #e0f2fe;
+    }
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    min-width: 100px;
+  }
+}
+
+/* Angular Material Cards */
+mat-card {
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  mat-card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  mat-card-content {
+    table {
+      width: 100%;
+      border-spacing: 0 0.5rem;
+
+      td {
+        padding: 0.5rem 0.75rem;
+
+        strong {
+          display: inline-block;
+          width: 180px;
+          font-weight: 600;
+          color: #374151;
+        }
+
+        span {
+          display: inline-block;
+          color: #111827;
+          background-color: #f3f4f6;
+          padding: 0.25rem 0.5rem;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+}
+
+/* Angular Material Form Fields */
+mat-form-field {
+  width: 100%;
+
+  input, mat-select {
+    font-size: 0.95rem;
+  }
+
+  mat-label {
+    font-weight: 500;
+    color: #374151;
+  }
+}
+
+/* Checkboxes */
+mat-checkbox {
+  margin-right: 1.5rem;
+  font-size: 0.95rem;
+  color: #1e3a8a;
+
+  .mat-checkbox-frame {
+    border-color: #1e3a8a;
+  }
+
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #1e3a8a;
+  }
+}
+
+/* Buttons */
+.btn-group {
+  button {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    mat-icon {
+      vertical-align: middle;
+      margin-right: 0.25rem;
+    }
+  }
+
+  &.btn-primary {
+    background-color: #1e3a8a;
+    color: #fff;
+  }
+
+  &.btn-warning {
+    background-color: #f59e0b;
+    color: #fff;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  mat-card-title {
+    font-size: 1.2rem;
+  }
+
+  .table th, .table td {
+    padding: 0.5rem 0.75rem;
+  }
+
+  mat-checkbox {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+}

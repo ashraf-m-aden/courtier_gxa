@@ -9,7 +9,7 @@ import { CourtierService } from '../../../Services/courtier/courtier.service';
   selector: 'app-list-contrat',
   imports: [DatePipe, MatIconModule],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css'
+  styleUrl: './list.component.scss'
 })
 export class ListContratComponent {
   @Input() isContrat = false;

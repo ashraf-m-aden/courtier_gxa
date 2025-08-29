@@ -78,7 +78,7 @@ export class TierListComponent {
 
   async loadTiers() {
     this.isLoading.set(true);
-
+    this.allTiers.set([])
     this.courtierService.getTiersSearch(this.searchTerm).subscribe({
       next: (data: any) => {
 

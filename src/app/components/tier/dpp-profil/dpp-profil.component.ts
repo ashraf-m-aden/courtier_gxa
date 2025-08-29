@@ -23,7 +23,7 @@ import { Tier } from '../../../Model/tier.model';
     MatInputModule, MatCheckboxModule,
     MatButtonModule, MatIconModule],
   templateUrl: './dpp-profil.component.html',
-  styleUrl: './dpp-profil.component.css'
+  styleUrl: './dpp-profil.component.scss'
 })
 export class DppProfilComponent {
 

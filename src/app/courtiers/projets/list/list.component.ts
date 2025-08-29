@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   selector: 'app-list-projet',
   imports: [DatePipe, MatIconModule, AsyncPipe],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css'
+  styleUrl: './list.component.scss'
 })
 export class ListProjetComponent {
   @Input() isContrat = false;

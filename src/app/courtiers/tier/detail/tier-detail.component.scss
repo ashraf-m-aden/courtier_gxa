@@ -1,7 +1,61 @@
-:host {
-    display: block;
-    padding: 1rem;
+@import "../../../../scss/style.scss";
+.tier-profile-page {
+  padding: 1rem;
+
+  .card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: $white;
+    box-shadow: 0 4px 20px rgba($black, 0.08);
+
+    h5 {
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: $primary;
+    }
+
+    .spinner-border {
+      display: flex;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+
+    mat-tab-group {
+      .mat-tab-labels {
+        border-bottom: 2px solid lighten($primary, 30%);
+        .mat-tab-label {
+          font-weight: 500;
+          padding: 0.8rem 1.2rem;
+          border-radius: 8px 8px 0 0;
+          transition: all 0.3s ease;
+          color: $primary;
+
+          &:hover {
+            background: rgba($primary, 0.08);
+          }
+
+          &.mat-tab-label-active {
+            background: $primary;
+            color: $white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba($black, 0.1);
+          }
+        }
+      }
+
+      .mat-tab-body-wrapper {
+        margin-top: 1rem;
+        padding: 1rem 0;
+
+        .container-fluid {
+          padding: 0 1rem;
+
+          p {
+            color: $grey;
+            font-size: 0.95rem;
+          }
+        }
+      }
+    }
   }
-  mat-card {
-    margin: 1rem 0;
-  }
+}

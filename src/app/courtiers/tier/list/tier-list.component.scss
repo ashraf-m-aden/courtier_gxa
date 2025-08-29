@@ -1,18 +1,120 @@
 @import "../../../../style.scss";
 
+.tiers-page {
+  padding: 1rem;
 
-.form {
+  .search-card {
+    border-radius: 12px;
+    background: $white;
+    box-shadow: 0 4px 16px rgba($black, 0.08);
 
-  display: flex;
+    .custom-input-group {
+      border-radius: 8px;
+      overflow: hidden;
 
-  flex-wrap: wrap;
-  justify-content: space-between;
-  background-color: white;
-  border-radius: 10px;
-  padding: 10px;
+      input.form-control {
+        border: none;
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
+      }
 
+      .search-icon {
+        background: $primary;
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s ease;
 
-  &-search {
-    width: fit-content;
+        mat-icon {
+          font-size: 1.2rem;
+        }
+
+        &:hover {
+          background: darken($primary, 10%);
+        }
+      }
+    }
+
+    .new-tier-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: 500;
+      transition: transform 0.2s ease;
+
+      mat-icon {
+        font-size: 1.3rem;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .table-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: $white;
+
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 0.5rem;
+
+      thead.table-header {
+        background: $primary;
+        color: $white;
+        border-radius: 8px;
+
+        th {
+          padding: 0.8rem 1rem;
+          text-align: left;
+        }
+      }
+
+      tbody tr {
+        background: #fdfdfd;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba($black, 0.04);
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba($black, 0.1);
+        }
+
+        td {
+          padding: 0.8rem 1rem;
+          vertical-align: middle;
+        }
+
+        .edit-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.3rem;
+          font-size: 0.85rem;
+          transition: background 0.3s ease;
+
+          mat-icon {
+            font-size: 1rem;
+          }
+
+          &:hover {
+            background: $primary;
+            color: $white;
+            border-color: $primary;
+          }
+        }
+      }
+    }
   }
 }

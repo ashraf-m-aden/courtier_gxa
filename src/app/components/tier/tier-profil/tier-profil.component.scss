@@ -1,0 +1,139 @@
+.tier-page {
+  padding: 1rem;
+
+  .btn-group {
+    button {
+      min-width: 120px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  form {
+    .row {
+      .mat-form-field {
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      mat-checkbox {
+        margin-right: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    button[type='submit'] {
+      min-width: 160px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+
+      mat-icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+
+  .spinner-border {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+}
+.tier-info-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
+
+
+}
+.tier-info-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem 2.5rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e3a8a; // deep primary color
+    margin-bottom: 1.8rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+  }
+
+  .card-content {
+    .row {
+      margin-top: 1rem;
+
+      .col-md-3,
+      .col-md-6,
+      .col-12 {
+        margin-bottom: 1.2rem;
+
+        strong {
+          display: block;
+          font-weight: 600;
+          color: #374151;
+          margin-bottom: 0.3rem;
+          font-size: 0.95rem;
+        }
+
+        span {
+          display: block;
+          color: #111827;
+          font-size: 0.95rem;
+          padding: 0.25rem 0.5rem;
+          background-color: #f9fafb;
+          border-radius: 6px;
+          border: 1px solid #e5e7eb;
+        }
+      }
+
+      .col-md-6 span {
+        white-space: pre-wrap; // handle multi-line text
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+
+    .card-title {
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-content {
+      .row {
+        .col-md-3,
+        .col-md-6,
+        .col-12 {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}

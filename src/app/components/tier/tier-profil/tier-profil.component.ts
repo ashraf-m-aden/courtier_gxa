@@ -23,7 +23,7 @@ import { Tier } from '../../../Model/tier.model';
     MatInputModule, MatCheckboxModule,
     MatButtonModule, MatIconModule],
   templateUrl: './tier-profil.component.html',
-  styleUrl: './tier-profil.component.css'
+  styleUrl: './tier-profil.component.scss'
 })
 export class TierProfilComponent {
 
