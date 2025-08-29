@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'nouveau',
+  selector: 'nouveau-quittance',
   imports: [FormsModule,ReactiveFormsModule],
   templateUrl: './nouveau.component.html',
   styleUrl: './nouveau.component.css'

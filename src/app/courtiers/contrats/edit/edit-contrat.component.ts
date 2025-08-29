@@ -21,7 +21,7 @@ import { ListQuittanceDetailsComponent } from '../../../components/contrat/detai
 
 @Component({
   selector: 'edit-contrat',
-  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, EditInfoGeneralContratComponent,ListQuittanceDetailsComponent, EditAdminContratComponent, EditAdminPieceContratComponent, EditRisqueContratComponent, EditProduitsContratComponent],
+  imports: [FormsModule, MatStepperModule, ReactiveFormsModule, EditInfoGeneralContratComponent, ListQuittanceDetailsComponent, EditAdminContratComponent, EditAdminPieceContratComponent, EditRisqueContratComponent, EditProduitsContratComponent],
   templateUrl: './edit-contrat.component.html',
   styleUrl: './edit-contrat.component.css'
 })
@@ -37,18 +37,14 @@ export class EditContratComponent {
   rveh = signal<any>(undefined);
   garant = signal<any[]>([]);
   idContrat = 0
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService,private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private courtierService: CourtierService, private toastr: ToastrService) {
 
     this.isContrat.set(this.route.snapshot.data['isContrat'])
     this.isEdit.set(true)
     this.idContrat = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id']) : 0;
 
   }
-
-
-  ngOnInit() {
-
-
+  async refresh() {
     if (this.idContrat != 0 && this.isEdit()) {
       this.courtierService.getDetailContrat(this.idContrat).subscribe({
         next: (data: any) => {
@@ -70,7 +66,7 @@ export class EditContratComponent {
             },
             error: (error) => {
               console.error('Error fetching adhesion details:', error);
-                          this.toastr.error('Erreur lors de la récupération des détails de l’adhésion', error);
+              this.toastr.error('Erreur lors de la récupération des détails de l’adhésion', error);
 
             },
             complete: () => {
@@ -87,6 +83,12 @@ export class EditContratComponent {
       })
 
     }
+
+  }
+
+  ngOnInit() {
+    this.refresh()
+
 
 
 

@@ -1,0 +1,117 @@
+/* Main card wrapper */
+.card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  fieldset {
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: #f9fafb;
+
+    legend {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1e3a8a;
+      padding: 0 0.5rem;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 0.75rem;
+
+      span {
+        display: block;
+        margin-top: 0.25rem;
+        padding: 0.4rem 0.6rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        background-color: #ffffff;
+        min-width: 60px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: #111827;
+      }
+    }
+
+    input[type="checkbox"] {
+      margin-right: 0.5rem;
+      accent-color: #1e3a8a;
+    }
+
+    .flex {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      &.flex-column {
+        flex-direction: column;
+      }
+
+      &.flex-sm-column {
+        @media (max-width: 768px) {
+          flex-direction: column;
+        }
+      }
+
+      .block {
+        display: block;
+      }
+
+      .w-full {
+        width: 100%;
+      }
+
+      .w-16 {
+        width: 4rem;
+      }
+
+      .w-24 {
+        width: 6rem;
+      }
+
+      gap: 1rem;
+    }
+  }
+}
+
+/* Specific styles for Situation Comptable */
+fieldset p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+  margin: 0.5rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .d-flex.gap-5 {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  fieldset {
+    padding: 0.75rem 1rem;
+
+    legend {
+      font-size: 1.1rem;
+    }
+
+    label span {
+      font-size: 0.9rem;
+    }
+  }
+}

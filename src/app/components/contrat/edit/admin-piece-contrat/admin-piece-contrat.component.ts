@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'edit-admin-piece-contrat',
   imports: [FormsModule, ReactiveFormsModule, DatePipe],
   templateUrl: './admin-piece-contrat.component.html',
-  styleUrl: './admin-piece-contrat.component.css'
+  styleUrl: './admin-piece-contrat.component.scss'
 })
 export class EditAdminPieceContratComponent {
   @Input() isContrat = signal(true); // Indique si c'est un contrat

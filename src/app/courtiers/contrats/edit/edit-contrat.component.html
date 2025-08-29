@@ -1,8 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 d-flex justify-content-between">
       <h5>Modifier un contrat</h5>
-
+      <button class="btn btn-group btn-primary" (click)="refresh()">
+        Rafraichir
+      </button>
     </div>
     @if(contratDetails() ){
     <div class="col-12">

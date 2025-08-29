@@ -9,7 +9,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'list-quittance-details',
-  imports: [DatePipe,MatCardModule,FormsModule,ReactiveFormsModule,MatInputModule,MatDatepickerModule],
+  imports: [DatePipe, MatCardModule, FormsModule, ReactiveFormsModule, MatInputModule, MatDatepickerModule],
   templateUrl: './list-quittance.component.html',
   styleUrl: './list-quittance.component.scss'
 })
@@ -26,7 +26,12 @@ export class ListQuittanceDetailsComponent {
     effect(() => {
       courtierService.getListeDesQuittances(this.contratDetails()?.Numtiers, this.contratDetails()?.Contrat).subscribe({
         next: (data: any) => {
-          this.list_quittances = data
+          if (Array.isArray(data)) {
+            this.list_quittances = data
+
+          } else {
+            this.list_quittances = []
+          }
         }
       })
     })

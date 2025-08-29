@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'edit-admin-contrat',
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './admin-contrat.component.html',
-  styleUrl: './admin-contrat.component.css'
+  styleUrl: './admin-contrat.component.scss'
 })
 export class EditAdminContratComponent {
 

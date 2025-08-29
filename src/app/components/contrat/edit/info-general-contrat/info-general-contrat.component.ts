@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
   selector: 'edit-info-general-contrat',
   imports: [FormsModule, ReactiveFormsModule,DatePipe],
   templateUrl: './info-general-contrat.component.html',
-  styleUrl: './info-general-contrat.component.css'
+  styleUrl: './info-general-contrat.component.scss'
 })
 export class EditInfoGeneralContratComponent {
   @Input() isContrat = signal(true);

@@ -141,7 +141,11 @@ export class CourtierService {
     return this.http.post(`${this.baseUrl}/detail_tier`, payload);
   }
 
-  getListeDesContrats(payload: any): Observable<any> {
+  getListeDesContrats(): Observable<any> {
+     let payload = {
+      BasSecurityContext: this.BasSecurityContext,
+
+    };
     return this.http.post(`${this.baseUrl}/liste_des_contrats`, payload);
   }
 
