@@ -1,1 +1,106 @@
 @import "../../../../../scss/style.scss";
+/* Form card styling */
+form.card, fieldset.card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  }
+
+  legend {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    display: block;
+
+    .input, select {
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      margin-top: 0.25rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      color: #111827;
+      background-color: #f9fafb;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: #1e3a8a;
+        box-shadow: 0 0 0 2px rgba(30,58,138,0.2);
+        background-color: #ffffff;
+      }
+    }
+  }
+
+  .d-flex {
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    &.flex-column {
+      flex-direction: column;
+    }
+
+    &.flex-sm-column {
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+/* Responsive grid inside fieldset */
+.row.g-4 {
+  margin: 0 -0.5rem;
+
+  > .col-12, > .col-md-6, > .col-sm-6 {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Buttons */
+button.btn-primary {
+  background-color: #1e3a8a;
+  border: none;
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #3746b3;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 992px) {
+  .row.g-4 {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  fieldset.card {
+    padding: 1rem;
+  }
+
+  legend {
+    font-size: 1.1rem;
+  }
+
+  label .input, label select {
+    font-size: 0.9rem;
+  }
+}
