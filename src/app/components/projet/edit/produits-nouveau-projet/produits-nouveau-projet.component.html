@@ -1,7 +1,8 @@
 <form [formGroup]="vehiculeForm" class="card" (ngSubmit)="submitnewOffer()">
   <h2 class="text-xl font-bold mb-3">Ajout nouvelle proposition</h2>
 
-  @if (this.project() && this.project().offers.length== 0) {
+  @if (this.project() && (this.project().offers.length== 0 &&
+  !project().offers?.offer)) {
 
   <div class="d-flex m-3 flex-column">
     <label class="block mb-1">Liste des produits</label>

@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angul
   selector: 'details-admin-contrat',
   imports: [FormsModule, ReactiveFormsModule, DatePipe],
   templateUrl: './admin-contrat.component.html',
-  styleUrl: './admin-contrat.component.css'
+  styleUrl: './admin-contrat.component.scss'
 })
 export class DetailsAdminContratComponent {
 

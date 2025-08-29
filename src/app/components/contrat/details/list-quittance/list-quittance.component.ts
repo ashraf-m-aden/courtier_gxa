@@ -11,7 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   selector: 'list-quittance-details',
   imports: [DatePipe,MatCardModule,FormsModule,ReactiveFormsModule,MatInputModule,MatDatepickerModule],
   templateUrl: './list-quittance.component.html',
-  styleUrl: './list-quittance.component.scss'
+  styleUrl: './list-quittance.component.css'
 })
 export class ListQuittanceDetailsComponent {
   @Input() contratDetails = signal<any>(undefined)

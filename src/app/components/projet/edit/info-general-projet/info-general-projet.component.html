@@ -83,7 +83,37 @@
             </button>
           </td>
         </tr>
-        } } @else {
+        } }
+
+        @else if (project().offers?.offer) {
+
+        <tr
+          role="button"
+          [class]="{ 'table-primary': offre()?.id === project().offers?.offer.id }"
+        >
+          <td>{{ project().offers?.offer.prod_libelle }}</td>
+          <td>{{ project().offers?.offer.offer_contrat }}</td>
+          <td>{{ project().offers?.offer.cie_nom }}</td>
+          <td class="d-flex gap-2 justify-content-center">
+            <button
+              class="btn btn-sm btn-primary"
+              (click)="
+                selectOffer(project().offers?.offer); $event.stopPropagation()
+              "
+            >
+              Sélectionner
+            </button>
+            <button
+              class="btn btn-sm btn-danger"
+              (dblclick)="
+                deleteOffer(project().offers?.offer); $event.stopPropagation()
+              "
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
+        } @else {
         <tr>
           <td colspan="4" class="text-center text-muted">
             Aucune offre trouvée

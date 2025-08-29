@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'edit-risque-projet',
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './risque-projet.component.html',
-  styleUrl: './risque-projet.component.css'
+  styleUrl: './risque-projet.component.scss'
 })
 export class EditRisqueProjetComponent {
 

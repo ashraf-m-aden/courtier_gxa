@@ -53,7 +53,7 @@ export class EditProduitsNouveauProjetComponent {
 
 
       const productObject = this.detailProduit()
-
+this.loadData()
 
 
 
@@ -62,10 +62,9 @@ export class EditProduitsNouveauProjetComponent {
   }
 
 
+  async loadData(){
 
-  async ngOnInit() {
-
-    if (this.project() && this.project().offers && this.project().offers.length > 0) {
+    if (this.project() && this.project().offers && this.project().offers.length > 0 || this.project().offers?.offer) {
         this.vehiculeForm.get('codeprod')!.setValue(this.project().offers[0].offer.prod_id);
       this.courtierService.getDetailProduit(this.project().offers[0].offer.prod_id).subscribe({
         next: (data: any[]) => {
@@ -118,6 +117,11 @@ export class EditProduitsNouveauProjetComponent {
         })
       });
     }
+  }
+
+
+  async ngOnInit() {
+
   }
 
 

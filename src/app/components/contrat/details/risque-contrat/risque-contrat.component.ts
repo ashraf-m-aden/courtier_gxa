@@ -8,7 +8,7 @@ import { Risa } from '../../../../Model/risque.model';
   selector: 'details-risque-contrat',
   imports: [FormsModule, ReactiveFormsModule, DatePipe],
   templateUrl: './risque-contrat.component.html',
-  styleUrl: './risque-contrat.component.css'
+  styleUrl: './risque-contrat.component.scss'
 })
 export class DetailsRisqueContratComponent {
   @Input() contratDetails = signal<any>(null);

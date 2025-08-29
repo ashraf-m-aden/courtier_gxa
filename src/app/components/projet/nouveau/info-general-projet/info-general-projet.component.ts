@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'info-general-projet',
   imports: [FormsModule, ReactiveFormsModule, DatePipe],
   templateUrl: './info-general-projet.component.html',
-  styleUrl: './info-general-projet.component.css'
+  styleUrl: './info-general-projet.component.scss'
 })
 export class InfoGeneralProjetComponent {
   @Input() isContrat = signal(true);

@@ -9,7 +9,7 @@ import { CourtierService } from '../../../../Services/courtier/courtier.service'
   selector: 'details-admin-piece-contrat',
   imports: [FormsModule, ReactiveFormsModule, DatePipe],
   templateUrl: './admin-piece-contrat.component.html',
-  styleUrl: './admin-piece-contrat.component.css'
+  styleUrl: './admin-piece-contrat.component.scss'
 })
 export class DetailsAdminPieceContratComponent {
   @Input() isContrat = signal(true); // Indique si c'est un contrat
