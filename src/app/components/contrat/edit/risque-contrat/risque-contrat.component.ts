@@ -104,13 +104,13 @@ export class EditRisqueContratComponent {
     //Add 'implements OnInit' to the class.
     this.riskForm.get('Datecg')!.valueChanges.subscribe(value => {
       if (value) {
-        const date = new Date(value);
+        const date = this.formatSOAPDate(value,true);
         this.riskForm.get('Datecg')!.setValue(date, { emitEvent: false });
       }
     });
     this.riskForm.get('Datecirc')!.valueChanges.subscribe(value => {
       if (value) {
-        const date = new Date(value);
+        const date = this.formatSOAPDate(value,true);
         this.riskForm.get('Datecirc')!.setValue(date, { emitEvent: false });
       }
     });
@@ -219,4 +219,15 @@ export class EditRisqueContratComponent {
 
     });
   }
+
+ formatSOAPDate(dateString:string, withTime = true) {
+  if (!dateString) return null;
+  const d = new Date(dateString);
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  const date = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  if (withTime) {
+    return `${date}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  }
+  return date;
+}
 }

@@ -301,4 +301,7 @@ export class EditAdminPieceContratComponent {
     this.pieceForm.get("Contrat")?.setValue(this.retrievedcontratDetails()[0].Contrat)
     this.pieceForm.get("Codeprod")?.setValue(this.retrievedcontratDetails()[0].Codeprod)
   }
+
+
+
 }

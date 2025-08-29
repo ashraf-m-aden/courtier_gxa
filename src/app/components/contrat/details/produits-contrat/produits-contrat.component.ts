@@ -39,7 +39,7 @@ export class DetailsProduitsContratComponent {
   @Input() contratDetails = signal<any>(null);
 
   codeprodSignal!: Signal<any>;
-  productObject= signal<Produit | undefined> (undefined)
+  productObject= signal<any> (undefined)
 
 
 
@@ -56,8 +56,8 @@ export class DetailsProduitsContratComponent {
   // API call
   private fetchProductDetails(codeProd: string) {
     this.courtierService.getDetailProduit(codeProd).subscribe({
-      next: (data: Produit) => {
-        this.productObject.set(data ?? undefined);
+      next: (data: any[]) => {
+        this.productObject.set(data[0] ?? undefined);
         console.log("ici");
         console.log(data);
 

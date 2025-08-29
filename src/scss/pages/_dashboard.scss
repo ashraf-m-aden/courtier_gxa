@@ -1,51 +1,115 @@
-﻿/*
- *  Document   : _dashboard.scss
- *  Author     : RedStar Template
- *  Description: This scss file for dashboard page style classes
- */
-.dashboard-flot-chart {
-  height: 275px;
-}
+﻿.container-fluid {
+  padding: 2rem;
 
-.dashboard-donut-chart {
-  height: 265px;
-  text-align: center;
-}
+  .row {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 2;
+  }
 
-.dashboard-line-chart {
-  height: 250px;
-}
+  .stat-card {
+    position: relative;
+    border-radius: 12px;
+    padding: 10px 5px;
+    color: $color-primary;
+    overflow: hidden;
+    border: $cyan solid 1px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 15px rgba($white, 0.4);
 
-.dashboard-stat-list {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 40px;
 
-  li {
-    padding: 16px 0 0 0;
+    h5 {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
 
-    small {
-      font-size: 8px;
+    p.h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    i.icon {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      font-size: 4rem;
+      opacity: 0.2;
+      transition: transform 0.5s ease;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba($black, 0.15);
+      i.icon {
+        transform: scale(1.2) rotate(15deg);
+      }
+    }
+  }
+
+
+
+  .dashboard-list-card {
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba($black, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 1rem 1.5rem;
+    }
+
+    ul.list-group {
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: rgba($primary, 0.05);
+        }
+
+        i {
+          margin-right: 0.5rem;
+        }
+
+        .badge {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  table {
+    .badge {
+      font-size: 0.85rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+      &:hover {
+        transform: scale(1.05);
+      }
     }
   }
 }
 
-.dashboard-task-infos {
-  .progress {
-    height: 10px;
-    position: relative;
-    top: 6px;
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  .stat-card {
+    p.h3 { font-size: 1.5rem; }
+    i.icon { font-size: 3rem; }
   }
-}
-.totalEarning {
-  text-align: center;
-  padding: 6px;
-  color: #ff9800;
-}
-.earningProgress .progress {
-  height: 9px;
-}
-
-.card{
-
 }

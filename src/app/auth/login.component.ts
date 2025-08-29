@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import { AuthState } from '../store/features/auth/auth.state';
 import * as AuthSelectors from '../store/features/auth/auth.selectors'; // import selectors
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -62,11 +63,15 @@ export class LoginComponent {
   public loading = toSignal(this.store.select(AuthSelectors.selectAuthLoading), { initialValue: false });
   public rawError = toSignal(this.store.select(AuthSelectors.selectAuthError), { initialValue: null });
   public isAuthenticated = toSignal(this.store.select(AuthSelectors.selectIsAuthenticated), { initialValue: false });
-  constructor() {
+  constructor(private toast:ToastrService) {
 
     effect(() => {
       if (this.isAuthenticated()) {
         this.router.navigate(['courtiers']);
+
+      }
+      if (this.rawError()) {
+              this.toast.error("Une erreur est survenue veuillez verifier vos identifiants","Erreur de connexion")
 
       }
     });
@@ -85,7 +90,11 @@ export class LoginComponent {
     // console.log("passs !!!!==="+password)
     //this.store.dispatch(AuthActions.loginStart());
 
-    this.store.dispatch(AuthActions.login({ login: login!, password: password!, domain: domain! }));
+    try {
+      this.store.dispatch(AuthActions.login({ login: login!, password: password!, domain: domain! }));
+    } catch (error) {
+      this.toast.error("Une erreur est survenue veuillez verifier vos identifiants","Erreur de connexion")
+    }
   }
 
 

@@ -1,0 +1,178 @@
+@import "../../../scss/style.scss";
+
+// Header
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 2rem;
+  height: 64px;
+  background: $white; // Primary gradient
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: $primary;
+
+    i.icon-business {
+      font-size: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover i.icon-business {
+      transform: rotate(-15deg) scale(1.1);
+    }
+
+    span {
+      white-space: nowrap;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+
+      &.login-btn {
+        background: #fff;
+        color: $primary;
+
+        &:hover {
+          background: #f0f4f8;
+        }
+      }
+
+      &.register-btn {
+        background: #ffc107;
+        color: $primary;
+
+        &:hover {
+          background: darken(#ffc107, 5%);
+        }
+      }
+
+      &.logout-btn {
+
+        color: $red;
+
+        &:hover {
+          background: darken(#f44336, 5%);
+
+          color: $white;
+        }
+      }
+    }
+
+    .profile-icon {
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.25s ease, color 0.25s ease;
+      color: $primary;
+
+      &:hover {
+        transform: scale(1.1);
+        color: $indigooo;
+      }
+    }
+  }
+}
+
+// Profile Dialog
+.profile-dialog {
+  position: fixed;
+  top: 80px;
+  right: 2rem;
+  width: 320px;
+  background: #fff;
+  color: #333;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  z-index: 1100;
+  animation: fadeIn 0.3s ease forwards;
+
+  h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #1292ee;
+    margin-bottom: 1rem;
+  }
+
+  .profile-info p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+
+    strong {
+      color: #3a7e69;
+    }
+  }
+
+  .profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+
+    .btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+
+      &.edit-btn {
+        background: #3a7e69;
+        color: #fff;
+
+        &:hover {
+          background: darken(#3a7e69, 5%);
+        }
+      }
+
+      &.close-btn {
+        background: #ccc;
+        color: #333;
+
+        &:hover {
+          background: #b3b3b3;
+        }
+      }
+    }
+  }
+}
+
+
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

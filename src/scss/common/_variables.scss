@@ -1,38 +1,37 @@
-
-  $red: #f44336;
-  $pink: #e91e63;
-  $purple: #9c27b0;
-  $indigooo: #3f51b5;
-  $blue: #2196f3;
-  $cyan: #00bcd4;
-  $teal: #009688;
-  $green: #4caf50;
-  $yellow: #ffe821;
-  $orange: #ff9800;
-  $deep-orange: #ff5722;
-  $brown: #795548;
-  $grey: #9e9e9e;
-  $black: #000000;
-  $white: #ffffff;
+$red: #f44336;
+$pink: #e91e63;
+$purple: #9c27b0;
+$indigooo: #3f51b5;
+$blue: #2196f3;
+$cyan: #00bcd4;
+$teal: #009688;
+$green: #4caf50;
+$yellow: #ffe821;
+$orange: #ff9800;
+$deep-orange: #ff5722;
+$brown: #795548;
+$grey: #9e9e9e;
+$black: #000000;
+$white: #ffffff;
 
 $indigooo: #3f51b5;
 
 
-  $linear-green: linear-gradient(45deg, #9ce89d, #cdfa7e);
-  $linear-orange: linear-gradient(135deg, #ffc480, #ff763b);
-  $linear-cyan: linear-gradient(45deg, #72c2ff, #86f0ff);
-  $linear-red: linear-gradient(316deg, #fc5286, #fbaaa2);
-  $linear-purple: linear-gradient(230deg, #759bff, #843cf6);
-  $linear-purple-dark: linear-gradient(45deg, #a52dd8, #e29bf1);
-  $linear-card2: linear-gradient(to right, #c33764, #1d2671);
-  $linear-card3: linear-gradient(to left, #134e5e, #71b280);
-  $linear-card4: linear-gradient(to left, #d38312, #a83279);
-  $red-to-pink-to-purple-horizontal-gradient: linear-gradient(
-    0deg,
+$linear-green: linear-gradient(45deg, #9ce89d, #cdfa7e);
+$linear-orange: linear-gradient(135deg, #ffc480, #ff763b);
+$linear-cyan: linear-gradient(45deg, #72c2ff, #86f0ff);
+$linear-cyan2: linear-gradient(45deg, #86f0ff, #ffffff);
+$linear-cyan3: linear-gradient(45deg, #ffffff,#86f0ff);
+$linear-red: linear-gradient(316deg, #fc5286, #fbaaa2);
+$linear-purple: linear-gradient(230deg, #759bff, #843cf6);
+$linear-purple-dark: linear-gradient(45deg, #a52dd8, #e29bf1);
+$linear-card2: linear-gradient(to right, #c33764, #1d2671);
+$linear-card3: linear-gradient(to left, #134e5e, #71b280);
+$linear-card4: linear-gradient(to left, #d38312, #a83279);
+$red-to-pink-to-purple-horizontal-gradient: linear-gradient(0deg,
     --orange-red 0%,
     --vivid-pink 50%,
-    --electric-violet 100%
-  );
+    --electric-violet 100%);
 
 //Fonts Family
 $navbar-font-family: "Roboto", sans-serif;
@@ -90,27 +89,27 @@ $light: #F8F9FA;
 $off-white: #f6f2ed;
 $white-gray: #f2f2f2;
 $white-light: #cacaca;
-$white-opacity-50: rgba(255,255,255,0.5);
+$white-opacity-50: rgba(255, 255, 255, 0.5);
 $white: #fff;
 $black: #000;
 $gray-100: #748494;
 $gray-200: #3f5054;
 
 $overlay-black: #030f27;
-$light-orange: rgba(239,111,49,.1);
+$light-orange: rgba(239, 111, 49, .1);
 
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  black,
-  "success":    green,
-  "info":       yellow,
-  "warning":    yellow,
-  "danger":     red,
-  "light":      $white,
-  "dark":       #000,
+  "primary": $primary,
+  "secondary": black,
+  "success": green,
+  "info": yellow,
+  "warning": yellow,
+  "danger": red,
+  "light": $white,
+  "dark": #000,
   "white-gray": $white-gray,
   "white-opacity-50": $white-opacity-50,
-  "white":      $white,
+  "white": $white,
   "overlay-black": $overlay-black,
 );
 
@@ -191,48 +190,45 @@ $red: #f44336;
 $pink: #861a5d;
 $pinkinsh: #fff8fa;
 $purple: #6f42c1;
-  $indigo: #3f51b5;
-  $blue: #2196f3;
-  $cyan: #00bcd4;
-  $teal: #009688;
-  $green: #4caf50;
-  $yellow: #ffe821;
-  $orange: #fd7e14;
-  $deep-orange: #ff5722;
-  $brown: #795548;
-  $grey: #9e9e9e;
-  $black: #000000;
-  $white: #ffffff;
-  $bright-blue: oklch(51.01% 0.274 263.83);
-  $electric-violet: oklch(53.18% 0.28 296.97);
-  $french-violet: oklch(47.66% 0.246 305.88);
-  $vivid-pink: oklch(69.02% 0.277 332.77);
-  $hot-red: oklch(61.42% 0.238 15.34);
-  $orange-red: oklch(63.32% 0.24 31.68);
+$indigo: #3f51b5;
+$blue: #2196f3;
+$cyan: #00bcd4;
+$teal: #009688;
+$green: #4caf50;
+$yellow: #ffe821;
+$orange: #fd7e14;
+$deep-orange: #ff5722;
+$brown: #795548;
+$grey: #9e9e9e;
+$black: #000000;
+$white: #ffffff;
+$bright-blue: oklch(51.01% 0.274 263.83);
+$electric-violet: oklch(53.18% 0.28 296.97);
+$french-violet: oklch(47.66% 0.246 305.88);
+$vivid-pink: oklch(69.02% 0.277 332.77);
+$hot-red: oklch(61.42% 0.238 15.34);
+$orange-red: oklch(63.32% 0.24 31.68);
 
-  $gray-900: oklch(19.37% 0.006 300.98);
-  $gray-700: oklch(36.98% 0.014 302.71);
-  $gray-400: oklch(70.9% 0.015 304.04);
+$gray-900: oklch(19.37% 0.006 300.98);
+$gray-700: oklch(36.98% 0.014 302.71);
+$gray-400: oklch(70.9% 0.015 304.04);
 
-  $linear-green: linear-gradient(45deg, #9ce89d, #cdfa7e);
-  $linear-orange: linear-gradient(135deg, #ffc480, #ff763b);
-  $linear-cyan: linear-gradient(45deg, #72c2ff, #86f0ff);
-  $linear-red: linear-gradient(316deg, #fc5286, #fbaaa2);
-  $linear-purple: linear-gradient(230deg, #759bff, #843cf6);
-  $linear-purple-dark: linear-gradient(45deg, #a52dd8, #e29bf1);
-  $linear-card1: linear-gradient(to left, #3a7bd5, #3a6073);
-  $linear-card2: linear-gradient(to right, #c33764, #1d2671);
-  $linear-card3: linear-gradient(to left, #134e5e, #71b280);
-  $linear-card4: linear-gradient(to left, #d38312, #a83279);
-  $red-to-pink-to-purple-vertical-gradient: linear-gradient(
-    to right,
+$linear-green: linear-gradient(45deg, #9ce89d, #cdfa7e);
+$linear-orange: linear-gradient(135deg, #ffc480, #ff763b);
+$linear-cyan: linear-gradient(45deg, #72c2ff, #86f0ff);
+$linear-red: linear-gradient(316deg, #fc5286, #fbaaa2);
+$linear-purple: linear-gradient(230deg, #759bff, #843cf6);
+$linear-purple-dark: linear-gradient(45deg, #a52dd8, #e29bf1);
+$linear-card1: linear-gradient(to left, #3a7bd5, #3a6073);
+$linear-card2: linear-gradient(to right, #c33764, #1d2671);
+$linear-card3: linear-gradient(to left, #134e5e, #71b280);
+$linear-card4: linear-gradient(to left, #d38312, #a83279);
+$red-to-pink-to-purple-vertical-gradient: linear-gradient(to right,
     $orange-red 0%,
     $vivid-pink 50%,
-    $electric-violet 100%
-  );
+    $electric-violet 100%);
 
-  $white-to-purple-horizontal-gradient: linear-gradient(
-    to right,
+$white-to-purple-horizontal-gradient: linear-gradient(to right,
     $pinkinsh 0%,
     $pinkinsh 60%,
     $electric-violet 70%,
@@ -241,18 +237,16 @@ $purple: #6f42c1;
     $vivid-pink 100%,
   );
 
-  $customGradient: linear-gradient(
-    90deg,
+$customGradient: linear-gradient(90deg,
     $instagram 0%,
     $flickr 25%,
     $vivid-pink 50%,
-    $electric-violet 100%
-  );
+    $electric-violet 100%);
 
 //Fonts Family
 $navbar-font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-"Segoe UI Symbol";
+  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol";
 $sidebar-font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-"Segoe UI Symbol";
+  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol";

@@ -1,17 +1,68 @@
 @import "src/style";
+
 .layout-container {
   height: 100vh;
 }
 
 .sidebar {
   width: 240px;
-  background: white;
+  background: $linear-cyan2;
   color: $primary;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* Floating geometric shapes */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 12px;
+    opacity: 0.08;
+    z-index: 0;
+  }
+
+  &::before {
+    top: -40px;
+    left: -30px;
+    width: 120px;
+    height: 80px;
+    background: $linear-cyan;
+    transform: rotate(25deg);
+    animation: float 6s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    bottom: -50px;
+    right: -20px;
+    width: 180px;
+    height: 120px;
+    background: $linear-orange;
+    transform: rotate(-20deg);
+    animation: float 8s ease-in-out infinite alternate-reverse;
+  }
 }
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(25deg);
+  }
+
+  50% {
+    transform: translateY(10px) rotate(25deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(25deg);
+  }
+}
+
+
 
 .logo-bar {
   font-weight: bold;
   color: $primary;
+  padding: 50px;
+  font-size: x-large;
 }
 
 .content {
@@ -37,5 +88,105 @@
 @media (max-width: 767px) {
   .desktop-header {
     display: none;
+  }
+}
+
+  ul.custom-nav {
+    list-style: none;
+    padding: 1rem;
+    margin: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.2rem;
+      margin: 0.5rem 0;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 1rem;
+      color: $color-primary;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+
+      mat-icon {
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      &:hover {
+        background:$linear-green;
+        transform: translateX(4px);
+
+        mat-icon {
+          transform: rotate(20deg) scale(1.3);
+          color: $linear-orange;
+        }
+      }
+
+      &.active-link {
+        background:  $linear-cyan;
+        font-weight: 600;
+
+        mat-icon {
+          color: $white;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: $apple;
+    color: $color-primary;
+  box-shadow: 0 4px 12px rgba($black, 0.15);
+
+  .menu-btn {
+    font-size: 1.8rem;
+      color: lighten($primary-two, 20%);
+    background: black;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 2rem;
+    }
+  }
+
+  .mobile-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    mat-icon {
+      font-size: 2rem;
+      color: $white;
+    }
+
+    span {
+      color: $white;
+    }
+  }
+
+  .profile-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: lighten($primary-two, 20%);
+    }
   }
 }

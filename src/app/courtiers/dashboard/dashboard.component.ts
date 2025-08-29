@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 interface Contrat {
   type: string;
   montant: number;
@@ -17,7 +18,7 @@ interface Client {
 }
 @Component({
   selector: 'dashboard',
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

@@ -1,55 +1,50 @@
-<div class="container py-4">
-  <div class="row mb-4">
-    <div class="col-md-3">
-      <div class="card text-white bg-primary mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Contrats actifs</h5>
-          <p class="card-text h3">{{ totalContrats }}</p>
-        </div>
+<div class="container-fluid">
+
+  <!-- Top Stats Cards -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-3 col-12">
+      <div class="stat-card  mat-elevation-z4">
+        <mat-icon class="icon">file_present</mat-icon>
+        <h5>Contrats actifs</h5>
+        <p class="h3">{{ totalContrats }}</p>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card text-white bg-success mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Primes encaissées</h5>
-          <p class="card-text h3">{{ primesEncaissees }}</p>
-        </div>
+    <div class="col-md-3 col-12">
+      <div class="stat-card  mat-elevation-z4">
+        <mat-icon class="icon">attach_money</mat-icon>
+        <h5>Primes encaissées</h5>
+        <p class="h3">{{ primesEncaissees }}</p>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card text-white bg-info mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Nouveaux contrats</h5>
-          <p class="card-text h3">{{ nouveauxContrats }}</p>
-        </div>
+    <div class="col-md-3 col-12">
+      <div class="stat-card b mat-elevation-z4">
+        <mat-icon class="icon">note_add</mat-icon>
+        <h5>Nouveaux contrats</h5>
+        <p class="h3">{{ nouveauxContrats }}</p>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card text-white bg-warning mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Taux conversion</h5>
-          <p class="card-text h3">{{ tauxConversion }}%</p>
-        </div>
+    <div class="col-md-3 col-12">
+      <div class="stat-card  mat-elevation-z4">
+        <mat-icon class="icon">trending_up</mat-icon>
+        <h5>Taux conversion</h5>
+        <p class="h3">{{ tauxConversion }}%</p>
       </div>
     </div>
   </div>
 
-  <!-- Répartition par produit et nouveaux clients -->
+  <!-- Dashboard Lists -->
   <div class="row g-4 mb-4">
+
     <!-- Répartition des primes par produit -->
     <div class="col-md-6">
-      <div class="card shadow-sm">
-        <div
-          class="card-header bg-primary text-white d-flex align-items-center"
-        >
-          <i class="bi bi-pie-chart-fill me-2"></i>
+      <div class="dashboard-list-card mat-elevation-z2">
+        <div class="card-header bg-primary text-white d-flex align-items-center">
+          <mat-icon class="me-2">pie_chart</mat-icon>
           Répartition des primes par produit
         </div>
         <ul class="list-group list-group-flush">
           @for(c of contratsParProduit; track c) {
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center"
-          >
+          <li class="list-group-item d-flex justify-content-between align-items-center">
             <span>{{ c.type }}</span>
             <span class="badge bg-primary rounded-pill">{{ c.montant }}</span>
           </li>
@@ -60,20 +55,16 @@
 
     <!-- Nouveaux clients -->
     <div class="col-md-6">
-      <div class="card shadow-sm">
-        <div
-          class="card-header bg-success text-white d-flex align-items-center"
-        >
-          <i class="bi bi-people-fill me-2"></i>
+      <div class="dashboard-list-card mat-elevation-z2">
+        <div class="card-header bg-success text-white d-flex align-items-center">
+          <mat-icon class="me-2">people</mat-icon>
           Nouveaux clients
         </div>
         <ul class="list-group list-group-flush">
           @for(client of clientsRecents; track client) {
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center"
-          >
+          <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
-              <i class="bi bi-person-circle me-1 text-secondary"></i>
+              <mat-icon class="me-1 text-secondary">person</mat-icon>
               {{ client.nom }}
             </div>
             <small class="text-muted">{{ client.dateCreation }}</small>
@@ -82,14 +73,15 @@
         </ul>
       </div>
     </div>
+
   </div>
 
   <!-- Sinistres récents -->
   <div class="row g-4">
     <div class="col-12">
-      <div class="card shadow-sm">
+      <div class="dashboard-list-card mat-elevation-z2">
         <div class="card-header bg-warning text-dark d-flex align-items-center">
-          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <mat-icon class="me-2">warning</mat-icon>
           Sinistres récents
         </div>
         <div class="table-responsive">
@@ -128,4 +120,5 @@
       </div>
     </div>
   </div>
+
 </div>
